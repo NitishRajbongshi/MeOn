@@ -23,5 +23,10 @@ Route::post('/logout', [LogoutController::class, 'logoutUser'])->middleware('aut
 // admin
 Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('adminDashboard');
+
+    // manage class
     Route::get('/manageClass', [StandardController::class, 'index'])->name('manageClass');
+    Route::post('/manageClass', [StandardController::class, 'store']);
+    Route::get('/manageClass/{id}', [StandardController::class, 'show']);
+    Route::post('/manageClass/edit/{id}', [StandardController::class, 'update']);
 });

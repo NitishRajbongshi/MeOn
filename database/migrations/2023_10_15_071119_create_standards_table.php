@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('standards', function (Blueprint $table) {
             $table->id();
-            $table->string('name', '100');
-            $table->longText('description');
+            $table->string('name', '100')->unique();
+            $table->longText('description')->nullable();
             $table->bigInteger('created_by');
             $table->bigInteger('updated_by');
             $table->timestamps();

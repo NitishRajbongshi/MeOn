@@ -1,42 +1,42 @@
 <div class="w-full">
     <dh-component>
         <div class="flex flex-no-wrap">
-            <div style="min-height: 100vh" class="w-64 absolute sm:relative bg-gray-800 shadow md:h-full flex-col justify-between hidden sm:flex">
+            <div style="min-height: auto" class="w-64 absolute sm:relative bg-slate-50 md:h-full flex-col justify-between hidden sm:flex">
                 <div class="px-8">
-                    <div class="w-full my-4 flex items-center text-lg text-white">
+                    <div class="w-full my-4 flex items-center text-lg text-black">
                         <i class="fa fa-bars mr-2" aria-hidden="true"></i>
                         <p>Dashboard</p>
                     </div>
                     <ul class="mt-4">
-                        <li class="flex w-full justify-between text-gray-300 cursor-pointer items-center mb-6">
+                        <li class="flex w-full justify-between text-blue-900 cursor-pointer items-center mb-6">
                             <a href="javascript:void(0)" class="flex items-center focus:outline-none hover:text-gray-400">
-                                <i class="fa fa-user mr-3 text-sm" aria-hidden="true"></i>
-                                <span class="text-sm">Profile</span>
+                                <i class="fa fa-user mr-3 text-md" aria-hidden="true"></i>
+                                <span class="text-md">Profile</span>
                             </a>
                         </li>
-                        <li class="flex w-full justify-between text-gray-300 cursor-pointer items-center mb-6">
+                        <li class="flex w-full justify-between text-blue-900 cursor-pointer items-center mb-6">
                             <a href="{{route('manageClass')}}" class="flex items-center focus:outline-none hover:text-gray-400">
-                                <i class="fa fa-book mr-3 text-sm"></i>
-                                <span class="text-sm">Manage Class</span>
+                                <i class="fa fa-book mr-3 text-md"></i>
+                                <span class="text-md">Manage Class</span>
                             </a>
                         </li>
-                        <li class="flex w-full justify-between text-gray-300 cursor-pointer items-center mb-6">
+                        <li class="flex w-full justify-between text-blue-900 cursor-pointer items-center mb-6">
                             <a href="javascript:void(0)" class="flex items-center focus:outline-none hover:text-gray-400">
-                                <i class="fa fa-pen mr-3 text-sm"></i>
-                                <span class="text-sm">Manage Subject</span>
+                                <i class="fa fa-pen mr-3 text-md"></i>
+                                <span class="text-md">Manage Subject</span>
                             </a>
                         </li>
-                        <li class="flex w-full justify-between text-gray-300 cursor-pointer items-center mb-6">
+                        <li class="flex w-full justify-between text-blue-900 cursor-pointer items-center mb-6">
                             <a href="javascript:void(0)" class="flex items-center focus:outline-none hover:text-gray-400">
-                                <i class="fa fa-sticky-note mr-3 text-sm" aria-hidden="true"></i>
-                                <span class="text-sm">Manage Notes</span>
+                                <i class="fa fa-sticky-note mr-3 text-md" aria-hidden="true"></i>
+                                <span class="text-md">Manage Notes</span>
                             </a>
                         </li>
 
-                        <li class="flex w-full justify-between text-gray-300 cursor-pointer items-center mb-6">
+                        <li class="flex w-full justify-between text-blue-900 cursor-pointer items-center mb-6">
                             <a href="javascript:void(0)" class="flex items-center focus:outline-none hover:text-gray-400">
-                                <i class="fa fa-cog mr-3 text-sm" aria-hidden="true"></i>
-                                <span class="text-sm">Settings</span>
+                                <i class="fa fa-cog mr-3 text-md" aria-hidden="true"></i>
+                                <span class="text-md">Settings</span>
                             </a>
                         </li>
 
@@ -44,8 +44,8 @@
                             <form action="{{route('logout')}}" method="POST">
                                 @csrf
                                 <button type="submit" class="flex items-center focus:outline-none hover:text-gray-400">
-                                    <i class="fa fa-sign-out mr-3 text-sm" aria-hidden="true"></i>
-                                    <span class="text-sm">Logout</span>
+                                    <i class="fa fa-sign-out mr-3 text-md" aria-hidden="true"></i>
+                                    <span class="text-md">Logout</span>
                                 </button>
                             </form>
                         </li>
@@ -80,7 +80,7 @@
                         <p>Dashboard</p>
                     </div>
                     <ul class="mt-4">
-                        <li class="flex w-full justify-between text-gray-300 cursor-pointer items-center mb-6">
+                        <li class="flex w-full justify-between text-blue-900 cursor-pointer items-center mb-6">
                             <a href="javascript:void(0)" class="flex items-center focus:outline-none hover:text-gray-400">
                                 <i class="fa fa-user mr-3 text-sm" aria-hidden="true"></i>
                                 <span class="text-sm">Profile</span>

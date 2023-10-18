@@ -4,14 +4,16 @@
             <div style="min-height: auto" class="w-64 absolute sm:relative bg-slate-50 md:h-full flex-col justify-between hidden sm:flex">
                 <div class="px-8">
                     <div class="w-full my-4 flex items-center text-lg text-black">
-                        <i class="fa fa-bars mr-2" aria-hidden="true"></i>
-                        <p>Dashboard</p>
+                        <a href="{{route('adminDashboard')}}">
+                            <i class="fa fa-bars mr-1" aria-hidden="true"></i>
+                            Dashboard
+                        </a>
                     </div>
                     <ul class="mt-4">
                         <li class="flex w-full justify-between text-blue-900 cursor-pointer items-center mb-6">
                             <a href="javascript:void(0)" class="flex items-center focus:outline-none hover:text-gray-400">
                                 <i class="fa fa-user mr-3 text-md" aria-hidden="true"></i>
-                                <span class="text-md">Profile</span>
+                                <span class="text-md">Manage Profile</span>
                             </a>
                         </li>
                         <li class="flex w-full justify-between text-blue-900 cursor-pointer items-center mb-6">
@@ -21,7 +23,7 @@
                             </a>
                         </li>
                         <li class="flex w-full justify-between text-blue-900 cursor-pointer items-center mb-6">
-                            <a href="javascript:void(0)" class="flex items-center focus:outline-none hover:text-gray-400">
+                            <a href="{{route('manageSubject')}}" class="flex items-center focus:outline-none hover:text-gray-400">
                                 <i class="fa fa-pen mr-3 text-md"></i>
                                 <span class="text-md">Manage Subject</span>
                             </a>
@@ -127,7 +129,7 @@
             </div>
             <!-- Sidebar ends -->
             <!-- Remove class [ h-64 ] when adding a card block -->
-            <div class="container mx-auto p-1 md:p-4 md:w-4/5">
+            <div class="container border-s min-h-screen mx-auto p-1 md:p-4 md:w-4/5">
                 <!-- Remove class [ border-dashed border-2 border-gray-300 ] to remove dotted border -->
                 <div class="w-full h-auto p-1 md:p-2 rounded bg-white">
                     <!-- Place your content here -->

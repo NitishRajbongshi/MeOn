@@ -33,6 +33,8 @@ class StandardController extends Controller
 
         if(Standard::create($data)) {
             return redirect()->back()->with('success', 'New class added successfully!');
+        } else {
+            return redirect()->back()->with('failed', 'Failed to add new class!');
         }
     }
 

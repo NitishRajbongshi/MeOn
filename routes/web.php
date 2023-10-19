@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Chapter\ChapterController;
 use App\Http\Controllers\Standard\StandardController;
 use App\Http\Controllers\Subject\SubjectController;
 use Illuminate\Support\Facades\Auth;
@@ -35,5 +36,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/manageSubject', [SubjectController::class, 'index'])->name('manageSubject');
     Route::post('/manageSubject', [SubjectController::class, 'store']);
 
-
+    // manage chapter
+    Route::get('/manageChapter', [ChapterController::class, 'index'])->name('manageChapter');
+    Route::post('/manageChapter', [ChapterController::class, 'store']);
 });

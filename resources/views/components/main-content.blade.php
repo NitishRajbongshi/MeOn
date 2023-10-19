@@ -29,6 +29,12 @@
                             </a>
                         </li>
                         <li class="flex w-full justify-between text-blue-900 cursor-pointer items-center mb-6">
+                            <a href="{{route('manageChapter')}}" class="flex items-center focus:outline-none hover:text-gray-400">
+                                <i class="fa fa-book mr-3 text-md"></i>
+                                <span class="text-md">Manage Chapter</span>
+                            </a>
+                        </li>
+                        <li class="flex w-full justify-between text-blue-900 cursor-pointer items-center mb-6">
                             <a href="javascript:void(0)" class="flex items-center focus:outline-none hover:text-gray-400">
                                 <i class="fa fa-sticky-note mr-3 text-md" aria-hidden="true"></i>
                                 <span class="text-md">Manage Notes</span>

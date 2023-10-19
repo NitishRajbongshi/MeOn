@@ -39,4 +39,5 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     // manage chapter
     Route::get('/manageChapter', [ChapterController::class, 'index'])->name('manageChapter');
     Route::post('/manageChapter', [ChapterController::class, 'store']);
+    Route::get('/getSubject/{id}', [ChapterController::class, 'getSubject']);
 });

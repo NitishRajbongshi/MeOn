@@ -9,12 +9,33 @@ use Illuminate\Support\Facades\Auth;
 
 class ChapterController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $user = Auth::user();
-        $classes = Standard::paginate(5);
+        $standards = Standard::all(['id', 'name']);
         return view('admin.manageChapter', [
             'user' => $user,
-            'classes' => $classes
+            'classes' => $standards
         ]);
+    }
+
+    public function getSubject(Request $request)
+    {
+        if(csrf_token()) {
+            $id = $request->id;
+            $subjects = Standard::find($id)->subjects()->select('id', 'name')->get();
+            $response = [
+                'status' => 'success',
+                'message' => 'Get data successfully!',
+                'result' => $subjects
+            ];
+        } else {
+            $response = [
+                'status' => 'failed',
+                'message' => 'Unathorized action!',
+                'result' => null
+            ];
+        }
+        return response()->json($response);
     }
 }

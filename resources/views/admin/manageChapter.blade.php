@@ -58,7 +58,7 @@
                                         placeholder="Write any description if needed..."></textarea>
                                 </div>
                             </div>
-                            <div class="md:flex my-2">
+                            <div class="md:flex">
                                 <div class="w-full md:w-1/3">
                                     <label class="text-sm" for="class">Select Class:<span
                                             class="text-xs text-red-500">*</span></label>
@@ -82,12 +82,31 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="md:flex">
+                                <div class="w-full md:w-1/3">
+                                    <label class="text-sm" for="subject">Select Subject:<span
+                                            class="text-xs text-red-500">*</span></label>
+                                </div>
+                                <div class="w-full md:w-2/3">
+                                    <select name="subject" id="subject"
+                                        class="border border-blue-300 rounded-sm outline-none p-1 text-sm">
+                                        <option value="">Choose one</option>
+                                    </select>
+
+                                    @error('class')
+                                        <p class="text-xs text-red-500">
+                                            <i class="fa fa-warning mr-1 my-1"></i>
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
+                                </div>
+                            </div>
                             <div class="flex justify-end">
                                 <button
                                     class="border border-blue-300 text-blue-950 bg-blue-200 px-2 py-1 rounded-sm text-sm font-bold"
                                     type="submit">
                                     <i class="fa fa-save mr-1"></i>
-                                    Add Class
+                                    Add Chapter
                                 </button>
                             </div>
                         </form>
@@ -104,7 +123,7 @@
             <div class="border rounded-md">
                 <div class="my-3 text-center text-md">
                     <span class="border rounded-sm p-1 font-bold text-blue-900 border-blue-900 bg-blue-200">
-                        Available Class List
+                        Available Chapter List
                     </span>
                 </div>
                 <div class="flex flex-col overflow-x-auto">
@@ -156,7 +175,7 @@
                 </div>
                 <div class="text-xs my-3 p-2">
                     <span class="text-xs">
-                        {{ $classes->links() }}
+                        {{-- {{ $classes->links() }} --}}
                     </span>
                 </div>
             </div>
@@ -165,7 +184,8 @@
     </main>
     <footer>
         <div class="w-full bg-white p-3">
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste sit sapiente totam a. Vitae, illum earum. Debitis repudiandae error nam.</p>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste sit sapiente totam a. Vitae, illum earum.
+                Debitis repudiandae error nam.</p>
         </div>
     </footer>
     <script>
@@ -232,7 +252,38 @@
                 $('#modal').addClass('hidden');
             });
 
+            // Get the subjects by a class
+            $('#class').on('change', () => {
+                // Get CSRF token from the meta tag
+                var csrfToken = $('meta[name="csrf-token"]').attr('content');
 
+                $('#subject').empty();
+                $('#subject').append('<option value="">Choose One</option>');
+
+                const selectedClass = $('#class').val();
+                $.ajax({
+                    url: '/admin/getSubject/' + selectedClass,
+                    type: 'GET',
+                    dataType: 'json',
+                    headers: {
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    success: function(response) {
+                        if(response.status == 'success') {
+                            $.each(response.result, function(index, subject) {
+                                $('#subject').append('<option value="' + subject.id + '">' +
+                                    subject.name + '</option>');
+                            });
+                        } else {
+                            alert(`Failed! ${response.message}`);
+                        }
+                    },
+                    error: function(e) {
+                        console.error('AJAX error:', e);
+                        alert("Server Error!");
+                    }
+                });
+            })
         });
     </script>
 @endsection

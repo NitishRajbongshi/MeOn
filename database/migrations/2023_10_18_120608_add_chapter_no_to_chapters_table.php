@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('chapters', function (Blueprint $table) {
-            $table->integer('chapter_no')->unique();
+            $table->integer('chapter_no');
         });
     }
 

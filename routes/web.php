@@ -1,18 +1,27 @@
 <?php
 
-use App\Http\Controllers\Admin\DashboardController;
+use App\Models\Standard\Standard;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Chapter\ChapterController;
-use App\Http\Controllers\Standard\StandardController;
 use App\Http\Controllers\Subject\SubjectController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Standard\StandardController;
+use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Admin\AdminDashboardController;
 
 Route::get('/', function () {
     $user = Auth::user();
-    return view('welcome', ['user' => $user]);
+    $classes = Standard::all(['id', 'name']);
+    return view('welcome', [
+        'user' => $user,
+        'classes' =>$classes
+    ]);
 });
+
+// dashboard
+Route::get('/getSubjectList/{id}', [DashboardController::class, 'getSubjectList']);
 
 // login
 Route::middleware(['guest'])->group(function() {
@@ -24,7 +33,7 @@ Route::post('/logout', [LogoutController::class, 'logoutUser'])->middleware('aut
 
 // admin
 Route::middleware(['auth'])->prefix('admin')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('adminDashboard');
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('adminDashboard');
 
     // manage class
     Route::get('/manageClass', [StandardController::class, 'index'])->name('manageClass');

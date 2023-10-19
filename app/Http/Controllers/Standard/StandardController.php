@@ -69,4 +69,13 @@ class StandardController extends Controller
         $result = $request->input('name');
         return response()->json($result);
     }
+
+    public function getSubject(Request $request) {
+        $response = [
+            'status' => 'failed',
+            'message' => 'Unathorized action!',
+            'result' => null
+        ];
+        return response()->json($response);
+    }
 }

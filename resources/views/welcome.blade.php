@@ -8,11 +8,12 @@
         {{-- content --}}
         <div class="w-full md:w-3/4">
             {{-- Class section --}}
-            <div class="available_class p-2">
-                <div class="text-xl border-b py-2 my-3">
+            <div class="available_class px-4">
+                <div class="text-xl border-b my-3">
                     <span class="font-bold">
                         <i class="fa fa-list text-sm mr-1"></i>
-                        List of Classes</span>
+                        List of Classes
+                    </span>
                 </div>
                 <div class="flex items-start flex-wrap justify-start gap-1 md:gap-3 my-2">
                     @foreach ($classes as $item)
@@ -33,7 +34,25 @@
             </div>
         </div>
         {{-- sidebar --}}
-        <div class="hidden md:block md:w-1/4 border">
+        <div class="hidden md:block md:w-1/4 px-4">
+            <div class="notification_list ">
+                <div class="text-xl border-b my-3 font-bold">
+                    <p>
+                        <i class="fa fa-bell text-sm"></i>
+                        Recent Update
+                    </p>
+
+                </div>
+                <div>
+                    <ul>
+                        <li>
+                            <i class="fa fa-angle-right mr-1 text-red-600" aria-hidden="true"></i>
+                            New Notes Uploaded
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
         </div>
 
 
@@ -108,17 +127,18 @@
                             var button = createSubjectCard(data);
                             container.append(button);
                         });
-               
+
                         // show the modal
                         $('#modal').removeClass('hidden');
                         $('#modal').addClass('flex');
-                    }, 
+                    },
                     error: function(response) {
                         alert('Failed to get the subject list');
                     }
                 });
 
 
+                // get the chapter list when choose a subject
                 $('.subject_btn').on('click', function() {
                     const subject_id = $(this).data('id');
                     console.log(subject_id);

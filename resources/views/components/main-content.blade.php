@@ -24,13 +24,13 @@
                         </li>
                         <li class="flex w-full justify-between text-blue-900 cursor-pointer items-center mb-6">
                             <a href="{{route('manageSubject')}}" class="flex items-center focus:outline-none hover:text-gray-400">
-                                <i class="fa fa-pen mr-3 text-md"></i>
+                                <i class="fa fa-file-text mr-3 text-md"></i>
                                 <span class="text-md">Manage Subject</span>
                             </a>
                         </li>
                         <li class="flex w-full justify-between text-blue-900 cursor-pointer items-center mb-6">
                             <a href="{{route('manageChapter')}}" class="flex items-center focus:outline-none hover:text-gray-400">
-                                <i class="fa fa-book mr-3 text-md"></i>
+                                <i class="fa fa-list mr-3 text-md"></i>
                                 <span class="text-md">Manage Chapter</span>
                             </a>
                         </li>

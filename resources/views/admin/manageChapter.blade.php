@@ -221,9 +221,6 @@
     <script>
         $(document).ready(function() {
             // prevent getting negative number
-
-            $
-
             $('.openModal').on('click', function() {
                 const id = $(this).data('id');
 

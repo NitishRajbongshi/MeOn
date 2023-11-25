@@ -56,23 +56,23 @@ class ChapterController extends Controller
         }
     }
 
-    public function getSubject(Request $request)
-    {
-        if (csrf_token()) {
-            $id = $request->id;
-            $subjects = Standard::find($id)->subjects()->select('id', 'name')->get();
-            $response = [
-                'status' => 'success',
-                'message' => 'Get data successfully!',
-                'result' => $subjects
-            ];
-        } else {
-            $response = [
-                'status' => 'failed',
-                'message' => 'Unathorized action!',
-                'result' => null
-            ];
-        }
-        return response()->json($response);
-    }
+    // public function getSubject(Request $request)
+    // {
+    //     if (csrf_token()) {
+    //         $id = $request->id;
+    //         $subjects = Standard::find($id)->subjects()->select('id', 'name')->get();
+    //         $response = [
+    //             'status' => 'success',
+    //             'message' => 'Get data successfully!',
+    //             'result' => $subjects
+    //         ];
+    //     } else {
+    //         $response = [
+    //             'status' => 'failed',
+    //             'message' => 'Unathorized action!',
+    //             'result' => null
+    //         ];
+    //     }
+    //     return response()->json($response);
+    // }
 }

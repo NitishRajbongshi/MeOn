@@ -70,12 +70,32 @@ class StandardController extends Controller
         return response()->json($result);
     }
 
-    public function getSubject(Request $request) {
-        $response = [
-            'status' => 'failed',
-            'message' => 'Unathorized action!',
-            'result' => null
-        ];
+    // public function getSubject(Request $request) {
+    //     $response = [
+    //         'status' => 'failed',
+    //         'message' => 'Unathorized action!',
+    //         'result' => null
+    //     ];
+    //     return response()->json($response);
+    // }
+
+    public function getSubject(Request $request)
+    {
+        if (csrf_token()) {
+            $id = $request->id;
+            $subjects = Standard::find($id)->subjects()->select('id', 'name')->get();
+            $response = [
+                'status' => 'success',
+                'message' => 'Get data successfully!',
+                'result' => $subjects
+            ];
+        } else {
+            $response = [
+                'status' => 'failed',
+                'message' => 'Unathorized action!',
+                'result' => null
+            ];
+        }
         return response()->json($response);
     }
 }

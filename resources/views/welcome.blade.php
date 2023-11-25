@@ -83,7 +83,7 @@
             // Function to create a subject card
             function createSubjectCard(data) {
                 return $('<button>', {
-                    class: 'class_btn',
+                    class: 'subject_btn',
                     'data-id': data.id,
                     html: $('<div>', {
                         class: 'bg-white rounded-lg outline-none shadow-md flex flex-col items-center h-36 px-5 py-2 justify-center hover:shadow-xl',
@@ -131,19 +131,16 @@
                         // show the modal
                         $('#modal').removeClass('hidden');
                         $('#modal').addClass('flex');
+
+                        container.on('click', '.subject_btn', function() {
+                            var subject_id = $(this).data('id');
+                            window.location.href = '/notes/subject/' + subject_id;
+                        });
                     },
                     error: function(response) {
                         alert('Failed to get the subject list');
                     }
                 });
-
-
-                // get the chapter list when choose a subject
-                $('.subject_btn').on('click', function() {
-                    const subject_id = $(this).data('id');
-                    console.log(subject_id);
-
-                })
 
                 $('#closeModal').on('click', function() {
                     $('#modal').removeClass('flex');

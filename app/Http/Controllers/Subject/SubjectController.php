@@ -49,4 +49,24 @@ class SubjectController extends Controller
             return redirect()->back()->with('failed', 'Failed to add new subject!');
         }
     }
+
+    public function getChapter(Request $request)
+    {
+        if (csrf_token()) {
+            $id = $request->id;
+            $chapters = Subject::find($id)->chapters()->select('id', 'name')->get();
+            $response = [
+                'status' => 'success',
+                'message' => 'Get data successfully!',
+                'result' => $chapters
+            ];
+        } else {
+            $response = [
+                'status' => 'failed',
+                'message' => 'Unathorized action!',
+                'result' => null
+            ];
+        }
+        return response()->json($response);
+    }
 }

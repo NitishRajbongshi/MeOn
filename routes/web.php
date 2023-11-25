@@ -10,6 +10,7 @@ use App\Http\Controllers\Subject\SubjectController;
 use App\Http\Controllers\Standard\StandardController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Note\NoteController;
 
 Route::get('/', function () {
     $user = Auth::user();
@@ -40,13 +41,25 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::post('/manageClass', [StandardController::class, 'store']);
     Route::get('/manageClass/{id}', [StandardController::class, 'show']);
     Route::post('/manageClass/edit/{id}', [StandardController::class, 'update']);
+    Route::get('/getSubject/{id}', [StandardController::class, 'getSubject']);
 
     // manage subject
     Route::get('/manageSubject', [SubjectController::class, 'index'])->name('manageSubject');
     Route::post('/manageSubject', [SubjectController::class, 'store']);
+    Route::get('/getChapter/{id}', [SubjectController::class, 'getChapter']);
 
     // manage chapter
     Route::get('/manageChapter', [ChapterController::class, 'index'])->name('manageChapter');
     Route::post('/manageChapter', [ChapterController::class, 'store']);
-    Route::get('/getSubject/{id}', [ChapterController::class, 'getSubject']);
+
+    // manage notes
+    Route::get('/manageNotes', [NoteController::class, 'index'])->name('manageNote');
+    Route::post('/manageNotes', [NoteController::class, 'store']);
+});
+
+// notes
+Route::prefix('notes')->group(function () {
+    Route::get('/subject/{subject}', [NoteController::class, 'getChapterList']);
+    Route::get('/getNotes/{chapter}', [NoteController::class, 'getAvailableNote']);
+    Route::get('/viewNotes/{note}', [NoteController::class, 'showPdfFile']);
 });

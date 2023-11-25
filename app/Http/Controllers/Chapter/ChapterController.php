@@ -30,7 +30,6 @@ class ChapterController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request);
         $validator = $request->validate([
             'class' => 'required',
             'subject' => 'required',

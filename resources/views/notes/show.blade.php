@@ -28,22 +28,35 @@
                     <div class="border-b my-3 font-bold">
                         <h1 class="text-xl">
                             <i class="fa fa-list mr-1 text-sm"></i>
-                            View PDF
+                            View Notes
                         </h1>
                     </div>
-                    <h1>{{ $note['name'] }}</h1>
-                    <p>{{ $note['description'] }}</p>
+                    <div>
+                        <h1 class="font-bold text-xl">
+                            <i class="fa fa-caret-right" aria-hidden="true"></i>
+                            {{ $note['name'] }}
+                        </h1>
+                        <p class="my-2 text-md text-slate-600">{{ $note['description'] }}</p>
+                    </div>
 
                     @if ($note->resources->count() > 0)
-                        <div class="row">
+                        <div class="row my-2">
+                            @php
+                                $i = 1;
+                            @endphp
                             @foreach ($note->resources as $resource)
-                                <div class="col-md-4 mb-3">
-                                    <img src="{{ Storage::url($resource->img_path) }}" alt="Image" class="w-full h-auto">
+                                <div class="col-md-12 mb-3">
+                                    <p class="text-blue-500">Page {{$i}}</p>
+                                    <img class="w-full h-auto border shadow-sm" 
+                                    src="{{ Storage::url($resource->img_path) }}" alt="Image" >
                                 </div>
+                                @php
+                                    $i++;
+                                @endphp
                             @endforeach
                         </div>
                     @else
-                        <p>No images available for this note.</p>
+                        <p>No images available right now</p>
                     @endif
                 </div>
             </div>

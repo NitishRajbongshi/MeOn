@@ -27,7 +27,6 @@ class NoteController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->hasFile('img_file'));
         $user = Auth::user();
         $validate = $request->validate([
             'class' => 'required',
@@ -53,7 +52,6 @@ class NoteController extends Controller
                 $uploadStatus = 0;
                 $imageFolder = Config::get('custom.image_folder');
                 foreach ($request->file('img_file') as $image) {
-                    // $file = $request->file('img_file');
                     $randomCode = rand(100, 999);
                     $imageName = $randomCode . '_' . $image->getClientOriginalName();
                     $imagePath = implode('/', [
@@ -142,13 +140,9 @@ class NoteController extends Controller
     public function showPdfFile(Request $request, Note $note)
     {
         $user = Auth::user();
-        // $note['pdf_url'] = asset("storage{$note['path']}");
-        // $images = Note::find($note->id)->resources;
-        // dd($images);
         return view('notes.show', [
             'user' => $user,
             'note' => $note,
-            // 'images' => $images
         ]);
     }
 }

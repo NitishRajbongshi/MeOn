@@ -31,23 +31,6 @@
                             View PDF
                         </h1>
                     </div>
-                    {{-- <div>
-                        <a href="" class="text-xs">
-                            hello
-                        </a><br>
-                        <a href="#" class="text-xl font-bold">
-                            hello
-                        </a>
-                    </div>
-                    <div>
-                        <p class="underline text-lg text-blue-500">List of chapters:</p>
-                        <div class="ms-8 my-2  ">
-
-                        </div>
-                    </div> --}}
-
-
-
                     <h1>{{ $note['name'] }}</h1>
                     <p>{{ $note['description'] }}</p>
 

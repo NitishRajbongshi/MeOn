@@ -45,9 +45,6 @@
                     @else
                         <p>No images available for this note.</p>
                     @endif
-
-                    {{-- <iframe src="{{ $images['img_path'] }}" width="100%" height="500px"></iframe> --}}
-
                 </div>
             </div>
             {{-- sidebar --}}

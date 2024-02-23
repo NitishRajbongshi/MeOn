@@ -48,7 +48,7 @@
                                 <div class="col-md-12 mb-3">
                                     <p class="text-blue-500">Page {{$i}}</p>
                                     <img class="w-full h-auto border shadow-sm" 
-                                    src="{{ Storage::url($resource->img_path) }}" alt="Image" >
+                                    src="{{ asset('storage/'. $resource->img_path) }}" alt="Image" >
                                 </div>
                                 @php
                                     $i++;

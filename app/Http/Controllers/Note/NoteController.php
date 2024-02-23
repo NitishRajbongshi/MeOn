@@ -9,6 +9,7 @@ use App\Models\Subject\Subject;
 use App\Models\Standard\Standard;
 use App\Http\Controllers\Controller;
 use App\Models\Note\NoteResource;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Storage;
@@ -26,6 +27,60 @@ class NoteController extends Controller
     }
 
     public function store(Request $request)
+    {
+        // dd($request);
+        $user = Auth::user();
+        $validate = $request->validate([
+            'class' => 'required',
+            'subject' => 'required',
+            'chapter' => 'required',
+            'name' => 'required',
+            'description' => 'nullable',
+            'img_file.*' => 'required|image|mimes:jpg, jpeg|max:1024',
+        ]);
+
+        try {
+            // store the basic note details
+            $noteData = [
+                'standard_id' => $request->input('class'),
+                'subject_id' => $request->input('subject'),
+                'chapter_id' => $request->input('chapter'),
+                'name' => $request->input('name'),
+                'description' => $request->input('description'),
+                'created_by' => $user->id,
+                'updated_by' => $user->id,
+            ];
+            $noteUploadedStatus = Note::create($noteData);
+            if ($noteUploadedStatus) {
+                if ($request->hasFile('img_file')) {
+                    $uploadStatus = 0;
+
+                    foreach ($request->file('img_file') as $image) {
+                        $imagePath = $image->store('notes', 'public');
+                        $imgData = [
+                            'note_id' => $noteUploadedStatus->id,
+                            'img_path' => $imagePath,
+                        ];
+
+                        if (NoteResource::create($imgData)) {
+                            $uploadStatus = 1;
+                        }
+                    }
+                    if ($uploadStatus) {
+                        return redirect()->back()->with('success', 'Notes uploaded successfully!');
+                    } else {
+                        // rollback
+
+                        return redirect()->back()->with('failed', 'Failed to upload the file!');
+                    }
+                }
+            }
+        } catch (Exception $e) {
+            dd($e);
+        }
+    }
+
+    public function storeOld(Request $request)
     {
         $user = Auth::user();
         $validate = $request->validate([

@@ -11,16 +11,28 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Schema::create('subjects', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->bigInteger('standard_id');
+        //     $table->string('name', '100');
+        //     $table->longText('description')->nullable();
+        //     $table->bigInteger('created_by');
+        //     $table->bigInteger('updated_by');
+        //     $table->timestamps();
+        //     $table->foreign('standard_id')->references('id')
+        //     ->on('standards')->onDelete('cascade');
+        // });
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('standard_id');
-            $table->string('name', '100');
+            $table->bigInteger('standard_id')->unsigned(); // Added unsigned for foreign key
+            $table->string('name', 100);
             $table->longText('description')->nullable();
             $table->bigInteger('created_by');
             $table->bigInteger('updated_by');
             $table->timestamps();
-            $table->foreign('standard_id')->references('id')
-            ->on('standards')->onDelete('cascade');
+
+            // Added foreign key constraint
+            $table->foreign('standard_id')->references('id')->on('standards')->onDelete('cascade');
         });
     }
 

@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('notes', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('standard_id');
-            $table->bigInteger('subject_id');
-            $table->bigInteger('chapter_id');
+            $table->bigInteger('standard_id')->unsigned();
+            $table->bigInteger('subject_id')->unsigned();
+            $table->bigInteger('chapter_id')->unsigned();
             $table->string('name');
             $table->longText('description')->nullable();
             // $table->string('path');

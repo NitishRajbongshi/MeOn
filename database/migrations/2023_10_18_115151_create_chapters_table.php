@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('chapters', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('standard_id');
-            $table->bigInteger('subject_id');
+            $table->bigInteger('standard_id')->unsigned();
+            $table->bigInteger('subject_id')->unsigned();
             $table->string('name');
             $table->longText('description')->nullable();
             $table->bigInteger('created_by');

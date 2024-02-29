@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('note_resources', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('note_id');
+            $table->bigInteger('note_id')->unsigned();
             $table->string('img_path');
             $table->timestamps();
             $table->foreign('note_id')->references('id')

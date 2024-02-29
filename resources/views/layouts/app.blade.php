@@ -28,7 +28,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     {{-- alpine js --}}
     <script src="//unpkg.com/alpinejs" defer></script>
-    <title>EDUCATOR</title>
+    <title>Edorb</title>
 </head>
 
 <body class="font-[Poppins] bg-gradient-to-t bg-slate-50 h-screen">

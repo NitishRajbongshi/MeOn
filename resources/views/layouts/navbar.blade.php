@@ -1,7 +1,8 @@
 <header class="bg-white">
     <nav class="flex justify-between items-center w-[95%]  mx-auto">
         <div>
-            <img class="w-16 cursor-pointer" src="https://cdn-icons-png.flaticon.com/512/5968/5968204.png" alt="...">
+            {{-- <img class="w-16 cursor-pointer" src="https://cdn-icons-png.flaticon.com/512/5968/5968204.png" alt="..."> --}}
+            <p class="text-xl py-3 font-bold">EDORB</p>
         </div>
         <div
             class="nav-links duration-500 md:static absolute bg-white md:min-h-fit min-h-[60vh] left-0 top-[-100%] md:w-auto  w-full flex items-start px-5">

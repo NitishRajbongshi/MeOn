@@ -9,6 +9,7 @@ use App\Models\Subject\Subject;
 use App\Models\Standard\Standard;
 use App\Http\Controllers\Controller;
 use App\Models\Note\NoteResource;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
@@ -56,7 +57,7 @@ class NoteController extends Controller
                     $uploadStatus = 0;
 
                     foreach ($request->file('img_file') as $image) {
-                        $imagePath = $image->store('notes', 'public');
+                        $imagePath = $image->store('notes/' . Carbon::now()->format('Y') . '/' . $request->input('chapter') , 'public');
                         $imgData = [
                             'note_id' => $noteUploadedStatus->id,
                             'img_path' => $imagePath,

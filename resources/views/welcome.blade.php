@@ -7,6 +7,15 @@
     <main class="container mx-auto flex gap-2 my-2">
         {{-- content --}}
         <div class="w-full md:w-3/4">
+            {{-- Exam Link --}}
+            <div class="available_class px-4">
+                <div class="text-xl border-b my-3">
+                    <span class="font-bold">
+                        <i class="fa fa-list text-sm mr-1"></i>
+                        Exam Links
+                    </span>
+                </div>
+            </div>
             {{-- Class section --}}
             <div class="available_class px-4">
                 <div class="text-xl border-b my-3">
@@ -35,6 +44,7 @@
         </div>
         {{-- sidebar --}}
         <div class="hidden md:block md:w-1/4 px-4">
+           
             <div class="notification_list ">
                 <div class="text-xl border-b my-3 font-bold">
                     <p>

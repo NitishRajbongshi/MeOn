@@ -31,7 +31,7 @@
     <title>Edorb</title>
 </head>
 
-<body class="font-[Poppins] bg-gradient-to-t bg-slate-50 h-screen">
+<body class="font-[Poppins] bg-gradient-to-t bg-slate-100 h-screen">
     @yield('content')
 </body>
 

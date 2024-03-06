@@ -1,4 +1,4 @@
-<header class="bg-white">
+<header class="shadow-sm bg-white">
     <nav class="flex justify-between items-center w-[95%]  mx-auto">
         <div>
             {{-- <img class="w-16 cursor-pointer" src="https://cdn-icons-png.flaticon.com/512/5968/5968204.png" alt="..."> --}}
@@ -23,18 +23,57 @@
         </div>
         <div class="flex items-center gap-6">
             @auth
-            <div>
-                <a href="{{route('adminDashboard')}}" class="">
-                    <i class="fa fa-user mr-2 text-xs"></i>
-                    {{$user->name}}
-                </a>
-            </div>
+                <div class="flex justify-center">
+                    <div x-data="{ dropdownOpen: false }" class="relative">
+                        <button @click="dropdownOpen = !dropdownOpen"
+                            class="relative block text-sm overflow-hidden focus:outline-none">
+                            {{ $user->name }}
+                            <i class="fa fa-user mr-2 text-xs"></i>
+                        </button>
+
+                        <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 h-full w-full">
+                        </div>
+
+                        <div x-show="dropdownOpen"
+                            class="absolute right-0 mt-2 w-48 bg-white shadow-xl z-20">
+                            <ul>
+                                <li>
+                                    <a href="{{route('adminDashboard')}}"
+                                        class="block px-4 py-2 text-sm capitalize text-gray-800 hover:bg-indigo-500 hover:text-white">
+                                        Dashboard
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#"
+                                        class="block px-4 py-2 text-sm capitalize text-gray-800 hover:bg-indigo-500 hover:text-white">
+                                        Profile
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#"
+                                    class="block px-4 py-2 text-sm capitalize text-gray-800 hover:bg-indigo-500 hover:text-white">
+                                    Settings
+                                </a>
+                                </li>
+                                <li class="w-full hover:bg-red-200">
+                                    <form action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="flex items-center px-4 py-2 text-sm capitalize text-red-900 focus:outline-none">
+                                            <i class="fa fa-sign-out mr-2 text-md" aria-hidden="true"></i>
+                                            <span class="text-md">Logout</span>
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             @endauth
             @guest
-                <button class="bg-[#a6c1ee] text-white px-5 py-2 rounded-full hover:bg-[#87acec]">
+                <button class="text-xs">
                     <a href="{{ route('login') }}">
                         <i class="fa fa-sign-in"></i>
-                        Sign in
+                        Login
                     </a>
                 </button>
 

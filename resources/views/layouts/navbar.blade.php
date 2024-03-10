@@ -7,9 +7,8 @@
         <div
             class="nav-links duration-500 md:static absolute bg-white md:min-h-fit min-h-[40vh] left-0 top-[-100%] md:w-auto  w-full flex items-start px-5 py-4">
             <ul class="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-2">
-                <li>
+                <li class="md:hidden">
                     <a class="hover:text-gray-500 text-lg font-bold" href="/">
-                        {{-- <i class="fa fa-home"></i> --}}
                         EDORB
                     </a>
                 </li>

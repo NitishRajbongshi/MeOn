@@ -54,6 +54,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     // add Exam Link
     Route::get('/addExamLink', [ExamLinkController::class, 'index'])->name('addExamLink');
     Route::post('/addExamLink', [ExamLinkController::class, 'store']);
+    Route::delete('/deleteExamLink', [ExamLinkController::class, 'destroy'])->name('deleteExamLink');
 });
 
 // notes

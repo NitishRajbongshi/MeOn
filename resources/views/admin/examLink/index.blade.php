@@ -53,7 +53,7 @@
                             <div class="md:flex my-2">
                                 <div class="w-full md:w-1/3">
                                     <label class="text-sm" for="link">Exam Link:<span
-                                        class="text-xs text-red-500">*</span></label>
+                                            class="text-xs text-red-500">*</span></label>
                                 </div>
                                 <div class="w-full md:w-2/3">
                                     <textarea rows="4" id="link" name="link"
@@ -68,7 +68,7 @@
                             </div>
                             <div class="md:flex my-2">
                                 <div class="w-full md:w-1/3">
-                                    <label class="text-sm" for="status">Link Status:<span
+                                    <label class="text-sm" for="status">Exam Status:<span
                                             class="text-xs text-red-500">*</span></label>
                                 </div>
                                 <div class="w-full md:w-2/3">
@@ -105,6 +105,83 @@
                     <div class="border rounded-md border-slate-200 my-2 p-2">
                         <h1>SideBar</h1>
                     </div>
+                </div>
+            </div>
+
+            {{-- Data table --}}
+            <div class="border rounded-md">
+                <div class="my-3 text-center text-md">
+                    <span class="border rounded-sm p-1 text-sm font-bold text-blue-900 border-blue-900 bg-blue-200">
+                        Available Exam List
+                    </span>
+                </div>
+                <div class="flex flex-col overflow-x-auto">
+                    <div class="sm:-mx-6 lg:-mx-8">
+                        <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full text-left text-sm font-light">
+                                    <thead class="border-b font-medium dark:border-neutral-500">
+                                        <tr>
+                                            <th scope="col" class="px-6 py-1">#</th>
+                                            <th scope="col" class="px-6 py-1">Title</th>
+                                            <th scope="col" class="px-6 py-1 text-center">Status</th>
+                                            <th scope="col" class="px-6 py-1">Link</th>
+                                            <th scope="col" class="px-6 py-1">Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @php
+                                            $i = 1;
+                                        @endphp
+                                        @foreach ($examLinks as $item)
+                                            <tr class="border-b dark:border-neutral-500">
+                                                <td class="whitespace-nowrap px-6 py-1 font-medium">{{ $i }}</td>
+                                                <td class="whitespace-nowrap px-6 py-1">
+                                                    {{ $item->title }}
+                                                </td>
+                                                <td class="whitespace-nowrap px-6 py-1">
+                                                    <select name="examStatus" id="examStatus">
+                                                        <option value="{{ $item->status_id }}">
+                                                            {{ $item->status }}
+                                                        </option>
+                                                        @foreach ($statuses as $status)
+                                                            @if ($item->status_id != $status->id)
+                                                                <option value="{{ $status->id }}">
+                                                                    {{ $status->status }}
+                                                                </option>
+                                                            @endif
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td class="whitespace-nowrap px-6 py-1">
+                                                    {{ $item->link }}
+                                                </td>
+                                                <td class="whitespace-nowrap text-center px-6 py-1">
+                                                    <form action="{{route('deleteExamLink')}}" method="post">
+                                                        @method('delete')
+                                                        @csrf
+                                                        <input type="hidden" name="linkId" value="{{$item->link_id}}">
+                                                        <button type="submit" onclick="return confirm('Are you sure you want to delete this exam link?')">
+                                                            <i class="fa fa-trash text-xs"></i>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                            @php
+                                                $i++;
+                                            @endphp
+                                        @endforeach
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-xs my-3 p-2">
+                    <span class="text-xs">
+                        {{ $examLinks->links() }}
+                    </span>
                 </div>
             </div>
         </x-main-content>

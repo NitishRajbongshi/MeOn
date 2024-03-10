@@ -84,7 +84,7 @@
 
         </div>
 
-        <div class="container mx-auto bg-gray-200 py-1">
+        <div class="container mx-auto py-1">
             <div class="flex gap-1">
                 <!-- First Column (Side Navbar) -->
                 <div class="w-3/12 hidden md:block bg-white">
@@ -137,7 +137,24 @@
                         <ul class="mt-4">
                             <li class="menuTitle">
                                 <button class="flex text-lg justify-between w-full">
-                                    <div><i class="fa fa-book mr-2 text-md"></i>Manage Info</div>
+                                    <div><i class="fa fa-flask mr-[0.5rem] text-md" aria-hidden="true"></i>Manage Exam</div>
+                                    <div class="ms-4"><i class="fa fa-caret-left" aria-hidden="true"></i></div>
+                                </button>
+                                <ul class="text-md subMenuItem hidden ms-1">
+                                    <li class="my-2">
+                                        <a href="{{route('addExamLink')}}"
+                                            class="flex items-center focus:outline-none hover:text-gray-400">
+                                            <i class="fa fa-genderless mr-1" aria-hidden="true"></i>
+                                            <span class="text-md">Add Exam Links</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="mt-4">
+                            <li class="menuTitle">
+                                <button class="flex text-lg justify-between w-full">
+                                    <div><i class="fa fa-info-circle mr-[0.4rem] text-md" aria-hidden="true"></i>Manage Info</div>
                                     <div class="ms-4"><i class="fa fa-caret-left" aria-hidden="true"></i></div>
                                 </button>
                                 <ul class="text-md subMenuItem hidden ms-1">
@@ -155,20 +172,13 @@
                                             <span class="text-md">Add Main Banner</span>
                                         </a>
                                     </li>
-                                    <li class="my-2">
-                                        <a href="#"
-                                            class="flex items-center focus:outline-none hover:text-gray-400">
-                                            <i class="fa fa-genderless mr-1" aria-hidden="true"></i>
-                                            <span class="text-md">Add Exam Links</span>
-                                        </a>
-                                    </li>
                                 </ul>
                             </li>
                         </ul>
                         <ul class="mt-4">
                             <li class="menuTitle">
                                 <button class="flex text-lg justify-between w-full">
-                                    <div><i class="fa fa-book mr-2 text-md"></i>Manage Site</div>
+                                    <div><i class="fa fa-sitemap mr-[0.3rem] text-md" aria-hidden="true"></i>Manage Site</div>
                                     <div class="ms-4"><i class="fa fa-caret-left" aria-hidden="true"></i></div>
                                 </button>
                                 <ul class="text-md subMenuItem hidden ms-1">

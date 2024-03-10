@@ -5,18 +5,24 @@
             <p class="text-xl py-3 font-bold">EDORB</p>
         </div>
         <div
-            class="nav-links duration-500 md:static absolute bg-white md:min-h-fit min-h-[60vh] left-0 top-[-100%] md:w-auto  w-full flex items-start px-5">
+            class="nav-links duration-500 md:static absolute bg-white md:min-h-fit min-h-[40vh] left-0 top-[-100%] md:w-auto  w-full flex items-start px-5 py-4">
             <ul class="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-2">
                 <li>
+                    <a class="hover:text-gray-500 text-lg font-bold" href="/">
+                        {{-- <i class="fa fa-home"></i> --}}
+                        EDORB
+                    </a>
+                </li>
+                <li>
                     <a class="hover:text-gray-500" href="/">
-                        <i class="fa fa-home text-xs"></i>
+                        <i class="fa fa-home"></i>
                         Home
                     </a>
                 </li>
                 <li>
                     <a class="hover:text-gray-500" href="#">
-                        <i class="fa fa-book text-xs"></i>
-                        Courses
+                        <i class="fa fa-comments"></i>
+                        Blog
                     </a>
                 </li>
             </ul>
@@ -89,6 +95,6 @@
 
     function onToggleMenu(e) {
         e.name = e.name === 'menu' ? 'close' : 'menu'
-        navLinks.classList.toggle('top-[8%]')
+        navLinks.classList.toggle('top-[0%]')
     }
 </script>

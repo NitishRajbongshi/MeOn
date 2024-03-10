@@ -8,16 +8,97 @@
         {{-- content --}}
         <div class="w-full md:w-3/4">
             {{-- Exam Link --}}
-            <div class="available_class px-4">
+            <div class="available_class px-1 md:px-4">
                 <div class="text-xl border-b my-3">
                     <span class="font-bold">
                         <i class="fa fa-list text-sm mr-1"></i>
                         Exam Links
                     </span>
                 </div>
+                <div class="border bg-white p-1 rounded shadow-sm">
+                    {{-- <ul>
+                        @foreach ($examLinks as $examLink)
+                            <li class="border-s-4 border-indigo-500 p-2 my-1">
+                                <div>
+                                    @if ($examLink->status_id === 1)
+                                        <span class="bg-gray-500 text-white p-1 border-gray-800 rounded-lg">
+                                            Upcoming
+                                        </span>
+                                    @endif
+                                    @if ($examLink->status_id === 2)
+                                        <span class="bg-green-500 text-white p-1 border-green-800 rounded-lg">
+                                            Open
+                                        </span>
+                                    @endif
+                                    @if ($examLink->status_id === 3)
+                                        <span class="bg-red-500 text-white p-1 border-red-800 rounded-lg">
+                                            Expired
+                                        </span>
+                                    @endif
+                                </div>
+                                <div>
+                                    <span class="font-bold">{{ $examLink->title }}</span>
+                                    <span>
+                                        @if ($examLink->status_id === 2)
+                                            <a class="bg-yellow-200" href="{{ $examLink->link }}">{{ $examLink->link }}</a>
+                                        @else
+                                            Link not available
+                                        @endif
+                                    </span>
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul> --}}
+                    <table class="table-auto w-full">
+                        <thead>
+                            <th class="border px-4 py-2">Exam Title</th>
+                            <th class="border px-4 py-2">Exam Link</th>
+                        </thead>
+                        <tbody>
+                            @foreach ($examLinks as $examLink)
+                                <tr>
+                                    <td class="border px-1 md:px-4 py-2">
+                                        {{ $examLink->title }}
+                                        @if ($examLink->status_id === 1)
+                                            <span
+                                                class="text-xs bg-gray-500 text-white p-1 border-gray-800 rounded-sm">
+                                                Upcoming
+                                            </span>
+                                        @endif
+                                        @if ($examLink->status_id === 2)
+                                            <span
+                                                class="text-xs bg-green-500 text-white p-1 border-green-800 rounded-sm">
+                                                Open
+                                            </span>
+                                        @endif
+                                        @if ($examLink->status_id === 3)
+                                            <span
+                                                class="text-xs bg-red-500 text-white p-1 border-red-800 rounded-sm">
+                                                Expired
+                                            </span>
+                                        @endif
+                                    </td>
+                                    <td class="border px-4 py-2 text-center">
+                                        @if ($examLink->status_id === 2)
+                                            <a class="text-blue-500 p-1 rounded"
+                                                href="{{ $examLink->link }}">
+                                                Click Here
+                                            </a>
+                                        @else
+                                            <p>Not Avaiable</p>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <div class="my-1">
+                        {{ $examLinks->links() }}
+                    </div>
+                </div>
             </div>
             {{-- Class section --}}
-            <div class="available_class px-4">
+            <div class="available_class px-1 md:px-4">
                 <div class="text-xl border-b my-3">
                     <span class="font-bold">
                         <i class="fa fa-list text-sm mr-1"></i>
@@ -44,7 +125,7 @@
         </div>
         {{-- sidebar --}}
         <div class="hidden md:block md:w-1/4 px-4">
-           
+
             <div class="notification_list ">
                 <div class="text-xl border-b my-3 font-bold">
                     <p>

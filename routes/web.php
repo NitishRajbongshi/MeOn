@@ -10,16 +10,11 @@ use App\Http\Controllers\Subject\SubjectController;
 use App\Http\Controllers\Standard\StandardController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\ExamLink\ExamLinkController;
 use App\Http\Controllers\Note\NoteController;
+use App\Http\Controllers\WelcomeController;
 
-Route::get('/', function () {
-    $user = Auth::user();
-    $classes = Standard::all(['id', 'name']);
-    return view('welcome', [
-        'user' => $user,
-        'classes' =>$classes
-    ]);
-});
+Route::get('/', [WelcomeController::class, 'index']);
 
 // dashboard
 Route::get('/getSubjectList/{id}', [DashboardController::class, 'getSubjectList']);
@@ -55,6 +50,10 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     // manage notes
     Route::get('/manageNotes', [NoteController::class, 'index'])->name('manageNote');
     Route::post('/manageNotes', [NoteController::class, 'store']);
+
+    // add Exam Link
+    Route::get('/addExamLink', [ExamLinkController::class, 'index'])->name('addExamLink');
+    Route::post('/addExamLink', [ExamLinkController::class, 'store']);
 });
 
 // notes

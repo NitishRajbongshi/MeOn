@@ -3,8 +3,107 @@
 @section('content')
     <x-show-notification />
     @include('layouts.navbar')
+    <style>
+        /* Slideshow container */
+        .slideshow-container {
+            max-width: 100%;
+            position: relative;
+            margin: auto;
+        }
 
-    <main class="container mx-auto flex gap-2 my-2">
+        /* Caption text */
+        .text {
+            color: #f2f2f2;
+            font-size: 15px;
+            padding: 8px 12px;
+            position: absolute;
+            bottom: 8px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Number text (1/3 etc) */
+        .numbertext {
+            color: #f2f2f2;
+            font-size: 12px;
+            padding: 8px 12px;
+            position: absolute;
+            top: 0;
+        }
+
+        .active {
+            background-color: #717171;
+        }
+
+        /* Fading animation */
+        .fade {
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+
+        @keyframes fade {
+            from {
+                opacity: .4
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        /* On smaller screens, decrease text size */
+        @media only screen and (max-width: 300px) {
+            .text {
+                font-size: 11px
+            }
+        }
+    </style>
+
+    {{-- marquee --}}
+    <div class="mb-1 text-xs font-bold bg-gray-200">
+        <marquee class="marq pt-1" direction="left" loop="">
+            <span>Lorem ipsum dolor sit</span>
+            <i class="fa fa-circle"></i>
+        </marquee>
+    </div>
+
+    {{-- info button --}}
+    <div class="container mx-auto flex gap-1 justify-end items-center text-xs">
+        <p>
+            <i class="fa-solid fa-comment"></i>
+            Feedback
+        </p>
+        <p>
+            <i class="fa-solid fa-address-card"></i>
+            About us
+        </p>
+        <p>
+            <i class="fa-solid fa-phone"></i>
+            contact us
+        </p>
+    </div>
+
+    <!-- Slideshow container -->
+    <div class="container mx-auto">
+        <div class="slideshow-container w-full">
+            <div class="mySlides fade">
+                <div class="numbertext">1 / 3</div>
+                <img src="{{asset('images/banner1.png')}}" style="width:100%">
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">2 / 3</div>
+                <img src="{{asset('images/banner2.png')}}" style="width:100%">
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">3 / 3</div>
+                <img src="{{asset('images/banner1.png')}}" style="width:100%">
+            </div>
+        </div>
+    </div>
+
+    <main class="container mx-auto flex gap-2 min-h-[90vh]">
         {{-- content --}}
         <div class="w-full md:w-3/4">
             {{-- Exam Link --}}
@@ -15,86 +114,67 @@
                         Exam Links
                     </span>
                 </div>
-                <div class="border bg-white p-1 rounded shadow-sm">
-                    {{-- <ul>
-                        @foreach ($examLinks as $examLink)
-                            <li class="border-s-4 border-indigo-500 p-2 my-1">
-                                <div>
-                                    @if ($examLink->status_id === 1)
-                                        <span class="bg-gray-500 text-white p-1 border-gray-800 rounded-lg">
-                                            Upcoming
-                                        </span>
-                                    @endif
-                                    @if ($examLink->status_id === 2)
-                                        <span class="bg-green-500 text-white p-1 border-green-800 rounded-lg">
-                                            Open
-                                        </span>
-                                    @endif
-                                    @if ($examLink->status_id === 3)
-                                        <span class="bg-red-500 text-white p-1 border-red-800 rounded-lg">
-                                            Expired
-                                        </span>
-                                    @endif
-                                </div>
-                                <div>
-                                    <span class="font-bold">{{ $examLink->title }}</span>
-                                    <span>
-                                        @if ($examLink->status_id === 2)
-                                            <a class="bg-yellow-200" href="{{ $examLink->link }}">{{ $examLink->link }}</a>
-                                        @else
-                                            Link not available
-                                        @endif
-                                    </span>
-                                </div>
-                            </li>
-                        @endforeach
-                    </ul> --}}
-                    <table class="table-auto w-full">
-                        <thead>
-                            <th class="border px-4 py-2">Exam Title</th>
-                            <th class="border px-4 py-2">Exam Link</th>
-                        </thead>
-                        <tbody>
-                            @foreach ($examLinks as $examLink)
-                                <tr>
-                                    <td class="border px-1 md:px-4 py-2">
-                                        {{ $examLink->title }}
-                                        @if ($examLink->status_id === 1)
-                                            <span
-                                                class="text-xs bg-gray-500 text-white p-1 border-gray-800 rounded-sm">
-                                                Upcoming
+                <div class="px-1 py-2 text-sm bg-white rounded shadow-sm">
+                    @if ($examLinks->count() == 0)
+                        <p class="p-1">
+                            <i class="fa fa-smile" aria-hidden="true"></i>
+                            No exam link uploaded yet!
+                        </p>
+                    @else
+                        <table class="table-auto w-full">
+                            <thead>
+                                <th class="border-b px-4 py-2">Exam Title</th>
+                                <th class="border-b px-4 py-2">Exam Link</th>
+                            </thead>
+                            <tbody>
+                                @php
+                                    $i = 1;
+                                @endphp
+                                @foreach ($examLinks as $examLink)
+                                    <tr>
+                                        <td class="border-b px-1 md:px-4 py-2">
+                                            <span class="font-bold">
+                                                {{ $i }} :
                                             </span>
-                                        @endif
-                                        @if ($examLink->status_id === 2)
-                                            <span
-                                                class="text-xs bg-green-500 text-white p-1 border-green-800 rounded-sm">
-                                                Open
-                                            </span>
-                                        @endif
-                                        @if ($examLink->status_id === 3)
-                                            <span
-                                                class="text-xs bg-red-500 text-white p-1 border-red-800 rounded-sm">
-                                                Expired
-                                            </span>
-                                        @endif
-                                    </td>
-                                    <td class="border px-4 py-2 text-center">
-                                        @if ($examLink->status_id === 2)
-                                            <a class="text-blue-500 p-1 rounded"
-                                                href="{{ $examLink->link }}">
-                                                Click Here
-                                            </a>
-                                        @else
-                                            <p>Not Avaiable</p>
-                                        @endif
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    <div class="my-1">
-                        {{ $examLinks->links() }}
-                    </div>
+                                            {{ $examLink->title }}
+                                            @if ($examLink->status_id === 1)
+                                                <span class="text-xs bg-gray-500 text-white p-1 border-gray-800 rounded-sm">
+                                                    Upcoming
+                                                </span>
+                                            @endif
+                                            @if ($examLink->status_id === 2)
+                                                <span
+                                                    class="text-xs bg-green-500 text-white p-1 border-green-800 rounded-sm">
+                                                    Open
+                                                </span>
+                                            @endif
+                                            @if ($examLink->status_id === 3)
+                                                <span class="text-xs bg-red-500 text-white p-1 border-red-800 rounded-sm">
+                                                    Expired
+                                                </span>
+                                            @endif
+                                        </td>
+                                        <td class="border-b px-4 py-2 text-center">
+                                            @if ($examLink->status_id === 2)
+                                                <a class="text-blue-500 p-1 rounded" href="{{ $examLink->link }}">
+                                                    Click Here
+                                                </a>
+                                            @else
+                                                <p>Not Avaiable</p>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    @php
+                                        $i++;
+                                    @endphp
+                                @endforeach
+                            </tbody>
+                        </table>
+                        <div class="my-1">
+                            {{ $examLinks->links() }}
+                        </div>
+                    @endif
+
                 </div>
             </div>
             {{-- Class section --}}
@@ -125,7 +205,6 @@
         </div>
         {{-- sidebar --}}
         <div class="hidden md:block md:w-1/4 px-4">
-
             <div class="notification_list ">
                 <div class="text-xl border-b my-3 font-bold">
                     <p>
@@ -145,8 +224,6 @@
                 </div>
             </div>
         </div>
-
-
         {{-- modal for showing the subject list --}}
         <div id="modal" class="hidden fixed inset-0 bg-gray-800 bg-opacity-75 items-center justify-center">
             <div class="bg-white p-4 rounded-md w-[22rem] md:w-[36rem]">
@@ -169,6 +246,43 @@
             </div>
         </div>
     </main>
+
+    {{-- footer --}}
+    <div class="p-1 bg-yellow-200">
+        <div class="flex flex-row flex-wrap py-2">
+            <div class="basis-full md:basis-1/3 flex flex-col justify-center items-center">
+                <div>
+                    <i class="fa fa-info-circle text-5xl"></i>
+                </div>
+                <p class="text-2xl font-bold">EDORB</p>
+            </div>
+            <div class="basis-full md:basis-1/3">
+                <h1 class="underline font-bold text-xl pb-2">Important Link</h1>
+                <ul>
+                    <li>Contact Us</li>
+                    <li>About Us</li>
+                    <li>Location</li>
+                    <li>Faculty</li>
+                </ul>
+            </div>
+            <div class="basis-full md:basis-1/3">
+                <div class="text-2xl py-2">
+                    <a class="me-2" href="#"><i class="fa-brands fa-facebook"></i></a>
+                    <a class="me-2" href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a class="me-2" href="#"><i class="fa-brands fa-twitter"></i></a>
+                </div>
+                <p>
+                    Copyright
+                    <i class="fa fa-copyright" aria-hidden="true"></i>
+                    2024 Edorb.in
+                </p>
+                <div class="text-xs">
+                    <a href="#">Developer info</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         $(document).ready(() => {
             // Function to create a subject card
@@ -240,5 +354,23 @@
 
             })
         })
+
+
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {
+                slideIndex = 1
+            }
+            slides[slideIndex - 1].style.display = "block";
+            setTimeout(showSlides, 5000); // Change image every 2 seconds
+        }
     </script>
 @endsection

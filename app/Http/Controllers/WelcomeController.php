@@ -13,7 +13,7 @@ class WelcomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $classes = Standard::all(['id', 'name']);
+        $classes = Standard::all(['id', 'name', 'description']);
         // Exam link
         $examLinks = DB::table('exam_links')->orderBy('created_at', 'desc')->paginate(3);
         // Marquee

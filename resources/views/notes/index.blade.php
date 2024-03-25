@@ -41,7 +41,7 @@
                     </div>
                     <div>
                         <p class="underline text-lg text-blue-500">List of chapters:</p>
-                        <div class="ms-8 my-2  ">
+                        <div class="md:m-2">
                             @foreach ($chapters as $chapter)
                                 <div class="my-2 border-s-4 border-blue-500 ps-2">
                                     <a class="" href="#">
@@ -52,19 +52,12 @@
                                         <a href="#"
                                             class="noteViewBtn border text-xs border-blue-200 bg-blue-100 text-blue-800 font-bold px-1 py-0.5 rounded-sm"
                                             data-id="{{ $chapter->id }}">
-                                            <i class="fa fa-plus mr-1"></i>View available notes
+                                            <i class="fa fa-eye mr-1"></i>Click to view available notes
                                         </a>
                                     </div>
                                     {{-- Note container --}}
                                     <div id="{{ $chapter->id }}">
-                                        {{-- <div class="ms-3 my-2 text-xs border-s-2 ps-2 border-dotted border-blue-800">
-                                            <p class="font-bold">Title</p>
-                                            <p>description</p>
-                                            <button
-                                                class="border text-xs border-blue-200 bg-blue-100 text-blue-800 font-bold px-1 mt-2 rounded-sm">
-                                                view notes
-                                            </button>
-                                        </div> --}}
+                                        {{-- / --}}
                                     </div>
                                 </div>
                             @endforeach
@@ -100,7 +93,7 @@
         // Function to generate HTML content for each object in the array
         function generateContent(note) {
             return `
-                <div class="ms-3 my-2 text-xs border-s-2 ps-2 border-dotted border-blue-800">
+                <div class="md:ms-3 my-2 text-xs border-s-2 ps-2 border-dotted border-blue-800">
                     <p class="font-bold">${note.name}</p>
                     <p>${note.description}</p>
                     <button class="viewPdfFile border text-xs border-blue-200 bg-blue-100 text-blue-800 font-bold px-1 mt-2 rounded-sm" id="noteBtn${note.id}" data-id="${note.id}">

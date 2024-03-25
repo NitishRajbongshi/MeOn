@@ -60,7 +60,7 @@
     </style>
 
     {{-- marquee --}}
-    <div class="mb-1 text-xs font-bold bg-gray-200">
+    <div class="mb-1 text-sm font-bold bg-gray-200">
         <marquee class="marq pt-1" direction="left" loop="">
             @foreach ($marquees as $marquee)
                 <span>{{$marquee->title}}</span>
@@ -187,20 +187,27 @@
                         List of Classes
                     </span>
                 </div>
-                <div class="flex items-start flex-wrap justify-start gap-1 md:gap-3 my-2">
+                <div class="flex flex-wrap justify-between items-center">
                     @foreach ($classes as $item)
-                        <button
-                            class="class_btn bg-white rounded-lg outline-none shadow-md flex flex-col items-center w-[49%] md:w-[31%] lg:w-[18.9%] h-36 px-5 py-2 justify-center hover:shadow-xl"
-                            data-id="{{ $item->id }}">
-                            <div class="bg-green-100 p-5 rounded-full flex justify-center items-center">
-                                <i class="fa fa-book text-green-900"></i>
+                    <div class="flex w-full my-1 md:w-[49%] rounded-md min-h-[12rem] bg-white shadow-sm hover:shadow-lg">
+                        <div class="w-1/3 flex justify-center items-center">
+                            <img src="{{asset('images/course.png')}}" alt="image">
+                        </div>
+                        <div class="w-2/3">
+                            <div class="flex justify-end">
+                                <p class="text-xs text-white px-2 py-1 bg-red-600 rounded-tr-md">New</p>
                             </div>
-                            <div class="text-sm my-1">
-                                <p class="font-bold">
-                                    {{ $item->name }}
-                                </p>
+                            <div class="min-h-[7rem] pr-2">
+                                <h1 class="font-bold text-lg">{{ $item->name }}</h1>
+                                <p class="text-sm text-gray-500 max-h-[5rem] w-full" style="overflow: hidden;
+                                text-overflow: ellipsis;">{{ $item->description }}</p>
                             </div>
-                        </button>
+                            <div class="flex items-center justify-end mt-2 mr-2 ">
+                                <p class="text-sm text-green-500 mx-1">Free</p>
+                                <button class="class_btn px-4 py-1 rounded bg-green-500 text-white hover:bg-green-600" data-id="{{ $item->id }}">Explore Notes</button>
+                            </div>
+                        </div>
+                    </div>
                     @endforeach
                 </div>
             </div>

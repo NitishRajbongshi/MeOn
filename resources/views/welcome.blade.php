@@ -63,7 +63,7 @@
     <div class="mb-1 text-sm font-bold bg-gray-200">
         <marquee class="marq pt-1" direction="left" loop="">
             @foreach ($marquees as $marquee)
-                <span>{{$marquee->title}}</span>
+                <span>{{ $marquee->title }}</span>
                 <i class="fa fa-circle"></i>
             @endforeach
         </marquee>
@@ -116,7 +116,7 @@
                         Exam Links
                     </span>
                 </div>
-                <div class="px-1 py-2 text-sm bg-white rounded shadow-sm">
+                <div class="p-2 rounded-md shadow-sm text-sm bg-white">
                     @if ($examLinks->count() == 0)
                         <p class="p-1">
                             <i class="fa fa-smile" aria-hidden="true"></i>
@@ -124,20 +124,11 @@
                         </p>
                     @else
                         <table class="table-auto w-full">
-                            <thead>
-                                <th class="border-b px-4 py-2">Exam Title</th>
-                                <th class="border-b px-4 py-2">Exam Link</th>
-                            </thead>
                             <tbody>
-                                @php
-                                    $i = 1;
-                                @endphp
                                 @foreach ($examLinks as $examLink)
-                                    <tr>
-                                        <td class="border-b px-1 md:px-4 py-2">
-                                            <span class="font-bold">
-                                                {{ $i }} :
-                                            </span>
+                                    <tr class="">
+                                        <td class="p-1 ">
+                                            <i class="fa fa-circle text-xs text-green-500"></i>
                                             {{ $examLink->title }}
                                             @if ($examLink->status_id === 1)
                                                 <span class="text-xs bg-gray-500 text-white p-1 border-gray-800 rounded-sm">
@@ -156,9 +147,9 @@
                                                 </span>
                                             @endif
                                         </td>
-                                        <td class="border-b px-4 py-2 text-center">
+                                        <td class="p-1 text-end">
                                             @if ($examLink->status_id === 2)
-                                                <a class="text-blue-500 p-1 rounded" href="{{ $examLink->link }}">
+                                                <a class="text-blue-500 rounded" href="{{ $examLink->link }}">
                                                     Click Here
                                                 </a>
                                             @else
@@ -166,9 +157,6 @@
                                             @endif
                                         </td>
                                     </tr>
-                                    @php
-                                        $i++;
-                                    @endphp
                                 @endforeach
                             </tbody>
                         </table>
@@ -189,25 +177,29 @@
                 </div>
                 <div class="flex flex-wrap justify-between items-center">
                     @foreach ($classes as $item)
-                    <div class="flex w-full my-1 md:w-[49%] rounded-md min-h-[12rem] bg-white shadow-sm hover:shadow-lg">
-                        <div class="w-1/3 flex justify-center items-center">
-                            <img src="{{asset('images/course.png')}}" alt="image">
+                        <div
+                            class="flex w-full my-1 md:w-[49%] rounded-md min-h-[12rem] bg-white shadow-sm hover:shadow-lg">
+                            <div class="w-1/3 flex justify-center items-center">
+                                <img src="{{ asset('images/course.png') }}" alt="image">
+                            </div>
+                            <div class="w-2/3">
+                                <div class="flex justify-end">
+                                    <p class="text-xs text-white px-2 py-1 bg-red-600 rounded-tr-md">New</p>
+                                </div>
+                                <div class="min-h-[7rem] pr-2">
+                                    <h1 class="font-bold text-lg">{{ $item->name }}</h1>
+                                    <p class="text-sm text-gray-500 max-h-[5rem] w-full"
+                                        style="overflow: hidden;
+                                text-overflow: ellipsis;">
+                                        {{ $item->description }}</p>
+                                </div>
+                                <div class="flex items-center justify-end mt-2 mr-2 ">
+                                    <p class="text-sm text-green-500 mx-1">Free</p>
+                                    <button class="class_btn px-4 py-1 rounded bg-green-500 text-white hover:bg-green-600"
+                                        data-id="{{ $item->id }}">Explore Notes</button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="w-2/3">
-                            <div class="flex justify-end">
-                                <p class="text-xs text-white px-2 py-1 bg-red-600 rounded-tr-md">New</p>
-                            </div>
-                            <div class="min-h-[7rem] pr-2">
-                                <h1 class="font-bold text-lg">{{ $item->name }}</h1>
-                                <p class="text-sm text-gray-500 max-h-[5rem] w-full" style="overflow: hidden;
-                                text-overflow: ellipsis;">{{ $item->description }}</p>
-                            </div>
-                            <div class="flex items-center justify-end mt-2 mr-2 ">
-                                <p class="text-sm text-green-500 mx-1">Free</p>
-                                <button class="class_btn px-4 py-1 rounded bg-green-500 text-white hover:bg-green-600" data-id="{{ $item->id }}">Explore Notes</button>
-                            </div>
-                        </div>
-                    </div>
                     @endforeach
                 </div>
             </div>

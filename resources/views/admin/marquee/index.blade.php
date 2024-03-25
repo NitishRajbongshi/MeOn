@@ -15,7 +15,7 @@
                     <li>
                         <span class="mx-2 text-neutral-500 dark:text-neutral-400">/</span>
                     </li>
-                    <li class="text-neutral-500 dark:text-neutral-400">Manage Subject</li>
+                    <li class="text-neutral-500 dark:text-neutral-400">Add Marquee</li>
                 </ol>
             </div>
 
@@ -23,59 +23,24 @@
                 <div class="w-full md:w-3/4">
                     {{-- Form --}}
                     <div class="border rounded-md border-slate-200 my-2 p-1 md:p-2">
-                        <form action="{{ route('manageSubject') }}" method="post" autocomplete="off">
+                        <form action="{{ route('marquee') }}" method="post" autocomplete="off">
                             @csrf
                             <fieldset class="my-2">
                                 <span class="border-2 border-blue-900 rounded-sm text-sm p-1 font-bold text-blue-900">
                                     <i class="fa fa-plus mr-1"></i>
-                                    Add Subject Details
+                                    Add Marquee Text
                                 </span>
                             </fieldset>
                             <div class="md:flex my-2">
                                 <div class="w-full md:w-1/3">
-                                    <label class="text-sm" for="name">Subject Name: <span
+                                    <label class="text-sm" for="title">Marquee Text:<span
                                             class="text-xs text-red-500">*</span></label>
                                 </div>
                                 <div class="w-full md:w-2/3">
-                                    <input type="text" id="name" name="name" placeholder="G. Science"
-                                        value="{{ old('name') }}"
-                                        class="w-full border border-blue-300 rounded-sm outline-none p-1 text-sm">
-
-                                    @error('name')
-                                        <p class="text-xs text-red-500">
-                                            <i class="fa fa-warning mr-1 my-1"></i>
-                                            {{ $message }}
-                                        </p>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="md:flex my-2">
-                                <div class="w-full md:w-1/3">
-                                    <label class="text-sm" for="description">Subject Description:</label>
-                                </div>
-                                <div class="w-full md:w-2/3">
-                                    <textarea rows="4" id="description" name="description"
+                                    <textarea rows="4" id="title" name="title"
                                         class="w-full border border-blue-300 rounded-sm outline-none p-1 text-sm"
-                                        placeholder="Write any description if needed...">{{ old('description') }}</textarea>
-                                </div>
-                            </div>
-                            <div class="md:flex my-2">
-                                <div class="w-full md:w-1/3">
-                                    <label class="text-sm" for="class">Class:<span
-                                            class="text-xs text-red-500">*</span></label>
-                                </div>
-                                <div class="w-full md:w-2/3">
-                                    <select name="class" id="class"
-                                        class="border border-blue-300 rounded-sm outline-none p-1 text-sm">
-                                        <option value="">Choose class</option>
-                                        @foreach ($classes as $class)
-                                            <option value="{{ $class->id }}">
-                                                {{ $class->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-
-                                    @error('class')
+                                        placeholder="New classes started for class 12">{{ old('title') }}</textarea>
+                                    @error('title')
                                         <p class="text-xs text-red-500">
                                             <i class="fa fa-warning mr-1 my-1"></i>
                                             {{ $message }}
@@ -83,12 +48,13 @@
                                     @enderror
                                 </div>
                             </div>
+                            
                             <div class="flex justify-end">
                                 <button
                                     class="border border-blue-300 text-blue-950 bg-blue-200 px-2 py-1 rounded-sm text-sm font-bold"
                                     type="submit">
                                     <i class="fa fa-save mr-1"></i>
-                                    Add Subject
+                                    Publish Marquee Text
                                 </button>
                             </div>
                         </form>
@@ -104,8 +70,8 @@
             {{-- Data table --}}
             <div class="border rounded-md">
                 <div class="my-3 text-center text-md">
-                    <span class="border rounded-sm p-1 font-bold text-blue-900 border-blue-900 bg-blue-200">
-                        Available Subject List
+                    <span class="border rounded-sm p-1 text-sm font-bold text-blue-900 border-blue-900 bg-blue-200">
+                        Available Marquee
                     </span>
                 </div>
                 <div class="flex flex-col overflow-x-auto">
@@ -116,10 +82,7 @@
                                     <thead class="border-b font-medium dark:border-neutral-500">
                                         <tr>
                                             <th scope="col" class="px-6 py-1">#</th>
-                                            <th scope="col" class="px-6 py-1">Subject Name</th>
-                                            <th scope="col" class="px-6 py-1">Subject Description</th>
-                                            <th scope="col" class="px-6 py-1">Subject For</th>
-                                            <th scope="col" class="px-6 py-1">Edit</th>
+                                            <th scope="col" class="px-6 py-1">Title</th>
                                             <th scope="col" class="px-6 py-1">Delete</th>
                                         </tr>
                                     </thead>
@@ -127,25 +90,21 @@
                                         @php
                                             $i = 1;
                                         @endphp
-                                        @foreach ($subjects as $item)
+                                        @foreach ($marqueeDetails as $item)
                                             <tr class="border-b dark:border-neutral-500">
                                                 <td class="whitespace-nowrap px-6 py-1 font-medium">{{ $i }}</td>
                                                 <td class="whitespace-nowrap px-6 py-1">
-                                                    {{ $item->name }}
+                                                    {{ $item->title }}
                                                 </td>
-                                                <td class="whitespace-nowrap px-6 py-1">
-                                                    {{ $item->description }}
-                                                </td>
-                                                <td class="whitespace-nowrap px-6 py-1">
-                                                    {{ $item->class_name }}
-                                                </td>
-                                                <td class="whitespace-nowrap px-6 py-1">
-                                                    <button class="openModal" data-id="{{ $item->id }}">
-                                                        <i class="fa fa-pen text-xs"></i>
-                                                    </button>
-                                                </td>
-                                                <td class="whitespace-nowrap px-6 py-1">
-                                                    <i class="fa fa-trash text-xs"></i>
+                                                <td class="whitespace-nowrap text-center px-6 py-1">
+                                                    <form action="{{route('deleteExamLink')}}" method="post">
+                                                        @method('delete')
+                                                        @csrf
+                                                        <input type="hidden" name="linkId" value="{{$item->id}}">
+                                                        <button type="submit" onclick="return confirm('Are you sure you want to delete this exam link?')">
+                                                            <i class="fa fa-trash text-xs"></i>
+                                                        </button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                             @php
@@ -160,12 +119,11 @@
                 </div>
                 <div class="text-xs my-3 p-2">
                     <span class="text-xs">
-                        {{ $subjects->links() }}
+                        {{ $marqueeDetails->links() }}
                     </span>
                 </div>
             </div>
         </x-main-content>
-        @include('layouts.modal-layout')
     </main>
     @include('layouts.footer')
 @endsection

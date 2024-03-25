@@ -62,8 +62,10 @@
     {{-- marquee --}}
     <div class="mb-1 text-xs font-bold bg-gray-200">
         <marquee class="marq pt-1" direction="left" loop="">
-            <span>Lorem ipsum dolor sit</span>
-            <i class="fa fa-circle"></i>
+            @foreach ($marquees as $marquee)
+                <span>{{$marquee->title}}</span>
+                <i class="fa fa-circle"></i>
+            @endforeach
         </marquee>
     </div>
 
@@ -88,17 +90,17 @@
         <div class="slideshow-container w-full">
             <div class="mySlides fade">
                 <div class="numbertext">1 / 3</div>
-                <img src="{{asset('images/banner1.png')}}" style="width:100%">
+                <img src="{{ asset('images/banner1.png') }}" style="width:100%">
             </div>
 
             <div class="mySlides fade">
                 <div class="numbertext">2 / 3</div>
-                <img src="{{asset('images/banner2.png')}}" style="width:100%">
+                <img src="{{ asset('images/banner2.png') }}" style="width:100%">
             </div>
 
             <div class="mySlides fade">
                 <div class="numbertext">3 / 3</div>
-                <img src="{{asset('images/banner1.png')}}" style="width:100%">
+                <img src="{{ asset('images/banner1.png') }}" style="width:100%">
             </div>
         </div>
     </div>
@@ -246,43 +248,7 @@
             </div>
         </div>
     </main>
-
-    {{-- footer --}}
-    <div class="p-1 bg-yellow-200">
-        <div class="flex flex-row flex-wrap py-2">
-            <div class="basis-full md:basis-1/3 flex flex-col justify-center items-center">
-                <div>
-                    <i class="fa fa-info-circle text-5xl"></i>
-                </div>
-                <p class="text-2xl font-bold">EDORB</p>
-            </div>
-            <div class="basis-full md:basis-1/3">
-                <h1 class="underline font-bold text-xl pb-2">Important Link</h1>
-                <ul>
-                    <li>Contact Us</li>
-                    <li>About Us</li>
-                    <li>Location</li>
-                    <li>Faculty</li>
-                </ul>
-            </div>
-            <div class="basis-full md:basis-1/3">
-                <div class="text-2xl py-2">
-                    <a class="me-2" href="#"><i class="fa-brands fa-facebook"></i></a>
-                    <a class="me-2" href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a class="me-2" href="#"><i class="fa-brands fa-twitter"></i></a>
-                </div>
-                <p>
-                    Copyright
-                    <i class="fa fa-copyright" aria-hidden="true"></i>
-                    2024 Edorb.in
-                </p>
-                <div class="text-xs">
-                    <a href="#">Developer info</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    @include('layouts.footer')
     <script>
         $(document).ready(() => {
             // Function to create a subject card

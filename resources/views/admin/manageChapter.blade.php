@@ -212,12 +212,7 @@
         </x-main-content>
         @include('layouts.modal-layout')
     </main>
-    <footer>
-        <div class="w-full bg-white p-3">
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste sit sapiente totam a. Vitae, illum earum.
-                Debitis repudiandae error nam.</p>
-        </div>
-    </footer>
+    @include('layouts.footer')
     <script>
         $(document).ready(function() {
             // prevent getting negative number

@@ -88,20 +88,20 @@
             <div class="flex gap-1">
                 <!-- First Column (Side Navbar) -->
                 <div class="w-3/12 hidden md:block bg-white">
-                    <div class="px-8">
-                        <div class="w-full my-4 flex items-center text-lg text-black">
+                    <div class="px-4">
+                        <div class="w-full my-4 flex items-center text-lg text-black p-2 hover:bg-blue-200 hover:rounded-md">
                             <a href="{{ route('adminDashboard') }}">
                                 <i class="fa fa-bars mr-1" aria-hidden="true"></i>
                                 Dashboard
                             </a>
                         </div>
-                        <ul class="mt-4">
+                        <ul class="mt-2">
                             <li class="menuTitle">
-                                <button class="flex text-lg justify-between w-full">
+                                <button class="flex text-lg justify-between w-full p-2 hover:bg-blue-200 hover:rounded-md">
                                     <div><i class="fa fa-book mr-2 text-md"></i>Manage Notes</div>
                                     <div class="ms-4"><i class="fa fa-caret-left" aria-hidden="true"></i></div>
                                 </button>
-                                <ul class="text-md subMenuItem hidden ms-1">
+                                <ul class="text-md subMenuItem hidden ms-3">
                                     <li class="my-2">
                                         <a href="{{ route('manageClass') }}"
                                             class="flex items-center focus:outline-none hover:text-gray-400">
@@ -134,13 +134,13 @@
                                 </ul>
                             </li>
                         </ul>
-                        <ul class="mt-4">
+                        <ul class="mt-2">
                             <li class="menuTitle">
-                                <button class="flex text-lg justify-between w-full">
+                                <button class="flex text-lg justify-between w-full p-2 hover:bg-blue-200 hover:rounded-md">
                                     <div><i class="fa fa-flask mr-[0.5rem] text-md" aria-hidden="true"></i>Manage Exam</div>
                                     <div class="ms-4"><i class="fa fa-caret-left" aria-hidden="true"></i></div>
                                 </button>
-                                <ul class="text-md subMenuItem hidden ms-1">
+                                <ul class="text-md subMenuItem hidden ms-3">
                                     <li class="my-2">
                                         <a href="{{route('addExamLink')}}"
                                             class="flex items-center focus:outline-none hover:text-gray-400">
@@ -151,15 +151,15 @@
                                 </ul>
                             </li>
                         </ul>
-                        <ul class="mt-4">
+                        <ul class="mt-2">
                             <li class="menuTitle">
-                                <button class="flex text-lg justify-between w-full">
+                                <button class="flex text-lg justify-between w-full p-2 hover:bg-blue-200 hover:rounded-md">
                                     <div><i class="fa fa-info-circle mr-[0.4rem] text-md" aria-hidden="true"></i>Manage Info</div>
                                     <div class="ms-4"><i class="fa fa-caret-left" aria-hidden="true"></i></div>
                                 </button>
-                                <ul class="text-md subMenuItem hidden ms-1">
+                                <ul class="text-md subMenuItem hidden ms-3">
                                     <li class="my-2">
-                                        <a href="#"
+                                        <a href="{{route('marquee')}}"
                                             class="flex items-center focus:outline-none hover:text-gray-400">
                                             <i class="fa fa-genderless mr-1" aria-hidden="true"></i>
                                             <span class="text-md">Add Marquee</span>
@@ -175,13 +175,13 @@
                                 </ul>
                             </li>
                         </ul>
-                        <ul class="mt-4">
+                        <ul class="mt-2">
                             <li class="menuTitle">
-                                <button class="flex text-lg justify-between w-full">
+                                <button class="flex text-lg justify-between w-full p-2 hover:bg-blue-200 hover:rounded-md">
                                     <div><i class="fa fa-sitemap mr-[0.3rem] text-md" aria-hidden="true"></i>Manage Site</div>
                                     <div class="ms-4"><i class="fa fa-caret-left" aria-hidden="true"></i></div>
                                 </button>
-                                <ul class="text-md subMenuItem hidden ms-1">
+                                <ul class="text-md subMenuItem hidden ms-3">
                                     <li class="my-2">
                                         <a href="#"
                                             class="flex items-center focus:outline-none hover:text-gray-400">
@@ -192,7 +192,7 @@
                                 </ul>
                             </li>
                         </ul>
-                        <ul class="mt-4">
+                        <ul class="mt-2">
                             {{-- <li class="flex w-full justify-between text-blue-900 cursor-pointer items-center mb-6">
                             <a href="javascript:void(0)" class="flex items-center focus:outline-none hover:text-gray-400">
                                 <i class="fa fa-user mr-3 text-md" aria-hidden="true"></i>

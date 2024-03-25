@@ -8,4 +8,5 @@
             <h1>hello</h1>
         </x-main-content>
     </main>
+    @include('layouts.footer')
 @endsection

@@ -11,6 +11,7 @@ use App\Http\Controllers\Standard\StandardController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\ExamLink\ExamLinkController;
+use App\Http\Controllers\Marquee\MarqueeController;
 use App\Http\Controllers\Note\NoteController;
 use App\Http\Controllers\WelcomeController;
 
@@ -55,6 +56,10 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/addExamLink', [ExamLinkController::class, 'index'])->name('addExamLink');
     Route::post('/addExamLink', [ExamLinkController::class, 'store']);
     Route::delete('/deleteExamLink', [ExamLinkController::class, 'destroy'])->name('deleteExamLink');
+
+    // add marquee text
+    Route::get('/manageMarquee', [MarqueeController::class, 'index'])->name('marquee');
+    Route::post('/manageMarquee', [MarqueeController::class, 'store']);
 });
 
 // notes

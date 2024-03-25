@@ -186,4 +186,5 @@
             </div>
         </x-main-content>
     </main>
+    @include('layouts.footer')
 @endsection

@@ -76,8 +76,10 @@
             Feedback
         </p>
         <p>
-            <i class="fa-solid fa-address-card"></i>
-            About us
+            <a href="{{route('about')}}">
+                <i class="fa-solid fa-address-card"></i>
+                About us
+            </a>
         </p>
         <p>
             <i class="fa-solid fa-phone"></i>
@@ -189,8 +191,7 @@
                                 <div class="min-h-[7rem] pr-2">
                                     <h1 class="font-bold text-lg">{{ $item->name }}</h1>
                                     <p class="text-sm text-gray-500 max-h-[5rem] w-full"
-                                        style="overflow: hidden;
-                                text-overflow: ellipsis;">
+                                        style="overflow: hidden; text-overflow: ellipsis;">
                                         {{ $item->description }}</p>
                                 </div>
                                 <div class="flex items-center justify-end mt-2 mr-2 ">
@@ -203,6 +204,56 @@
                     @endforeach
                 </div>
             </div>
+
+            {{-- <div class="flex justify-between items-center flex-wrap">
+                <div class="w-full md:w-[49.5%] p-4 border bg-white rounded-md hover:shadow-md">
+                    <div class="flex justify-between font-bold pb-2">
+                        <div class="text-md">
+                            <i class="fa fa-circle mr-1 text-green-700"></i>
+                            Chapter Name
+                        </div>
+                        <div>
+                            <p class="text-gray-500 text-sm">Class 10</p>
+                        </div>
+                    </div>
+                    <div class="min-h-[5rem]">
+                        <p class="text-gray-400 max-h-[4rem] text-xs" style="overflow: hidden; text-overflow: ellipsis;">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, officia velit? Deleniti?
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, ipsa velit temporibus dignissimos possimus quae voluptatibus alias adipisci quidem, eius aspernatur maxime eligendi distinctio similique? Aut debitis dolores animi aperiam quasi nobis recusandae molestiae.
+                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Distinctio atque esse minus dolores soluta qui, nobis et velit officia nisi?
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, fuga. Cumque dignissimos natus minus alias cum explicabo ab facere omnis reiciendis laborum, deleniti suscipit commodi placeat delectus magni reprehenderit amet doloremque consequatur fugiat quisquam. Nulla in ut non asperiores voluptatem.
+                        </p>
+                    </div>
+                    <div class="flex justify-between items-end flex-wrap mt-3">
+                        <p class="text-xs text-green-500">12-chapters</p>
+                        <button data-id="1" class="subject_btn bg-green-500 text-white rounded-md py-1 px-2 hover:bg-green-600">
+                            Go to chapter List
+                        </button>
+                    </div>
+                </div>
+                <div class="w-full md:w-[49.5%] p-4 border bg-white rounded-md hover:shadow-md">
+                    <div class="flex justify-between font-bold pb-2">
+                        <div class="text-md">
+                            <i class="fa fa-circle mr-1 text-green-700"></i>
+                            Chapter Name
+                        </div>
+                        <div>
+                            <p class="text-gray-500 text-sm">Class 10</p>
+                        </div>
+                    </div>
+                    <div class="min-h-[5rem]">
+                        <p class="text-gray-400 max-h-[4rem] text-xs" style="overflow: hidden; text-overflow: ellipsis;">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, 
+                        </p>
+                    </div>
+                    <div class="flex justify-between items-end flex-wrap mt-3">
+                        <p class="text-xs text-green-500">12-chapters</p>
+                        <button data-id="1" class="subject_btn bg-green-500 text-white rounded-md py-1 px-2 hover:bg-green-600">
+                            Go to chapter List
+                        </button>
+                    </div>
+                </div>
+            </div> --}}
         </div>
         {{-- sidebar --}}
         <div class="hidden md:block md:w-1/4 px-4">

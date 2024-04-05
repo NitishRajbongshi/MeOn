@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\Standard\Standard;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -21,11 +19,12 @@ Route::get('/', [WelcomeController::class, 'index']);
 Route::get('/getSubjectList/{id}', [DashboardController::class, 'getSubjectList']);
 
 // login
-Route::middleware(['guest'])->group(function() {
+Route::middleware(['guest'])->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'store']);
 });
 
+Route::get('/about', [WelcomeController::class, 'about'])->name('about');
 Route::post('/logout', [LogoutController::class, 'logoutUser'])->middleware('auth')->name('logout');
 
 // admin

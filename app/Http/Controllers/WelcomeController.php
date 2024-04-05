@@ -25,4 +25,8 @@ class WelcomeController extends Controller
             'marquees' => $marquees
         ]);
     }
+
+    public function about() {
+        return view('site.about');
+    }
 }

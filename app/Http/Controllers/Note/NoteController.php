@@ -37,7 +37,7 @@ class NoteController extends Controller
             'chapter' => 'required',
             'name' => 'required',
             'description' => 'nullable',
-            'img_file.*' => 'required|image|mimes:jpg, jpeg|max:1024',
+            'img_file.*' => 'required|image|mimes:jpg, jpeg|max:5120',
         ]);
 
         try {

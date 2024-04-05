@@ -140,7 +140,7 @@
                                     <div>
                                         <p class="text-slate-500 text-[.8rem]">
                                             <i class="fa fa-warning mr-1 my-1"></i>
-                                            Upload multiple images at once of type .jpg or .jpeg and size should less than 1MB</p>
+                                            Upload multiple images at once of type .jpg or .jpeg and size should less than 5MB</p>
                                     </div>
                                 </div>
                             </div>

@@ -46,9 +46,9 @@
                             @endphp
                             @foreach ($note->resources as $resource)
                                 <div class="col-md-12 mb-3">
-                                    <p class="text-blue-500">Page {{$i}}</p>
-                                    <img class="w-full h-auto border shadow-sm" 
-                                    src="{{ asset('storage/'. $resource->img_path) }}" alt="Image" >
+                                    <p class="text-blue-500">Page {{ $i }}</p>
+                                    <img class="w-full h-auto border shadow-sm noteImages"
+                                        src="{{ asset('storage/' . $resource->img_path) }}" alt="Image">
                                 </div>
                                 @php
                                     $i++;
@@ -56,7 +56,7 @@
                             @endforeach
                         </div>
                     @else
-                        <p>No images available right now</p>
+                        <p>No notes available right now</p>
                     @endif
                 </div>
             </div>
@@ -82,4 +82,26 @@
             </div>
         </div>
     </main>
+    @include('layouts.footer')
+    <script>
+        window.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        $(document).ready(function() {
+            $('.noteImages').on('contextmenu', function(e) {
+                e.preventDefault();
+            });
+
+            $('.noteImages').on('dragstart', function(e) {
+                e.preventDefault();
+            });
+
+            $('.noteImages').on('mousedown', function(e) {
+                if (e.button == 2) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
 @endsection

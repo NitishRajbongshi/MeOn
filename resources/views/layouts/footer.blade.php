@@ -10,10 +10,10 @@
         <div class="basis-full px-1 md:basis-1/3">
             <h1 class="underline font-bold text-lg pb-2">Important Link</h1>
             <ul>
-                <li class="text-sm"><a href="#" class="hover:text-gray-500">Contact Us</a></li>
-                <li class="text-sm"><a href="#" class="hover:text-gray-500">About Us</a></li>
-                <li class="text-sm"><a href="#" class="hover:text-gray-500">Location</a></li>
-                <li class="text-sm"><a href="#" class="hover:text-gray-500">Faculty</a></li>
+                <li class="text-md"><a href="#" class="hover:text-gray-500">Contact Us</a></li>
+                <li class="text-md"><a href="{{route('about')}}" class="hover:text-gray-500">About Us</a></li>
+                <li class="text-md"><a href="#" class="hover:text-gray-500">Location</a></li>
+                <li class="text-md"><a href="{{url('/sitemap.xml')}}" class="hover:text-gray-500">SiteMap</a></li>
             </ul>
         </div>
         <div class="basis-full px-1 md:basis-1/3">
@@ -28,7 +28,7 @@
                 2024 Edorb.in
             </p>
             <div class="text-xs">
-                <a href="#">Developer info</a>
+                <a href="https://nitishrajbongshi.github.io/visit_portfolio/" target="__blank">Developer info</a>
             </div>
         </div>
     </div>

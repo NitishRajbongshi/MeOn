@@ -76,14 +76,16 @@
             Feedback
         </p>
         <p>
-            <a href="{{route('about')}}">
+            <a href="{{ route('about') }}">
                 <i class="fa-solid fa-address-card"></i>
                 About us
             </a>
         </p>
         <p>
-            <i class="fa-solid fa-phone"></i>
-            contact us
+            <a href="{{ route('contact.us') }}">
+                <i class="fa-solid fa-phone"></i>
+                contact us
+            </a>
         </p>
     </div>
 

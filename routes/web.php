@@ -25,6 +25,7 @@ Route::middleware(['guest'])->group(function () {
 });
 
 Route::get('/about', [WelcomeController::class, 'about'])->name('about');
+Route::get('/contact-us', [WelcomeController::class, 'contact'])->name('contact.us');
 Route::post('/logout', [LogoutController::class, 'logoutUser'])->middleware('auth')->name('logout');
 
 // admin

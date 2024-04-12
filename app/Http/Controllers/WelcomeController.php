@@ -32,4 +32,11 @@ class WelcomeController extends Controller
             'user' => $user
         ]);
     }
+
+    public function contact() {
+        $user = Auth::user();
+        return view('site.contact', [
+            'user' => $user
+        ]);
+    }
 }

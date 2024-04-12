@@ -33,7 +33,7 @@
             <form action="" method="">
                 <div class="flex justify-between items-center flex-wrap p-2">
                     <div class="w-full md:w-[33%]">
-                        <label class="font-bold text-xl" for="name">
+                        <label class="font-bold text-md" for="name">
                             <i class="fa fa-user"></i>
                             Name
                         </label><br>
@@ -41,7 +41,7 @@
                             placeholder="John Doe" required>
                     </div>
                     <div class="w-full md:w-[33%]">
-                        <label class="font-bold text-xl" for="email">
+                        <label class="font-bold text-md" for="email">
                             <i class="fa fa-envelope"></i>
                             Email
                         </label><br>
@@ -49,7 +49,7 @@
                             placeholder="johndoe@gmail.com" required>
                     </div>
                     <div class="w-full md:w-[33%]">
-                        <label class="font-bold text-xl" for="contact">
+                        <label class="font-bold text-md" for="contact">
                             <i class="fa fa-phone"></i>
                             Contact
                         </label><br>
@@ -58,7 +58,7 @@
                     </div>
                 </div>
                 <div class="p-2">
-                    <label class="font-bold text-xl" for="message">
+                    <label class="font-bold text-md" for="message">
                         <i class="fa fa-message"></i>
                         Message
                     </label><br>
@@ -67,12 +67,12 @@
                         placeholder="Write your message here..."></textarea>
                 </div>
                 <div class="flex justify-end my-1 p-2">
-                    <a href="/" class="mx-2 border border-red-300 bg-red-200 px-2 text-red-600 rounded-sm">
+                    <a href="/" class="mx-2 pt-1 border border-red-300 bg-red-200 px-2 text-red-600 rounded-sm">
                         <i class="fa fa-backward mr-1"></i>
                         Back to home
                     </a>
                     <button
-                        class="border border-blue-300 text-blue-950 bg-blue-200 px-2 py-1 rounded-sm text-sm font-bold"
+                        class="border border-blue-300 text-blue-950 bg-blue-200 px-2 py-1 rounded-sm text-md font-bold"
                         type="submit">
                         <i class="fa fa-paper-plane mr-1"></i>
                         Send Message

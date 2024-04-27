@@ -6,7 +6,7 @@
         <div class="p-1 md:p-4 w-full rounded-md text-xs">
             <ol class="list-reset flex">
                 <li>
-                    <a href="/"
+                    <a href="{{ route('home') }}"
                         class="text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600">Home</a>
                 </li>
                 <li>
@@ -55,7 +55,8 @@
             {{-- Content section --}}
             <div class="p-1">
                 <p class="text-md text-justify my-5 text-gray-600">
-                    Welcome to our website <span class="font-bold">Edorb.in</span>, your one-stop destination for comprehensive study materials and
+                    Welcome to our website <span class="font-bold">Edorb.in</span>, your one-stop destination for
+                    comprehensive study materials and
                     solutions tailored for students from Class 5 to 10 following the SEBA & from 9 to 12 following the NCERT
                     curriculum, available in both Assamese and English languages. Specifically designed for Science stream
                     (Physics, Chemistry, Mathematics, Biology) students in Classes 11 and 12, our platform offers

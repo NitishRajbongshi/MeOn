@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Auth;
 
 class SubjectController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $user = Auth::user();
         $standards = Standard::all(['id', 'name']);
         // $subjects = Subject::paginate(5);
@@ -28,7 +29,8 @@ class SubjectController extends Controller
         ]);
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $validator = $request->validate([
             'class' => 'required',
             'name' => 'required|max:100',
@@ -43,7 +45,7 @@ class SubjectController extends Controller
             'updated_by' => Auth::user()->id,
         ];
 
-        if(Subject::create($data)) {
+        if (Subject::create($data)) {
             return redirect()->back()->with('success', 'New subject added successfully!');
         } else {
             return redirect()->back()->with('failed', 'Failed to add new subject!');
@@ -68,5 +70,22 @@ class SubjectController extends Controller
             ];
         }
         return response()->json($response);
+    }
+
+    public function getSubjectList(Request $request)
+    {
+        $id = $request->id;
+        $user = Auth::user();
+        $classes = Standard::all();
+        $currentClass = Standard::find($id);
+        $subjects = $currentClass->subjects()->select('id', 'name', 'description')->get();
+        $subjectCount = $currentClass->subjects()->count();
+        return view('subjects.index', [
+            'user' => $user,
+            'classes' => $classes,
+            'subjects' => $subjects,
+            'currentClass' => $currentClass->name,
+            'subjectCount' => $subjectCount
+        ]);
     }
 }

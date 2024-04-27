@@ -41,7 +41,7 @@
                     </div>
                     <div class="w-full text-center my-3 bg-red-200 text-red-700 rounded-sm py-1 hover:shadow-sm">
                         <i class="fa fa-backward"></i>
-                        <span class="font-bold"><a href="{{url('/')}}">Back</a></span>
+                        <span class="font-bold"><a href="{{ route('home') }}">Back</a></span>
                     </div>
                 </form>
             </div>

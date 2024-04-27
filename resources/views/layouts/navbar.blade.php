@@ -12,12 +12,12 @@
             style="z-index: 1;">
             <ul class="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-2">
                 <li class="md:hidden">
-                    <a class="hover:text-gray-500 text-lg font-bold" href="/">
+                    <a class="hover:text-gray-500 text-lg font-bold" href="{{ route('home') }}">
                         EDORB
                     </a>
                 </li>
                 <li>
-                    <a class="hover:text-gray-500" href="/">
+                    <a class="hover:text-gray-500" href="{{ route('home') }}">
                         <i class="fa fa-home"></i>
                         Home
                     </a>

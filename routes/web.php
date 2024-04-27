@@ -13,7 +13,7 @@ use App\Http\Controllers\Marquee\MarqueeController;
 use App\Http\Controllers\Note\NoteController;
 use App\Http\Controllers\WelcomeController;
 
-Route::get('/', [WelcomeController::class, 'index']);
+Route::get('/', [WelcomeController::class, 'index'])->name('home');
 
 // dashboard
 Route::get('/getSubjectList/{id}', [DashboardController::class, 'getSubjectList']);
@@ -60,6 +60,11 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     // add marquee text
     Route::get('/manageMarquee', [MarqueeController::class, 'index'])->name('marquee');
     Route::post('/manageMarquee', [MarqueeController::class, 'store']);
+});
+
+// subject
+Route::prefix('content')->group(function() {
+    Route::get('/subject/{id}', [SubjectController::class, 'getSubjectList'])->name('subjectList');
 });
 
 // notes

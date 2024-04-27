@@ -2,8 +2,9 @@
 
 @section('content')
     <x-show-notification />
-    <div class="flex justify-center items-center h-screen">
-        <div class="w-[18rem] bg-white shadow-md rounded p-4">
+    <div class="flex justify-center items-center h-screen"
+        style="background-color: #A9C9FF; background-image: linear-gradient(180deg, #A9C9FF 0%, #FFBBEC 100%);">
+        <div class="w-[20rem] bg-white shadow-md rounded p-4">
             <div class="logo-section flex justify-center items-center my-4">
                 <img src="{{ asset('icons/login.png') }}" alt="logo" width="50rem" height="50rem">
             </div>

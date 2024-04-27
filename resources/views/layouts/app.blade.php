@@ -44,10 +44,13 @@
     {{-- alpine js --}}
     <script src="//unpkg.com/alpinejs" defer></script>
     <title>Edorb</title>
+    {{-- It will include extra links only for particular page --}}
+    @stack('styles')
 </head>
 
-<body class="font-[Poppins] bg-gradient-to-t bg-slate-100 h-screen">
+<body class="font-[Poppins] bg-gradient-to-t bg-gray-100 h-screen">
     @yield('content')
+    @stack('scripts')
 </body>
 
 </html>

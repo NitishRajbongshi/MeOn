@@ -1,5 +1,5 @@
 {{-- footer --}}
-<div class="p-1 bg-yellow-200">
+<div class="p-1" style="background: linear-gradient(90deg, hsla(40, 94%, 74%, 1) 0%, hsla(60, 89%, 72%, 1) 100%);">
     <div class="flex flex-row flex-wrap py-2">
         <div class="basis-full md:basis-1/3 flex flex-col justify-center items-center">
             <div>

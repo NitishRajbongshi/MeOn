@@ -2,7 +2,7 @@
 
 @section('content')
     @include('layouts.navbar')
-    <div class="container mx-auto">
+    <div class="container mx-auto backgroundImage">
         <div class="p-1 md:p-4 w-full rounded-md text-xs">
             <ol class="list-reset flex">
                 <li>
@@ -17,11 +17,11 @@
         </div>
 
         <div class="p-1 md:py-4">
-            <h1 class="text-center text-3xl font-bold underline pb-2">About Us</h1>
+            <h1 class="text-center text-3xl font-bold pb-4">About Us</h1>
             {{-- Person section --}}
             <div class="flex justify-between items-center flex-wrap">
                 <div
-                    class="w-full md:w-[49%] p-2 mb-1 flex flex-wrap justify-center items-center border md:min-h-[12rem] rounded-md bg-white md:justify-start">
+                    class="w-full md:w-[49%] p-2 mb-1 flex flex-wrap justify-center items-center shadow-md md:min-h-[12rem] rounded-md bg-transparent md:justify-start">
                     <div class="pe-2">
                         <img src="{{ asset('images/profile/ankur.jpeg') }}" alt="ankur" width="150rem;"
                             class="border rounded-full">
@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div
-                    class="w-full md:w-[49%] p-2 mb-1 flex flex-wrap justify-center items-center border md:min-h-[12rem] rounded-md bg-white md:justify-start">
+                    class="w-full md:w-[49%] p-2 mb-1 flex flex-wrap justify-center items-center shadow-md md:min-h-[12rem] rounded-md bg-transparent md:justify-start">
                     <div class="pe-2">
                         <img src="{{ asset('images/profile/rekha.jpeg') }}" alt="ankur" width="150rem;"
                             class="border rounded-full">
@@ -54,7 +54,7 @@
 
             {{-- Content section --}}
             <div class="p-1">
-                <p class="text-md text-justify my-5 text-gray-600">
+                <p class="text-md text-justify my-5 text-blue-900">
                     Welcome to our website <span class="font-bold">Edorb.in</span>, your one-stop destination for
                     comprehensive study materials and
                     solutions tailored for students from Class 5 to 10 following the SEBA & from 9 to 12 following the NCERT
@@ -65,19 +65,19 @@
                     and coaching for medical and engineering entrance exams( like JEE, CEE , NEET , NEST, etc.), ensuring a
                     holistic learning experience.
                 </p>
-                <p class="text-md text-justify my-5 text-gray-600">
+                <p class="text-md text-justify my-5 text-blue-900">
                     Explore our vast collection of study resources, including textbooks, video lectures, and practice exams,
                     all designed to enhance your understanding and boost your grades. Our team of experienced educators and
                     subject matter experts ensures that you receive accurate and reliable information, making learning
                     enjoyable and effective.
                 </p>
-                <p class="text-md text-justify my-5 text-gray-600">
+                <p class="text-md text-justify my-5 text-blue-900">
                     Whether you're preparing for board exams, competitive entrance tests, or simply aiming to deepen your
                     knowledge in physics and related fields, we have the tools and support you need. Our interactive online
                     platform allows you to study at your own pace, access live classes, and interact with tutors for
                     personalized guidance.
                 </p>
-                <p class="text-md text-justify my-5 text-gray-600">
+                <p class="text-md text-justify my-5 text-blue-900">
                     Join our community of motivated learners and take your academic journey to new heights. With our
                     comprehensive resources and expert guidance, success is within your reach.
                 </p>
@@ -85,4 +85,19 @@
         </div>
     </div>
     @include('layouts.footer')
+
+    @push('styles')
+        <style>
+            .backgroundImage {
+                position: relative;
+                background-image: url('images/background/image1.jpg');
+                background-size: cover;
+                background-position: center;
+                background-color: rgba(255, 255, 255, 0.8);
+            }
+        </style>
+    @endpush
+
+    @push('scripts')
+    @endpush
 @endsection

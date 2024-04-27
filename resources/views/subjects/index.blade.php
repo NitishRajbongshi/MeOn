@@ -30,7 +30,7 @@
                             Subject List
                         </h1>
                     </div>
-                    <div class="my-2">
+                    <div class="my-2 block md:hidden">
                         <a href="#classContainer" class="border text-sm border-red-200 p-1 text-red-500">
                             <button>View all available classes</button>
                         </a>

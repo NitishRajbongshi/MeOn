@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Auth;
 
 class StandardController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $user = Auth::user();
         $classes = Standard::paginate(5);
         return view('admin.manageClass', [
@@ -18,7 +19,8 @@ class StandardController extends Controller
         ]);
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $validator = $request->validate([
             'name' => 'required|max:100',
             'description' => 'nullable',
@@ -31,18 +33,19 @@ class StandardController extends Controller
             'updated_by' => Auth::user()->id,
         ];
 
-        if(Standard::create($data)) {
+        if (Standard::create($data)) {
             return redirect()->back()->with('success', 'New class added successfully!');
         } else {
             return redirect()->back()->with('failed', 'Failed to add new class!');
         }
     }
 
-    public function show(Request $request) {
-        if(csrf_token()) {
+    public function show(Request $request)
+    {
+        if (csrf_token()) {
             $id = $request->id;
             $classInfo = Standard::find($id);
-            if($classInfo == null) {
+            if ($classInfo == null) {
                 $response = [
                     'status' => 'failed',
                     'message' => 'Class not found!',
@@ -65,9 +68,32 @@ class StandardController extends Controller
         return response()->json($response);
     }
 
-    public function update(Request $request) {
-        $result = $request->input('name');
-        return response()->json($result);
+    public function update(Request $request)
+    {
+        $standardId = $request->id;
+        $className = $request->input('name');
+        $classDescription = $request->input('description');
+        // Find the standard by its ID
+        $standard = Standard::find($standardId);
+        if ($standard) {
+            $standard->name = $className;
+            $standard->description = $classDescription;
+            $standard->updated_by = Auth::user()->id;
+            $standard->updated_at = now();
+
+            // Save the changes to the database
+            $standard->save();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Class updated successfully!'
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Selected class not found!'
+            ]);
+        }
     }
 
     // public function getSubject(Request $request) {

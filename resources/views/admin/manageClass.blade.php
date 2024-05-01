@@ -84,7 +84,7 @@
                     </span>
                 </div>
                 <div class="flex flex-col overflow-x-auto">
-                    <div class="sm:-mx-6 lg:-mx-8">
+                    <div class="">
                         <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
                             <div class="overflow-x-auto">
                                 <table class="min-w-full text-left text-sm font-light">
@@ -138,73 +138,89 @@
             </div>
         </x-main-content>
         @include('layouts.modal-layout')
+        @include('layouts.success-modal')
+        @include('layouts.failed-modal')
     </main>
     @include('layouts.footer')
-    <script>
-        $(document).ready(function() {
-            $('.openModal').on('click', function() {
-                const id = $(this).data('id');
+    @push('scripts')
+        <script>
+            $(document).ready(function() {
+                $('.openModal').on('click', function() {
+                    const id = $(this).data('id');
 
-                // Get CSRF token from the meta tag
-                var csrfToken = $('meta[name="csrf-token"]').attr('content');
-
-                $.ajax({
-                    url: '/admin/manageClass/' + id,
-                    method: 'GET',
-                    dataType: 'json',
-                    headers: {
-                        'X-CSRF-TOKEN': csrfToken
-                    },
-                    success: function(response) {
-                        console.log(response);
-                        if (response.status == 'success' && response.result != null) {
-                            $('#editName').val(response.result.name);
-                            $('#editDescription').val(response.result.description);
-
-                            // show the modal
-                            $('#modal').removeClass('hidden');
-                            $('#modal').addClass('flex');
-                        } else {
-                            alert(response.message);
-                        }
-                    },
-                    error: function(e) {
-                        console.error('AJAX error:', e);
-                    }
-                });
-
-                $('#submitBtn').on('click', function() {
-
-                    var formData = $('#myForm').serialize();
+                    // Get CSRF token from the meta tag
+                    var csrfToken = $('meta[name="csrf-token"]').attr('content');
 
                     $.ajax({
-                        url: '/admin/manageClass/edit/' + id,
-                        method: 'POST',
+                        url: '/admin/manageClass/' + id,
+                        method: 'GET',
                         dataType: 'json',
-                        data: formData,
                         headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            'X-CSRF-TOKEN': csrfToken
                         },
                         success: function(response) {
-                            console.log('AJAX response:', response);
+                            console.log(response);
+                            if (response.status == 'success' && response.result != null) {
+                                $('#editName').val(response.result.name);
+                                $('#editDescription').val(response.result.description);
+
+                                // show the modal
+                                $('#modal').removeClass('hidden');
+                                $('#modal').addClass('flex');
+                            } else {
+                                alert(response.message);
+                            }
                         },
-                        error: function(error) {
-                            console.error('AJAX error:', error);
+                        error: function(e) {
+                            console.error('AJAX error:', e);
                         }
                     });
 
-                    // Close the modal (optional)
+                    $('#submitBtn').on('click', function() {
+
+                        var formData = $('#myForm').serialize();
+
+                        $.ajax({
+                            url: '/admin/manageClass/edit/' + id,
+                            method: 'POST',
+                            dataType: 'json',
+                            data: formData,
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success: function(response) {
+                                if (response.status === 'success') {
+                                    $('.modalContent').html(response.message);
+                                    $('#successModal').removeClass('hidden');
+                                    $('#successModal').addClass('flex');
+                                } 
+                                if (response.status === 'failed') {
+                                    $('.modalContent').html(response.message);
+                                    $('#failedModal').removeClass('hidden');
+                                    $('#failedModal').addClass('flex');
+                                }
+                            },
+                            error: function(error) {
+                                console.error('AJAX error:', error);
+                            }
+                        });
+
+                        // Close the modal (optional)
+                        $('#modal').addClass('hidden');
+                    });
+
+                });
+
+                $('#closeModal').on('click', function() {
+                    $('#modal').removeClass('flex');
                     $('#modal').addClass('hidden');
                 });
 
+
             });
-
-            $('#closeModal').on('click', function() {
-                $('#modal').removeClass('flex');
-                $('#modal').addClass('hidden');
-            });
-
-
-        });
-    </script>
+            function refreshPage() {
+                location.reload();
+            }
+        </script>
+    @endpush
 @endsection

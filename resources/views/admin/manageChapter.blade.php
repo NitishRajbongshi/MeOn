@@ -19,8 +19,8 @@
                 </ol>
             </div>
 
-            <div class="md:flex md:gap-1">
-                <div class="w-full md:w-3/4">
+            <div class="flex flex-wrap-reverse md:justify-between md:gap-1">
+                <div class="w-full md:w-[70%]">
                     {{-- Form --}}
                     <div class="border rounded-md border-slate-200 my-2 p-1 md:p-2">
                         <form action="{{ route('manageChapter') }}" method="post" autocomplete="off">
@@ -134,9 +134,13 @@
                         </form>
                     </div>
                 </div>
-                <div class="hidden md:block md:w-1/4">
+                <div class="w-full md:w-[29.5%]">
                     <div class="border rounded-md border-slate-200 my-2 p-2">
-                        <h1>SideBar</h1>
+                        <h1 class="font-bold text-red-500 underline text-md mb-1">Instruction</h1>
+                        <p class="text-sm text-gray-600 text-justify">
+                            <i class="fa fa-circle-dot text-xs"></i>
+                            Please choose the class & subject from the drop-down list carefully. Once submitted, it cannot be edited.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -149,7 +153,7 @@
                     </span>
                 </div>
                 <div class="flex flex-col overflow-x-auto">
-                    <div class="sm:-mx-6 lg:-mx-8">
+                    <div class="">
                         <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
                             <div class="overflow-x-auto">
                                 <table class="min-w-full text-left text-sm font-light">
@@ -158,6 +162,7 @@
                                             <th scope="col" class="px-6 py-1">#</th>
                                             <th scope="col" class="px-6 py-1">Class</th>
                                             <th scope="col" class="px-6 py-1">Subject</th>
+                                            <th scope="col" class="px-6 py-1">Chapter</th>
                                             <th scope="col" class="px-6 py-1">Name</th>
                                             <th scope="col" class="px-6 py-1">Description</th>
                                             <th scope="col" class="px-6 py-1">Edit</th>
@@ -170,12 +175,15 @@
                                         @endphp
                                         @foreach ($chapters as $item)
                                             <tr class="border-b dark:border-neutral-500">
-                                                <td class="whitespace-nowrap px-6 py-1 font-medium">{{ $i }}</td>
+                                                <td class="whitespace-nowrap px-6 py-1 font-medium text-center">{{ $i }}</td>
                                                 <td class="whitespace-nowrap px-6 py-1">
                                                     {{ $item->class_name }}
                                                 </td>
                                                 <td class="whitespace-nowrap px-6 py-1">
                                                     {{ $item->subject_name }}
+                                                </td>
+                                                <td class="whitespace-nowrap px-6 py-1 text-center">
+                                                    {{ $item->chapter_no }}
                                                 </td>
                                                 <td class="whitespace-nowrap px-6 py-1">
                                                     {{ $item->name }}
@@ -183,12 +191,12 @@
                                                 <td class="whitespace-nowrap px-6 py-1">
                                                     {{ $item->description }}
                                                 </td>
-                                                <td class="whitespace-nowrap px-6 py-1">
+                                                <td class="whitespace-nowrap px-6 py-1 text-center">
                                                     <button class="openModal" data-id="{{ $item->id }}">
                                                         <i class="fa fa-pen text-xs"></i>
                                                     </button>
                                                 </td>
-                                                <td class="whitespace-nowrap px-6 py-1">
+                                                <td class="whitespace-nowrap px-6 py-1 text-center">
                                                     <i class="fa fa-trash text-xs"></i>
                                                 </td>
                                             </tr>
@@ -205,7 +213,7 @@
                 </div>
                 <div class="text-xs my-3 p-2">
                     <span class="text-xs">
-                        {{-- {{ $classes->links() }} --}}
+                        {{ $chapters->links() }}
                     </span>
                 </div>
             </div>

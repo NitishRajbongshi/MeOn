@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Marquee\MarqueeDetail;
 use Illuminate\Http\Request;
 use App\Models\Standard\Standard;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Marquee\MarqueeDetail;
+use App\Models\Master\MasterClassCategory;
 
 class WelcomeController extends Controller
 {
@@ -14,6 +15,8 @@ class WelcomeController extends Controller
     {
         $user = Auth::user();
         $classes = Standard::all(['id', 'name', 'description']);
+        $categories = MasterClassCategory::with('standards')->get();
+
         // Exam link
         $examLinks = DB::table('exam_links')->orderBy('created_at', 'desc')->paginate(3);
         // Marquee
@@ -22,7 +25,8 @@ class WelcomeController extends Controller
             'user' => $user,
             'classes' => $classes,
             'examLinks' => $examLinks,
-            'marquees' => $marquees
+            'marquees' => $marquees,
+            'categories' => $categories
         ]);
     }
 

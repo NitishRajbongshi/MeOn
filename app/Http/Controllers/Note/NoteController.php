@@ -20,7 +20,7 @@ class NoteController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $classes = Standard::paginate(5);
+        $classes = Standard::get();
         return view('admin.manageNotes', [
             'user' => $user,
             'classes' => $classes

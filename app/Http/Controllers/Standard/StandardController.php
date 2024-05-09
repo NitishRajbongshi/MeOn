@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Standard;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Standard\Standard;
+use App\Http\Controllers\Controller;
+use App\Models\Master\MasterClassCategory;
 use Illuminate\Support\Facades\Auth;
 
 class StandardController extends Controller
@@ -13,9 +14,11 @@ class StandardController extends Controller
     {
         $user = Auth::user();
         $classes = Standard::paginate(5);
+        $categories = MasterClassCategory::all();
         return view('admin.manageClass', [
             'user' => $user,
-            'classes' => $classes
+            'classes' => $classes,
+            'categories' => $categories
         ]);
     }
 
@@ -24,11 +27,13 @@ class StandardController extends Controller
         $validator = $request->validate([
             'name' => 'required|max:100',
             'description' => 'nullable',
+            'category' => 'required'
         ]);
 
         $data = [
             'name' => $request->name,
             'description' => $request->description,
+            'master_class_category_id' => $request->category,
             'created_by' => Auth::user()->id,
             'updated_by' => Auth::user()->id,
         ];

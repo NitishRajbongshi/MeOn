@@ -5,7 +5,7 @@
                 <div>
                     <span class="border-2 border-blue-900 rounded-sm text-sm p-1 font-bold text-blue-900">
                         <i class="fa fa-pen mr-1"></i>
-                        Edit Class Details
+                        Edit Subject Details
                     </span>
                 </div>
                 <div>
@@ -17,7 +17,7 @@
             </fieldset>
             <div class="md:flex my-2">
                 <div class="w-full md:w-1/3">
-                    <label class="text-sm" for="editName">Class Name: <span
+                    <label class="text-sm" for="editName">Subject Name: <span
                             class="text-xs text-red-500">*</span></label>
                 </div>
                 <div class="w-full md:w-2/3">
@@ -34,7 +34,7 @@
             </div>
             <div class="md:flex my-2">
                 <div class="w-full md:w-1/3">
-                    <label class="text-sm" for="editDescription">Class Description:</label>
+                    <label class="text-sm" for="editDescription">Subject Description:</label>
                 </div>
                 <div class="w-full md:w-2/3">
                     <textarea rows="4" id="editDescription" name="description"

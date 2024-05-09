@@ -58,6 +58,30 @@
                                         placeholder="Write any description if needed..."></textarea>
                                 </div>
                             </div>
+                            <div class="md:flex">
+                                <div class="w-full md:w-1/3">
+                                    <label class="text-sm" for="category">Select Category:<span
+                                            class="text-xs text-red-500">*</span></label>
+                                </div>
+                                <div class="w-full md:w-2/3">
+                                    <select name="category" id="category"
+                                        class="border w-full border-blue-300 rounded-sm outline-none p-1 text-sm md:w-1/2">
+                                        <option value="">Choose one</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}">
+                                                {{ $category->category }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+
+                                    @error('category')
+                                        <p class="text-xs text-red-500">
+                                            <i class="fa fa-warning mr-1 my-1"></i>
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
+                                </div>
+                            </div>
                             <div class="flex justify-end">
                                 <button
                                     class="border border-blue-300 text-blue-950 bg-blue-200 px-2 py-1 rounded-sm text-sm font-bold"
@@ -193,7 +217,7 @@
                                     $('.modalContent').html(response.message);
                                     $('#successModal').removeClass('hidden');
                                     $('#successModal').addClass('flex');
-                                } 
+                                }
                                 if (response.status === 'failed') {
                                     $('.modalContent').html(response.message);
                                     $('#failedModal').removeClass('hidden');
@@ -218,6 +242,7 @@
 
 
             });
+
             function refreshPage() {
                 location.reload();
             }

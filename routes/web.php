@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\ExamLink\ExamLinkController;
 use App\Http\Controllers\Marquee\MarqueeController;
 use App\Http\Controllers\Note\NoteController;
+use App\Http\Controllers\Standard\CategoryController;
 use App\Http\Controllers\WelcomeController;
 
 Route::get('/', [WelcomeController::class, 'index'])->name('home');
@@ -42,11 +43,15 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     // manage subject
     Route::get('/manageSubject', [SubjectController::class, 'index'])->name('manageSubject');
     Route::post('/manageSubject', [SubjectController::class, 'store']);
+    Route::get('/manageSubject/{id}', [SubjectController::class, 'show']);
+    Route::post('/manageSubject/edit/{id}', [SubjectController::class, 'update']);
     Route::get('/getChapter/{id}', [SubjectController::class, 'getChapter']);
 
     // manage chapter
     Route::get('/manageChapter', [ChapterController::class, 'index'])->name('manageChapter');
     Route::post('/manageChapter', [ChapterController::class, 'store']);
+    Route::get('/manageChapter/{id}', [ChapterController::class, 'getChapter']);
+    Route::post('/manageChapter/edit/{id}', [ChapterController::class, 'update']);
 
     // manage notes
     Route::get('/manageNotes', [NoteController::class, 'index'])->name('manageNote');
@@ -60,6 +65,10 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     // add marquee text
     Route::get('/manageMarquee', [MarqueeController::class, 'index'])->name('marquee');
     Route::post('/manageMarquee', [MarqueeController::class, 'store']);
+
+    // add class category
+    Route::get('/addClassCategory', [CategoryController::class, 'index'])->name('classCategory');
+    Route::post('/addClassCategory', [CategoryController::class, 'store']);
 });
 
 // subject

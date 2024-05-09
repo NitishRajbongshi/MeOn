@@ -5,7 +5,10 @@
     @include('layouts.navbar')
 
     {{-- marquee --}}
-    <div class="mb-1 text-sm font-bold bg-gray-200">
+    <div class="mb-1 text-sm font-bold"
+        style="background-color: #f9e3d7;
+    background-image: linear-gradient(62deg, #f9e3d7 0%, #fce5a3 100%);
+    ">
         <marquee class="marq pt-1" direction="left" loop="">
             @foreach ($marquees as $marquee)
                 <span>{{ $marquee->title }}</span>
@@ -16,17 +19,19 @@
 
     {{-- info button --}}
     <div class="container mx-auto flex gap-1 justify-end items-center text-xs">
-        <p class="border border-blue-200 p-1 hover:bg-blue-200 hover:text-blue-800 hover:cursor-pointer">
-            <i class="fa-solid fa-comment"></i>
-            Feedback
+        <p class="border border-blue-200 p-1 hover:bg-blue-500 hover:text-white hover:font-bold hover:cursor-pointer">
+            <a href="#">
+                <i class="fa-solid fa-comment"></i>
+                Feedback
+            </a>
         </p>
-        <p class="border border-blue-200 p-1 hover:bg-blue-200 hover:text-blue-800 hover:cursor-pointer">
+        <p class="border border-blue-200 p-1 hover:bg-blue-500 hover:text-white hover:font-bold hover:cursor-pointer">
             <a href="{{ route('about') }}">
                 <i class="fa-solid fa-address-card"></i>
                 About us
             </a>
         </p>
-        <p class="border border-blue-200 p-1 hover:bg-blue-200 hover:text-blue-800 hover:cursor-pointer">
+        <p class="border border-blue-200 p-1 hover:bg-blue-500 hover:text-white hover:font-bold hover:cursor-pointer">
             <a href="{{ route('contact.us') }}">
                 <i class="fa-solid fa-phone"></i>
                 contact us
@@ -123,37 +128,47 @@
                 <div class="text-xl border-b my-3">
                     <span class="font-bold">
                         <i class="fa fa-list text-sm mr-1"></i>
-                        List of Classes
+                        Our Courses
                     </span>
                 </div>
-                <div class="flex flex-wrap justify-between items-center">
-                    @foreach ($classes as $item)
-                        <div class="flex w-full my-1 md:w-[49%] rounded-md min-h-[12rem] bg-white shadow-sm hover:shadow-lg"
-                            style="background: linear-gradient(90deg, rgba(255,245,255,1) 0%, rgba(241,251,255,1) 47%, rgba(234,237,255,1) 100%);">
-                            <div class="w-1/3 flex justify-center items-center">
-                                <img src="{{ asset('images/course.png') }}" alt="image">
-                            </div>
-                            <div class="w-2/3">
-                                <div class="flex justify-end">
-                                    <p class="text-xs text-white px-2 py-1 bg-red-600 rounded-tr-md">New</p>
-                                </div>
-                                <div class="min-h-[7rem] pr-2">
-                                    <h1 class="font-bold text-lg">{{ $item->name }}</h1>
-                                    <p class="text-sm text-gray-500 max-h-[5rem] w-full"
-                                        style="overflow: hidden; text-overflow: ellipsis;">
-                                        {{ $item->description }}</p>
-                                </div>
-                                <div class="flex items-center justify-end mt-2 mr-2 ">
-                                    <p class="text-sm text-blue-500 mx-1">Free</p>
-                                    <button class="px-4 py-1 rounded bg-blue-500 text-white hover:bg-blue-600"
-                                        data-id="{{ $item->id }}">
-                                        <a href="{{ route('subjectList', [$item->id]) }}">Explore Notes</a>
-                                    </button>
-                                </div>
-                            </div>
+                @foreach ($categories as $category)
+                    <div class="text-md bg-blue-200 text-blue-600 my-3 px-3 py-2 rounded-md flex justify-between">
+                        <div class="font-bold">
+                            {{ $category->category }}
                         </div>
-                    @endforeach
-                </div>
+                        <div>
+                            <i class="fa fa-angle-down"></i>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap justify-between items-center">
+                        @foreach ($category->standards as $item)
+                            <div class="flex w-full my-1 md:w-[49%] rounded-md min-h-[12rem] bg-white shadow-sm hover:shadow-lg"
+                                style="background: linear-gradient(90deg, rgba(255,245,255,1) 0%, rgba(241,251,255,1) 47%, rgba(234,237,255,1) 100%);">
+                                <div class="w-1/3 flex justify-center items-center">
+                                    <img src="{{ asset('images/course.png') }}" alt="image">
+                                </div>
+                                <div class="w-2/3">
+                                    <div class="flex justify-end">
+                                        <p class="text-xs text-white px-2 py-1 bg-red-600 rounded-tr-md">New</p>
+                                    </div>
+                                    <div class="min-h-[7rem] pr-2">
+                                        <h1 class="font-bold text-lg">{{ $item->name }}</h1>
+                                        <p class="text-sm text-gray-500 max-h-[5rem] w-full"
+                                            style="overflow: hidden; text-overflow: ellipsis;">
+                                            {{ $item->description }}</p>
+                                    </div>
+                                    <div class="flex items-center justify-end mt-2 mr-2 ">
+                                        <p class="text-sm text-blue-500 mx-1">Free</p>
+                                        <button class="px-4 py-1 rounded bg-blue-500 text-white hover:bg-blue-600"
+                                            data-id="{{ $item->id }}">
+                                            <a href="{{ route('subjectList', [$item->id]) }}">Explore Notes</a>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @endforeach
             </div>
         </div>
         {{-- sidebar --}}

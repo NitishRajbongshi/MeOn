@@ -1,7 +1,7 @@
 <div id="failedModal" class="hidden fixed inset-0 bg-gray-800 bg-opacity-75 items-center justify-center">
     <div class="bg-white p-4 rounded-md w-full md:w-[30rem] text-center">
         <div class="text-center">
-            <i class="fa fa-times-circle text-5xl text-red-800"></i>
+            <i class="fa fa-times-circle text-5xl text-red-800 my-4"></i>
             <p class="text-red-800 font-bold my-2">Failed</p>
             <p class="modalContent"></p>
         </div>

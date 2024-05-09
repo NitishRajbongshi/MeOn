@@ -130,7 +130,13 @@
                                             <span class="text-md">Add Notes</span>
                                         </a>
                                     </li>
-
+                                    <li class="my-2">
+                                        <a href="{{ route('classCategory') }}"
+                                            class="flex items-center focus:outline-none hover:text-gray-400">
+                                            <i class="fa fa-genderless mr-1" aria-hidden="true"></i>
+                                            <span class="text-md">Add Category</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>

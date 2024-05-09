@@ -88,4 +88,64 @@ class SubjectController extends Controller
             'subjectCount' => $subjectCount
         ]);
     }
+
+    public function show(Request $request)
+    {
+        if (csrf_token()) {
+            $id = $request->id;
+            $subjectInfo = Subject::find($id);
+            if ($subjectInfo == null) {
+                $response = [
+                    'status' => 'failed',
+                    'message' => 'Subject not found!',
+                    'result' => null
+                ];
+            } else {
+                $response = [
+                    'status' => 'success',
+                    'message' => 'Successfully get the info',
+                    'result' => $subjectInfo
+                ];
+            }
+        } else {
+            $response = [
+                'status' => 'failed',
+                'message' => 'Unathorized action!',
+                'result' => null
+            ];
+        }
+        return response()->json($response);
+    }
+
+    public function update(Request $request)
+    {
+        if (csrf_token()) {
+            $subjectId = $request->id;
+            $subjectName = $request->input('name');
+            $subjectDescription = $request->input('description');
+            $subject = Subject::find($subjectId);
+            if ($subject) {
+                $subject->name = $subjectName;
+                $subject->description = $subjectDescription;
+                $subject->updated_by = Auth::user()->id;
+                $subject->updated_at = now();
+                $subject->save();
+    
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Subject info updated successfully!'
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Selected subject not found!'
+                ]);
+            }
+        } else {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Unathorized action!'
+            ]);
+        }
+    }
 }

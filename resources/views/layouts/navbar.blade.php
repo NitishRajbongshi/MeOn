@@ -4,26 +4,26 @@
             {{-- <img class="w-16 cursor-pointer" src="https://cdn-icons-png.flaticon.com/512/5968/5968204.png" alt="..."> --}}
             <a href="/" class="flex justify-center items-center py-1">
                 <img src="{{ asset('images/main_logo.png') }}" alt="logo" width="60rem;">
-                <span class="text-xl py-3 font-bold">EDORB</span>
+                <span class="text-xl py-3 font-bold text-blue-800">EDORB</span>
             </a>
             {{-- <p class="text-xl py-3 font-bold">EDORB</p> --}}
         </div>
-        <div class="nav-links duration-500 md:static absolute bg-white md:min-h-fit min-h-[40vh] left-0 top-[-100%] md:w-auto  w-full flex items-start px-5 py-4"
+        <div class="nav-links duration-500 md:static bg-white absolute md:min-h-fit min-h-[40vh] left-0 top-[-100%] md:w-auto  w-full flex items-start px-5 py-4"
             style="z-index: 1;">
             <ul class="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-2">
                 <li class="md:hidden">
-                    <a class="hover:text-gray-500 text-lg font-bold" href="{{ route('home') }}">
+                    <a class="hover:text-gray-500 text-lg font-bold text-blue-800" href="{{ route('home') }}">
                         EDORB
                     </a>
                 </li>
                 <li>
-                    <a class="hover:text-gray-500" href="{{ route('home') }}">
+                    <a class="hover:text-gray-500 text-blue-800" href="{{ route('home') }}">
                         <i class="fa fa-home"></i>
                         Home
                     </a>
                 </li>
                 <li>
-                    <a class="hover:text-gray-500" href="#">
+                    <a class="hover:text-gray-500 text-red-800" href="#">
                         <i class="fa fa-comments"></i>
                         Blog
                     </a>
@@ -35,7 +35,7 @@
                 <div class="flex justify-center">
                     <div x-data="{ dropdownOpen: false }" class="relative">
                         <button @click="dropdownOpen = !dropdownOpen"
-                            class="relative block text-sm overflow-hidden focus:outline-none">
+                            class="relative block text-sm overflow-hidden focus:outline-none text-blue-800">
                             {{ $user->name }}
                             <i class="fa fa-user mr-2 text-xs"></i>
                         </button>

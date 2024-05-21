@@ -88,8 +88,8 @@
             <div class="flex gap-1">
                 <!-- First Column (Side Navbar) -->
                 <div class="w-3/12 hidden md:block bg-white">
-                    <div class="px-4">
-                        <div class="w-full my-4 flex items-center text-lg text-black p-2 hover:bg-blue-200 hover:rounded-md">
+                    <div class="px-4 text-indigo-800">
+                        <div class="w-full my-4 flex items-center text-lg p-2 hover:bg-blue-200 hover:rounded-md">
                             <a href="{{ route('adminDashboard') }}">
                                 <i class="fa fa-bars mr-1" aria-hidden="true"></i>
                                 Dashboard

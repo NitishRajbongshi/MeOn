@@ -30,7 +30,7 @@ Route::get('/contact-us', [WelcomeController::class, 'contact'])->name('contact.
 Route::post('/logout', [LogoutController::class, 'logoutUser'])->middleware('auth')->name('logout');
 
 // admin
-Route::middleware(['auth'])->prefix('admin')->group(function () {
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('adminDashboard');
 
     // manage class
@@ -73,12 +73,12 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
 // subject
 Route::prefix('content')->group(function() {
-    Route::get('/subject/{id}', [SubjectController::class, 'getSubjectList'])->name('subjectList');
+    Route::get('/subject/{id}', [SubjectController::class, 'getSubjectList'])->name('subjectList'); // class-10/all-subject
 });
 
 // notes
 Route::prefix('notes')->group(function () {
-    Route::get('/subject/{subject}', [NoteController::class, 'getChapterList']);
+    Route::get('/subject/{subject}', [NoteController::class, 'getChapterList']); // class-10/g-math/unit-measurement/all-notes
     Route::get('/getNotes/{chapter}', [NoteController::class, 'getAvailableNote']);
     Route::get('/viewNotes/{note}', [NoteController::class, 'showPdfFile']);
 });

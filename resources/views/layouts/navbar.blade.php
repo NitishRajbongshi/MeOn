@@ -45,12 +45,14 @@
 
                         <div x-show="dropdownOpen" class="absolute right-0 mt-2 w-48 bg-white shadow-xl z-20">
                             <ul>
+                                @if ($user->admin)
                                 <li>
                                     <a href="{{ route('adminDashboard') }}"
                                         class="block px-4 py-2 text-sm capitalize text-gray-800 hover:bg-indigo-500 hover:text-white">
                                         Dashboard
                                     </a>
                                 </li>
+                                @endif
                                 <li>
                                     <a href="#"
                                         class="block px-4 py-2 text-sm capitalize text-gray-800 hover:bg-indigo-500 hover:text-white">

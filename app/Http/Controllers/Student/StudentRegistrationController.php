@@ -73,8 +73,8 @@ class StudentRegistrationController extends Controller
                     ];
                     $student = Student::create($data);
                     if ($student) {
-                        $student->courses()->attach($request->subjects);
                         $student->subjects()->attach($request->subjects);
+                        $student->courses()->attach($request->courses);
 
                         DB::commit();
                         return view('pages.pageSuccess');

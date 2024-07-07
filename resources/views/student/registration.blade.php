@@ -8,7 +8,7 @@
             <div class="logo-section text-center bg-blue-500 py-8 text-white">
                 {{-- <img src="{{ asset('icons/login.png') }}" alt="logo" width="50rem" height="50rem"> --}}
                 <h1 class="text-lg  uppercase font-bold underline">Student Registration</h1>
-                <p class="text-md">Please fill the form carefully to register yourself successfully.</p>
+                <p class="text-md">Please fill the form carefully.</p>
                 <p class="text-end text-md px-2 md:px-4">For any query call: <span class="font-bold">7002390253</span></p>
                 <div class="text-left text-md px-2 md:px-4">
                     <p class="underline font-bold">Read carefully before filling out the form:</p>
@@ -239,13 +239,15 @@
                             <label for="subjects" class="font-bold">Check the subject list you are interested in:<span
                                     class="font-bold text-lg ms-1 text-red-500">*</span></label>
                             <div class="flex gap-5">
-                                @foreach ($subjects as $subject)
-                                    <div class="form-check">
-                                        <input type="checkbox" name="subjects[]" value="{{ $subject->id }}"
-                                            class="form-check-input">
-                                        <label class="form-check-label">{{ $subject->name }}</label>
-                                    </div>
-                                @endforeach
+                                <div class="flex flex-wrap gap-2">
+                                    @foreach ($subjects as $subject)
+                                        <div class="form-check">
+                                            <input type="checkbox" name="subjects[]" value="{{ $subject->id }}"
+                                                class="form-check-input">
+                                            <label class="form-check-label">{{ $subject->name }}</label>
+                                        </div>
+                                    @endforeach
+                                </div>
                             </div>
                             @error('subjects')
                                 <p class="text-sm text-red-500">
@@ -262,13 +264,15 @@
                             <label for="courses" class="font-bold">Choose your course(s): <span
                                     class="font-bold text-lg ms-1 text-red-500">*</span></label>
                             <div class="flex gap-5">
-                                @foreach ($courses as $course)
-                                    <div class="form-check">
-                                        <input type="checkbox" name="courses[]" value="{{ $course->id }}"
-                                            class="form-check-input">
-                                        <label class="form-check-label">{{ $course->name }}</label>
-                                    </div>
-                                @endforeach
+                                <div class="flex flex-wrap gap-2">
+                                    @foreach ($courses as $course)
+                                        <div class="form-check">
+                                            <input type="checkbox" name="courses[]" value="{{ $course->id }}"
+                                                class="form-check-input">
+                                            <label class="form-check-label">{{ $course->name }}</label>
+                                        </div>
+                                    @endforeach
+                                </div>
                             </div>
                             @error('courses')
                                 <p class="text-sm text-red-500">

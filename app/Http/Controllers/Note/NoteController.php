@@ -154,6 +154,7 @@ class NoteController extends Controller
     {
         $user = Auth::user();
         $class = Standard::find($subject->standard_id);
+        $classes = Standard::all();
         $chapters = Subject::find($subject->id)->chapters;
         return view(
             'notes.index',
@@ -162,11 +163,27 @@ class NoteController extends Controller
                 'class' => $class,
                 'subject' => $subject,
                 'chapters' => $chapters,
+                'classes' => $classes
             ]
         );
     }
 
-    public function getAvailableNote(Request $request, Chapter $chapter)
+    public function getAvailableNote(Request $request, Chapter $chapter) {
+        $user = Auth::user();
+        $notes = Chapter::find($chapter->id)->notes;
+        // dd($notes);
+        $classes = Standard::all();
+        return view(
+            'notes.list',
+            [
+                'user' => $user,
+                'notes' => $notes,
+                'classes' => $classes
+            ]
+        );
+    }
+
+    public function getAvailableNoteOld(Request $request, Chapter $chapter)
     {
         if (csrf_token()) {
             $availableNotes = Chapter::find($chapter->id)->notes;

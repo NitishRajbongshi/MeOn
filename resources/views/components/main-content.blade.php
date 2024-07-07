@@ -160,6 +160,30 @@
                         <ul class="mt-2">
                             <li class="menuTitle">
                                 <button class="flex text-lg justify-between w-full p-2 hover:bg-blue-200 hover:rounded-md">
+                                    <div><i class="fa fa-book mr-2 text-md"></i>Manage Student</div>
+                                    <div class="ms-4"><i class="fa fa-caret-left" aria-hidden="true"></i></div>
+                                </button>
+                                <ul class="text-md subMenuItem hidden ms-3">
+                                    <li class="my-2">
+                                        <a href="{{ route('manageClass') }}"
+                                            class="flex items-center focus:outline-none hover:text-gray-400">
+                                            <i class="fa fa-genderless mr-1" aria-hidden="true"></i>
+                                            <span class="text-md">New Registration</span>
+                                        </a>
+                                    </li>
+                                    <li class="my-2">
+                                        <a href="{{ route('student.list') }}"
+                                            class="flex items-center focus:outline-none hover:text-gray-400">
+                                            <i class="fa fa-genderless mr-1" aria-hidden="true"></i>
+                                            <span class="text-md">Student Database</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="mt-2">
+                            <li class="menuTitle">
+                                <button class="flex text-lg justify-between w-full p-2 hover:bg-blue-200 hover:rounded-md">
                                     <div><i class="fa fa-info-circle mr-[0.4rem] text-md" aria-hidden="true"></i>Manage Info</div>
                                     <div class="ms-4"><i class="fa fa-caret-left" aria-hidden="true"></i></div>
                                 </button>

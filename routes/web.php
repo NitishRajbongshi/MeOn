@@ -12,7 +12,10 @@ use App\Http\Controllers\ExamLink\ExamLinkController;
 use App\Http\Controllers\Marquee\MarqueeController;
 use App\Http\Controllers\Note\NoteController;
 use App\Http\Controllers\Standard\CategoryController;
+use App\Http\Controllers\Student\StudentController;
+use App\Http\Controllers\Student\StudentRegistrationController;
 use App\Http\Controllers\WelcomeController;
+use App\Models\Student\Student;
 
 Route::get('/', [WelcomeController::class, 'index'])->name('home');
 
@@ -28,6 +31,10 @@ Route::middleware(['guest'])->group(function () {
 Route::get('/about', [WelcomeController::class, 'about'])->name('about');
 Route::get('/contact-us', [WelcomeController::class, 'contact'])->name('contact.us');
 Route::post('/logout', [LogoutController::class, 'logoutUser'])->middleware('auth')->name('logout');
+
+// student
+Route::get('/student/registration', [StudentRegistrationController::class, 'index'])->name('student.registration');
+Route::post('/student/registration', [StudentRegistrationController::class, 'store']);
 
 // admin
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
@@ -69,6 +76,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     // add class category
     Route::get('/addClassCategory', [CategoryController::class, 'index'])->name('classCategory');
     Route::post('/addClassCategory', [CategoryController::class, 'store']);
+
+    // manage student
+    Route::get('/student/list', [StudentController::class, 'index'])->name('student.list');
 });
 
 // subject

@@ -40,9 +40,15 @@
                             <span class="font-bold">Login</span>
                         </button>
                     </div>
-                    <div class="w-full text-center my-3 bg-red-200 text-red-700 rounded-sm py-1 hover:shadow-sm">
-                        <i class="fa fa-backward"></i>
-                        <span class="font-bold"><a href="{{ route('home') }}">Back</a></span>
+                    <div class="w-full my-3">
+                        <a href="{{ route('home') }}"
+                            class="w-full text-center block bg-red-200 text-red-700 rounded-sm py-1 hover:shadow-sm">
+                            <i class="fa fa-backward"></i>
+                            <span class="font-bold">Back</span>
+                        </a>
+                    </div>
+                    <div class="text-blue-500 text-sm text-center py-3">
+                        <a href="{{ route('student.registration') }}">New Student Registration</a>
                     </div>
                 </form>
             </div>

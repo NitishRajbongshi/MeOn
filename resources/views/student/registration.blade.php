@@ -14,7 +14,7 @@
                     <p class="underline font-bold">Read carefully before filling out the form:</p>
                     <ul class="list-disc ps-3 text-justify">
                         <li>Read the form carefully to avoid any mistakes.</li>
-                        <li>ou cannot edit the form once it has been submitted.</li>
+                        <li>You cannot edit the form once it has been submitted.</li>
                         <li>All the fields with <span class="text-red-500 font-bold text-lg">*</span> marks are mandatory to
                             fill.</li>
                         <li>Once you register, you have to wait until the admin approves your profile.</li>

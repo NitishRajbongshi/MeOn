@@ -6,7 +6,7 @@
     <main>
         <x-main-content>
             {{-- BreadCrumbs --}}
-            <div class="w-full rounded-md text-xs">
+            <div class="w-full rounded-md text-xs mb-2">
                 <ol class="list-reset flex">
                     <li>
                         <a href="#"
@@ -18,14 +18,31 @@
                     <li class="text-neutral-500 dark:text-neutral-400">Student Database</li>
                 </ol>
             </div>
-            
-            {{-- Data table --}}
-            <div class="border rounded-md">
-                <div class="my-3 text-center text-md">
-                    <span class="border rounded-sm p-1 font-bold text-blue-900 border-blue-900 bg-blue-200">
-                        Available Class List
+            <div class="studentTab flex flex-wrap gap-1">
+                <div class="my-1 text-md">
+                    <span class="border p-1 font-bold text-blue-900 border-blue-900 bg-blue-200">
+                        <a href="#">
+                            List of all Students
+                        </a>
                     </span>
                 </div>
+                <div class="my-1 text-md">
+                    <span class="border p-1 font-bold text-blue-900 border-blue-900 bg-blue-200">
+                        <a href="#">
+                            Active Student List
+                        </a>
+                    </span>
+                </div>
+                <div class="my-1 text-md">
+                    <span class="border p-1 font-bold text-blue-900 border-blue-900 bg-blue-200">
+                        <a href="#">
+                            Class-wise Student List
+                        </a>
+                    </span>
+                </div>
+            </div>
+            {{-- Data table --}}
+            <div class="border rounded-md mt-2">
                 <div class="flex flex-col overflow-x-auto">
                     <div class="">
                         <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
@@ -36,8 +53,9 @@
                                             <th scope="col" class="px-6 py-1">#</th>
                                             <th scope="col" class="px-6 py-1">Name</th>
                                             <th scope="col" class="px-6 py-1">Email</th>
-                                            <th scope="col" class="px-6 py-1">Edit</th>
-                                            <th scope="col" class="px-6 py-1">Delete</th>
+                                            <th scope="col" class="px-6 py-1 text-center">Status</th>
+                                            <th scope="col" class="px-6 py-1 text-center">View</th>
+                                            <th scope="col" class="px-6 py-1 text-center">Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -53,12 +71,19 @@
                                                 <td class="whitespace-nowrap px-6 py-1">
                                                     {{ $item->email }}
                                                 </td>
-                                                <td class="whitespace-nowrap px-6 py-1">
+                                                <td class="whitespace-nowrap px-6 py-1 text-center">
+                                                    @if ($item->active === 0)
+                                                        <span class="text-red-500">Pending</span>
+                                                    @else
+                                                    <span class="text-green-500">Activated</span>
+                                                    @endif
+                                                </td>
+                                                <td class="whitespace-nowrap px-6 py-1 text-center">
                                                     <button class="openModal" data-id="{{ $item->id }}">
-                                                        <i class="fa fa-pen text-xs"></i>
+                                                        <i class="fa fa-eye text-xs"></i>
                                                     </button>
                                                 </td>
-                                                <td class="whitespace-nowrap px-6 py-1">
+                                                <td class="whitespace-nowrap px-6 py-1 text-center">
                                                     <i class="fa fa-trash text-xs"></i>
                                                 </td>
                                             </tr>

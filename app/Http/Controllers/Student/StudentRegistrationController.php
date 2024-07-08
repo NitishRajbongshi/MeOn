@@ -11,7 +11,6 @@ use App\Models\Student\StudentClass;
 use App\Models\Student\MasterStudentCourse;
 use App\Models\Student\MasterStudentSubject;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class StudentRegistrationController extends Controller
 {
@@ -77,18 +76,30 @@ class StudentRegistrationController extends Controller
                         $student->courses()->attach($request->courses);
 
                         DB::commit();
-                        return view('pages.pageSuccess');
+                        return view('layouts.status', [
+                            'status' => 'Success',
+                            'description' => 'Your registration is commpleted. Wait for admin confirmation message!'
+                        ]);
                     } else {
                         DB::rollBack();
-                        return view('pages.pageBreak');
+                        return view('layouts.status', [
+                            'status' => 'Failed',
+                            'description' => 'Your registration is not commpleted. Try Again!'
+                        ]);
                     }
                 } else {
                     DB::rollBack();
-                    return view('pages.pageBreak');
+                    return view('layouts.status', [
+                        'status' => 'Failed',
+                        'description' => 'Your registration is not commpleted. Try Again!'
+                    ]);
                 }
             }
         } catch (Exception $e) {
-            return view('pages.pageBreak');
+            return view('layouts.status', [
+                'status' => 'Failed',
+                'description' => 'Your registration is not commpleted. Some internal server error occured!'
+            ]);
         }
     }
 }

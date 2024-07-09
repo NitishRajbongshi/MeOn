@@ -29,7 +29,7 @@
                 <form action="{{ route('student.registration') }}" method="POST" autocomplete="off">
                     @csrf
                     <div>
-                        <p class="uppercase font-bold py-1 border ps-1 bg-slate-400 text-white">Personal Details</p>
+                        <p class="uppercase font-bold py-1 border ps-1 bg-blue-400 text-white">Personal Details</p>
                     </div>
                     <div class="flex flex-wrap justify-between text-sm">
                         <div class="w-[100%] md:w-[49.5%]">
@@ -111,7 +111,7 @@
                     </div>
 
                     <div class="mt-4">
-                        <p class="uppercase font-bold py-1 border ps-1 bg-slate-400 text-white">Contact Details</p>
+                        <p class="uppercase font-bold py-1 border ps-1 bg-blue-400 text-white">Contact Details</p>
                     </div>
                     <div class="flex flex-wrap justify-between text-sm">
                         <div class="w-[100%] md:w-[49.5%]">
@@ -191,7 +191,7 @@
                     </div>
 
                     <div class="mt-4">
-                        <p class="uppercase font-bold py-1 border ps-1 bg-slate-400 text-white">Educational Information</p>
+                        <p class="uppercase font-bold py-1 border ps-1 bg-blue-400 text-white">Educational Information</p>
                     </div>
                     <div class="flex flex-wrap justify-between text-sm">
                         <div class="w-[100%] md:w-[49.5%]">
@@ -234,7 +234,7 @@
                     </div>
 
                     <div class="mt-4">
-                        <p class="uppercase font-bold py-1 border ps-1 bg-slate-400 text-white">Subject Details</p>
+                        <p class="uppercase font-bold py-1 border ps-1 bg-blue-400 text-white">Subject Details</p>
                         <div class="">
                             <label for="subjects" class="font-bold">Check the subject list you are interested in:<span
                                     class="font-bold text-lg ms-1 text-red-500">*</span></label>
@@ -259,7 +259,7 @@
                     </div>
 
                     <div class="mt-4">
-                        <p class="uppercase font-bold py-1 border ps-1 bg-slate-400 text-white">Course Details</p>
+                        <p class="uppercase font-bold py-1 border ps-1 bg-blue-400 text-white">Course Details</p>
                         <div class="">
                             <label for="courses" class="font-bold">Choose your course(s): <span
                                     class="font-bold text-lg ms-1 text-red-500">*</span></label>
@@ -275,6 +275,43 @@
                                 </div>
                             </div>
                             @error('courses')
+                                <p class="text-sm text-red-500">
+                                    <i class="fa fa-warning mr-1"></i>
+                                    {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <p class="uppercase font-bold py-1 border ps-1 bg-red-400 text-white">Create Password</p>
+                    </div>
+                    <p class="text-red-500"><span class="font-bold">Hint: </span>A password can be any character,
+                        including digits, as well as a special character with a minimum length of 8.</p>
+                    <div class="flex flex-wrap justify-between text-sm">
+                        <div class="w-[100%] md:w-[49.5%]">
+                            <div class="mt-2 bg-slate-200">
+                                <label class="px-1" for="password"><i
+                                        class="fa fa-key me-2 text-blue-800"></i><strong>Password:</strong><span
+                                        class="font-bold text-lg ms-1 text-red-500">*</span></label>
+                                <input class="w-full border rounded-sm p-1 outline-blue-100" type="password"
+                                    name="password" id="password" placeholder="********">
+                            </div>
+                            @error('password')
+                                <p class="text-sm text-red-500">
+                                    <i class="fa fa-warning mr-1"></i>
+                                    {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
+                        <div class="w-[100%] md:w-[49.5%]">
+                            <div class="mt-2 bg-slate-200">
+                                <label class="px-1" for="password_confirmation"><i
+                                        class="fa fa-key me-2 text-blue-800"></i><strong>Confirm Password:</strong><span
+                                        class="font-bold text-lg ms-1 text-red-500">*</span></label>
+                                <input class="w-full border rounded-sm p-1 outline-blue-100" type="password"
+                                    name="password_confirmation" id="password_confirmation" placeholder="********">
+                            </div>
+                            @error('password_confirmation')
                                 <p class="text-sm text-red-500">
                                     <i class="fa fa-warning mr-1"></i>
                                     {{ $message }}

@@ -41,6 +41,7 @@ class StudentRegistrationController extends Controller
             'courses' => 'required',
             'subjects' => 'required',
             'class' => 'required',
+            'password' => 'required|string|min:8|confirmed',
         ]);
         DB::beginTransaction();
         try {
@@ -51,7 +52,7 @@ class StudentRegistrationController extends Controller
                 $userData = [
                     'name' => $request->name,
                     'email' => $request->email,
-                    'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+                    'password' => bcrypt($request->input('password')),
                 ];
                 $newuser = User::create($userData);
                 if ($newuser) {

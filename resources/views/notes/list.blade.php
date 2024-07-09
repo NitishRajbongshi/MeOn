@@ -47,7 +47,7 @@
                     </div>
                     <div>
                         <p class="underline text-lg text-blue-500">List of chapters:</p>
-                        <div class="md:my-2">
+                        <div class="flex justify-between items-center flex-wrap">
                             @foreach ($notes as $note)
                                 <div class="w-full my-1 md:w-[49.5%] p-4 border border-blue-100 bg-white hover:shadow-md">
                                     <div class="flex justify-between font-bold pb-2">

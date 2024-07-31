@@ -165,10 +165,10 @@
                                 </button>
                                 <ul class="text-md subMenuItem hidden ms-3">
                                     <li class="my-2">
-                                        <a href="{{ route('manageClass') }}"
+                                        <a href="{{ route('student.list.new') }}"
                                             class="flex items-center focus:outline-none hover:text-gray-400">
                                             <i class="fa fa-genderless mr-1" aria-hidden="true"></i>
-                                            <span class="text-md">New Registration</span>
+                                            <span class="text-md text-red-500">New Registration</span>
                                         </a>
                                     </li>
                                     <li class="my-2">

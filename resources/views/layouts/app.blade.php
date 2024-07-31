@@ -50,6 +50,9 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     {{-- alpine js --}}
     <script src="//unpkg.com/alpinejs" defer></script>
+    {{-- sweetalert --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.3/dist/sweetalert2.all.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.3/dist/sweetalert2.min.css" rel="stylesheet">
     <title>Edorb</title>
     {{-- It will include extra links only for particular page --}}
     @stack('styles')

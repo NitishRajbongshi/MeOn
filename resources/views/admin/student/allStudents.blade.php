@@ -18,23 +18,23 @@
                     <li class="text-neutral-500 dark:text-neutral-400">Student Database</li>
                 </ol>
             </div>
-            <div class="studentTab flex flex-wrap gap-1">
-                <div class="my-1 text-md">
-                    <span class="border p-1 font-bold text-blue-900 border-blue-900 bg-blue-200">
+            <div class="studentTab flex flex-wrap gap-[0.1rem] border-b border-blue-200">
+                <div class="text-md rounded-t-md py-1 px-2 bg-blue-500">
+                    <span class=" text-sm font-bold text-white ">
                         <a href="#">
                             List of all Students
                         </a>
                     </span>
                 </div>
-                <div class="my-1 text-md">
-                    <span class="border p-1 font-bold text-blue-900 border-blue-900 bg-blue-200">
+                <div class="text-md rounded-t-md py-1 px-2 bg-blue-200 hover:bg-blue-500">
+                    <span class=" text-sm font-bold text-blue-900 hover:text-white">
                         <a href="#">
                             Active Student List
                         </a>
                     </span>
                 </div>
-                <div class="my-1 text-md">
-                    <span class="border p-1 font-bold text-blue-900 border-blue-900 bg-blue-200">
+                <div class="text-md rounded-t-md py-1 px-2 bg-blue-200 hover:bg-blue-500">
+                    <span class=" text-sm font-bold text-blue-900 hover:text-white">
                         <a href="#">
                             Class-wise Student List
                         </a>

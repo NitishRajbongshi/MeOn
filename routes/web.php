@@ -78,7 +78,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::post('/addClassCategory', [CategoryController::class, 'store']);
 
     // manage student
-    Route::get('/student/list', [StudentController::class, 'index'])->name('student.list');
+    Route::get('/student/all', [StudentController::class, 'index'])->name('student.list');
+    Route::get('/student/new', [StudentController::class, 'newStudentList'])->name('student.list.new');
+    Route::post('/student/active', [StudentController::class, 'activeStudent'])->name('student.active');
 });
 
 // subject

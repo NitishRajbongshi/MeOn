@@ -63,6 +63,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     // manage notes
     Route::get('/manageNotes', [NoteController::class, 'index'])->name('manageNote');
     Route::post('/manageNotes', [NoteController::class, 'store']);
+    Route::get('/manageNotes/upload/{note:name}', [NoteController::class, 'uploadAdditionalNotes']);
+    Route::post('/manageNotes/upload', [NoteController::class, 'storeAdditionalNotes']);
 
     // add Exam Link
     Route::get('/addExamLink', [ExamLinkController::class, 'index'])->name('addExamLink');
@@ -92,5 +94,5 @@ Route::prefix('content')->group(function() {
 Route::prefix('notes')->group(function () {
     Route::get('/subject/{subject}', [NoteController::class, 'getChapterList']); // class-10/g-math/unit-measurement/all-notes
     Route::get('/getNotes/{chapter}', [NoteController::class, 'getAvailableNote']);
-    Route::get('/viewNotes/{note}', [NoteController::class, 'showPdfFile']);
+    Route::get('/viewNotes/{note:name}', [NoteController::class, 'showPdfFile']);
 });

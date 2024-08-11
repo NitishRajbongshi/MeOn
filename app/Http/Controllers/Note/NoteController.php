@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Note;
 
+use Exception;
+use Carbon\Carbon;
 use App\Models\Note\Note;
 use Illuminate\Http\Request;
 use App\Models\Chapter\Chapter;
 use App\Models\Subject\Subject;
-use App\Models\Standard\Standard;
-use App\Http\Controllers\Controller;
 use App\Models\Note\NoteResource;
-use Carbon\Carbon;
-use Exception;
+use App\Models\Standard\Standard;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Storage;
@@ -21,15 +22,22 @@ class NoteController extends Controller
     {
         $user = Auth::user();
         $classes = Standard::get();
+        $notes = DB::table('notes')
+            ->leftJoin('standards', 'notes.standard_id', '=', 'standards.id')
+            ->leftJoin('subjects', 'notes.subject_id', '=', 'subjects.id')
+            ->leftJoin('chapters', 'notes.chapter_id', '=', 'chapters.id')
+            ->select('notes.*', 'standards.name as class_name', 'subjects.name as subject_name', 'chapters.name as chapter_name')
+            ->paginate(5);
+
         return view('admin.manageNotes', [
             'user' => $user,
-            'classes' => $classes
+            'classes' => $classes,
+            'notes' => $notes
         ]);
     }
 
     public function store(Request $request)
     {
-        // dd($request);
         $user = Auth::user();
         $validate = $request->validate([
             'class' => 'required',
@@ -57,7 +65,7 @@ class NoteController extends Controller
                     $uploadStatus = 0;
 
                     foreach ($request->file('img_file') as $image) {
-                        $imagePath = $image->store('notes/' . Carbon::now()->format('Y') . '/' . $request->input('chapter') , 'public');
+                        $imagePath = $image->store('notes/' . Carbon::now()->format('Y') . '/' . $request->input('chapter'), 'public');
                         $imgData = [
                             'note_id' => $noteUploadedStatus->id,
                             'img_path' => $imagePath,
@@ -168,7 +176,8 @@ class NoteController extends Controller
         );
     }
 
-    public function getAvailableNote(Request $request, Chapter $chapter) {
+    public function getAvailableNote(Request $request, Chapter $chapter)
+    {
         $user = Auth::user();
         $notes = Chapter::find($chapter->id)->notes;
         // dd($notes);
@@ -217,5 +226,54 @@ class NoteController extends Controller
             'user' => $user,
             'note' => $note,
         ]);
+    }
+
+    public function uploadAdditionalNotes(Request $request, Note $note)
+    {
+        $noteID = $note->id;
+        $user = Auth::user();
+        $classes = Standard::get();
+        return view('admin.notes.additionalNotes', [
+            'user' => $user,
+            'classes' => $classes,
+            'noteID' => $noteID
+        ]);
+    }
+
+    public function storeAdditionalNotes(Request $request, Note $note)
+    {
+        $noteID = $request->note_id;
+        $note = Note::find($noteID);
+
+        $validate = $request->validate([
+            'img_file.*' => 'required|image|mimes:jpg, jpeg|max:5120',
+        ]);
+
+        try {
+            if ($request->hasFile('img_file')) {
+                $uploadStatus = 0;
+
+                foreach ($request->file('img_file') as $image) {
+                    $imagePath = $image->store('notes/' . Carbon::now()->format('Y') . '/' . $note->chapter_id, 'public');
+                    $imgData = [
+                        'note_id' => $noteID,
+                        'img_path' => $imagePath,
+                    ];
+
+                    if (NoteResource::create($imgData)) {
+                        $uploadStatus = 1;
+                    }
+                }
+                if ($uploadStatus) {
+                    return redirect()->back()->with('success', 'Notes uploaded successfully!');
+                } else {
+                    // rollback
+
+                    return redirect()->back()->with('failed', 'Failed to upload the file!');
+                }
+            }
+        } catch (Exception $e) {
+            dd($e);
+        }
     }
 }

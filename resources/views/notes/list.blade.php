@@ -67,7 +67,7 @@
                                     </div>
                                     <div class="flex justify-between items-end flex-wrap mt-3">
                                         <p class="text-xs text-blue-500">Free</p>
-                                        <a href="{{ url('/notes/viewNotes', $note->id) }}">
+                                        <a href="{{ url('/notes/viewNotes', $note->name) }}">
                                             <button data-id={{ $note->id }}
                                                 class="subject_btn bg-blue-500 text-white rounded py-1 px-2 hover:bg-blue-600">
                                                 View Notes

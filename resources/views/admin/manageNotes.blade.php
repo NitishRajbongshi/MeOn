@@ -23,7 +23,8 @@
                 <div class="w-full md:w-3/4">
                     {{-- Form --}}
                     <div class="border rounded-md border-slate-200 my-2 p-1 md:p-2">
-                        <form action="{{ route('manageNote') }}" method="post" autocomplete="off" enctype="multipart/form-data">
+                        <form action="{{ route('manageNote') }}" method="post" autocomplete="off"
+                            enctype="multipart/form-data">
                             @csrf
                             <fieldset class="my-2">
                                 <span class="border-2 border-blue-900 rounded-sm text-sm p-1 font-bold text-blue-900">
@@ -119,28 +120,30 @@
                                     <textarea rows="4" id="description" name="description"
                                         class="w-full border border-blue-300 rounded-sm outline-none p-1 text-sm"
                                         placeholder="Write any description if needed..."></textarea>
-                                    
+
                                 </div>
                             </div>
                             <div class="md:flex my-2">
-                                <div class="w-full md:w-1/3">   
+                                <div class="w-full md:w-1/3">
                                     <label class="text-sm" for="img_file">Upload Images:<span
-                                        class="text-xs text-red-500">*</span></label>
+                                            class="text-xs text-red-500">*</span></label>
                                 </div>
                                 <div class="w-full md:w-2/3">
-                                    <input type="file" name="img_file[]" id="img_file" accept=".jpg, .jpeg" 
-                                    class="w-full rounded-sm outline-none text-sm text-blue-300" multiple required>
+                                    <input type="file" name="img_file[]" id="img_file" accept=".jpg, .jpeg"
+                                        class="w-full rounded-sm outline-none text-sm text-blue-300" multiple required>
                                     @error('img_file')
-                                            <p class="text-xs text-red-500">
-                                                <i class="fa fa-warning mr-1 my-1"></i>
-                                                {{ $message }}
-                                            </p>
+                                        <p class="text-xs text-red-500">
+                                            <i class="fa fa-warning mr-1 my-1"></i>
+                                            {{ $message }}
+                                        </p>
                                     @enderror
 
                                     <div>
                                         <p class="text-slate-500 text-[.8rem]">
                                             <i class="fa fa-warning mr-1 my-1"></i>
-                                            Upload multiple images at once of type .jpg or .jpeg and size should less than 5MB</p>
+                                            Upload multiple images at once of type .jpg or .jpeg and size should less than
+                                            5MB
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -160,6 +163,85 @@
                     <div class="border rounded-md border-slate-200 my-2 p-2">
                         <h1>SideBar</h1>
                     </div>
+                </div>
+            </div>
+            {{-- Data table --}}
+            <div class="border rounded-md">
+                <div class="my-3 text-center text-md">
+                    <span class="border rounded-sm p-1 font-bold text-blue-900 border-blue-900 bg-blue-200">
+                        List of all notes
+                    </span>
+                </div>
+                <div class="flex flex-col overflow-x-auto">
+                    <div class="">
+                        <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full text-left text-sm font-light">
+                                    <thead class="border-b font-medium dark:border-neutral-500">
+                                        <tr>
+                                            <th scope="col" class="px-6 py-1">#</th>
+                                            <th scope="col" class="px-6 py-1">Class</th>
+                                            <th scope="col" class="px-6 py-1">Subject</th>
+                                            <th scope="col" class="px-6 py-1">Chapter</th>
+                                            <th scope="col" class="px-6 py-1">Title</th>
+                                            <th scope="col" class="px-6 py-1">Description</th>
+                                            <th scope="col" class="px-6 py-1">View</th>
+                                            <th scope="col" class="px-6 py-1">Upload</th>
+                                            <th scope="col" class="px-6 py-1">Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @php
+                                            $i = 1;
+                                        @endphp
+                                        @foreach ($notes as $item)
+                                            <tr class="border-b dark:border-neutral-500">
+                                                <td class="whitespace-nowrap px-6 py-1 font-medium text-center">
+                                                    {{ $i }}</td>
+                                                <td class="whitespace-nowrap px-6 py-1">
+                                                    {{ $item->class_name }}
+                                                </td>
+                                                <td class="whitespace-nowrap px-6 py-1">
+                                                    {{ $item->subject_name }}
+                                                </td>
+                                                <td class="whitespace-nowrap px-6 py-1 text-center">
+                                                    {{ $item->chapter_name }}
+                                                </td>
+                                                <td class="whitespace-nowrap px-6 py-1">
+                                                    {{ $item->name }}
+                                                </td>
+                                                <td class="whitespace-nowrap px-6 py-1">
+                                                    {{ $item->description }}
+                                                </td>
+                                                <td class="whitespace-nowrap px-6 py-1 text-center">
+                                                    <a href="{{ url('/notes/viewNotes', $item->name) }}">
+                                                        <i class="fa fa-eye text-xs"></i>
+                                                    </a>
+                                                </td>
+                                                <td class="whitespace-nowrap px-6 py-1 text-center">
+                                                    <a href="{{ url('/admin/manageNotes/upload', $item->name) }}">
+                                                        <i class="fa fa-plus text-xs"></i>
+                                                    </a>
+                                                </td>
+                                                <td class="whitespace-nowrap px-6 py-1 text-center">
+                                                    <i class="fa fa-trash text-xs"></i>
+                                                </td>
+                                            </tr>
+                                            @php
+                                                $i++;
+                                            @endphp
+                                        @endforeach
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-xs my-3 p-2">
+                    <span class="text-xs">
+                        {{ $notes->links() }}
+                    </span>
                 </div>
             </div>
         </x-main-content>

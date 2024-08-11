@@ -87,12 +87,12 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 
 // subject
 Route::prefix('content')->group(function() {
-    Route::get('/subject/{id}', [SubjectController::class, 'getSubjectList'])->name('subjectList'); // class-10/all-subject
+    Route::get('/subject/{standard:name}/all-subjects', [SubjectController::class, 'getSubjectList'])->name('subjectList');
 });
 
 // notes
 Route::prefix('notes')->group(function () {
-    Route::get('/subject/{subject}', [NoteController::class, 'getChapterList']); // class-10/g-math/unit-measurement/all-notes
-    Route::get('/getNotes/{chapter}', [NoteController::class, 'getAvailableNote']);
-    Route::get('/viewNotes/{note:name}', [NoteController::class, 'showPdfFile']);
+    Route::get('/chapter/{subject:name}/all-chapters', [NoteController::class, 'getChapterList']);
+    Route::get('/show/{chapter:name}/all-notes', [NoteController::class, 'getAvailableNote']);
+    Route::get('/view/{note:name}', [NoteController::class, 'showPdfFile']);
 });

@@ -37,7 +37,7 @@
                     </div>
                     <div class="border border-blue-300 p-2 bg-blue-200 text-blue-700">
                         <a href="#" class="text-sm font-bold">
-                            {{ $currentClass }} - ({{ $subjectCount }} Subjects Available)
+                            {{ $currentClass->name }} - ({{ $subjectCount }} Subjects Available)
                         </a><br>
                     </div>
                     <div class="py-2">
@@ -51,7 +51,7 @@
                                             {{ $item->name }}
                                         </div>
                                         <div>
-                                            <p class="text-gray-500 text-sm">{{ $currentClass }}</p>
+                                            <p class="text-gray-500 text-sm">{{ $currentClass->name }}</p>
                                         </div>
                                     </div>
                                     <div class="min-h-[5rem]">
@@ -64,7 +64,7 @@
                                         <p class="text-xs text-blue-500">Free</p>
                                         <button data-id={{ $item->id }}
                                             class="subject_btn bg-blue-500 text-white rounded py-1 px-2 hover:bg-blue-600">
-                                            <a href="{{ url('/notes/subject', $item->id) }}">
+                                            <a href="{{ url('/notes/chapter', [$item->name, 'all-chapters']) }}">
                                                 Go to chapter List
                                             </a>
                                         </button>

@@ -72,9 +72,10 @@ class SubjectController extends Controller
         return response()->json($response);
     }
 
-    public function getSubjectList(Request $request)
+    public function getSubjectList(Request $request, Standard $standard)
     {
-        $id = $request->id;
+        // dd($standard);
+        $id = $standard->id;
         $user = Auth::user();
         $classes = Standard::all();
         $currentClass = Standard::find($id);
@@ -84,7 +85,7 @@ class SubjectController extends Controller
             'user' => $user,
             'classes' => $classes,
             'subjects' => $subjects,
-            'currentClass' => $currentClass->name,
+            'currentClass' => $currentClass,
             'subjectCount' => $subjectCount
         ]);
     }

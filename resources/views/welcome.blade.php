@@ -161,7 +161,8 @@
                                         <p class="text-sm text-blue-500 mx-1">Free</p>
                                         <button class="px-4 py-1 rounded bg-blue-500 text-white hover:bg-blue-600"
                                             data-id="{{ $item->id }}">
-                                            <a href="{{ route('subjectList', [$item->id]) }}">Explore Notes</a>
+                                            {{-- <a href="{{ route('subjectList', [$item->id]) }}">Explore Notes</a> --}}
+                                            <a href="{{ url('content/subject', [$item->name, 'all-subjects']) }}">Explore Notes</a>
                                         </button>
                                     </div>
                                 </div>

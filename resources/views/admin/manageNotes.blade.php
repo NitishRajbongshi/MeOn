@@ -214,7 +214,7 @@
                                                     {{ $item->description }}
                                                 </td>
                                                 <td class="whitespace-nowrap px-6 py-1 text-center">
-                                                    <a href="{{ url('/notes/viewNotes', $item->name) }}">
+                                                    <a href="{{ url('/notes/view', $item->name) }}">
                                                         <i class="fa fa-eye text-xs"></i>
                                                     </a>
                                                 </td>

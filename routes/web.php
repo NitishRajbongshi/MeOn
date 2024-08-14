@@ -87,7 +87,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 
 // subject
 Route::prefix('content')->group(function() {
-    Route::get('/subject/{standard:name}/all-subjects', [SubjectController::class, 'getSubjectList'])->name('subjectList');
+    Route::get('/subject/{standard:name}/language/all-languages', [SubjectController::class, 'getLanguageList'])->name('language');
+    Route::get('/subject/{standard:name}/language/assamese/all-subjects', [SubjectController::class, 'getAssameseSubjectList'])->name('subjectList.assamese');
+    Route::get('/subject/{standard:name}/language/english/all-subjects', [SubjectController::class, 'getEnglishSubjectList'])->name('subjectList.english');
 });
 
 // notes

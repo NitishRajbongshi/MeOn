@@ -7,6 +7,7 @@ use App\Models\Subject\Subject;
 use App\Models\Standard\Standard;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Master\MasterLanguage;
 use Illuminate\Support\Facades\Auth;
 
 class SubjectController extends Controller
@@ -72,15 +73,43 @@ class SubjectController extends Controller
         return response()->json($response);
     }
 
-    public function getSubjectList(Request $request, Standard $standard)
+    public function getLanguageList(Request $request, Standard $standard)
     {
-        // dd($standard);
+        $user = Auth::user();
+        $className = $standard->name;
+        // $languages = MasterLanguage::all(['id', 'language']);
+
+        return view('subjects.showLanguages', [
+            'user' => $user,
+            'className' => $className,
+        ]);
+    }
+
+    public function getAssameseSubjectList(Request $request, Standard $standard)
+    {
         $id = $standard->id;
         $user = Auth::user();
         $classes = Standard::all();
         $currentClass = Standard::find($id);
-        $subjects = $currentClass->subjects()->select('id', 'name', 'description')->get();
-        $subjectCount = $currentClass->subjects()->count();
+        $subjects = $currentClass->subjects()->select('id', 'name', 'description')->where('master_language_id', '0')->get();
+        $subjectCount = $currentClass->subjects()->where('master_language_id', '0')->count();
+        return view('subjects.index', [
+            'user' => $user,
+            'classes' => $classes,
+            'subjects' => $subjects,
+            'currentClass' => $currentClass,
+            'subjectCount' => $subjectCount
+        ]);
+    }
+
+    public function getEnglishSubjectList(Request $request, Standard $standard)
+    {
+        $id = $standard->id;
+        $user = Auth::user();
+        $classes = Standard::all();
+        $currentClass = Standard::find($id);
+        $subjects = $currentClass->subjects()->select('id', 'name', 'description')->where('master_language_id', '1')->get();
+        $subjectCount = $currentClass->subjects()->where('master_language_id', '1')->count();
         return view('subjects.index', [
             'user' => $user,
             'classes' => $classes,
@@ -131,7 +160,7 @@ class SubjectController extends Controller
                 $subject->updated_by = Auth::user()->id;
                 $subject->updated_at = now();
                 $subject->save();
-    
+
                 return response()->json([
                     'status' => 'success',
                     'message' => 'Subject info updated successfully!'

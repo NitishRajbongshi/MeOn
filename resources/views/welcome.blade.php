@@ -70,7 +70,7 @@
                         Exam Links
                     </span>
                 </div>
-                <div class="p-2 rounded-md shadow-sm text-sm font-bold"
+                <div class="p-2 shadow-sm text-sm font-bold"
                     style="background: linear-gradient(90deg, rgb(149, 183, 222) 0%, rgb(212, 221, 238) 100%)">
                     @if ($examLinks->count() == 0)
                         <p class="p-1">
@@ -132,8 +132,9 @@
                     </span>
                 </div>
                 @foreach ($categories as $category)
-                    <div class="text-md bg-blue-200 text-blue-600 my-3 px-3 py-2 rounded-md flex justify-between">
+                    <div class="text-md bg-blue-200 text-blue-600 my-3 px-3 py-2 flex justify-between">
                         <div class="font-bold">
+                            <i class="fa fa-circle-dot"></i>
                             {{ $category->category }}
                         </div>
                         <div>
@@ -162,7 +163,10 @@
                                         <button class="px-4 py-1 rounded bg-blue-500 text-white hover:bg-blue-600"
                                             data-id="{{ $item->id }}">
                                             {{-- <a href="{{ route('subjectList', [$item->id]) }}">Explore Notes</a> --}}
-                                            <a href="{{ url('content/subject', [$item->name, 'all-subjects']) }}">Explore Notes</a>
+                                            {{-- <a href="{{ url('content/subject', [$item->name, 'all-subjects']) }}">Explore Notes</a> --}}
+                                            <a href="{{ url('content/subject', [$item->name, 'language', 'all-languages']) }}">
+                                                Explore Notes
+                                            </a>
                                         </button>
                                     </div>
                                 </div>

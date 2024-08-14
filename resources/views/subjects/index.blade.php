@@ -89,7 +89,7 @@
                         <ul>
                             @foreach ($classes as $item)
                                 <li>
-                                    <a href="{{ route('subjectList', [$item->id]) }}" class="text-sm text-blue-500">
+                                    <a href="{{ url('content/subject', [$item->name, 'language', 'all-languages']) }}" class="text-sm text-blue-500">
                                         <i class="fa fa-circle-dot mr-1 text-red-600" aria-hidden="true"></i>
                                         {{ $item->name }}
                                     </a>

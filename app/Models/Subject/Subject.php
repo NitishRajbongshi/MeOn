@@ -17,6 +17,7 @@ class Subject extends Model
         'standard_id',
         'name',
         'description',
+        'master_language_id',
         'created_by',
         'updated_by'
     ];

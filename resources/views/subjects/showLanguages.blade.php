@@ -4,8 +4,8 @@
     @include('layouts.navbar')
     <div class="min-h-[60%] md:min-h-[80%] flex justify-center items-center">
         <div class="w-auto h-auto ">
-            <div class="text-center mb-4">
-                <p class="text-2xl font-bold text-blue-600">Choose Language</p>
+            <div class="text-center mb-3">
+                <p class="text-2xl font-bold text-blue-600">Choose Preferable Language</p>
             </div>
             <div class="flex flex-wrap items-center justify-center  md:justify-between">
                 <div class="m-2 w-48 text-center py-20 bg-blue-500 text-white hover:shadow-md hover:shadow-blue-300">

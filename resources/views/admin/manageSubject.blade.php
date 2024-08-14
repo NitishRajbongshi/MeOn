@@ -66,8 +66,8 @@
                                 </div>
                                 <div class="w-full md:w-2/3">
                                     <select name="class" id="class"
-                                        class="border border-blue-300 rounded-sm outline-none p-1 text-sm">
-                                        <option value="">Choose class</option>
+                                        class="border w-full border-blue-300 rounded-sm outline-none p-1 text-sm md:w-1/2">
+                                        <option value="">Choose Class</option>
                                         @foreach ($classes as $class)
                                             <option value="{{ $class->id }}">
                                                 {{ $class->name }}
@@ -76,6 +76,30 @@
                                     </select>
 
                                     @error('class')
+                                        <p class="text-xs text-red-500">
+                                            <i class="fa fa-warning mr-1 my-1"></i>
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="md:flex my-2">
+                                <div class="w-full md:w-1/3">
+                                    <label class="text-sm" for="language">Language:<span
+                                            class="text-xs text-red-500">*</span></label>
+                                </div>
+                                <div class="w-full md:w-2/3">
+                                    <select name="language" id="language"
+                                        class="border w-full border-blue-300 rounded-sm outline-none p-1 text-sm md:w-1/2">
+                                        <option value="">Choose Language</option>
+                                        @foreach ($languages as $language)
+                                            <option value="{{ $language->id }}">
+                                                {{ $language->language }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+
+                                    @error('language')
                                         <p class="text-xs text-red-500">
                                             <i class="fa fa-warning mr-1 my-1"></i>
                                             {{ $message }}
@@ -123,6 +147,7 @@
                                             <th scope="col" class="px-6 py-1">Subject Name</th>
                                             <th scope="col" class="px-6 py-1">Subject Description</th>
                                             <th scope="col" class="px-6 py-1">Subject For</th>
+                                            <th scope="col" class="px-6 py-1">Language</th>
                                             <th scope="col" class="px-6 py-1">Edit</th>
                                             <th scope="col" class="px-6 py-1">Delete</th>
                                         </tr>
@@ -142,6 +167,9 @@
                                                 </td>
                                                 <td class="whitespace-nowrap px-6 py-1">
                                                     {{ $item->class_name }}
+                                                </td>
+                                                <td class="whitespace-nowrap px-6 py-1">
+                                                    {{ $item->language }}
                                                 </td>
                                                 <td class="whitespace-nowrap px-6 py-1">
                                                     <button class="openModal" data-id="{{ $item->id }}">

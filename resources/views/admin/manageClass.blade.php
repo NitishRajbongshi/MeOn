@@ -66,7 +66,7 @@
                                 <div class="w-full md:w-2/3">
                                     <select name="category" id="category"
                                         class="border w-full border-blue-300 rounded-sm outline-none p-1 text-sm md:w-1/2">
-                                        <option value="">Choose one</option>
+                                        <option value="">Choose One</option>
                                         @foreach ($categories as $category)
                                             <option value="{{ $category->id }}">
                                                 {{ $category->category }}
@@ -80,6 +80,50 @@
                                             {{ $message }}
                                         </p>
                                     @enderror
+                                </div>
+                            </div>
+                            <div class="md:flex my-2">
+                                <div class="w-full md:w-1/3">
+                                    <label class="text-sm" for="price_status">Select Price Status:<span
+                                            class="text-xs text-red-500">*</span></label>
+                                </div>
+                                <div class="w-full md:w-2/3">
+                                    <select name="price_status" id="price_status"
+                                        class="border w-full border-blue-300 rounded-sm outline-none p-1 text-sm md:w-1/2">
+                                        <option value="">Choose One</option>
+                                        @foreach ($priceStatues as $priceStatue)
+                                            <option value="{{ $priceStatue->id }}">
+                                                {{ $priceStatue->status }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+
+                                    @error('price_status')
+                                        <p class="text-xs text-red-500">
+                                            <i class="fa fa-warning mr-1 my-1"></i>
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="md:flex my-2 price_tag" style="display: none;">
+                                <div class="w-full md:w-1/3">
+                                    <label class="text-sm" for="actual_price">Actual Price (Rs.): <span
+                                            class="text-xs text-red-500"></span></label>
+                                </div>
+                                <div class="w-full md:w-2/3">
+                                    <input type="number" id="actual_price" name="actual_price" placeholder="0.00"
+                                        class="w-full border border-blue-300 rounded-sm outline-none p-1 text-sm md:w-1/2">
+                                </div>
+                            </div>
+                            <div class="md:flex my-2 price_tag" style="display: none;">
+                                <div class="w-full md:w-1/3">
+                                    <label class="text-sm" for="offer_price">Offer Price (Rs.): <span
+                                            class="text-xs text-red-500"></span></label>
+                                </div>
+                                <div class="w-full md:w-2/3">
+                                    <input type="number" id="offer_price" name="offer_price" placeholder="0.00"
+                                        class="w-full border border-blue-300 rounded-sm outline-none p-1 text-sm md:w-1/2">
                                 </div>
                             </div>
                             <div class="flex justify-end">
@@ -114,11 +158,14 @@
                                 <table class="min-w-full text-left text-sm font-light">
                                     <thead class="border-b font-medium dark:border-neutral-500">
                                         <tr>
-                                            <th scope="col" class="px-6 py-1">#</th>
+                                            <th scope="col" class="px-6 py-1 text-center">#</th>
                                             <th scope="col" class="px-6 py-1">Name</th>
                                             <th scope="col" class="px-6 py-1">Description</th>
-                                            <th scope="col" class="px-6 py-1">Edit</th>
-                                            <th scope="col" class="px-6 py-1">Delete</th>
+                                            <th scope="col" class="px-6 py-1 text-center">Pricing</th>
+                                            <th scope="col" class="px-6 py-1 text-center">Actual Price (Rs)</th>
+                                            <th scope="col" class="px-6 py-1 text-center">Offer Price (Rs)</th>
+                                            <th scope="col" class="px-6 py-1 text-center">Edit</th>
+                                            <th scope="col" class="px-6 py-1 text-center">Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -127,19 +174,33 @@
                                         @endphp
                                         @foreach ($classes as $item)
                                             <tr class="border-b dark:border-neutral-500">
-                                                <td class="whitespace-nowrap px-6 py-1 font-medium">{{ $i }}</td>
+                                                <td class="whitespace-nowrap px-6 py-1 font-medium text-center">{{ $i }}
+                                                </td>
                                                 <td class="whitespace-nowrap px-6 py-1">
                                                     {{ $item->name }}
                                                 </td>
                                                 <td class="whitespace-nowrap px-6 py-1">
                                                     {{ $item->description }}
                                                 </td>
-                                                <td class="whitespace-nowrap px-6 py-1">
+                                                <td class="whitespace-nowrap px-6 py-1 text-center">
+                                                    @if ($item->master_price_status_id == '1')
+                                                        Free
+                                                    @else
+                                                        Paid
+                                                    @endif
+                                                </td>
+                                                <td class="whitespace-nowrap px-6 py-1 text-center">
+                                                    {{ $item->actual_price }}
+                                                </td>
+                                                <td class="whitespace-nowrap px-6 py-1 text-center">
+                                                    {{ $item->offer_price }}
+                                                </td>
+                                                <td class="whitespace-nowrap px-6 py-1 text-center">
                                                     <button class="openModal" data-id="{{ $item->id }}">
                                                         <i class="fa fa-pen text-xs"></i>
                                                     </button>
                                                 </td>
-                                                <td class="whitespace-nowrap px-6 py-1">
+                                                <td class="whitespace-nowrap px-6 py-1 text-center">
                                                     <i class="fa fa-trash text-xs"></i>
                                                 </td>
                                             </tr>
@@ -169,6 +230,14 @@
     @push('scripts')
         <script>
             $(document).ready(function() {
+                $('#price_status').on('change', function() {
+                    const priceStatus = $(this).val();
+                    $('.price_tag').hide();
+                    if (priceStatus === '2') {
+                        $('.price_tag').show();
+                    }
+                })
+
                 $('.openModal').on('click', function() {
                     const id = $(this).data('id');
 

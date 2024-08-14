@@ -159,12 +159,20 @@
                                             {{ $item->description }}</p>
                                     </div>
                                     <div class="flex items-center justify-end mt-2 mr-2 ">
-                                        <p class="text-sm text-blue-500 mx-1">Free</p>
+                                        @if ($item->master_price_status_id == '1')
+                                            <p class="text-sm text-blue-500 mx-1">Free</p>
+                                        @else
+                                            <p class="text-sm text-blue-500 mx-1">
+                                                <span class="font-bold text-md text-gray-400" style="text-decoration: line-through">Rs. {{$item->actual_price}}</span>
+                                                <span class="font-bold text-md text-red-600">Rs. {{$item->offer_price}}</span>
+                                            </p>
+                                        @endif
                                         <button class="px-4 py-1 rounded bg-blue-500 text-white hover:bg-blue-600"
                                             data-id="{{ $item->id }}">
                                             {{-- <a href="{{ route('subjectList', [$item->id]) }}">Explore Notes</a> --}}
                                             {{-- <a href="{{ url('content/subject', [$item->name, 'all-subjects']) }}">Explore Notes</a> --}}
-                                            <a href="{{ url('content/subject', [$item->name, 'language', 'all-languages']) }}">
+                                            <a
+                                                href="{{ url('content/subject', [$item->name, 'language', 'all-languages']) }}">
                                                 Explore Notes
                                             </a>
                                         </button>

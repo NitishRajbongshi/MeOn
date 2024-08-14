@@ -14,7 +14,7 @@ class WelcomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $classes = Standard::all(['id', 'name', 'description']);
+        $classes = Standard::all(['id', 'name', 'description', 'master_price_status_id', 'actual_price', 'offer_price']);
         $categories = MasterClassCategory::with('standards')->get();
 
         // Exam link

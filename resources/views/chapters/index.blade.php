@@ -14,7 +14,7 @@
                 <li>
                     <span class="mx-2 text-neutral-500 dark:text-neutral-400">/</span>
                 </li>
-                <li class="text-neutral-500 dark:text-neutral-400">Notes List</li>
+                <li class="text-neutral-500 dark:text-neutral-400">Chapter List</li>
             </ol>
         </div>
 
@@ -25,52 +25,52 @@
                     <div class="border-b my-3 font-bold">
                         <h1 class="text-xl">
                             <i class="fa fa-list mr-1 text-sm"></i>
-                            Notes List
+                            Chapter List
                         </h1>
                     </div>
                     <div class="font-bold border border-blue-300 p-2 bg-blue-200 text-blue-700">
                         Showing available chapters for
-                        <span class="text-blue-800">Name</span>
+                        <span class="text-blue-800">{{ $subject->name }}</span>
                         <span class="text-red-500 font-bold p-1">
-                            Class Name
+                            ({{ $class->name }})
                         </span>
                     </div>
                     <div class="text-justify my-2">
                         <p>All related solutions and notes are listed here related to <span
-                                class="font-bold">Name</span>. You can easily get the notes by selecting a
+                                class="font-bold">{{ $class->name }}</span>. You can easily get the notes by selecting a
                             specific topic or chapter from the list provided below.</p>
                     </div>
                     <div>
-                        <a href="#" class="text-sm text-blue-500 underline">
-                            Click here to explore other chapters available for Name
+                        <a href="{{ url('/content/subject', $class->id) }}" class="text-sm text-blue-500 underline">
+                            Click here to explore other chapters available for {{ $class->name }}
                         </a>
                     </div>
                     <div>
                         <p class="underline text-lg text-blue-500">List of chapters:</p>
                         <div class="flex justify-between items-center flex-wrap">
-                            @foreach ($notes as $note)
+                            @foreach ($chapters as $chapter)
                                 <div class="w-full my-1 md:w-[49.5%] p-4 border border-blue-100 bg-white hover:shadow-md">
                                     <div class="flex justify-between font-bold pb-2">
                                         <div class="text-md">
                                             <i class="fa fa-circle-dot mr-1 text-blue-700"></i>
-                                            {{ $note->name }}
+                                            {{ $chapter->name }}
                                         </div>
-                                        {{-- <div>
+                                        <div>
                                             <p class="text-gray-500 text-sm">{{ $subject->name }}</p>
-                                        </div> --}}
+                                        </div>
                                     </div>
                                     <div class="min-h-[5rem]">
                                         <p class="text-gray-400 max-h-[4rem] text-xs"
                                             style="overflow: hidden; text-overflow: ellipsis;">
-                                            {{ $note->description }}
+                                            {{ $chapter->description }}
                                         </p>
                                     </div>
                                     <div class="flex justify-between items-end flex-wrap mt-3">
                                         <p class="text-xs text-blue-500">Free</p>
-                                        <a href="{{ url('/notes/view', $note->name) }}">
-                                            <button data-id={{ $note->id }}
+                                        <a href="{{ url('/notes/show', [$chapter->name, 'all-notes']) }}">
+                                            <button data-id={{ $chapter->id }}
                                                 class="subject_btn bg-blue-500 text-white rounded py-1 px-2 hover:bg-blue-600">
-                                                View Notes
+                                                Explore Notes
                                             </button>
                                         </a>
                                     </div>
@@ -94,7 +94,8 @@
                         <ul>
                             @foreach ($classes as $item)
                                 <li>
-                                    <a href="{{ url('content/subject', [$item->name, 'language', 'all-languages']) }}" class="text-sm text-blue-500">
+                                    <a href="{{ url('content/subject', [$item->name, 'language', 'all-languages']) }}"
+                                        class="text-sm text-blue-500">
                                         <i class="fa fa-circle-dot mr-1 text-red-600" aria-hidden="true"></i>
                                         {{ $item->name }}
                                     </a>
@@ -107,4 +108,60 @@
         </div>
     </main>
     @include('layouts.footer')
+
+    <script>
+        // Function to generate HTML content for each object in the array
+        function generateContent(note) {
+            return `
+                <div class="md:ms-3 my-2 text-xs border-s-2 ps-2 border-dotted border-blue-800">
+                    <p class="font-bold">${note.name}</p>
+                    <p>${note.description}</p>
+                    <button class="viewPdfFile border text-xs border-blue-200 bg-blue-100 text-blue-800 font-bold px-1 mt-2 rounded-sm" id="noteBtn${note.id}" data-id="${note.id}">
+                        <a href="/notes/viewNotes/${note.id}" class="">View Note</a>
+                    </button>
+                </div>
+            `;
+        }
+
+        // not usefull now
+        $(document).ready(function() {
+            $(".noteViewBtn").on('click', function() {
+                const chapterID = $(this).data('id');
+
+                // Get CSRF token from the meta tag
+                var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+                // Get all the available notes
+                $.ajax({
+                    url: '/notes/getNotes/' + chapterID,
+                    type: 'GET',
+                    dataType: 'json',
+                    headers: {
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    success: function(response) {
+                        console.log(response);
+                        $("#" + chapterID).empty();
+                        if (response.status == 'success') {
+                            if (response.result.length > 0) {
+                                $.each(response.result, function(index, note) {
+                                    var contentToInsert = generateContent(note);
+                                    // Insert the content into the specified div
+                                    $("#" + chapterID).append(contentToInsert);
+                                });
+                            } else {
+                                alert("No note available for this chapter right now!");
+                            }
+                        } else {
+                            alert(`Failed! ${response.message}`);
+                        }
+                    },
+                    error: function(e) {
+                        console.error('AJAX error:', e);
+                        alert("Server Error!");
+                    }
+                });
+            })
+        });
+    </script>
 @endsection

@@ -17,6 +17,9 @@ class Standard extends Model
         'name',
         'description',
         'master_class_category_id',
+        'master_price_status_id',
+        'actual_price',
+        'offer_price',
         'created_by',
         'updated_by'
     ];

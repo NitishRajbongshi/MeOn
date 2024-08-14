@@ -165,7 +165,7 @@ class NoteController extends Controller
         $classes = Standard::all();
         $chapters = Subject::find($subject->id)->chapters;
         return view(
-            'notes.index',
+            'chapters.index',
             [
                 'user' => $user,
                 'class' => $class,
@@ -183,7 +183,7 @@ class NoteController extends Controller
         // dd($notes);
         $classes = Standard::all();
         return view(
-            'notes.list',
+            'notes.index',
             [
                 'user' => $user,
                 'notes' => $notes,

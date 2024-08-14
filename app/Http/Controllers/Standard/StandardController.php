@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Standard\Standard;
 use App\Http\Controllers\Controller;
 use App\Models\Master\MasterClassCategory;
+use App\Models\Master\MasterPriceStatus;
 use Illuminate\Support\Facades\Auth;
 
 class StandardController extends Controller
@@ -15,10 +16,12 @@ class StandardController extends Controller
         $user = Auth::user();
         $classes = Standard::paginate(5);
         $categories = MasterClassCategory::all();
+        $priceStatues = MasterPriceStatus::all();
         return view('admin.manageClass', [
             'user' => $user,
             'classes' => $classes,
-            'categories' => $categories
+            'categories' => $categories,
+            'priceStatues' => $priceStatues
         ]);
     }
 
@@ -27,13 +30,17 @@ class StandardController extends Controller
         $validator = $request->validate([
             'name' => 'required|max:100',
             'description' => 'nullable',
-            'category' => 'required'
+            'category' => 'required',
+            'price_status' => 'required'
         ]);
 
         $data = [
             'name' => $request->name,
             'description' => $request->description,
             'master_class_category_id' => $request->category,
+            'master_price_status_id' => $request->price_status,
+            'actual_price' => $request->actual_price ? $request->actual_price : '0.00',
+            'offer_price' => $request->offer_price ? $request->offer_price : '0.00',
             'created_by' => Auth::user()->id,
             'updated_by' => Auth::user()->id,
         ];

@@ -16,17 +16,19 @@ class SubjectController extends Controller
     {
         $user = Auth::user();
         $standards = Standard::all(['id', 'name']);
-        // $subjects = Subject::paginate(5);
+        $languages = MasterLanguage::all(['id', 'language']);
 
         $subjects = DB::table('subjects')
-            ->join('standards', 'subjects.standard_id', '=', 'standards.id')
-            ->select('subjects.*', 'standards.name as class_name')
+            ->leftJoin('standards', 'subjects.standard_id', '=', 'standards.id')
+            ->leftJoin('master_languages', 'subjects.master_language_id', '=', 'master_languages.id')
+            ->select('subjects.*', 'standards.name as class_name', 'master_languages.language as language')
             ->paginate(5);
 
         return view('admin.manageSubject', [
             'user' => $user,
             'classes' => $standards,
-            'subjects' => $subjects
+            'subjects' => $subjects,
+            'languages' => $languages
         ]);
     }
 
@@ -36,12 +38,14 @@ class SubjectController extends Controller
             'class' => 'required',
             'name' => 'required|max:100',
             'description' => 'nullable',
+            'language' => 'required'
         ]);
 
         $data = [
             'standard_id' => $request->class,
             'name' => $request->name,
             'description' => $request->description,
+            'master_language_id' => $request->language,
             'created_by' => Auth::user()->id,
             'updated_by' => Auth::user()->id,
         ];
@@ -91,8 +95,8 @@ class SubjectController extends Controller
         $user = Auth::user();
         $classes = Standard::all();
         $currentClass = Standard::find($id);
-        $subjects = $currentClass->subjects()->select('id', 'name', 'description')->where('master_language_id', '0')->get();
-        $subjectCount = $currentClass->subjects()->where('master_language_id', '0')->count();
+        $subjects = $currentClass->subjects()->select('id', 'name', 'description')->where('master_language_id', '1')->get();
+        $subjectCount = $currentClass->subjects()->where('master_language_id', '1')->count();
         return view('subjects.index', [
             'user' => $user,
             'classes' => $classes,
@@ -108,8 +112,8 @@ class SubjectController extends Controller
         $user = Auth::user();
         $classes = Standard::all();
         $currentClass = Standard::find($id);
-        $subjects = $currentClass->subjects()->select('id', 'name', 'description')->where('master_language_id', '1')->get();
-        $subjectCount = $currentClass->subjects()->where('master_language_id', '1')->count();
+        $subjects = $currentClass->subjects()->select('id', 'name', 'description')->where('master_language_id', '2')->get();
+        $subjectCount = $currentClass->subjects()->where('master_language_id', '2')->count();
         return view('subjects.index', [
             'user' => $user,
             'classes' => $classes,

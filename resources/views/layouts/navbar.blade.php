@@ -3,7 +3,7 @@
         <div>
             {{-- <img class="w-16 cursor-pointer" src="https://cdn-icons-png.flaticon.com/512/5968/5968204.png" alt="..."> --}}
             <a href="/" class="flex justify-center items-center py-1">
-                <img src="{{ asset('images/main_logo.png') }}" alt="logo" width="60rem;">
+                <img src="{{ asset('images/main_logo.png') }}" alt="logo" width="60rem;" class="hidden md:block">
                 <span class="text-xl py-3 font-bold text-blue-800">EDORB</span>
             </a>
             {{-- <p class="text-xl py-3 font-bold">EDORB</p> --}}

@@ -27,7 +27,7 @@ class NoteController extends Controller
             ->leftJoin('subjects', 'notes.subject_id', '=', 'subjects.id')
             ->leftJoin('chapters', 'notes.chapter_id', '=', 'chapters.id')
             ->select('notes.*', 'standards.name as class_name', 'subjects.name as subject_name', 'chapters.name as chapter_name')
-            ->paginate(5);
+            ->paginate(10);
 
         return view('admin.manageNotes', [
             'user' => $user,

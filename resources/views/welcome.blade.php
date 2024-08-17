@@ -163,8 +163,8 @@
                                             <p class="text-sm text-blue-500 mx-1">Free</p>
                                         @else
                                             <p class="text-sm text-blue-500 mx-1">
-                                                <span class="font-bold text-md text-gray-400" style="text-decoration: line-through">Rs. {{$item->actual_price}}</span>
-                                                <span class="font-bold text-md text-red-600">Rs. {{$item->offer_price}}</span>
+                                                <span class="font-bold text-md text-gray-400" style="text-decoration: line-through"><i class="fa-solid fa-indian-rupee-sign"></i>{{$item->actual_price}}</span>
+                                                <span class="font-bold text-md text-red-600"><i class="fa-solid fa-indian-rupee-sign"></i>{{$item->offer_price}}</span>
                                             </p>
                                         @endif
                                         <button class="px-4 py-1 rounded bg-blue-500 text-white hover:bg-blue-600"

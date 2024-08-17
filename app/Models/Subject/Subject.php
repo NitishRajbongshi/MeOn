@@ -18,6 +18,9 @@ class Subject extends Model
         'name',
         'description',
         'master_language_id',
+        'master_price_status_id',
+        'actual_price',
+        'offer_price',
         'created_by',
         'updated_by'
     ];

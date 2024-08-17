@@ -30,14 +30,16 @@ class WelcomeController extends Controller
         ]);
     }
 
-    public function about() {
+    public function about()
+    {
         $user = Auth::user();
         return view('site.about', [
             'user' => $user
         ]);
     }
 
-    public function contact() {
+    public function contact()
+    {
         $user = Auth::user();
         return view('site.contact', [
             'user' => $user

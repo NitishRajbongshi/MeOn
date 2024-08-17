@@ -26,9 +26,10 @@
                         <form action="{{ route('manageChapter') }}" method="post" autocomplete="off">
                             @csrf
                             <fieldset class="my-2">
-                                <legend class="border-2 border-blue-900 rounded-sm text-sm px-1 mb-2 font-bold text-blue-900">
-                                        <i class="fa fa-plus mr-1"></i>
-                                        Add Chapter Details
+                                <legend
+                                    class="border-2 border-blue-900 rounded-sm text-sm px-1 mb-2 font-bold text-blue-900">
+                                    <i class="fa fa-plus mr-1"></i>
+                                    Add Chapter Details
                                 </legend>
                                 <div class="md:flex">
                                     <div class="w-full md:w-1/3">
@@ -80,8 +81,9 @@
                                     </div>
                                     <div class="w-full md:w-2/3">
                                         <div class="w-full md:w-1/2">
-                                            <input type="number" id="chapter_no" name="chapter_no" placeholder="1" min="1"
-                                            class="w-full border border-blue-300 rounded-sm outline-none p-1 text-sm">
+                                            <input type="number" id="chapter_no" name="chapter_no" placeholder="1"
+                                                min="1"
+                                                class="w-full border border-blue-300 rounded-sm outline-none p-1 text-sm">
                                         </div>
 
                                         @error('chapter_no')
@@ -119,7 +121,50 @@
                                             placeholder="Write any description if needed..."></textarea>
                                     </div>
                                 </div>
+                                <div class="md:flex my-2">
+                                    <div class="w-full md:w-1/3">
+                                        <label class="text-sm" for="price_status">Select Price Status:<span
+                                                class="text-xs text-red-500">*</span></label>
+                                    </div>
+                                    <div class="w-full md:w-2/3">
+                                        <select name="price_status" id="price_status"
+                                            class="border w-full border-blue-300 rounded-sm outline-none p-1 text-sm md:w-1/2">
+                                            <option value="">Choose One</option>
+                                            @foreach ($priceStatues as $priceStatue)
+                                                <option value="{{ $priceStatue->id }}">
+                                                    {{ $priceStatue->status }}
+                                                </option>
+                                            @endforeach
+                                        </select>
 
+                                        @error('price_status')
+                                            <p class="text-xs text-red-500">
+                                                <i class="fa fa-warning mr-1 my-1"></i>
+                                                {{ $message }}
+                                            </p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="md:flex my-2 price_tag" style="display: none;">
+                                    <div class="w-full md:w-1/3">
+                                        <label class="text-sm" for="actual_price">Actual Price (Rs.): <span
+                                                class="text-xs text-red-500"></span></label>
+                                    </div>
+                                    <div class="w-full md:w-2/3">
+                                        <input type="number" id="actual_price" name="actual_price" placeholder="0.00"
+                                            class="w-full border border-blue-300 rounded-sm outline-none p-1 text-sm md:w-1/2">
+                                    </div>
+                                </div>
+                                <div class="md:flex my-2 price_tag" style="display: none;">
+                                    <div class="w-full md:w-1/3">
+                                        <label class="text-sm" for="offer_price">Offer Price (Rs.): <span
+                                                class="text-xs text-red-500"></span></label>
+                                    </div>
+                                    <div class="w-full md:w-2/3">
+                                        <input type="number" id="offer_price" name="offer_price" placeholder="0.00"
+                                            class="w-full border border-blue-300 rounded-sm outline-none p-1 text-sm md:w-1/2">
+                                    </div>
+                                </div>
                                 <div class="flex justify-end">
                                     <button
                                         class="border border-blue-300 text-blue-950 bg-blue-200 px-2 py-1 rounded-sm text-sm font-bold"
@@ -139,7 +184,8 @@
                         <h1 class="font-bold text-red-500 underline text-md mb-1">Instruction</h1>
                         <p class="text-sm text-gray-600 text-justify">
                             <i class="fa fa-circle-dot text-xs"></i>
-                            Please choose the class & subject from the drop-down list carefully. Once submitted, it cannot be edited.
+                            Please choose the class & subject from the drop-down list carefully. Once submitted, it cannot
+                            be edited.
                         </p>
                     </div>
                 </div>
@@ -165,8 +211,11 @@
                                             <th scope="col" class="px-6 py-1">Chapter</th>
                                             <th scope="col" class="px-6 py-1">Name</th>
                                             <th scope="col" class="px-6 py-1">Description</th>
-                                            <th scope="col" class="px-6 py-1">Edit</th>
-                                            <th scope="col" class="px-6 py-1">Delete</th>
+                                            <th scope="col" class="px-6 py-1 text-center">Pricing</th>
+                                            <th scope="col" class="px-6 py-1 text-center">Actual Price (Rs)</th>
+                                            <th scope="col" class="px-6 py-1 text-center">Offer Price (Rs)</th>
+                                            <th scope="col" class="px-6 py-1 text-center">Edit</th>
+                                            <th scope="col" class="px-6 py-1 text-center">Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -175,7 +224,8 @@
                                         @endphp
                                         @foreach ($chapters as $item)
                                             <tr class="border-b dark:border-neutral-500">
-                                                <td class="whitespace-nowrap px-6 py-1 font-medium text-center">{{ $i }}</td>
+                                                <td class="whitespace-nowrap px-6 py-1 font-medium text-center">
+                                                    {{ $i }}</td>
                                                 <td class="whitespace-nowrap px-6 py-1">
                                                     {{ $item->class_name }}
                                                 </td>
@@ -190,6 +240,19 @@
                                                 </td>
                                                 <td class="whitespace-nowrap px-6 py-1">
                                                     {{ $item->description }}
+                                                </td>
+                                                <td class="whitespace-nowrap px-6 py-1 text-center">
+                                                    @if ($item->master_price_status_id == '1')
+                                                        Free
+                                                    @else
+                                                        Paid
+                                                    @endif
+                                                </td>
+                                                <td class="whitespace-nowrap px-6 py-1 text-center">
+                                                    {{ $item->actual_price }}
+                                                </td>
+                                                <td class="whitespace-nowrap px-6 py-1 text-center">
+                                                    {{ $item->offer_price }}
                                                 </td>
                                                 <td class="whitespace-nowrap px-6 py-1 text-center">
                                                     <button class="openModal" data-id="{{ $item->id }}">
@@ -223,6 +286,14 @@
     @include('layouts.footer')
     <script>
         $(document).ready(function() {
+            $('#price_status').on('change', function() {
+                const priceStatus = $(this).val();
+                $('.price_tag').hide();
+                if (priceStatus === '2') {
+                    $('.price_tag').show();
+                }
+            })
+
             // prevent getting negative number
             $('.openModal').on('click', function() {
                 const id = $(this).data('id');

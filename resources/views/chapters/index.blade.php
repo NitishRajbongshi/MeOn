@@ -66,7 +66,14 @@
                                         </p>
                                     </div>
                                     <div class="flex justify-between items-end flex-wrap mt-3">
-                                        <p class="text-xs text-blue-500">Free</p>
+                                        @if ($chapter->master_price_status_id == '1')
+                                            <p class="text-sm text-blue-500 mx-1">Free</p>
+                                        @else
+                                            <p class="text-sm text-blue-500 mx-1">
+                                                <span class="font-bold text-md text-gray-400" style="text-decoration: line-through"><i class="fa-solid fa-indian-rupee-sign"></i>{{$chapter->actual_price}}</span>
+                                                <span class="font-bold text-md text-red-600"><i class="fa-solid fa-indian-rupee-sign"></i>{{$chapter->offer_price}}</span>
+                                            </p>
+                                        @endif
                                         <a href="{{ url('/notes/show', [$chapter->name, 'all-notes']) }}">
                                             <button data-id={{ $chapter->id }}
                                                 class="subject_btn bg-blue-500 text-white rounded py-1 px-2 hover:bg-blue-600">

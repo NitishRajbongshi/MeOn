@@ -14,7 +14,7 @@ class StandardController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $classes = Standard::paginate(5);
+        $classes = Standard::paginate(10);
         $categories = MasterClassCategory::all();
         $priceStatues = MasterPriceStatus::all();
         return view('admin.manageClass', [

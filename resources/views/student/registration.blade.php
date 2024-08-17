@@ -5,7 +5,7 @@
     <div class="flex justify-center items-center min-h-full md:px-2"
         style="background-color: #A9C9FF; background-image: linear-gradient(180deg, #dbe7fa 0%, #feeefa 100%);">
         <div class="container mx-auto bg-white shadow-md rounded md:my-2">
-            <div class="logo-section text-center bg-blue-500 py-8 text-white">
+            <div class="logo-section text-center bg-blue-400 py-8 text-white">
                 {{-- <img src="{{ asset('icons/login.png') }}" alt="logo" width="50rem" height="50rem"> --}}
                 <h1 class="text-lg  uppercase font-bold underline">Student Registration</h1>
                 <p class="text-md">Please fill the form carefully.</p>
@@ -21,7 +21,6 @@
                         <li>You will receive a confirmation message once your profile is approved and you can login
                             successfully.</li>
                         <li>Your email will be considered the user ID.</li>
-                        <li>A password will be sent to you once your profile is approved.</li>
                     </ul>
                 </div>
             </div>

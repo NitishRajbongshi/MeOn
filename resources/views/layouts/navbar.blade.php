@@ -17,13 +17,19 @@
                     </a>
                 </li>
                 <li>
-                    <a class="hover:text-gray-500 text-blue-800" href="{{ route('home') }}">
+                    <a class="hover:text-gray-500 text-blue-800 font-bold" href="{{ route('home') }}">
                         <i class="fa fa-home"></i>
                         Home
                     </a>
                 </li>
                 <li>
-                    <a class="hover:text-gray-500 text-red-800" href="#">
+                    <a class="hover:text-gray-500 text-red-500 font-bold" href="{{ route('subscription') }}">
+                        <i class="fa fa-dollar mx-1"></i>
+                        Pricing
+                    </a>
+                </li>
+                <li>
+                    <a class="hover:text-gray-500 text-red-800 font-bold" href="#">
                         <i class="fa fa-comments"></i>
                         Blog
                     </a>
@@ -46,15 +52,15 @@
                         <div x-show="dropdownOpen" class="absolute right-0 mt-2 w-48 bg-white shadow-xl z-20">
                             <ul>
                                 @if ($user->admin)
-                                <li>
-                                    <a href="{{ route('adminDashboard') }}"
-                                        class="block px-4 py-2 text-sm capitalize text-gray-800 hover:bg-indigo-500 hover:text-white">
-                                        Dashboard
-                                    </a>
-                                </li>
+                                    <li>
+                                        <a href="{{ route('adminDashboard') }}"
+                                            class="block px-4 py-2 text-sm capitalize text-gray-800 hover:bg-indigo-500 hover:text-white">
+                                            Dashboard
+                                        </a>
+                                    </li>
                                 @endif
                                 <li>
-                                    <a href="#"
+                                    <a href="{{ route('user.profile', ['user' => Auth()->user()->name]) }}"
                                         class="block px-4 py-2 text-sm capitalize text-gray-800 hover:bg-indigo-500 hover:text-white">
                                         Profile
                                     </a>
@@ -81,12 +87,13 @@
                 </div>
             @endauth
             @guest
-                <button class="text-xs">
-                    <a href="{{ route('login') }}">
+                <a href="{{ route('login') }}">
+                    <button
+                        class="text-sm border bg-blue-500 text-white px-4 py-1 hover:bg-blue-600 hover:shadow-md hover:shadow-blue-100">
                         <i class="fa fa-sign-in"></i>
                         Login
-                    </a>
-                </button>
+                    </button>
+                </a>
 
             @endguest
             <ion-icon onclick="onToggleMenu(this)" name="menu" class="text-3xl cursor-pointer md:hidden"

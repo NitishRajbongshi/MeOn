@@ -7,8 +7,9 @@ use App\Models\Subject\Subject;
 use App\Models\Standard\Standard;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\Master\MasterLanguage;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Master\MasterLanguage;
+use App\Models\Master\MasterPriceStatus;
 
 class SubjectController extends Controller
 {
@@ -17,18 +18,19 @@ class SubjectController extends Controller
         $user = Auth::user();
         $standards = Standard::all(['id', 'name']);
         $languages = MasterLanguage::all(['id', 'language']);
-
+        $priceStatues = MasterPriceStatus::all();
         $subjects = DB::table('subjects')
             ->leftJoin('standards', 'subjects.standard_id', '=', 'standards.id')
             ->leftJoin('master_languages', 'subjects.master_language_id', '=', 'master_languages.id')
             ->select('subjects.*', 'standards.name as class_name', 'master_languages.language as language')
-            ->paginate(5);
+            ->paginate(10);
 
         return view('admin.manageSubject', [
             'user' => $user,
             'classes' => $standards,
             'subjects' => $subjects,
-            'languages' => $languages
+            'languages' => $languages,
+            'priceStatues' => $priceStatues
         ]);
     }
 
@@ -38,7 +40,8 @@ class SubjectController extends Controller
             'class' => 'required',
             'name' => 'required|max:100',
             'description' => 'nullable',
-            'language' => 'required'
+            'language' => 'required',
+            'price_status' => 'required'
         ]);
 
         $data = [
@@ -46,6 +49,9 @@ class SubjectController extends Controller
             'name' => $request->name,
             'description' => $request->description,
             'master_language_id' => $request->language,
+            'master_price_status_id' => $request->price_status,
+            'actual_price' => $request->actual_price ? $request->actual_price : '0.00',
+            'offer_price' => $request->offer_price ? $request->offer_price : '0.00',
             'created_by' => Auth::user()->id,
             'updated_by' => Auth::user()->id,
         ];
@@ -95,7 +101,7 @@ class SubjectController extends Controller
         $user = Auth::user();
         $classes = Standard::all();
         $currentClass = Standard::find($id);
-        $subjects = $currentClass->subjects()->select('id', 'name', 'description')->where('master_language_id', '1')->get();
+        $subjects = $currentClass->subjects()->select('id', 'name', 'description', 'master_price_status_id', 'actual_price', 'offer_price')->where('master_language_id', '1')->get();
         $subjectCount = $currentClass->subjects()->where('master_language_id', '1')->count();
         return view('subjects.index', [
             'user' => $user,
@@ -112,7 +118,7 @@ class SubjectController extends Controller
         $user = Auth::user();
         $classes = Standard::all();
         $currentClass = Standard::find($id);
-        $subjects = $currentClass->subjects()->select('id', 'name', 'description')->where('master_language_id', '2')->get();
+        $subjects = $currentClass->subjects()->select('id', 'name', 'description', 'master_price_status_id', 'actual_price', 'offer_price')->where('master_language_id', '2')->get();
         $subjectCount = $currentClass->subjects()->where('master_language_id', '2')->count();
         return view('subjects.index', [
             'user' => $user,

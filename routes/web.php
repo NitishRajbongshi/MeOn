@@ -14,10 +14,12 @@ use App\Http\Controllers\Note\NoteController;
 use App\Http\Controllers\Standard\CategoryController;
 use App\Http\Controllers\Student\StudentController;
 use App\Http\Controllers\Student\StudentRegistrationController;
+use App\Http\Controllers\Subscription\SubscriptionController;
+use App\Http\Controllers\User\UserProfileController;
 use App\Http\Controllers\WelcomeController;
-use App\Models\Student\Student;
 
 Route::get('/', [WelcomeController::class, 'index'])->name('home');
+Route::get('/subscription/plans/all-plans', [SubscriptionController::class, 'index'])->name('subscription');
 
 // dashboard
 Route::get('/getSubjectList/{id}', [DashboardController::class, 'getSubjectList']);
@@ -83,6 +85,19 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/student/all', [StudentController::class, 'index'])->name('student.list');
     Route::get('/student/new', [StudentController::class, 'newStudentList'])->name('student.list.new');
     Route::post('/student/active', [StudentController::class, 'activeStudent'])->name('student.active');
+});
+
+// user
+Route::middleware(['auth'])->prefix('user')->group(function () {
+    Route::get('/profile/{user:name}', [UserProfileController::class, 'index'])->name('user.profile');
+    Route::get('/plan/my-plans', [UserProfileController::class, 'plans'])->name('user.plans');
+});
+
+// subscription
+Route::middleware(['auth'])->prefix('user/subscription/plan')->group(function () {
+    Route::get('/basic', [SubscriptionController::class, 'basic'])->name('plan.basic')->middleware('signed');
+    Route::get('/standard', [SubscriptionController::class, 'standard'])->name('plan.standard')->middleware('signed');
+    Route::get('/premium', [SubscriptionController::class, 'premium'])->name('plan.premium')->middleware('signed');
 });
 
 // subject

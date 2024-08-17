@@ -8,6 +8,7 @@ use App\Models\Standard\Standard;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Master\MasterPriceStatus;
 
 class ChapterController extends Controller
 {
@@ -19,12 +20,13 @@ class ChapterController extends Controller
             ->join('standards', 'chapters.standard_id', '=', 'standards.id')
             ->join('subjects', 'chapters.subject_id', '=', 'subjects.id')
             ->select('chapters.*', 'standards.name as class_name', 'subjects.name as subject_name')
-            ->paginate(5);
-
+            ->paginate(10);
+        $priceStatues = MasterPriceStatus::all();
         return view('admin.manageChapter', [
             'user' => $user,
             'classes' => $standards,
-            'chapters' => $chapters
+            'chapters' => $chapters,
+            'priceStatues' => $priceStatues
         ]);
     }
 
@@ -36,6 +38,7 @@ class ChapterController extends Controller
             'chapter_no' => 'required|numeric|min:0',
             'name' => 'required|max:100',
             'description' => 'nullable',
+            'price_status' => 'required'
         ]);
 
         $data = [
@@ -43,6 +46,9 @@ class ChapterController extends Controller
             'description' => $request->description,
             'standard_id' => $request->class,
             'subject_id' => $request->subject,
+            'master_price_status_id' => $request->price_status,
+            'actual_price' => $request->actual_price ? $request->actual_price : '0.00',
+            'offer_price' => $request->offer_price ? $request->offer_price : '0.00',
             'created_by' => Auth::user()->id,
             'updated_by' => Auth::user()->id,
             'chapter_no' => $request->chapter_no,

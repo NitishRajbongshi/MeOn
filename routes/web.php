@@ -48,6 +48,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::post('/manageClass', [StandardController::class, 'store']);
     Route::get('/manageClass/{id}', [StandardController::class, 'show']);
     Route::post('/manageClass/edit/{id}', [StandardController::class, 'update']);
+    Route::delete('/manageClass/delete', [StandardController::class, 'destroy'])->name('class.delete');
     Route::get('/getSubject/{id}', [StandardController::class, 'getSubject']);
 
     // manage subject

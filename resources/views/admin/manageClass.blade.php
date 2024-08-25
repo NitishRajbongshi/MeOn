@@ -174,7 +174,8 @@
                                         @endphp
                                         @foreach ($classes as $item)
                                             <tr class="border-b dark:border-neutral-500">
-                                                <td class="whitespace-nowrap px-6 py-1 font-medium text-center">{{ $i }}
+                                                <td class="whitespace-nowrap px-6 py-1 font-medium text-center">
+                                                    {{ $i }}
                                                 </td>
                                                 <td class="whitespace-nowrap px-6 py-1">
                                                     {{ $item->name }}
@@ -200,8 +201,17 @@
                                                         <i class="fa fa-pen text-xs"></i>
                                                     </button>
                                                 </td>
-                                                <td class="whitespace-nowrap px-6 py-1 text-center">
-                                                    <i class="fa fa-trash text-xs"></i>
+                                                <td class="whitespace-nowrap text-center px-6 py-1">
+                                                    <form action="{{ route('class.delete') }}" method="post">
+                                                        @method('delete')
+                                                        @csrf
+                                                        <input type="hidden" name="classID"
+                                                            value="{{ $item->id }}">
+                                                        <button type="submit"
+                                                            onclick="return confirm('Are you sure you want to delete this class and related resources?')">
+                                                            <i class="fa fa-trash text-xs"></i>
+                                                        </button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                             @php

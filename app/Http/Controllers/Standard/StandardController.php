@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Standard;
 
+use Exception;
 use Illuminate\Http\Request;
 use App\Models\Standard\Standard;
 use App\Http\Controllers\Controller;
-use App\Models\Master\MasterClassCategory;
-use App\Models\Master\MasterPriceStatus;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Master\MasterPriceStatus;
+use App\Models\Master\MasterClassCategory;
 
 class StandardController extends Controller
 {
@@ -105,6 +106,21 @@ class StandardController extends Controller
                 'status' => 'failed',
                 'message' => 'Selected class not found!'
             ]);
+        }
+    }
+
+    public function destroy(Request $request)
+    {
+        try {
+            if ($request->_token && $request->classID) {
+                $examLink = Standard::findOrFail($request->classID);
+                $examLink->delete();
+                return redirect()->back()->with('success', 'Class and related resources deleted seccessfully');
+            } else {
+                return redirect()->back()->with('failed', 'Unauthorized access!');
+            }
+        } catch (Exception $e) {
+            dd($e);
         }
     }
 

@@ -1,8 +1,8 @@
 <div class="relative min-h-screen md:flex">
     <!-- mobile menu bar -->
-    <div class="bg-gray-500 text-gray-200 flex justify-end md:hidden">
+    <div class="bg-gray-200 text-gray-800 flex justify-end md:hidden">
         {{-- <a href="#" class="block p-4 text-white font-bold">Dashboard</a> --}}
-        <button class="mobile-menu-button p-2 focus:outline-none focus:bg-gray-700">
+        <button class="mobile-menu-button p-2 focus:outline-none focus:bg-gray-300">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
@@ -10,7 +10,7 @@
     </div>
 
     <div
-        class="sidebar bg-slate-400 text-slate-100 w-64 p-2 space-y-2 md:relative md:translate-x-0 absolute inset-y-0 left-0 transform transition duration-200 ease-in-out -translate-x-full">
+        class="sidebar bg-slate-300 text-slate-800 font-bold w-64 p-2 space-y-2 md:relative md:translate-x-0 absolute inset-y-0 left-0 transform transition duration-200 ease-in-out -translate-x-full">
         {{-- <a href="#" class="text-white flex items-center space-x-2 p-3">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">
@@ -20,12 +20,18 @@
             <span class="text-2xl font-extrabold">Cloudvine</span>
         </a> --}}
         <nav>
-            <a class="block py-2.5 px-4 rounded transition duration-200 hover:text-white hover:bg-slate-600">My Profile</a>
-            <a class="block py-2.5 px-4 rounded transition duration-200 hover:text-white hover:bg-slate-600">My Plans</a>
+            <a href="#" class="block py-2.5 px-4 rounded transition duration-200 hover:text-white hover:bg-slate-600">
+                <i class="fa fa-user mr-2"></i>
+                My Profile
+            </a>
+            <a href="#" class="block py-2.5 px-4 rounded transition duration-200 hover:text-white hover:bg-slate-600">
+                <i class="fa-solid fa-shield mr-2"></i>
+                My Plans
+            </a>
         </nav>
     </div>
 
-    <main class="bg-gray-200 flex-1">
+    <main class="flex-1">
         {{ $slot }}
     </main>
 </div>

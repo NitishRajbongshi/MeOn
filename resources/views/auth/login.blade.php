@@ -49,7 +49,7 @@
                         </a>
                     </div>
                     <div class="text-blue-500 text-sm text-center py-3">
-                        <a href="{{ route('student.registration') }}">New Student Registration</a>
+                        <a href="{{ route('student.registration') }}">New User? <span>Register here</span></a>
                     </div>
                 </form>
             </div>

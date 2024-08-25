@@ -11,10 +11,13 @@ use App\Models\Subject\Subject;
 use App\Models\Note\NoteResource;
 use App\Models\Standard\Standard;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Master\MasterPriceStatus;
+use App\Models\Subscription\UserPlanMapping;
 
 class NoteController extends Controller
 {
@@ -28,16 +31,19 @@ class NoteController extends Controller
             ->leftJoin('chapters', 'notes.chapter_id', '=', 'chapters.id')
             ->select('notes.*', 'standards.name as class_name', 'subjects.name as subject_name', 'chapters.name as chapter_name')
             ->paginate(10);
+        $priceStatues = MasterPriceStatus::all();
 
         return view('admin.manageNotes', [
             'user' => $user,
             'classes' => $classes,
-            'notes' => $notes
+            'notes' => $notes,
+            'priceStatues' => $priceStatues
         ]);
     }
 
     public function store(Request $request)
     {
+        // dd($request);
         $user = Auth::user();
         $validate = $request->validate([
             'class' => 'required',
@@ -45,6 +51,7 @@ class NoteController extends Controller
             'chapter' => 'required',
             'name' => 'required',
             'description' => 'nullable',
+            'price_status' => 'required',
             'img_file.*' => 'required|image|mimes:jpg, jpeg|max:5120',
         ]);
 
@@ -56,6 +63,7 @@ class NoteController extends Controller
                 'chapter_id' => $request->input('chapter'),
                 'name' => $request->input('name'),
                 'description' => $request->input('description'),
+                'master_price_status_id' => $request->input('price_status'),
                 'created_by' => $user->id,
                 'updated_by' => $user->id,
             ];
@@ -178,16 +186,94 @@ class NoteController extends Controller
 
     public function getAvailableNote(Request $request, Chapter $chapter)
     {
+        $chapterID = $chapter->id;
         $user = Auth::user();
-        $notes = Chapter::find($chapter->id)->notes;
-        // dd($notes);
+        $access = 0;
+        $message = '';
+        // $notes = Chapter::find($chapter->id)->notes;
+        $freeNotes = Note::where('chapter_id', $chapterID)
+            ->where('master_price_status_id', '1')
+            ->get();
+        $paidNotes = Note::where('chapter_id', $chapterID)
+            ->where('master_price_status_id', '2')
+            ->get();
+        // Algo to find access status
+        if ($chapter->master_price_status_id == 1) { // check if chapter is free
+            $access = 1;
+        } else { // chapter has a paid version
+            if (auth()->check()) {
+                if ($user->admin == 1) { // check for admin
+                    $access = 1;
+                } else { // not an admin
+                    // check user exist
+                    $userExist = UserPlanMapping::where('user_id', $user->id)->exists();
+                    if ($userExist) {
+                        // check user belongs to the class
+                        $existOnClass = UserPlanMapping::where('user_id', $user->id)
+                            ->where('standard_id', $chapter->standard_id)
+                            ->get()->first();
+                        if ($existOnClass) {
+                            // check user belongs to premium plan
+                            if ($existOnClass->master_subscription_plan_id == 3) { // premium plan
+                                // check for active status
+                                if ($existOnClass->approve == 1) {
+                                    $access = 1;
+                                } else {
+                                    $message = 'Your request for the subscription has received. It will be activated very soon. If problem persist please contact on 7002390253';
+                                }
+                            } else { // no premium plan
+                                // check user belongs to the subject
+                                $existOnsubject = UserPlanMapping::where('user_id', $user->id)
+                                    ->where('standard_id', $chapter->standard_id)
+                                    ->where('subject_id', $chapter->subject_id)
+                                    ->get()->first();
+                                if ($existOnsubject) {
+                                    // check user belongs to standard plan
+                                    if ($existOnsubject->master_subscription_plan_id == 2) { // standard plan
+                                        // check for active status
+                                        if ($existOnsubject->approve == 1) {
+                                            $access = 1;
+                                        } else {
+                                            $message = 'Your request for the subscription has received. It will be activated very soon. If problem persist please contact on 7002390253';
+                                        }
+                                    } else {
+                                        // check user belongs to the subject
+                                        $existOnChapter = UserPlanMapping::where('user_id', $user->id)
+                                            ->where('standard_id', $chapter->standard_id)
+                                            ->where('subject_id', $chapter->subject_id)
+                                            ->where('chapter_id', $chapter->id)
+                                            ->get()->first();
+                                        // dd($existOnChapter);
+                                        if ($existOnChapter) {
+                                            // check user belongs to standard plan
+                                            if ($existOnChapter->master_subscription_plan_id == 1) { // basic plan
+                                                // check for active status
+                                                if ($existOnChapter->approve == 1) {
+                                                    $access = 1;
+                                                } else {
+                                                    $message = 'Your request for the subscription has received. It will be activated very soon. If problem persist please contact on 7002390253';
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // dd($access);
         $classes = Standard::all();
         return view(
             'notes.index',
             [
                 'user' => $user,
-                'notes' => $notes,
-                'classes' => $classes
+                'freeNotes' => $freeNotes,
+                'paidNotes' => $paidNotes,
+                'classes' => $classes,
+                'access' => $access
             ]
         );
     }
@@ -219,13 +305,50 @@ class NoteController extends Controller
         return response()->json($response);
     }
 
-    public function showPdfFile(Request $request, Note $note)
+    public function showFreeNotes(Request $request, Note $note)
     {
         $user = Auth::user();
-        return view('notes.show', [
-            'user' => $user,
-            'note' => $note,
-        ]);
+        if($note->master_price_status_id == 1) {
+            return view('notes.show', [
+                'user' => $user,
+                'note' => $note,
+            ]);
+        } else {
+            $url = URL::temporarySignedRoute('view.note.preview', now()->addMinutes(60), ['note' => $note->name]);
+            return redirect($url);
+        }
+    }
+
+    public function previewNotes(Request $request, Note $note)
+    {
+        $user = Auth::user();
+        $resources = NoteResource::where('note_id', $note->id)->skip(0)->take(2)->get();
+        // dd($resources);
+        if($note->master_price_status_id == 2) {
+            return view('notes.preview', [
+                'user' => $user,
+                'note' => $note,
+                'resources' => $resources
+            ]);
+        } else {
+            $url = URL::temporarySignedRoute('view.note.free', now()->addMinutes(60), ['note' => $note->name]);
+            return redirect($url);
+        }
+    }
+
+    public function showPremiumNotes(Request $request, Note $note)
+    {
+        $user = Auth::user();
+        $requestEmail = $request->email;
+        if($user->email == $requestEmail) {
+            return view('notes.premium', [
+                'user' => $user,
+                'note' => $note,
+            ]);
+        } else {
+            $url = URL::temporarySignedRoute('view.note.preview', now()->addMinutes(60), ['note' => $note->name]);
+            return redirect($url);
+        }
     }
 
     public function uploadAdditionalNotes(Request $request, Note $note)

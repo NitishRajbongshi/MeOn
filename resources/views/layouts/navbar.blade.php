@@ -61,13 +61,15 @@
                                 @endif
                                 <li>
                                     <a href="{{ route('user.profile', ['user' => Auth()->user()->name]) }}"
-                                        class="block px-4 py-2 text-sm capitalize text-gray-800 hover:bg-indigo-500 hover:text-white">
+                                        class="block px-4 py-2 text-sm capitalize text-gray-800 hover:font-bold hover:bg-indigo-500 hover:text-white">
+                                        <i class="fa fa-user mr-2 text-md" aria-hidden="true"></i>
                                         Profile
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#"
-                                        class="block px-4 py-2 text-sm capitalize text-gray-800 hover:bg-indigo-500 hover:text-white">
+                                        class="block px-4 py-2 text-sm capitalize text-gray-800 hover:font-bold hover:bg-indigo-500 hover:text-white">
+                                        <i class="fa fa-gear mr-1 text-md" aria-hidden="true"></i>
                                         Settings
                                     </a>
                                 </li>
@@ -75,7 +77,7 @@
                                     <form action="{{ route('logout') }}" method="POST">
                                         @csrf
                                         <button type="submit"
-                                            class="flex items-center px-4 py-2 text-sm capitalize text-red-900 focus:outline-none">
+                                            class="flex items-center px-4 py-2 text-sm capitalize text-red-900 hover:font-bold focus:outline-none">
                                             <i class="fa fa-sign-out mr-2 text-md" aria-hidden="true"></i>
                                             <span class="text-md">Logout</span>
                                         </button>

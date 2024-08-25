@@ -125,6 +125,30 @@
                             </div>
                             <div class="md:flex my-2">
                                 <div class="w-full md:w-1/3">
+                                    <label class="text-sm" for="price_status">Select Price Status:<span
+                                            class="text-xs text-red-500">*</span></label>
+                                </div>
+                                <div class="w-full md:w-2/3">
+                                    <select name="price_status" id="price_status"
+                                        class="border w-full border-blue-300 rounded-sm outline-none p-1 text-sm md:w-1/2">
+                                        <option value="">Choose One</option>
+                                        @foreach ($priceStatues as $priceStatue)
+                                            <option value="{{ $priceStatue->id }}">
+                                                {{ $priceStatue->status }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+
+                                    @error('price_status')
+                                        <p class="text-xs text-red-500">
+                                            <i class="fa fa-warning mr-1 my-1"></i>
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="md:flex my-2">
+                                <div class="w-full md:w-1/3">
                                     <label class="text-sm" for="img_file">Upload Images:<span
                                             class="text-xs text-red-500">*</span></label>
                                 </div>
@@ -185,6 +209,7 @@
                                             <th scope="col" class="px-6 py-1">Chapter</th>
                                             <th scope="col" class="px-6 py-1">Title</th>
                                             <th scope="col" class="px-6 py-1">Description</th>
+                                            <th scope="col" class="px-6 py-1 text-center">Pricing</th>
                                             <th scope="col" class="px-6 py-1">View</th>
                                             <th scope="col" class="px-6 py-1">Upload</th>
                                             <th scope="col" class="px-6 py-1">Delete</th>
@@ -212,6 +237,13 @@
                                                 </td>
                                                 <td class="whitespace-nowrap px-6 py-1">
                                                     {{ $item->description }}
+                                                </td>
+                                                <td class="whitespace-nowrap px-6 py-1 text-center">
+                                                    @if ($item->master_price_status_id == '1')
+                                                        Free
+                                                    @else
+                                                        Paid
+                                                    @endif
                                                 </td>
                                                 <td class="whitespace-nowrap px-6 py-1 text-center">
                                                     <a href="{{ url('/notes/view', $item->name) }}">

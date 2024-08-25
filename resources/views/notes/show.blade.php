@@ -36,7 +36,13 @@
                             <i class="fa fa-caret-right" aria-hidden="true"></i>
                             {{ $note['name'] }}
                         </h1>
-                        <p class="my-2 text-md text-slate-600">{{ $note['description'] }}</p>
+                        <div>
+                            <a href="{{ route('subscription') }}">
+                                <img class="w-full h-auto border shadow-sm noteImages"
+                                    src="{{ asset('images/payment/ad_1.gif') }}" alt="gif">
+                            </a>
+                        </div>
+                        <p class="my-2 text-md text-justify text-slate-600">{{ $note['description'] }}</p>
                     </div>
 
                     @if ($note->resources->count() > 0)
@@ -46,7 +52,7 @@
                             @endphp
                             @foreach ($note->resources as $resource)
                                 <div class="col-md-12 mb-3">
-                                    <p class="text-blue-500">Page {{ $i }}</p>
+                                    <p class="font-bold text-sm text-right text-blue-500">Page {{ $i }}</p>
                                     <img class="w-full h-auto border shadow-sm noteImages"
                                         src="{{ asset('storage/' . $resource->img_path) }}" alt="Image">
                                 </div>

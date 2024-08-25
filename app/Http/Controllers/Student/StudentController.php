@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Student\Student;
 use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
@@ -14,10 +15,22 @@ class StudentController extends Controller
         $user = Auth::user();
         $students = User::where('admin', '0')->paginate(10);
         return view(
-            'admin.student.allStudents',
+            'admin.students.all',
             [
                 'user' => $user,
                 'students' => $students,
+            ]
+        );
+    }
+
+    public function view(Request $request, Student $student)
+    {
+        $user = Auth::user();
+        return view(
+            'admin.students.view',
+            [
+                'user' => $user,
+                'student' => $student,
             ]
         );
     }
@@ -27,7 +40,7 @@ class StudentController extends Controller
         $user = Auth::user();
         $students = User::where('admin', '0')->where('active', '0')->paginate(10);
         return view(
-            'admin.student.newStudents',
+            'admin.students.new',
             [
                 'user' => $user,
                 'students' => $students,

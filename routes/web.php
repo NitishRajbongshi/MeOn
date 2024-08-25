@@ -14,6 +14,7 @@ use App\Http\Controllers\Note\NoteController;
 use App\Http\Controllers\Standard\CategoryController;
 use App\Http\Controllers\Student\StudentController;
 use App\Http\Controllers\Student\StudentRegistrationController;
+use App\Http\Controllers\Subscription\ManageSubscription;
 use App\Http\Controllers\Subscription\SubscriptionController;
 use App\Http\Controllers\User\UserProfileController;
 use App\Http\Controllers\WelcomeController;
@@ -83,8 +84,15 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 
     // manage student
     Route::get('/student/all', [StudentController::class, 'index'])->name('student.list');
+    Route::get('/student/view/{student:email}', [StudentController::class, 'view'])->name('student.view');
+    Route::post('/student/delete', [StudentController::class, 'destroy'])->name('student.destroy');
     Route::get('/student/new', [StudentController::class, 'newStudentList'])->name('student.list.new');
     Route::post('/student/active', [StudentController::class, 'activeStudent'])->name('student.active');
+
+    // manage subscription
+    Route::get('/subscription/new', [ManageSubscription::class, 'newSubscription'])->name('subscription.new');
+    Route::post('/subscription/approve', [ManageSubscription::class, 'approveSubscription']);
+    Route::get('/subscription/approve/{payment:reference_id}', [ManageSubscription::class, 'showSubscription'])->name('subscription.aprrove');
 });
 
 // user
@@ -98,10 +106,25 @@ Route::middleware(['auth'])->prefix('user/subscription/plan')->group(function ()
     Route::get('/basic', [SubscriptionController::class, 'basic'])->name('plan.basic')->middleware('signed');
     Route::get('/standard', [SubscriptionController::class, 'standard'])->name('plan.standard')->middleware('signed');
     Route::get('/premium', [SubscriptionController::class, 'premium'])->name('plan.premium')->middleware('signed');
+
+    Route::get('/subject/list/{id}', [SubscriptionController::class, 'subjectList']);
+    Route::get('/chapter/list/{id}', [SubscriptionController::class, 'chapterList']);
+    Route::get('/class/price/{id}', [SubscriptionController::class, 'classPrice']);
+    Route::get('/subject/price/{id}', [SubscriptionController::class, 'subjectPrice']);
+    Route::get('/chapter/price/{id}', [SubscriptionController::class, 'chapterPrice']);
+
+    Route::post('/purchase/basic', [SubscriptionController::class, 'purchasePlan'])->name('plan.purchase')->middleware('signed');
+    Route::post('/purchase/basic/submit', [SubscriptionController::class, 'storePlanDetails'])->name('plan.store')->middleware('signed');
+
+    Route::post('/purchase/standard', [SubscriptionController::class, 'purchaseStandardPlan'])->name('plan.purchase.standard')->middleware('signed');
+    Route::post('/purchase/standard/submit', [SubscriptionController::class, 'storeStandardPlan'])->name('plan.store.standard')->middleware('signed');
+
+    Route::post('/purchase/premium', [SubscriptionController::class, 'purchasePremiumPlan'])->name('plan.purchase.premium')->middleware('signed');
+    Route::post('/purchase/premium/submit', [SubscriptionController::class, 'storePremiumPlan'])->name('plan.store.premium')->middleware('signed');
 });
 
 // subject
-Route::prefix('content')->group(function() {
+Route::prefix('content')->group(function () {
     Route::get('/subject/{standard:name}/language/all-languages', [SubjectController::class, 'getLanguageList'])->name('language');
     Route::get('/subject/{standard:name}/language/assamese/all-subjects', [SubjectController::class, 'getAssameseSubjectList'])->name('subjectList.assamese');
     Route::get('/subject/{standard:name}/language/english/all-subjects', [SubjectController::class, 'getEnglishSubjectList'])->name('subjectList.english');
@@ -111,5 +134,7 @@ Route::prefix('content')->group(function() {
 Route::prefix('notes')->group(function () {
     Route::get('/chapter/{subject:name}/all-chapters', [NoteController::class, 'getChapterList']);
     Route::get('/show/{chapter:name}/all-notes', [NoteController::class, 'getAvailableNote']);
-    Route::get('/view/{note:name}', [NoteController::class, 'showPdfFile']);
+    Route::get('/view/{note:name}/free', [NoteController::class, 'showFreeNotes'])->name('view.note.free')->middleware('signed');
+    Route::get('/view/{note:name}/preview', [NoteController::class, 'previewNotes'])->name('view.note.preview')->middleware('signed');
+    Route::get('/view/{note:name}/premium', [NoteController::class, 'showPremiumNotes'])->name('view.note.premium')->middleware(['auth', 'signed']);
 });

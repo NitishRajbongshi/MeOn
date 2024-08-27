@@ -59,8 +59,15 @@
 </head>
 
 <body class="font-[Nunito Sans] bg-gradient-to-t bg-gray-100 h-screen">
+    @include('layouts.preloader')
     @yield('content')
     @stack('scripts')
+    <script>
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            preloader.style.display = 'none';
+        });
+    </script>
 </body>
 
 </html>

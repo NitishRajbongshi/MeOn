@@ -4,13 +4,15 @@ namespace App\Http\Controllers\Student;
 
 use Exception;
 use App\Models\User;
+use App\Mail\SupportEmail;
 use Illuminate\Http\Request;
 use App\Models\Student\Student;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Student\StudentClass;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Student\MasterStudentCourse;
 use App\Models\Student\MasterStudentSubject;
-use Illuminate\Support\Facades\DB;
 
 class StudentRegistrationController extends Controller
 {
@@ -75,11 +77,15 @@ class StudentRegistrationController extends Controller
                     if ($student) {
                         $student->subjects()->attach($request->subjects);
                         $student->courses()->attach($request->courses);
-
+                        // send mail on activation
+                        $to = $student->email;
+                        $sub = 'Welcome to EDORB';
+                        $mgs = 'You have successfully registered on EDORB. A confirmation email will be sent to your registered email address once your profile is activated. Your UserID: ' . $request->email . ' and Password: ' . $request->input('password') . '. For any query, contact us at support@edorb.in.';
+                        Mail::to($to)->send(new SupportEmail($student, $mgs, $sub));
                         DB::commit();
                         return view('layouts.status', [
                             'status' => 'Success',
-                            'description' => 'Your registration is commpleted. Wait for admin confirmation message!'
+                            'description' => 'Registration is completed. A confirmation email will be sent once your profile is activated.'
                         ]);
                     } else {
                         DB::rollBack();

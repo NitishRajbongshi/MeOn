@@ -23,7 +23,7 @@
                 <div class="w-full md:w-[33%] text-center">
                     <i class="my-2 fa fa-envelope text-3xl text-slate-700 rounded-full p-6 bg-slate-100"></i>
                     <h3 class="text-2xl">Email</h3>
-                    <p class="text-lg">ankurjyoti902@gmail.com</p>
+                    <p class="text-lg">support@edorb.in</p>
                 </div>
             </div>
         </div>

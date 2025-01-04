@@ -127,12 +127,17 @@ class SubjectController extends Controller
         $currentClass = Standard::find($id);
         $subjects = $currentClass->subjects()->select('id', 'name', 'description', 'master_price_status_id', 'actual_price', 'offer_price')->where('master_language_id', '2')->get();
         $subjectCount = $currentClass->subjects()->where('master_language_id', '2')->count();
+        $metaData = DB::table('meta_subject_details')->where('standard_id', $id)
+            ->where('master_language_id', '2')
+            ->select('meta_title', 'meta_description', 'keywords')
+            ->first();
         return view('subjects.index', [
             'user' => $user,
             'classes' => $classes,
             'subjects' => $subjects,
             'currentClass' => $currentClass,
-            'subjectCount' => $subjectCount
+            'subjectCount' => $subjectCount,
+            'metaData' => $metaData
         ]);
     }
 

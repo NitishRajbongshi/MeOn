@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('title', "Welcome to Edorb")
+@section('meta_description', "Discover comprehensive Assamese and English notes for classes 5 to 10 (SEBA and NCERT) and exercise solutions for class 11 and 12 science (NCERT) in physics, chemistry, maths, and biology at edorb.in. We also offer online coaching for JEE, CEE, NEET, NEST, and more.")
+{{-- @section('meta_keywords', $page->keywords) --}}
 
 @section('content')
     <x-show-notification />
@@ -143,39 +146,65 @@
                     </div>
                     <div class="flex flex-wrap justify-between items-center">
                         @foreach ($category->standards as $item)
-                            <div class="flex w-full my-1 md:w-[49%] rounded-md min-h-[12rem] bg-white shadow-sm hover:shadow-lg"
+                            <div class="flex flex-wrap w-full my-1 md:w-[49%] rounded-md min-h-[12rem] bg-white shadow-sm hover:shadow-lg"
                                 style="background: linear-gradient(90deg, rgba(255,245,255,1) 0%, rgba(241,251,255,1) 47%, rgba(234,237,255,1) 100%);">
-                                <div class="w-1/3 flex justify-center items-center">
-                                    <img src="{{ asset('images/course.png') }}" alt="image">
-                                </div>
-                                <div class="w-2/3">
-                                    <div class="flex justify-end">
+                                {{-- <div class="w-2/6 flex justify-center items-start">
+                                    <img src="{{ asset('images/course.png') }}" alt="{{ $item->name }}" class="pt-5">
+                                </div> --}}
+                                <div class="w-full">
+                                    {{-- <div class="flex justify-end">
                                         <p class="text-xs text-white px-2 py-1 bg-red-600 rounded-tr-md">New</p>
-                                    </div>
-                                    <div class="min-h-[7rem] pr-2">
-                                        <h1 class="font-bold text-lg">{{ $item->name }}</h1>
-                                        <p class="text-sm text-gray-500 max-h-[5rem] w-full"
-                                            style="overflow: hidden; text-overflow: ellipsis;">
-                                            {{ $item->description }}</p>
-                                    </div>
-                                    <div class="flex items-center justify-end mt-2 mr-2 ">
-                                        @if ($item->master_price_status_id == '1')
-                                            <p class="text-sm text-blue-500 mx-1">Free</p>
-                                        @else
-                                            <p class="text-sm text-blue-500 mx-1">
-                                                <span class="font-bold text-md text-gray-400" style="text-decoration: line-through"><i class="fa-solid fa-indian-rupee-sign"></i>{{$item->actual_price}}</span>
-                                                <span class="font-bold text-md text-red-600"><i class="fa-solid fa-indian-rupee-sign"></i>{{$item->offer_price}}</span>
+                                    </div> --}}
+                                    <div class="min-h-[7rem] p-3 text-justify">
+                                        <div class="flex flex-wrap justify-between items-end border-b border-blue-300 pb-1">
+                                            <h1 class="font-bold text-xl">{{ $item->name }}</h1>
+                                            <p class="text-sm font-bold text-slate-500">Assamese + English</p>
+                                        </div>
+                                        <div class="py-1">
+                                            <p class="text-xs font-bold text-slate-500">NCERT</p>
+                                            <p class="font-bold text-sm"><span>Free</span> & <span>Premium</span></p>
+                                            <div class="inline-block bg-yellow-400 px-1 shadow-orange-500 rounded-sm">
+                                                @if ($item->master_price_status_id == '1')
+                                                    <p class="text-sm text-blue-500">Free</p>
+                                                @else
+                                                    <p class="text-sm text-blue-500">
+                                                        <span class="font-bold text-md text-gray-400"
+                                                            style="text-decoration: line-through"><i
+                                                                class="fa-solid fa-indian-rupee-sign"></i>{{ $item->actual_price }}</span>
+                                                        <span class="font-bold text-md text-red-600"><i
+                                                                class="fa-solid fa-indian-rupee-sign"></i>{{ $item->offer_price }}</span>
+                                                    </p>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="my-2">
+                                            <p class="text-sm text-gray-700 max-h-[6rem] min-h-[6rem] w-full"
+                                                style="overflow: hidden; text-overflow: ellipsis;">
+                                                {{ $item->description }}
                                             </p>
-                                        @endif
-                                        <button class="px-4 py-1 rounded bg-blue-500 text-white hover:bg-blue-600"
-                                            data-id="{{ $item->id }}">
-                                            {{-- <a href="{{ route('subjectList', [$item->id]) }}">Explore Notes</a> --}}
-                                            {{-- <a href="{{ url('content/subject', [$item->name, 'all-subjects']) }}">Explore Notes</a> --}}
-                                            <a
-                                                href="{{ url('content/subject', [$item->name, 'language', 'all-languages']) }}">
-                                                Explore Notes
-                                            </a>
-                                        </button>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-end justify-between gap-1 p-3 mb-3">
+                                        <div class="w-full md:w-1/2">
+                                            <button class="w-full px-4 py-2 rounded-full bg-yellow-500 text-white hover:bg-yellow-600"
+                                                data-id="{{ $item->id }}">
+                                                <a class="text-sm font-bold"
+                                                    href="/">
+                                                    Purchase Now
+                                                </a>
+                                            </button>
+                                        </div>
+                                        <div class="w-full md:w-1/2 flex justify-end">
+                                            <button class="w-full px-4 py-2 rounded-full bg-blue-500 text-white hover:bg-blue-600"
+                                                data-id="{{ $item->id }}">
+                                                {{-- <a href="{{ route('subjectList', [$item->id]) }}">Explore Notes</a> --}}
+                                                {{-- <a href="{{ url('content/subject', [$item->name, 'all-subjects']) }}">Explore Notes</a> --}}
+                                                <a class="text-sm font-bold"
+                                                    href="{{ url('content/subject', [$item->name, 'language', 'all-languages']) }}">
+                                                    View Content
+                                                </a>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

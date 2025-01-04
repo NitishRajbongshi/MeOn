@@ -72,7 +72,8 @@
                                     </div>
                                     <div class="flex justify-between items-end flex-wrap mt-3">
                                         <p class="text-sm text-green-500 mx-1">Free</p>
-                                        <a href="{{ URL::temporarySignedRoute('view.note.free', now()->addMinutes(60), ['note' => $note->name]) }}">
+                                        <a
+                                            href="{{ URL::temporarySignedRoute('view.note.free', now()->addMinutes(60), ['note' => $note->name]) }}">
                                             <button data-id={{ $note->id }}
                                                 class="subject_btn bg-green-500 text-white py-1 px-2 hover:bg-green-600">
                                                 View Notes
@@ -109,7 +110,8 @@
                                     <div class="flex justify-between items-end flex-wrap mt-3">
                                         <p class="text-sm text-red-500 mx-1">Premium</p>
                                         @if ($access == 0)
-                                            <a href="{{URL::temporarySignedRoute('view.note.preview', now()->addMinutes(60), ['note' => $note->name])}}">
+                                            <a
+                                                href="{{ URL::temporarySignedRoute('view.note.preview', now()->addMinutes(60), ['note' => $note->name]) }}">
                                                 <button data-id={{ $note->id }}
                                                     class="subject_btn bg-red-500 text-white py-1 px-2 hover:bg-red-600">
                                                     Preview Notes
@@ -117,12 +119,23 @@
                                             </a>
                                         @endif
                                         @if ($access == 1)
-                                            <a href="{{ URL::temporarySignedRoute('view.note.premium', now()->addMinutes(60), ['note' => $note->name, 'user' => Auth::user()->name, 'email' => Auth::user()->email]) }}">
-                                                <button data-id={{ $note->id }}
-                                                    class="subject_btn bg-red-500 text-white py-1 px-2 hover:bg-red-600">
-                                                    View Notes
-                                                </button>
-                                            </a>
+                                            @if (auth()->check())
+                                                <a
+                                                    href="{{ URL::temporarySignedRoute('view.note.premium', now()->addMinutes(60), ['note' => $note->name, 'user' => Auth::user()->name, 'email' => Auth::user()->email]) }}">
+                                                    <button data-id={{ $note->id }}
+                                                        class="subject_btn bg-red-500 text-white py-1 px-2 hover:bg-red-600">
+                                                        View Notes
+                                                    </button>
+                                                </a>
+                                            @else
+                                                <a
+                                                    href="{{ URL::temporarySignedRoute('view.note.preview', now()->addMinutes(60), ['note' => $note->name]) }}">
+                                                    <button data-id={{ $note->id }}
+                                                        class="subject_btn bg-red-500 text-white py-1 px-2 hover:bg-red-600">
+                                                        Preview Notes
+                                                    </button>
+                                                </a>
+                                            @endif
                                         @endif
                                     </div>
                                 </div>

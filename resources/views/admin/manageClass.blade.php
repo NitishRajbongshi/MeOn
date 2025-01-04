@@ -159,11 +159,11 @@
                                     <thead class="border-b font-medium dark:border-neutral-500">
                                         <tr>
                                             <th scope="col" class="px-6 py-1 text-center">#</th>
-                                            <th scope="col" class="px-6 py-1">Name</th>
-                                            <th scope="col" class="px-6 py-1">Description</th>
+                                            <th scope="col" class="px-6 py-1">Class Name</th>
+                                            <th scope="col" class="px-6 py-1"> Class Description</th>
                                             <th scope="col" class="px-6 py-1 text-center">Pricing</th>
-                                            <th scope="col" class="px-6 py-1 text-center">Actual Price (Rs)</th>
-                                            <th scope="col" class="px-6 py-1 text-center">Offer Price (Rs)</th>
+                                            <th scope="col" class="px-6 py-1 text-center">Actual Price(Rs)</th>
+                                            <th scope="col" class="px-6 py-1 text-center">Offer Price(Rs)</th>
                                             <th scope="col" class="px-6 py-1 text-center">Edit</th>
                                             <th scope="col" class="px-6 py-1 text-center">Delete</th>
                                         </tr>
@@ -218,7 +218,6 @@
                                                 $i++;
                                             @endphp
                                         @endforeach
-
                                     </tbody>
                                 </table>
                             </div>

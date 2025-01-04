@@ -19,7 +19,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Discover comprehensive Assamese and English notes for classes 5 to 10 (SEBA and NCERT) and exercise solutions for class 11 and 12 science (NCERT) in physics, chemistry, maths, and biology at edorb.in. We also offer online coaching for JEE, CEE, NEET, NEST, and more.">
+        content="@yield('meta_description', 'Discover comprehensive Assamese and English notes for classes 5 to 10 (SEBA and NCERT) and exercise solutions for class 11 and 12 science (NCERT) in physics, chemistry, maths, and biology at edorb.in. We also offer online coaching for JEE, CEE, NEET, NEST, and more.')">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {{-- meta tag for prevent back button --}}
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -53,7 +53,7 @@
     {{-- sweetalert --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.3/dist/sweetalert2.all.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.3/dist/sweetalert2.min.css" rel="stylesheet">
-    <title>Edorb</title>
+    <title>@yield('title', 'Edorb')</title>
     {{-- It will include extra links only for particular page --}}
     @stack('styles')
 </head>

@@ -240,10 +240,10 @@
                                 </button>
                                 <ul class="text-md subMenuItem hidden ms-3">
                                     <li class="my-2">
-                                        <a href="#"
+                                        <a href="{{ route('settings') }}"
                                             class="flex items-center focus:outline-none hover:text-gray-400">
                                             <i class="fa fa-genderless mr-1" aria-hidden="true"></i>
-                                            <span class="text-md">Setting</span>
+                                            <span class="text-md">Settings</span>
                                         </a>
                                     </li>
                                 </ul>

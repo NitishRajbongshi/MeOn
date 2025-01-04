@@ -1,5 +1,6 @@
 @extends('layouts.app')
-
+@section('title', $metaData->meta_title ?? 'Edorb')
+@section('meta_description', $metaData->meta_description ?? 'Discover comprehensive Assamese and English notes for classes 5 to 10 (SEBA and NCERT) and exercise solutions for class 11 and 12 science (NCERT) in physics, chemistry, maths, and biology at edorb.in. We also offer online coaching for JEE, CEE, NEET, NEST, and more.')
 @section('content')
     @include('layouts.navbar')
     <x-show-notification />

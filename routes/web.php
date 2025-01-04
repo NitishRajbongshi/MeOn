@@ -8,9 +8,12 @@ use App\Http\Controllers\Subject\SubjectController;
 use App\Http\Controllers\Standard\StandardController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ExamLink\ExamLinkController;
 use App\Http\Controllers\Marquee\MarqueeController;
 use App\Http\Controllers\Note\NoteController;
+use App\Http\Controllers\Settings\SiteSettings\MetaSettings\MetaSubjectListController;
+use App\Http\Controllers\Settings\SiteSettings\SiteSettingsController;
 use App\Http\Controllers\Standard\CategoryController;
 use App\Http\Controllers\Student\StudentController;
 use App\Http\Controllers\Student\StudentRegistrationController;
@@ -29,6 +32,9 @@ Route::get('/getSubjectList/{id}', [DashboardController::class, 'getSubjectList'
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'store']);
+    Route::get('/register', [RegisterController::class, 'index'])->name('register');
+    Route::post('/register', [RegisterController::class, 'store']);
+    Route::get('/email/verify/{token}', [RegisterController::class, 'verifyEmail'])->name('verify');
 });
 
 Route::get('/about', [WelcomeController::class, 'about'])->name('about');
@@ -94,6 +100,14 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/subscription/new', [ManageSubscription::class, 'newSubscription'])->name('subscription.new');
     Route::post('/subscription/approve', [ManageSubscription::class, 'approveSubscription']);
     Route::get('/subscription/approve/{payment:reference_id}', [ManageSubscription::class, 'showSubscription'])->name('subscription.aprrove');
+
+    // manage site Settings
+    Route::get('/site/settings', [SiteSettingsController::class, 'index'])->name('settings');
+
+    // manage subject list meta data
+    Route::get('/site/settings/manage/meta-data-for-subject-list', [MetaSubjectListController::class, 'index'])->name('meta.subject.list');
+    Route::post('/site/settings/manage/meta-data-for-subject-list', [MetaSubjectListController::class, 'store']);
+    Route::get('/site/settings/manage/meta-data-for-subject-list/get-meta-data', [MetaSubjectListController::class, 'getMetaData'])->name('get.meta.data');
 });
 
 // user

@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Student;
 
 use App\Models\User;
-use App\Mail\SupportEmail;
 use Illuminate\Http\Request;
 use App\Models\Student\Student;
 use App\Http\Controllers\Controller;
+use App\Mail\ProfileActivationEmail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
@@ -58,12 +58,13 @@ class StudentController extends Controller
                 $student = User::find($studentID);
                 if ($student) {
                     $student->active = 1;
+                    $student->email_verified_at = now();
                     $student->save();
                     // send mail on activation
                     $to = $student->email;
                     $sub = 'Profile Activation';
                     $mgs = 'Your profile is activated successfully. You can login with your valid credentials. For any query, contact us at support@edorb.in.';
-                    Mail::to($to)->send(new SupportEmail($student, $mgs, $sub));
+                    Mail::to($to)->send(new ProfileActivationEmail($student, $sub));
                     $response = [
                         'status' => 'success',
                         'message' => 'The student has been activated.',

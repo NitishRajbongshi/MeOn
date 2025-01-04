@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Student;
 
 use Exception;
 use App\Models\User;
-use App\Mail\SupportEmail;
 use Illuminate\Http\Request;
 use App\Models\Student\Student;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Mail\RegistrationSuccessEmail;
 use App\Models\Student\StudentClass;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Student\MasterStudentCourse;
@@ -80,8 +80,7 @@ class StudentRegistrationController extends Controller
                         // send mail on activation
                         $to = $student->email;
                         $sub = 'Welcome to EDORB';
-                        $mgs = 'You have successfully registered on EDORB. A confirmation email will be sent to your registered email address once your profile is activated. Your UserID: ' . $request->email . ' and Password: ' . $request->input('password') . '. For any query, contact us at support@edorb.in.';
-                        Mail::to($to)->send(new SupportEmail($student, $mgs, $sub));
+                        Mail::to($to)->send(new RegistrationSuccessEmail($student, $sub, $request->email, $request->input('password')));
                         DB::commit();
                         return view('layouts.status', [
                             'status' => 'Success',

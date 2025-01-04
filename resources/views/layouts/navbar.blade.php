@@ -24,7 +24,7 @@
                 </li>
                 <li>
                     <a class="hover:text-gray-500 text-red-500 font-bold" href="{{ route('subscription') }}">
-                        <i class="fa fa-dollar mx-1"></i>
+                        <i class="fa-solid fa-indian-rupee-sign"></i>
                         Pricing
                     </a>
                 </li>

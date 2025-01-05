@@ -17,6 +17,7 @@ class Chapter extends Model
         'standard_id',
         'subject_id',
         'name',
+        'slug',
         'description',
         'master_price_status_id',
         'actual_price',

@@ -1,9 +1,9 @@
 <div class="w-full">
     <dh-component>
-        <div class="w-64 min-h-screen z-40 absolute bg-gray-800 shadow md:h-full flex-col justify-between sm:hidden transition duration-150 ease-in-out"
+        <div class="w-64 min-h-full z-40 absolute bg-gray-800 shadow md:h-full flex-col justify-between lg:hidden transition duration-150 ease-in-out"
             id="mobile-nav">
             <button aria-label="toggle sidebar" id="openSideBar"
-                class="h-10 w-10 bg-gray-800 absolute right-0 mt-16 -mr-10 flex items-center shadow rounded-tr rounded-br justify-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 rounded focus:ring-gray-800"
+                class="h-10 w-10 bg-gray-800 absolute right-0 mt-6 -mr-10 flex items-center shadow rounded-tr rounded-br justify-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 rounded focus:ring-gray-800"
                 onclick="sidebarHandler(true)">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-adjustments" width="20"
                     height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#FFFFFF" fill="none"
@@ -31,65 +31,176 @@
                     <line x1="6" y1="6" x2="18" y2="18" />
                 </svg>
             </button>
-            <div class="px-8">
+            <div class="px-4 text-white">
                 <div class="w-full my-4 flex items-center text-lg text-white">
                     <i class="fa fa-bars mr-2" aria-hidden="true"></i>
                     <p>Dashboard</p>
                 </div>
                 <ul class="mt-4">
-                    <li class="flex w-full justify-between text-blue-900 cursor-pointer items-center mb-6">
-                        <a href="javascript:void(0)" class="flex items-center focus:outline-none hover:text-gray-400">
-                            <i class="fa fa-user mr-3 text-sm" aria-hidden="true"></i>
-                            <span class="text-sm">Profile</span>
-                        </a>
+                    <li class="menuTitle">
+                        <button
+                            class="flex text-md justify-between w-full px-1 py-2 hover:bg-gray-600 hover:rounded-md">
+                            <div><i class="fa fa-book mr-2 text-md"></i>Manage Notes</div>
+                            <div class="ms-4"><i class="fa fa-caret-left" aria-hidden="true"></i></div>
+                        </button>
+                        <ul class="text-md subMenuItem hidden ms-3">
+                            <li class="my-2">
+                                <a href="{{ route('manageClass') }}"
+                                    class="flex items-center focus:outline-none hover:text-gray-400">
+                                    <i class="fa fa-genderless mr-1" aria-hidden="true"></i>
+                                    <span class="text-md">Add Class</span>
+                                </a>
+                            </li>
+                            <li class="my-2">
+                                <a href="{{ route('manageSubject') }}"
+                                    class="flex items-center focus:outline-none hover:text-gray-400">
+                                    <i class="fa fa-genderless mr-1" aria-hidden="true"></i>
+                                    <span class="text-md">Add Subject</span>
+                                </a>
+                            </li>
+                            <li class="my-2">
+                                <a href="{{ route('manageChapter') }}"
+                                    class="flex items-center focus:outline-none hover:text-gray-400">
+                                    <i class="fa fa-genderless mr-1" aria-hidden="true"></i>
+                                    <span class="text-md">Add Chapter</span>
+                                </a>
+                            </li>
+                            <li class="my-2">
+                                <a href="{{ route('manageNote') }}"
+                                    class="flex items-center focus:outline-none hover:text-gray-400">
+                                    <i class="fa fa-genderless mr-1" aria-hidden="true"></i>
+                                    <span class="text-md">Add Notes</span>
+                                </a>
+                            </li>
+                            <li class="my-2">
+                                <a href="{{ route('classCategory') }}"
+                                    class="flex items-center focus:outline-none hover:text-gray-400">
+                                    <i class="fa fa-genderless mr-1" aria-hidden="true"></i>
+                                    <span class="text-md">Add Category</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
-                    <li class="flex w-full justify-between text-gray-300 cursor-pointer items-center mb-6">
-                        <a href="{{ route('manageClass') }}"
-                            class="flex items-center focus:outline-none hover:text-gray-400">
-                            <i class="fa fa-book mr-3 text-sm"></i>
-                            <span class="text-sm">Manage Class</span>
-                        </a>
+                </ul>
+                <ul class="mt-4">
+                    <li class="menuTitle">
+                        <button
+                            class="flex text-md justify-between w-full px-1 py-2 hover:bg-gray-600 hover:rounded-md">
+                            <div><i class="fa fa-flask mr-[0.5rem] text-md" aria-hidden="true"></i>Manage Exam
+                            </div>
+                            <div class="ms-4"><i class="fa fa-caret-left" aria-hidden="true"></i></div>
+                        </button>
+                        <ul class="text-md subMenuItem hidden ms-3">
+                            <li class="my-2">
+                                <a href="{{ route('addExamLink') }}"
+                                    class="flex items-center focus:outline-none hover:text-gray-400">
+                                    <i class="fa fa-genderless mr-1" aria-hidden="true"></i>
+                                    <span class="text-md">Add Exam Links</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
-                    <li class="flex w-full justify-between text-gray-300 cursor-pointer items-center mb-6">
-                        <a href="javascript:void(0)" class="flex items-center focus:outline-none hover:text-gray-400">
-                            <i class="fa fa-pen mr-3 text-sm"></i>
-                            <span class="text-sm">Manage Subject</span>
-                        </a>
+                </ul>
+                <ul class="mt-4">
+                    <li class="menuTitle">
+                        <button
+                            class="flex text-md justify-between w-full px-1 py-2 hover:bg-gray-600 hover:rounded-md">
+                            <div><i class="fa fa-book mr-2 text-md"></i>Manage Users</div>
+                            <div class="ms-4"><i class="fa fa-caret-left" aria-hidden="true"></i></div>
+                        </button>
+                        <ul class="text-md subMenuItem hidden ms-3">
+                            <li class="my-2">
+                                <a href="{{ route('student.list.new') }}"
+                                    class="flex items-center focus:outline-none hover:text-gray-400">
+                                    <i class="fa fa-genderless mr-1" aria-hidden="true"></i>
+                                    <span class="text-md text-red-500">New Registration</span>
+                                </a>
+                            </li>
+                            <li class="my-2">
+                                <a href="{{ route('student.list') }}"
+                                    class="flex items-center focus:outline-none hover:text-gray-400">
+                                    <i class="fa fa-genderless mr-1" aria-hidden="true"></i>
+                                    <span class="text-md">Student Database</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
-                    <li class="flex w-full justify-between text-gray-300 cursor-pointer items-center mb-6">
-                        <a href="javascript:void(0)" class="flex items-center focus:outline-none hover:text-gray-400">
-                            <i class="fa fa-sticky-note mr-3 text-sm" aria-hidden="true"></i>
-                            <span class="text-sm">Manage Notes</span>
-                        </a>
+                </ul>
+                <ul class="mt-4">
+                    <li class="menuTitle">
+                        <button
+                            class="flex text-md justify-between w-full px-1 py-2 hover:bg-gray-600 hover:rounded-md">
+                            <div><i class="fa fa-info-circle mr-[0.4rem] text-md"
+                                    aria-hidden="true"></i>Manage Info</div>
+                            <div class="ms-4"><i class="fa fa-caret-left" aria-hidden="true"></i></div>
+                        </button>
+                        <ul class="text-md subMenuItem hidden ms-3">
+                            <li class="my-2">
+                                <a href="{{ route('marquee') }}"
+                                    class="flex items-center focus:outline-none hover:text-gray-400">
+                                    <i class="fa fa-genderless mr-1" aria-hidden="true"></i>
+                                    <span class="text-md">Add Marquee</span>
+                                </a>
+                            </li>
+                            <li class="my-2">
+                                <a href="#"
+                                    class="flex items-center focus:outline-none hover:text-gray-400">
+                                    <i class="fa fa-genderless mr-1" aria-hidden="true"></i>
+                                    <span class="text-md">Add Main Banner</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
-
-                    <li class="flex w-full justify-between text-gray-300 cursor-pointer items-center mb-6">
-                        <a href="javascript:void(0)" class="flex items-center focus:outline-none hover:text-gray-400">
-                            <i class="fa fa-cog mr-3 text-sm" aria-hidden="true"></i>
-                            <span class="text-sm">Settings</span>
-                        </a>
+                </ul>
+                <ul class="mt-4">
+                    <li class="menuTitle">
+                        <button
+                            class="flex text-md justify-between w-full px-1 py-2 hover:bg-gray-600 hover:rounded-md">
+                            <div><i class="fa-solid fa-face-smile-beam mr-[0.3rem] text-md"
+                                    aria-hidden="true"></i>Subscription</div>
+                            <div class="ms-4"><i class="fa fa-caret-left" aria-hidden="true"></i></div>
+                        </button>
+                        <ul class="text-md subMenuItem hidden ms-3">
+                            <li class="my-2">
+                                <a href="{{ route('subscription.new') }}"
+                                    class="flex items-center focus:outline-none hover:text-gray-400">
+                                    <i class="fa fa-genderless mr-1" aria-hidden="true"></i>
+                                    <span class="text-md">New Request</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
-
-                    <li class="flex w-full justify-between text-red-600 cursor-pointer items-center mb-6">
-                        <form action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="flex items-center focus:outline-none hover:text-gray-400">
-                                <i class="fa fa-sign-out mr-3 text-sm" aria-hidden="true"></i>
-                                <span class="text-sm">Logout</span>
-                            </button>
-                        </form>
+                </ul>
+                <ul class="mt-4">
+                    <li class="menuTitle">
+                        <button
+                            class="flex text-md justify-between w-full px-1 py-2 hover:bg-gray-600 hover:rounded-md">
+                            <div>
+                                <i class="fa fa-sitemap mr-[0.3rem] text-md" aria-hidden="true"></i>
+                                ManageSite
+                            </div>
+                            <div class="ms-4"><i class="fa fa-caret-left" aria-hidden="true"></i></div>
+                        </button>
+                        <ul class="text-md subMenuItem hidden ms-3">
+                            <li class="my-2">
+                                <a href="{{ route('settings') }}"
+                                    class="flex items-center focus:outline-none hover:text-gray-400">
+                                    <i class="fa fa-genderless mr-1" aria-hidden="true"></i>
+                                    <span class="text-md">Settings</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div>
-
         </div>
 
         <div class="container mx-auto py-1">
             <div class="flex gap-1">
                 <!-- First Column (Side Navbar) -->
-                <div class="w-3/12 hidden md:block bg-white">
+                <div class="w-1/5 hidden lg:block bg-white">
                     <div class="px-4 text-indigo-800">
-                        <div class="w-full my-4 flex items-center text-lg p-2 hover:bg-blue-200 hover:rounded-md">
+                        <div class="w-full my-4 flex items-center text-md p-2 hover:bg-blue-200 hover:rounded-md">
                             <a href="{{ route('adminDashboard') }}">
                                 <i class="fa fa-bars mr-1" aria-hidden="true"></i>
                                 Dashboard
@@ -98,7 +209,7 @@
                         <ul class="mt-2">
                             <li class="menuTitle">
                                 <button
-                                    class="flex text-lg justify-between w-full p-2 hover:bg-blue-200 hover:rounded-md">
+                                    class="flex text-md justify-between w-full p-2 hover:bg-blue-200 hover:rounded-md">
                                     <div><i class="fa fa-book mr-2 text-md"></i>Manage Notes</div>
                                     <div class="ms-4"><i class="fa fa-caret-left" aria-hidden="true"></i></div>
                                 </button>
@@ -144,7 +255,7 @@
                         <ul class="mt-2">
                             <li class="menuTitle">
                                 <button
-                                    class="flex text-lg justify-between w-full p-2 hover:bg-blue-200 hover:rounded-md">
+                                    class="flex text-md justify-between w-full p-2 hover:bg-blue-200 hover:rounded-md">
                                     <div><i class="fa fa-flask mr-[0.5rem] text-md" aria-hidden="true"></i>Manage Exam
                                     </div>
                                     <div class="ms-4"><i class="fa fa-caret-left" aria-hidden="true"></i></div>
@@ -163,8 +274,8 @@
                         <ul class="mt-2">
                             <li class="menuTitle">
                                 <button
-                                    class="flex text-lg justify-between w-full p-2 hover:bg-blue-200 hover:rounded-md">
-                                    <div><i class="fa fa-book mr-2 text-md"></i>Manage Student</div>
+                                    class="flex text-md justify-between w-full p-2 hover:bg-blue-200 hover:rounded-md">
+                                    <div><i class="fa fa-book mr-2 text-md"></i>Manage Users</div>
                                     <div class="ms-4"><i class="fa fa-caret-left" aria-hidden="true"></i></div>
                                 </button>
                                 <ul class="text-md subMenuItem hidden ms-3">
@@ -188,7 +299,7 @@
                         <ul class="mt-2">
                             <li class="menuTitle">
                                 <button
-                                    class="flex text-lg justify-between w-full p-2 hover:bg-blue-200 hover:rounded-md">
+                                    class="flex text-md justify-between w-full p-2 hover:bg-blue-200 hover:rounded-md">
                                     <div><i class="fa fa-info-circle mr-[0.4rem] text-md"
                                             aria-hidden="true"></i>Manage Info</div>
                                     <div class="ms-4"><i class="fa fa-caret-left" aria-hidden="true"></i></div>
@@ -214,7 +325,7 @@
                         <ul class="mt-2">
                             <li class="menuTitle">
                                 <button
-                                    class="flex text-lg justify-between w-full p-2 hover:bg-blue-200 hover:rounded-md">
+                                    class="flex text-md justify-between w-full p-2 hover:bg-blue-200 hover:rounded-md">
                                     <div><i class="fa-solid fa-face-smile-beam mr-[0.3rem] text-md"
                                             aria-hidden="true"></i>Subscription</div>
                                     <div class="ms-4"><i class="fa fa-caret-left" aria-hidden="true"></i></div>
@@ -233,7 +344,7 @@
                         <ul class="mt-2">
                             <li class="menuTitle">
                                 <button
-                                    class="flex text-lg justify-between w-full p-2 hover:bg-blue-200 hover:rounded-md">
+                                    class="flex text-md justify-between w-full p-2 hover:bg-blue-200 hover:rounded-md">
                                     <div><i class="fa fa-sitemap mr-[0.3rem] text-md" aria-hidden="true"></i>Manage
                                         Site</div>
                                     <div class="ms-4"><i class="fa fa-caret-left" aria-hidden="true"></i></div>
@@ -277,7 +388,7 @@
                 </div>
 
                 <!-- Middle Column (Main Container) -->
-                <div class="w-full md:w-9/12 bg-white">
+                <div class="w-full lg:w-4/5 bg-white">
                     <!-- Main content goes here -->
                     <div class="min-h-screen mx-auto p-1 md:p-4 md:8/12">
                         <div class="w-full h-auto p-1 md:p-2 rounded bg-white">

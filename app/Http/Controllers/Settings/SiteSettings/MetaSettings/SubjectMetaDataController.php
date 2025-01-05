@@ -2,27 +2,24 @@
 
 namespace App\Http\Controllers\Settings\SiteSettings\MetaSettings;
 
-use Illuminate\Http\Request;
-use App\Models\Standard\Standard;
 use App\Http\Controllers\Controller;
+use App\Models\Meta\MetaChapterDetail;
+use App\Models\Standard\Standard;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Master\MasterLanguage;
-use App\Models\Meta\MetaSubjectDetail;
 use Illuminate\Support\Facades\Log;
 
-class MetaSubjectListController extends Controller
+class SubjectMetaDataController extends Controller
 {
     public function index()
     {
         $user = Auth::user();
         $standards = Standard::all(['id', 'name']);
-        $languages = MasterLanguage::all(['id', 'language']);
         return view(
-            'admin.settings.metaSettings.subjectList',
+            'admin.settings.metaSettings.subject',
             [
                 'user' => $user,
                 'classes' => $standards,
-                'languages' => $languages,
             ]
         );
     }
@@ -36,17 +33,14 @@ class MetaSubjectListController extends Controller
 
         try {
             $data = [
-                'standard_id' => $request->class,
-                'master_language_id' => $request->language,
+                'subject_id' => $request->subject,
                 'meta_title' => $request->title,
                 'meta_description' => $request->description,
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id,
             ];
             // check if meta data already exists
-            $metaData = MetaSubjectDetail::where('standard_id', $request->class)
-                ->where('master_language_id', $request->language)
-                ->get()->first();
+            $metaData = MetaChapterDetail::where('subject_id', $request->subject)->get()->first();
             if ($metaData) {
                 if ($metaData->update($data)) {
                     return redirect()->back()->with('success', 'Meta data updated successfully.');
@@ -54,7 +48,7 @@ class MetaSubjectListController extends Controller
                     return redirect()->back()->with('failed', 'Failed to update meta data!');
                 }
             }
-            if(MetaSubjectDetail::create($data)) {
+            if (MetaChapterDetail::create($data)) {
                 return redirect()->back()->with('success', 'New meta data added successfully.');
             } else {
                 return redirect()->back()->with('failed', 'Failed to add meta data!');
@@ -68,10 +62,8 @@ class MetaSubjectListController extends Controller
     public function getMetaData(Request $request)
     {
         try {
-            $classId = $request->class;
-            $languagesId = $request->language;
-            $metaData = MetaSubjectDetail::where('standard_id', $classId)
-                ->where('master_language_id', $languagesId)
+            $subjectId = $request->subject;
+            $metaData = MetaChapterDetail::where('subject_id', $subjectId)
                 ->select('meta_title', 'meta_description')
                 ->get()->first();
             if (!$metaData) {

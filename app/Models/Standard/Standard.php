@@ -15,6 +15,7 @@ class Standard extends Model
 
     protected $fillable = [
         'name',
+        'slug',
         'description',
         'master_class_category_id',
         'master_price_status_id',

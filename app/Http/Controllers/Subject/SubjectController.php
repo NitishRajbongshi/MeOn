@@ -47,6 +47,7 @@ class SubjectController extends Controller
         $data = [
             'standard_id' => $request->class,
             'name' => $request->name,
+            'slug' => strtolower(str_replace(' ', '-', $request->name)),
             'description' => $request->description,
             'master_language_id' => $request->language,
             'master_price_status_id' => $request->price_status,
@@ -55,7 +56,6 @@ class SubjectController extends Controller
             'created_by' => Auth::user()->id,
             'updated_by' => Auth::user()->id,
         ];
-
         if (Subject::create($data)) {
             return redirect()->back()->with('success', 'New subject added successfully!');
         } else {
@@ -86,7 +86,7 @@ class SubjectController extends Controller
     public function getLanguageList(Request $request, Standard $standard)
     {
         $user = Auth::user();
-        $className = $standard->name;
+        $className = $standard->slug;
         // $languages = MasterLanguage::all(['id', 'language']);
 
         return view('subjects.showLanguages', [
@@ -101,7 +101,7 @@ class SubjectController extends Controller
         $user = Auth::user();
         $classes = Standard::all();
         $currentClass = Standard::find($id);
-        $subjects = $currentClass->subjects()->select('id', 'name', 'description', 'master_price_status_id', 'actual_price', 'offer_price')
+        $subjects = $currentClass->subjects()->select('id', 'name', 'slug', 'description', 'master_price_status_id', 'actual_price', 'offer_price')
             ->where('master_language_id', '1')->get();
         $subjectCount = $currentClass->subjects()
             ->where('master_language_id', '1')->count();

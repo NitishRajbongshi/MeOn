@@ -43,6 +43,7 @@ class ChapterController extends Controller
 
         $data = [
             'name' => $request->name,
+            'slug' => strtolower(str_replace(' ', '-', $request->name)),
             'description' => $request->description,
             'standard_id' => $request->class,
             'subject_id' => $request->subject,

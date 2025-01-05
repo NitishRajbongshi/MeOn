@@ -200,7 +200,7 @@
                                                 {{-- <a href="{{ route('subjectList', [$item->id]) }}">Explore Notes</a> --}}
                                                 {{-- <a href="{{ url('content/subject', [$item->name, 'all-subjects']) }}">Explore Notes</a> --}}
                                                 <a class="text-sm font-bold"
-                                                    href="{{ url('content/subject', [$item->name, 'language', 'all-languages']) }}">
+                                                    href="{{ url('content/subject', [$item->slug, 'language', 'all-languages']) }}">
                                                     View Content
                                                 </a>
                                             </button>

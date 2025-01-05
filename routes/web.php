@@ -12,7 +12,10 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ExamLink\ExamLinkController;
 use App\Http\Controllers\Marquee\MarqueeController;
 use App\Http\Controllers\Note\NoteController;
-use App\Http\Controllers\Settings\SiteSettings\MetaSettings\MetaSubjectListController;
+use App\Http\Controllers\Settings\SiteSettings\MetaSettings\ChapterMetaDataController;
+use App\Http\Controllers\Settings\SiteSettings\MetaSettings\ClassMetaDataController;
+use App\Http\Controllers\Settings\SiteSettings\MetaSettings\NoteMetaDataController;
+use App\Http\Controllers\Settings\SiteSettings\MetaSettings\SubjectMetaDataController;
 use App\Http\Controllers\Settings\SiteSettings\SiteSettingsController;
 use App\Http\Controllers\Standard\CategoryController;
 use App\Http\Controllers\Student\StudentController;
@@ -104,10 +107,25 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     // manage site Settings
     Route::get('/site/settings', [SiteSettingsController::class, 'index'])->name('settings');
 
-    // manage subject list meta data
-    Route::get('/site/settings/manage/meta-data-for-subject-list', [MetaSubjectListController::class, 'index'])->name('meta.subject.list');
-    Route::post('/site/settings/manage/meta-data-for-subject-list', [MetaSubjectListController::class, 'store']);
-    Route::get('/site/settings/manage/meta-data-for-subject-list/get-meta-data', [MetaSubjectListController::class, 'getMetaData'])->name('get.meta.data');
+    // manage meta data for class
+    Route::get('/site/settings/manage/meta/class', [ClassMetaDataController::class, 'index'])->name('manage.meta.class');
+    Route::post('/site/settings/manage/meta/class', [ClassMetaDataController::class, 'store']);
+    Route::get('/site/settings/manage/class/get-meta-data', [ClassMetaDataController::class, 'getMetaData'])->name('get.meta.class');
+
+    // manage meta data for subject
+    Route::get('/site/settings/manage/meta/subject', [SubjectMetaDataController::class, 'index'])->name('manage.meta.subject');
+    Route::post('/site/settings/manage/meta/subject', [SubjectMetaDataController::class, 'store']);
+    Route::get('/site/settings/manage/subject/get-meta-data', [SubjectMetaDataController::class, 'getMetaData'])->name('get.meta.subject');
+
+    // manage meta data for chapter
+    Route::get('/site/settings/manage/meta/chapter', [ChapterMetaDataController::class, 'index'])->name('manage.meta.chapter');
+    Route::post('/site/settings/manage/meta/chapter', [ChapterMetaDataController::class, 'store']);
+    Route::get('/site/settings/manage/chapter/get-meta-data', [ChapterMetaDataController::class, 'getMetaData'])->name('get.meta.chapter');
+
+    // manage meta data for chapter
+    Route::get('/site/settings/manage/meta/note', [NoteMetaDataController::class, 'index'])->name('manage.meta.note');
+    Route::post('/site/settings/manage/meta/note', [NoteMetaDataController::class, 'store']);
+    Route::get('/site/settings/manage/note/get-meta-data', [NoteMetaDataController::class, 'getMetaData'])->name('get.meta.note');
 });
 
 // user
@@ -140,16 +158,16 @@ Route::middleware(['auth'])->prefix('user/subscription/plan')->group(function ()
 
 // subject
 Route::prefix('content')->group(function () {
-    Route::get('/subject/{standard:name}/language/all-languages', [SubjectController::class, 'getLanguageList'])->name('language');
-    Route::get('/subject/{standard:name}/language/assamese/all-subjects', [SubjectController::class, 'getAssameseSubjectList'])->name('subjectList.assamese');
-    Route::get('/subject/{standard:name}/language/english/all-subjects', [SubjectController::class, 'getEnglishSubjectList'])->name('subjectList.english');
+    Route::get('/subject/{standard:slug}/language/all-languages', [SubjectController::class, 'getLanguageList'])->name('language');
+    Route::get('/subject/{standard:slug}/language/assamese/all-subjects', [SubjectController::class, 'getAssameseSubjectList'])->name('subjectList.assamese');
+    Route::get('/subject/{standard:slug}/language/english/all-subjects', [SubjectController::class, 'getEnglishSubjectList'])->name('subjectList.english');
 });
 
 // notes
 Route::prefix('notes')->group(function () {
-    Route::get('/chapter/{subject:name}/all-chapters', [NoteController::class, 'getChapterList']);
-    Route::get('/show/{chapter:name}/all-notes', [NoteController::class, 'getAvailableNote']);
-    Route::get('/view/{note:name}/free', [NoteController::class, 'showFreeNotes'])->name('view.note.free')->middleware('signed');
-    Route::get('/view/{note:name}/preview', [NoteController::class, 'previewNotes'])->name('view.note.preview')->middleware('signed');
-    Route::get('/view/{note:name}/premium', [NoteController::class, 'showPremiumNotes'])->name('view.note.premium')->middleware(['auth', 'signed']);
+    Route::get('/chapter/{subject:slug}/all-chapters', [NoteController::class, 'getChapterList']);
+    Route::get('/show/{chapter:slug}/all-notes', [NoteController::class, 'getAvailableNote']);
+    Route::get('/view/{note:slug}/free', [NoteController::class, 'showFreeNotes'])->name('view.note.free')->middleware('signed');
+    Route::get('/view/{note:slug}/preview', [NoteController::class, 'previewNotes'])->name('view.note.preview')->middleware('signed');
+    Route::get('/view/{note:slug}/premium', [NoteController::class, 'showPremiumNotes'])->name('view.note.premium')->middleware(['auth', 'signed']);
 });

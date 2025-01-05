@@ -27,11 +27,22 @@
                             <ul class="">
                                 <li class=""><span class="font-bold">Manage Meta Data:</span> Manage your site meta
                                     data for different pages</li>
-                                <ol class="ml-2 text-blue-600">
-                                    <li><i class="fa fa-circle-dot text-xs mr-2"></i><a href="{{ route('meta.subject.list') }}">Manage subject list meta data</a></li>
-                                    <li><i class="fa fa-circle-dot text-xs mr-2"></i><a href="#">Manage chapter list meta data</a></li>
-                                    <li><i class="fa fa-circle-dot text-xs mr-2"></i><a href="#">Manage note list meta data</a></li>
-                                </ol>
+                                <li>
+                                    <ol class="ml-2 text-blue-600">
+                                        <li><i class="fa fa-circle-dot text-xs mr-2"></i>
+                                            <a href="{{ route('manage.meta.class') }}">Manage meta data for classes</a>
+                                        </li>
+                                        <li><i class="fa fa-circle-dot text-xs mr-2"></i>
+                                            <a href="{{ route('manage.meta.subject') }}">Manage meta data for subjects</a>
+                                        </li>
+                                        <li><i class="fa fa-circle-dot text-xs mr-2"></i>
+                                            <a href="{{ route('manage.meta.chapter') }}">Manage meta data for chapters</a>
+                                        </li>
+                                        <li><i class="fa fa-circle-dot text-xs mr-2"></i>
+                                            <a href="{{ route('manage.meta.note') }}">Manage meta data for notes</a>
+                                        </li>
+                                    </ol>
+                                </li>
                             </ul>
                         </div>
                     </div>

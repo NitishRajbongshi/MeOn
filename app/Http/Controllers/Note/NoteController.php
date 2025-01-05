@@ -62,6 +62,7 @@ class NoteController extends Controller
                 'subject_id' => $request->input('subject'),
                 'chapter_id' => $request->input('chapter'),
                 'name' => $request->input('name'),
+                'slug' => strtolower(str_replace(' ', '-', $request->input('name'))),
                 'description' => $request->input('description'),
                 'master_price_status_id' => $request->input('price_status'),
                 'created_by' => $user->id,
@@ -172,6 +173,9 @@ class NoteController extends Controller
         $class = Standard::find($subject->standard_id);
         $classes = Standard::all();
         $chapters = Subject::find($subject->id)->chapters;
+        $metaData = DB::table('meta_chapter_details')->where('subject_id', $subject->id)
+            ->select('meta_title', 'meta_description', 'keywords')
+            ->first();
         return view(
             'chapters.index',
             [
@@ -179,7 +183,8 @@ class NoteController extends Controller
                 'class' => $class,
                 'subject' => $subject,
                 'chapters' => $chapters,
-                'classes' => $classes
+                'classes' => $classes,
+                'metaData' => $metaData
             ]
         );
     }
@@ -263,9 +268,10 @@ class NoteController extends Controller
                 }
             }
         }
-
-        // dd($access);
         $classes = Standard::all();
+        $metaData = DB::table('meta_note_details')->where('chapter_id', $chapterID)
+            ->select('meta_title', 'meta_description', 'keywords')
+            ->first();
         return view(
             'notes.index',
             [
@@ -273,7 +279,8 @@ class NoteController extends Controller
                 'freeNotes' => $freeNotes,
                 'paidNotes' => $paidNotes,
                 'classes' => $classes,
-                'access' => $access
+                'access' => $access,
+                'metaData' => $metaData
             ]
         );
     }

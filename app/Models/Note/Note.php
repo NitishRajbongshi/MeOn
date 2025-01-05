@@ -17,6 +17,7 @@ class Note extends Model
         'subject_id',
         'chapter_id',
         'name',
+        'slug',
         'description',
         'master_price_status_id',
         'created_by',

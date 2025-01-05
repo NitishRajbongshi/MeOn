@@ -16,6 +16,7 @@ class Subject extends Model
     protected $fillable = [
         'standard_id',
         'name',
+        'slug',
         'description',
         'master_language_id',
         'master_price_status_id',

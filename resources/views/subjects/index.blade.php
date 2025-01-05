@@ -72,7 +72,7 @@
                                         @endif
                                         <button data-id={{ $item->id }}
                                             class="subject_btn bg-blue-500 text-white rounded py-1 px-2 hover:bg-blue-600">
-                                            <a href="{{ url('/notes/chapter', [$item->name, 'all-chapters']) }}">
+                                            <a href="{{ url('/notes/chapter', [$item->slug, 'all-chapters']) }}">
                                                 Go to chapter List
                                             </a>
                                         </button>

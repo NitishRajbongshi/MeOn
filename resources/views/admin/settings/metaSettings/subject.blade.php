@@ -23,11 +23,11 @@
                 <div class="w-full md:w-3/4">
                     <div class="border rounded-md border-slate-200 my-2 p-2">
                         <h2 class="font-bold text-lg text-blue-500">Manage Your Meta Data</h2>
-                        <p class="text-sm">Add meta details for the subject list page. </p>
+                        <p class="text-sm">Add meta details for the chapter list page. </p>
                         <div class="border rounded-md border-slate-200 my-2 p-1 md:p-2">
                             <div class="md:flex my-2">
                                 <div class="w-full md:w-1/3">
-                                    <label class="text-sm" for="class">Class:<span
+                                    <label class="text-sm" for="class">Select Class:<span
                                             class="text-xs text-red-500">*</span></label>
                                 </div>
                                 <div class="w-full md:w-2/3">
@@ -50,20 +50,15 @@
                             </div>
                             <div class="md:flex my-2">
                                 <div class="w-full md:w-1/3">
-                                    <label class="text-sm" for="language">Language:<span
+                                    <label class="text-sm" for="subject">Select Subject:<span
                                             class="text-xs text-red-500">*</span></label>
                                 </div>
                                 <div class="w-full md:w-2/3">
-                                    <select name="language" id="language"
+                                    <select name="subject" id="subject"
                                         class="border w-full border-blue-300 rounded-sm outline-none p-1 text-sm md:w-1/2">
-                                        <option value="">Choose Language</option>
-                                        @foreach ($languages as $language)
-                                            <option value="{{ $language->id }}">
-                                                {{ $language->language }}
-                                            </option>
-                                        @endforeach
+                                        <option value="">Choose Subject</option>
                                     </select>
-                                    @error('language')
+                                    @error('subject')
                                         <p class="text-xs text-red-500">
                                             <i class="fa fa-warning mr-1 my-1"></i>
                                             {{ $message }}
@@ -79,15 +74,14 @@
                         </div>
                         {{-- Form --}}
                         <div class="hidden border rounded-md border-slate-200 my-2 p-1 md:p-2" id="meta-form">
-                            <form action="{{ route('meta.subject.list') }}" method="post" autocomplete="off">
+                            <form action="{{ route('manage.meta.subject') }}" method="post" autocomplete="off">
                                 @csrf
                                 {{-- alert --}}
                                 <div id="alert"
                                     class="hidden bg-red-200 border border-red-300 text-red-900 rounded-sm p-2">
                                     <p>No meta data added yet! Add relavent meta data for the page.</p>
                                 </div>
-                                <input type="hidden" name="class" id="class-hidden" value="">
-                                <input type="hidden" name="language" id="language-hidden" value="">
+                                <input type="hidden" name="subject" id="subject-hidden" value="">
                                 <div class="md:flex my-2">
                                     <div class="w-full md:w-1/3">
                                         <label class="text-sm" for="title">Page Title: <span
@@ -97,7 +91,7 @@
                                         <input type="text" id="title" name="title"
                                             placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit."
                                             value="{{ old('title') }}"
-                                            class="w-full border border-blue-300 rounded-sm outline-none p-1 text-sm">
+                                            class="w-full border border-blue-300 rounded-sm outline-none p-1 text-sm" required>
                                         @error('title')
                                             <p class="text-xs text-red-500">
                                                 <i class="fa fa-warning mr-1 my-1"></i>
@@ -113,7 +107,7 @@
                                     </div>
                                     <div class="w-full md:w-2/3">
                                         <textarea rows="4" id="description" name="description"
-                                            class="w-full border border-blue-300 rounded-sm outline-none p-1 text-sm" placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste officia facilis ex, porro natus corrupti rem placeat magni dolor atque quia mollitia repudiandae vitae, debitis excepturi id libero rerum omnis?">{{ old('link') }}</textarea>
+                                            class="w-full border border-blue-300 rounded-sm outline-none p-1 text-sm" placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste officia facilis ex, porro natus corrupti rem placeat magni dolor atque quia mollitia repudiandae vitae, debitis excepturi id libero rerum omnis?" required>{{ old('link') }}</textarea>
                                         @error('description')
                                             <p class="text-xs text-red-500">
                                                 <i class="fa fa-warning mr-1 my-1"></i>
@@ -140,7 +134,7 @@
                         <h2 class="font-bold text-lg text-blue-500">Quick Links</h2>
                         <ol class="text-xs text-red-600">
                             <li><i class="fa-solid fa-link text-xs mr-2"></i><a
-                                    href="{{ route('meta.subject.list') }}">Manage subject list meta data</a></li>
+                                    href="{{ route('manage.meta.class') }}">Manage subject list meta data</a></li>
                             <li><i class="fa-solid fa-link text-xs mr-2"></i><a href="#">Manage chapter list meta
                                     data</a></li>
                             <li><i class="fa-solid fa-link text-xs mr-2"></i><a href="#">Manage note list meta
@@ -155,29 +149,63 @@
 @endsection
 @push('scripts')
     <script>
+        $(document).ready(function() {
+            // Get the subjects by a class
+            $('#class').on('change', () => {
+                // Get CSRF token from the meta tag
+                var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+                $('#subject').empty();
+                $('#subject').append('<option value="">Choose One</option>');
+
+                const selectedClass = $('#class').val();
+                $.ajax({
+                    url: '/admin/getSubject/' + selectedClass,
+                    type: 'GET',
+                    dataType: 'json',
+                    headers: {
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    success: function(response) {
+                        if (response.status == 'success') {
+                            $.each(response.result, function(index, subject) {
+                                $('#subject').append('<option value="' + subject.id +
+                                    '">' +
+                                    subject.name + '</option>');
+                            });
+                        } else {
+                            alert(`Failed! ${response.message}`);
+                        }
+                    },
+                    error: function(e) {
+                        console.error('AJAX error:', e);
+                        alert("Server Error!");
+                    }
+                });
+            });
+        });
+
         document.getElementById('get-meta-data').addEventListener('click', function() {
             let classId = document.getElementById('class').value;
-            let languageId = document.getElementById('language').value;
-            if (classId === '' || languageId === '') {
-                alert('Please select class and language');
+            let subjectId = document.getElementById('subject').value;
+            if (classId === '' || subjectId === '') {
+                alert('Please select class and subject');
                 return;
             }
             document.getElementById('meta-form').classList.remove('hidden');
             // ajax request to get meta data
             $.ajax({
-                url: `{{ route('get.meta.data') }}`,
+                url: `{{ route('get.meta.subject') }}`,
                 type: 'GET',
                 data: {
-                    class: classId,
-                    language: languageId
+                    subject: subjectId,
                 },
                 dataType: 'json',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(response) {
-                    document.getElementById('class-hidden').value = classId;
-                    document.getElementById('language-hidden').value = languageId;
+                    document.getElementById('subject-hidden').value = subjectId;
                     if (response.status === 'success') {
                         document.getElementById('alert').classList.add('hidden');
                         document.getElementById('title').value = response.title;

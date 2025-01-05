@@ -20,7 +20,7 @@
             </div>
 
             <div class="md:flex md:gap-1">
-                <div class="w-full md:w-3/4">
+                <div class="w-full lg:w-[70%]">
                     {{-- Form --}}
                     <div class="border rounded-md border-slate-200 my-2 p-1 md:p-2">
                         <form action="{{ route('manageNote') }}" method="post" autocomplete="off"
@@ -183,7 +183,7 @@
                         </form>
                     </div>
                 </div>
-                <div class="hidden md:block md:w-1/4">
+                <div class="hidden lg:block lg:w-[29.5%]">
                     <div class="border rounded-md border-slate-200 my-2 p-2">
                         <h1>SideBar</h1>
                     </div>

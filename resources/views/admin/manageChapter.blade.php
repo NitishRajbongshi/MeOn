@@ -20,7 +20,7 @@
             </div>
 
             <div class="flex flex-wrap-reverse md:justify-between md:gap-1">
-                <div class="w-full md:w-[70%]">
+                <div class="w-full lg:w-[70%]">
                     {{-- Form --}}
                     <div class="border rounded-md border-slate-200 my-2 p-1 md:p-2">
                         <form action="{{ route('manageChapter') }}" method="post" autocomplete="off">
@@ -179,13 +179,21 @@
                         </form>
                     </div>
                 </div>
-                <div class="w-full md:w-[29.5%]">
+                <div class="w-full lg:w-[29.5%]">
                     <div class="border rounded-md border-slate-200 my-2 p-2">
                         <h1 class="font-bold text-red-500 underline text-md mb-1">Instruction</h1>
                         <p class="text-sm text-gray-600 text-justify">
                             <i class="fa fa-circle-dot text-xs"></i>
                             Please choose the class & subject from the drop-down list carefully. Once submitted, it cannot
                             be edited.
+                        </p>
+                        <p class="text-sm text-gray-600 text-justify">
+                            <i class="fa fa-circle-dot text-xs"></i>
+                            The chapter name will be used to create a slug for the URL automatically.
+                        </p>
+                        <p class="text-sm text-gray-600 text-justify">
+                            <i class="fa fa-circle-dot text-xs"></i>
+                            The chapter name should not contain extra space, unnecessary special characters, or numeric values.
                         </p>
                     </div>
                 </div>

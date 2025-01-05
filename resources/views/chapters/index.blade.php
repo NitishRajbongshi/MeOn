@@ -1,5 +1,6 @@
 @extends('layouts.app')
-
+@section('title', $metaData->meta_title ?? 'Edorb')
+@section('meta_description', $metaData->meta_description ?? 'Discover comprehensive Assamese and English notes for classes 5 to 10 (SEBA and NCERT) and exercise solutions for class 11 and 12 science (NCERT) in physics, chemistry, maths, and biology at edorb.in. We also offer online coaching for JEE, CEE, NEET, NEST, and more.')
 @section('content')
     @include('layouts.navbar')
     <x-show-notification />
@@ -74,7 +75,7 @@
                                                 <span class="font-bold text-md text-red-600"><i class="fa-solid fa-indian-rupee-sign"></i>{{$chapter->offer_price}}</span>
                                             </p>
                                         @endif
-                                        <a href="{{ url('/notes/show', [$chapter->name, 'all-notes']) }}">
+                                        <a href="{{ url('/notes/show', [$chapter->slug, 'all-notes']) }}">
                                             <button data-id={{ $chapter->id }}
                                                 class="subject_btn bg-blue-500 text-white rounded py-1 px-2 hover:bg-blue-600">
                                                 Explore Notes

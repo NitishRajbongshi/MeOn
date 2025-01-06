@@ -1,7 +1,10 @@
 @extends('layouts.app')
-@section('title', "Welcome to Edorb")
-@section('meta_description', "Discover comprehensive Assamese and English notes for classes 5 to 10 (SEBA and NCERT) and exercise solutions for class 11 and 12 science (NCERT) in physics, chemistry, maths, and biology at edorb.in. We also offer online coaching for JEE, CEE, NEET, NEST, and more.")
-{{-- @section('meta_keywords', $page->keywords) --}}
+@section('title', 'Welcome to Edorb')
+@section('meta_description',
+    'Discover comprehensive Assamese and English notes for classes 5 to 10 (SEBA and NCERT) and
+    exercise solutions for class 11 and 12 science (NCERT) in physics, chemistry, maths, and biology at edorb.in. We also
+    offer online coaching for JEE, CEE, NEET, NEST, and more.')
+    {{-- @section('meta_keywords', $page->keywords) --}}
 
 @section('content')
     <x-show-notification />
@@ -163,19 +166,24 @@
                                         <div class="py-1">
                                             <p class="text-xs font-bold text-slate-500">NCERT</p>
                                             <p class="font-bold text-sm"><span>Free</span> & <span>Premium</span></p>
-                                            <div class="inline-block bg-yellow-400 px-1 shadow-orange-500 rounded-sm">
-                                                @if ($item->master_price_status_id == '1')
-                                                    <p class="text-sm text-blue-500">Free</p>
-                                                @else
-                                                    <p class="text-sm text-blue-500">
-                                                        <span class="font-bold text-md text-gray-400"
-                                                            style="text-decoration: line-through"><i
-                                                                class="fa-solid fa-indian-rupee-sign"></i>{{ $item->actual_price }}</span>
-                                                        <span class="font-bold text-md text-red-600"><i
-                                                                class="fa-solid fa-indian-rupee-sign"></i>{{ $item->offer_price }}</span>
-                                                    </p>
+                                            {{-- check if the user is authenticate or not --}}
+                                            @auth
+                                                @if ($user->admin)
+                                                    <div class="inline-block bg-yellow-400 px-1 shadow-orange-500 rounded-sm">
+                                                        @if ($item->master_price_status_id == '1')
+                                                            <p class="text-sm text-blue-500">Free</p>
+                                                        @else
+                                                            <p class="text-sm text-blue-500">
+                                                                <span class="font-bold text-md text-gray-400"
+                                                                    style="text-decoration: line-through"><i
+                                                                        class="fa-solid fa-indian-rupee-sign"></i>{{ $item->actual_price }}</span>
+                                                                <span class="font-bold text-md text-red-600"><i
+                                                                        class="fa-solid fa-indian-rupee-sign"></i>{{ $item->offer_price }}</span>
+                                                            </p>
+                                                        @endif
+                                                    </div>
                                                 @endif
-                                            </div>
+                                            @endauth
                                         </div>
                                         <div class="my-2">
                                             <p class="text-sm text-gray-700 max-h-[6rem] min-h-[6rem] w-full"
@@ -186,16 +194,17 @@
                                     </div>
                                     <div class="flex items-end justify-between gap-1 p-3 mb-3">
                                         <div class="w-full md:w-1/2">
-                                            <button class="w-full px-4 py-2 rounded-full bg-yellow-500 text-white hover:bg-yellow-600"
+                                            <button
+                                                class="w-full px-4 py-2 rounded-full bg-yellow-500 text-white hover:bg-yellow-600"
                                                 data-id="{{ $item->id }}">
-                                                <a class="text-sm font-bold"
-                                                    href="/">
+                                                <a class="text-sm font-bold" href="/">
                                                     Purchase Now
                                                 </a>
                                             </button>
                                         </div>
                                         <div class="w-full md:w-1/2 flex justify-end">
-                                            <button class="w-full px-4 py-2 rounded-full bg-blue-500 text-white hover:bg-blue-600"
+                                            <button
+                                                class="w-full px-4 py-2 rounded-full bg-blue-500 text-white hover:bg-blue-600"
                                                 data-id="{{ $item->id }}">
                                                 {{-- <a href="{{ route('subjectList', [$item->id]) }}">Explore Notes</a> --}}
                                                 {{-- <a href="{{ url('content/subject', [$item->name, 'all-subjects']) }}">Explore Notes</a> --}}

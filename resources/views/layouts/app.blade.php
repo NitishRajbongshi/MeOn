@@ -20,6 +20,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
         content="@yield('meta_description', 'Discover comprehensive Assamese and English notes for classes 5 to 10 (SEBA and NCERT) and exercise solutions for class 11 and 12 science (NCERT) in physics, chemistry, maths, and biology at edorb.in. We also offer online coaching for JEE, CEE, NEET, NEST, and more.')">
+    <meta name="keywords"
+        content="@yield('meta_keywords', 'edorb, edorb.in, edorb assamese notes, edorb english notes, edorb class 5 to 10 notes, edorb class 11 and 12 notes, edorb online coaching, edorb jee coaching, edorb cee coaching, edorb neet coaching, edorb nest coaching')">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {{-- meta tag for prevent back button --}}
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">

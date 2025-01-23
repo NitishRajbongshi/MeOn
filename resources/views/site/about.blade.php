@@ -1,8 +1,15 @@
 @extends('layouts.app')
-
+@section('title', 'Edorb - About Us')
+@section('meta_description',
+    'Welcome to our website Edorb.in, your one-stop destination for comprehensive study
+    materials and solutions tailored for students from Class 5 to 10 following the SEBA & from 9 to 12 following the NCERT
+    curriculum, available in both Assamese and English languages. Specifically designed for Science stream (Physics,
+    Chemistry, Mathematics, Biology) students in Classes 11 and 12, our platform offers meticulously curated notes, detailed
+    exercise solutions, and engaging blogs covering advanced physics topics.')
+@section('meta_keywords', 'Edorb, Edorb.in, Edorb Assam, Edorb online study, Edorb Assamese Notes')
 @section('content')
     @include('layouts.navbar')
-    <div class="container mx-auto backgroundImage">
+    <div class="container mx-auto">
         <div class="p-1 md:p-4 w-full rounded-md text-xs">
             <ol class="list-reset flex">
                 <li>
@@ -16,14 +23,14 @@
             </ol>
         </div>
 
-        <div class="p-1 md:py-4">
+        <div class="p-1 md:p-4">
             <h1 class="text-center text-3xl font-bold pb-4">About Us</h1>
             {{-- Person section --}}
             <div class="flex justify-between items-center flex-wrap">
-                <div
-                    class="w-full md:w-[49%] p-2 mb-1 flex flex-wrap justify-center items-center shadow-md md:min-h-[12rem] rounded-md bg-transparent md:justify-start">
-                    <div class="pe-2">
-                        <img src="{{ asset('images/profile/ankur.jpeg') }}" alt="ankur" width="150rem;"
+                <div class="w-full md:w-[49%] p-2 mb-1 flex flex-wrap justify-center items-center border md:min-h-[12rem] rounded-md bg-transparent md:justify-start"
+                    style="background-color: #eef6ff;background-image: linear-gradient(62deg, #eef0f5 0%, #ead7fa 100%);">
+                    <div class="pe-3">
+                        <img src="{{ asset('images/profile/ankur.jpeg') }}" alt="Edorb founder and CEO" width="150rem;"
                             class="border rounded-full">
                     </div>
                     <div class="p-2 text-center md:text-start">
@@ -35,10 +42,10 @@
                         <h4 class="text-md"><span class="font-bold">Contact: </span>7002390253</h4>
                     </div>
                 </div>
-                <div
-                    class="w-full md:w-[49%] p-2 mb-1 flex flex-wrap justify-center items-center shadow-md md:min-h-[12rem] rounded-md bg-transparent md:justify-start">
-                    <div class="pe-2">
-                        <img src="{{ asset('images/profile/rekha.jpeg') }}" alt="ankur" width="150rem;"
+                <div class="w-full md:w-[49%] p-2 mb-1 flex flex-wrap justify-center items-center border md:min-h-[12rem] rounded-md bg-transparent md:justify-start"
+                    style="background-color: #eef6ff;background-image: linear-gradient(62deg, #eef0f5 0%, #e6f5c9 100%);">
+                    <div class="pe-3">
+                        <img src="{{ asset('images/profile/rekha.jpeg') }}" alt="Edorb Chief Operating Officer" width="150rem;"
                             class="border rounded-full">
                     </div>
                     <div class="p-2 text-center md:text-start">

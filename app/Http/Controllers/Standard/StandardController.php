@@ -17,7 +17,7 @@ class StandardController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $classes = Standard::paginate(10);
+        $classes = Standard::paginate(5);
         $categories = MasterClassCategory::all();
         $priceStatues = MasterPriceStatus::all();
         return view('admin.manageClass', [
@@ -102,14 +102,25 @@ class StandardController extends Controller
 
     public function update(Request $request)
     {
+        Log::info($request);
         $standardId = $request->id;
         $className = $request->input('name');
         $classDescription = $request->input('description');
+        $classTags = $request->input('tags');
+        $classCategory = $request->input('category');
+        $classPriceStatus = $request->input('price_status');
+        $classActualPrice = $request->input('actual_price') ? $request->input('actual_price') : '0.00';
+        $classOfferPrice = $request->input('offer_price') ? $request->input('offer_price') : '0.00';
         // Find the standard by its ID
         $standard = Standard::find($standardId);
         if ($standard) {
             $standard->name = $className;
             $standard->description = $classDescription;
+            $standard->tags = $classTags;
+            $standard->master_class_category_id = $classCategory;
+            $standard->master_price_status_id = $classPriceStatus;
+            $standard->actual_price = $classActualPrice;
+            $standard->offer_price = $classOfferPrice;
             $standard->updated_by = Auth::user()->id;
             $standard->updated_at = now();
 

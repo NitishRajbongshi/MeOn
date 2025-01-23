@@ -25,12 +25,13 @@
                     <div class="border rounded-md border-slate-200 my-2 p-1 md:p-2">
                         <form action="{{ route('manageClass') }}" method="post" autocomplete="off">
                             @csrf
-                            <fieldset class="my-2">
+                            <fieldset class="mt-2 mb-4">
                                 <span class="border-2 border-blue-900 rounded-sm text-sm p-1 font-bold text-blue-900">
                                     <i class="fa fa-plus mr-1"></i>
                                     Add Class Details
                                 </span>
                             </fieldset>
+                            <hr>
                             <div class="md:flex my-2">
                                 <div class="w-full md:w-1/3">
                                     <label class="text-sm" for="name">Class Name: <span
@@ -64,7 +65,8 @@
                                             class="text-xs text-red-500">*</span></label>
                                 </div>
                                 <div class="w-full md:w-2/3">
-                                    <input type="text" id="tags" name="tags" placeholder="NCERT, Assamese, Class10"
+                                    <input type="text" id="tags" name="tags"
+                                        placeholder="NCERT, Assamese, Class10"
                                         class="w-full border border-blue-300 rounded-sm outline-none p-1 text-sm">
                                     <small class="text-red-500">Tags should be single words seperated by comma(csv).</small>
                                     @error('tags')
@@ -75,7 +77,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="md:flex">
+                            <div class="md:flex my-2">
                                 <div class="w-full md:w-1/3">
                                     <label class="text-sm" for="category">Select Category:<span
                                             class="text-xs text-red-500">*</span></label>
@@ -170,7 +172,7 @@
                 </div>
                 <div class="flex flex-col overflow-x-auto">
                     <div class="">
-                        <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                        <div class="inline-block min-w-full py-2 px-1">
                             <div class="overflow-x-auto">
                                 <table class="min-w-full text-left text-sm font-light">
                                     <thead class="border-b font-medium dark:border-neutral-500">
@@ -178,9 +180,8 @@
                                             <th scope="col" class="px-6 py-1 text-center">#</th>
                                             <th scope="col" class="px-6 py-1">Class Name</th>
                                             <th scope="col" class="px-6 py-1"> Class Description</th>
+                                            <th scope="col" class="px-6 py-1 text-center">Tags</th>
                                             <th scope="col" class="px-6 py-1 text-center">Pricing</th>
-                                            <th scope="col" class="px-6 py-1 text-center">Actual Price(Rs)</th>
-                                            <th scope="col" class="px-6 py-1 text-center">Offer Price(Rs)</th>
                                             <th scope="col" class="px-6 py-1 text-center">Edit</th>
                                             <th scope="col" class="px-6 py-1 text-center">Delete</th>
                                         </tr>
@@ -194,27 +195,39 @@
                                                 <td class="whitespace-nowrap px-6 py-1 font-medium text-center">
                                                     {{ $i }}
                                                 </td>
-                                                <td class="whitespace-nowrap px-6 py-1">
+                                                <td class="px-6 py-1">
                                                     {{ $item->name }}
                                                 </td>
-                                                <td class="whitespace-nowrap px-6 py-1">
+                                                <td class="text-justify px-6 py-1">
                                                     {{ $item->description }}
+                                                </td>
+                                                <td class="text-justify px-6 py-1">
+                                                    @php
+                                                        $tags = $item->tags ? explode(',', $item->tags) : [];
+                                                    @endphp
+                                                    @foreach ($tags as $tag)
+                                                        {{ $tag }}
+                                                    @endforeach
                                                 </td>
                                                 <td class="whitespace-nowrap px-6 py-1 text-center">
                                                     @if ($item->master_price_status_id == '1')
-                                                        Free
+                                                        Free <br>
+                                                        <span class="inline_block mr-1"
+                                                            style="text-decoration: line-through">Rs.
+                                                            {{ $item->actual_price }} </span>
+                                                        <span class="text-red-500">Rs. {{ $item->offer_price }}</span>
                                                     @else
-                                                        Paid
+                                                        Paid <br>
+                                                        <span class="inline_block mr-1"
+                                                            style="text-decoration: line-through">Rs.
+                                                            {{ $item->actual_price }} </span>
+                                                        <span class="text-red-500">Rs. {{ $item->offer_price }}</span>
                                                     @endif
                                                 </td>
                                                 <td class="whitespace-nowrap px-6 py-1 text-center">
-                                                    {{ $item->actual_price }}
-                                                </td>
-                                                <td class="whitespace-nowrap px-6 py-1 text-center">
-                                                    {{ $item->offer_price }}
-                                                </td>
-                                                <td class="whitespace-nowrap px-6 py-1 text-center">
-                                                    <button class="openModal" data-id="{{ $item->id }}">
+                                                    <button
+                                                        class="openModal rounded-full text-xs text-blue-500 hover:text-blue-800"
+                                                        data-id="{{ $item->id }}">
                                                         <i class="fa fa-pen text-xs"></i>
                                                     </button>
                                                 </td>
@@ -225,6 +238,7 @@
                                                         <input type="hidden" name="classID"
                                                             value="{{ $item->id }}">
                                                         <button type="submit"
+                                                            class="rounded-full bg-red-200 px-2 py-1 text-xs text-red-500 hover:text-red-800"
                                                             onclick="return confirm('Are you sure you want to delete this class and related resources?')">
                                                             <i class="fa fa-trash text-xs"></i>
                                                         </button>
@@ -264,6 +278,14 @@
                     }
                 })
 
+                $('#edit_price_status').on('change', function() {
+                    const priceStatus = $(this).val();
+                    $('.edit_price_tag').hide();
+                    if (priceStatus === '2') {
+                        $('.edit_price_tag').show();
+                    }
+                })
+
                 $('.openModal').on('click', function() {
                     const id = $(this).data('id');
 
@@ -282,6 +304,9 @@
                             if (response.status == 'success' && response.result != null) {
                                 $('#editName').val(response.result.name);
                                 $('#editDescription').val(response.result.description);
+                                $('#editTags').val(response.result.tags);
+                                $('#editCategory').val(response.result.master_class_category_id);
+                                $('#edit_price_status').val(response.result.master_price_status_id);
 
                                 // show the modal
                                 $('#modal').removeClass('hidden');

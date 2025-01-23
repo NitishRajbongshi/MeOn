@@ -252,7 +252,7 @@
                                                 <td class="whitespace-nowrap px-6 py-1">
                                                     {{ $item->name }}
                                                 </td>
-                                                <td class="whitespace-nowrap px-6 py-1">
+                                                <td class="text-justify px-6 py-1">
                                                     {{ $item->description }}
                                                 </td>
                                                 <td class="whitespace-nowrap px-6 py-1 text-center">

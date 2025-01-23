@@ -9,9 +9,8 @@
                     </span>
                 </div>
                 <div>
-                    <button id="closeModal" 
-                    class="">
-                       <i class="fa fa-times"></i>
+                    <button id="closeModal" class="">
+                        <i class="fa fa-times"></i>
                     </button>
                 </div>
             </fieldset>
@@ -22,7 +21,7 @@
                 </div>
                 <div class="w-full md:w-2/3">
                     <input type="text" id="editName" name="name" placeholder="Class 10"
-                        class="w-full border border-blue-300 rounded-sm outline-none p-1 text-sm">
+                        class="w-full border border-blue-300 rounded-sm outline-none p-1 text-sm" required>
 
                     @error('name')
                         <p class="text-xs text-red-500">
@@ -43,15 +42,101 @@
                 </div>
             </div>
 
+            <div class="md:flex my-2">
+                <div class="w-full md:w-1/3">
+                    <label class="text-sm" for="editTags">Related Tags (CSV):</label>
+                </div>
+                <div class="w-full md:w-2/3">
+                    <input type="text" id="editTags" name="tags" placeholder="NCERT, Assamese, Class10"
+                        class="w-full border border-blue-300 rounded-sm outline-none p-1 text-sm">
+                    <small class="text-red-500">Tags should be single words seperated by comma(csv).</small>
+                    @error('tags')
+                        <p class="text-xs text-red-500">
+                            <i class="fa fa-warning mr-1 my-1"></i>
+                            {{ $message }}
+                        </p>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="md:flex my-2">
+                <div class="w-full md:w-1/3">
+                    <label class="text-sm" for="editCategory">Select Category:<span
+                            class="text-xs text-red-500">*</span></label>
+                </div>
+                <div class="w-full md:w-2/3">
+                    <select name="category" id="editCategory"
+                        class="border w-full border-blue-300 rounded-sm outline-none p-1 text-sm ">
+                        <option value="">Choose One</option>
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}">
+                                {{ $category->category }}
+                            </option>
+                        @endforeach
+                    </select>
+
+                    @error('category')
+                        <p class="text-xs text-red-500">
+                            <i class="fa fa-warning mr-1 my-1"></i>
+                            {{ $message }}
+                        </p>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="md:flex my-2">
+                <div class="w-full md:w-1/3">
+                    <label class="text-sm" for="edit_price_status">Select Price Status:<span
+                            class="text-xs text-red-500">*</span></label>
+                </div>
+                <div class="w-full md:w-2/3">
+                    <select name="price_status" id="edit_price_status"
+                        class="border w-full border-blue-300 rounded-sm outline-none p-1 text-sm">
+                        <option value="">Choose One</option>
+                        @foreach ($priceStatues as $priceStatue)
+                            <option value="{{ $priceStatue->id }}">
+                                {{ $priceStatue->status }}
+                            </option>
+                        @endforeach
+                    </select>
+
+                    @error('price_status')
+                        <p class="text-xs text-red-500">
+                            <i class="fa fa-warning mr-1 my-1"></i>
+                            {{ $message }}
+                        </p>
+                    @enderror
+                </div>
+            </div>
+            <div class="md:flex my-2 edit_price_tag" style="display: none;">
+                <div class="w-full md:w-1/3">
+                    <label class="text-sm" for="actual_price">Actual Price (Rs.): <span
+                            class="text-xs text-red-500"></span></label>
+                </div>
+                <div class="w-full md:w-2/3">
+                    <input type="number" id="actual_price" name="actual_price" placeholder="0.00"
+                        class="w-full border border-blue-300 rounded-sm outline-none p-1 text-sm md:w-1/2">
+                </div>
+            </div>
+            <div class="md:flex my-2 edit_price_tag" style="display: none;">
+                <div class="w-full md:w-1/3">
+                    <label class="text-sm" for="offer_price">Offer Price (Rs.): <span
+                            class="text-xs text-red-500"></span></label>
+                </div>
+                <div class="w-full md:w-2/3">
+                    <input type="number" id="offer_price" name="offer_price" placeholder="0.00"
+                        class="w-full border border-blue-300 rounded-sm outline-none p-1 text-sm md:w-1/2">
+                </div>
+            </div>
+
             <div class="flex justify-end">
-                <button
-                    class="border border-blue-300 text-blue-950 bg-blue-200 px-2 py-1 rounded-sm text-sm font-bold"
+                <button class="border border-blue-300 text-blue-950 bg-blue-200 px-2 py-1 rounded-sm text-sm font-bold"
                     type="button" id="submitBtn">
                     <i class="fa fa-save mr-1"></i>
                     Save
                 </button>
             </div>
         </form>
-        
+
     </div>
 </div>

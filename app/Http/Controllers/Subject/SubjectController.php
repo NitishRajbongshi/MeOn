@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Master\MasterLanguage;
 use App\Models\Master\MasterPriceStatus;
+use Exception;
+use Illuminate\Support\Facades\Log;
 
 class SubjectController extends Controller
 {
@@ -23,7 +25,9 @@ class SubjectController extends Controller
             ->leftJoin('standards', 'subjects.standard_id', '=', 'standards.id')
             ->leftJoin('master_languages', 'subjects.master_language_id', '=', 'master_languages.id')
             ->select('subjects.*', 'standards.name as class_name', 'master_languages.language as language')
-            ->paginate(10);
+            ->orderBy('subjects.standard_id', 'asc')
+            ->orderBy('subjects.master_language_id', 'asc')
+            ->paginate(5);
 
         return view('admin.manageSubject', [
             'user' => $user,
@@ -175,14 +179,30 @@ class SubjectController extends Controller
 
     public function update(Request $request)
     {
+        Log::info($request->all());
         if (csrf_token()) {
             $subjectId = $request->id;
             $subjectName = $request->input('name');
             $subjectDescription = $request->input('description');
+            $subjectTags = $request->input('tags');
+            $subjectLanguage = $request->input('language');
+            $subjectPriceStatus = $request->input('price_status');
+            if($subjectPriceStatus == 1) {
+                $actualPrice = '0.00';
+                $offerPrice = '0.00';
+            } else {
+                $actualPrice = $request->input('actual_price') ? $request->input('actual_price') : '0.00';
+                $offerPrice = $request->input('offer_price') ? $request->input('offer_price') : '0.00';
+            }
             $subject = Subject::find($subjectId);
             if ($subject) {
                 $subject->name = $subjectName;
                 $subject->description = $subjectDescription;
+                $subject->tags = $subjectTags;
+                $subject->master_language_id = $subjectLanguage;
+                $subject->master_price_status_id = $subjectPriceStatus;
+                $subject->actual_price = $actualPrice;
+                $subject->offer_price = $offerPrice;
                 $subject->updated_by = Auth::user()->id;
                 $subject->updated_at = now();
                 $subject->save();
@@ -202,6 +222,21 @@ class SubjectController extends Controller
                 'status' => 'failed',
                 'message' => 'Unathorized action!'
             ]);
+        }
+    }
+
+    public function destroy(Request $request)
+    {
+        try {
+            if ($request->_token && $request->subjectID) {
+                $examLink = Subject::findOrFail($request->subjectID);
+                $examLink->delete();
+                return redirect()->back()->with('success', 'Subject and related resources deleted seccessfully!');
+            } else {
+                return redirect()->back()->with('failed', 'Unauthorized access!');
+            }
+        } catch (Exception $e) {
+            dd($e);
         }
     }
 }

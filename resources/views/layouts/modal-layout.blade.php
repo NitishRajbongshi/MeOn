@@ -110,21 +110,21 @@
             </div>
             <div class="md:flex my-2 edit_price_tag" style="display: none;">
                 <div class="w-full md:w-1/3">
-                    <label class="text-sm" for="actual_price">Actual Price (Rs.): <span
+                    <label class="text-sm" for="edit_actual_price">Actual Price (Rs.): <span
                             class="text-xs text-red-500"></span></label>
                 </div>
                 <div class="w-full md:w-2/3">
-                    <input type="number" id="actual_price" name="actual_price" placeholder="0.00"
+                    <input type="number" id="edit_actual_price" name="actual_price" placeholder="0.00"
                         class="w-full border border-blue-300 rounded-sm outline-none p-1 text-sm md:w-1/2">
                 </div>
             </div>
             <div class="md:flex my-2 edit_price_tag" style="display: none;">
                 <div class="w-full md:w-1/3">
-                    <label class="text-sm" for="offer_price">Offer Price (Rs.): <span
+                    <label class="text-sm" for="edit_offer_price">Offer Price (Rs.): <span
                             class="text-xs text-red-500"></span></label>
                 </div>
                 <div class="w-full md:w-2/3">
-                    <input type="number" id="offer_price" name="offer_price" placeholder="0.00"
+                    <input type="number" id="edit_offer_price" name="offer_price" placeholder="0.00"
                         class="w-full border border-blue-300 rounded-sm outline-none p-1 text-sm md:w-1/2">
                 </div>
             </div>

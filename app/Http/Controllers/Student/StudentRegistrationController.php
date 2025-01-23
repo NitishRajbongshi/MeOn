@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Student;
 
 use Exception;
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Student\Student;
 use Illuminate\Support\Facades\DB;
@@ -51,9 +52,11 @@ class StudentRegistrationController extends Controller
             if ($emailExist) {
                 // email exist
             } else {
+                $verification_token = Str::random(32);
                 $userData = [
                     'name' => $request->name,
                     'email' => $request->email,
+                    'verification_token' => $verification_token,
                     'password' => bcrypt($request->input('password')),
                 ];
                 $newuser = User::create($userData);
@@ -80,7 +83,7 @@ class StudentRegistrationController extends Controller
                         // send mail on activation
                         $to = $student->email;
                         $sub = 'Welcome to EDORB';
-                        Mail::to($to)->send(new RegistrationSuccessEmail($student, $sub, $request->email, $request->input('password')));
+                        Mail::to($to)->send(new RegistrationSuccessEmail($student, $sub, $request->email, $request->input('password'), $verification_token));
                         DB::commit();
                         return view('layouts.status', [
                             'status' => 'Success',

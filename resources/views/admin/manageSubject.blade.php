@@ -25,12 +25,13 @@
                     <div class="border rounded-md border-slate-200 my-2 p-1 md:p-2">
                         <form action="{{ route('manageSubject') }}" method="post" autocomplete="off">
                             @csrf
-                            <fieldset class="my-2">
+                            <fieldset class="mt-2 mb-4">
                                 <span class="border-2 border-blue-900 rounded-sm text-sm p-1 font-bold text-blue-900">
                                     <i class="fa fa-plus mr-1"></i>
                                     Add Subject Details
                                 </span>
                             </fieldset>
+                            <hr>
                             <div class="md:flex my-2">
                                 <div class="w-full md:w-1/3">
                                     <label class="text-sm" for="name">Subject Name: <span
@@ -65,7 +66,8 @@
                                             class="text-xs text-red-500">*</span></label>
                                 </div>
                                 <div class="w-full md:w-2/3">
-                                    <input type="text" id="tags" name="tags" placeholder="NCERT, Assamese, Class10"
+                                    <input type="text" id="tags" name="tags"
+                                        placeholder="NCERT, Assamese, Class10"
                                         class="w-full border border-blue-300 rounded-sm outline-none p-1 text-sm">
                                     <small class="text-red-500">Tags should be single words seperated by comma(csv).</small>
                                     @error('tags')
@@ -192,7 +194,8 @@
                         </p>
                         <p class="text-sm text-gray-600 text-justify">
                             <i class="fa fa-circle-dot text-xs"></i>
-                            The subject name should not contain extra space, unnecessary special characters, or numeric values.
+                            The subject name should not contain extra space, unnecessary special characters, or numeric
+                            values.
                         </p>
                     </div>
                 </div>
@@ -207,7 +210,7 @@
                 </div>
                 <div class="flex flex-col overflow-x-auto">
                     <div class="">
-                        <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                        <div class="inline-block min-w-full py-2 px-1">
                             <div class="overflow-x-auto">
                                 <table class="min-w-full text-left text-sm font-light">
                                     <thead class="border-b font-medium dark:border-neutral-500">
@@ -215,11 +218,9 @@
                                             <th scope="col" class="px-6 py-1">#</th>
                                             <th scope="col" class="px-6 py-1">Subject Name</th>
                                             <th scope="col" class="px-6 py-1">Subject Description</th>
-                                            <th scope="col" class="px-6 py-1 text-center">Subject For</th>
-                                            <th scope="col" class="px-6 py-1 text-center">Language</th>
+                                            <th scope="col" class="px-6 py-1 text-center">Tags</th>
+                                            <th scope="col" class="px-6 py-1 text-center">Class + Medium</th>
                                             <th scope="col" class="px-6 py-1 text-center">Pricing</th>
-                                            <th scope="col" class="px-6 py-1 text-center">Actual Price (Rs)</th>
-                                            <th scope="col" class="px-6 py-1 text-center">Offer Price (Rs)</th>
                                             <th scope="col" class="px-6 py-1 text-center">Edit</th>
                                             <th scope="col" class="px-6 py-1 text-center">Delete</th>
                                         </tr>
@@ -232,38 +233,56 @@
                                             <tr class="border-b dark:border-neutral-500">
                                                 <td class="whitespace-nowrap px-6 py-1 font-medium">{{ $i }}
                                                 </td>
-                                                <td class="whitespace-nowrap px-6 py-1">
+                                                <td class="px-6 py-1">
                                                     {{ $item->name }}
                                                 </td>
                                                 <td class="text-justify px-6 py-1">
                                                     {{ $item->description }}
                                                 </td>
-                                                <td class="whitespace-nowrap px-6 py-1">
-                                                    {{ $item->class_name }}
-                                                </td>
-                                                <td class="whitespace-nowrap px-6 py-1">
-                                                    {{ $item->language }}
+                                                <td class="text-justify px-6 py-1">
+                                                    @php
+                                                        $tags = $item->tags ? explode(',', $item->tags) : [];
+                                                    @endphp
+                                                    @foreach ($tags as $tag)
+                                                        <p>#{{ trim($tag) }}</p>
+                                                    @endforeach
                                                 </td>
                                                 <td class="whitespace-nowrap px-6 py-1 text-center">
+                                                    {{ $item->class_name }} <br> ({{ $item->language }})
+                                                </td>
+
+                                                <td class="whitespace-nowrap px-6 py-1 text-center">
                                                     @if ($item->master_price_status_id == '1')
-                                                        Free
+                                                        Free <br>
+                                                        <span class="inline_block mr-1"
+                                                            style="text-decoration: line-through">Rs.
+                                                            {{ $item->actual_price }} </span>
+                                                        <span class="text-red-500">Rs. {{ $item->offer_price }}</span>
                                                     @else
-                                                        Paid
+                                                        Paid <br>
+                                                        <span class="inline_block mr-1"
+                                                            style="text-decoration: line-through">Rs.
+                                                            {{ $item->actual_price }} </span>
+                                                        <span class="text-red-500">Rs. {{ $item->offer_price }}</span>
                                                     @endif
                                                 </td>
                                                 <td class="whitespace-nowrap px-6 py-1 text-center">
-                                                    {{ $item->actual_price }}
-                                                </td>
-                                                <td class="whitespace-nowrap px-6 py-1 text-center">
-                                                    {{ $item->offer_price }}
-                                                </td>
-                                                <td class="whitespace-nowrap px-6 py-1 text-center">
-                                                    <button class="openModal" data-id="{{ $item->id }}">
+                                                    <button class="openModal text-blue-500 hover:text-blue-800" data-id="{{ $item->id }}">
                                                         <i class="fa fa-pen text-xs"></i>
                                                     </button>
                                                 </td>
                                                 <td class="whitespace-nowrap px-6 py-1 text-center">
-                                                    <i class="fa fa-trash text-xs"></i>
+                                                    <form action="{{ route('subject.delete') }}" method="post">
+                                                        @method('delete')
+                                                        @csrf
+                                                        <input type="hidden" name="subjectID"
+                                                            value="{{ $item->id }}">
+                                                        <button type="submit"
+                                                            class="rounded-full bg-red-200 px-2 py-1 text-xs text-red-500 hover:text-red-800"
+                                                            onclick="return confirm('Are you sure you want to delete this class and related resources?')">
+                                                            <i class="fa fa-trash text-xs"></i>
+                                                        </button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                             @php
@@ -299,6 +318,14 @@
                     }
                 })
 
+                $('#edit_price_status').on('change', function() {
+                    const priceStatus = $(this).val();
+                    $('.edit_price_tag').hide();
+                    if (priceStatus === '2') {
+                        $('.edit_price_tag').show();
+                    }
+                })
+
                 $('.openModal').on('click', function() {
                     const id = $(this).data('id');
 
@@ -306,7 +333,7 @@
                     var csrfToken = $('meta[name="csrf-token"]').attr('content');
 
                     $.ajax({
-                        url: '/admin/manageSubject/' + id,
+                        url: '/admin/manage-subject/' + id,
                         method: 'GET',
                         dataType: 'json',
                         headers: {
@@ -317,7 +344,16 @@
                             if (response.status == 'success' && response.result != null) {
                                 $('#editName').val(response.result.name);
                                 $('#editDescription').val(response.result.description);
-
+                                $('#editTags').val(response.result.tags);
+                                $('#editLanguage').val(response.result.master_language_id);
+                                $('#edit_price_status').val(response.result.master_price_status_id);
+                                const priceStatus = response.result.master_price_status_id;
+                                $('.edit_price_tag').hide();
+                                if (priceStatus == '2') {
+                                    $('#edit_actual_price').val(response.result.actual_price);
+                                    $('#edit_offer_price').val(response.result.offer_price);
+                                    $('.edit_price_tag').show();
+                                }
                                 // show the modal
                                 $('#modal').removeClass('hidden');
                                 $('#modal').addClass('flex');
@@ -331,11 +367,9 @@
                     });
 
                     $('#submitBtn').on('click', function() {
-
                         var formData = $('#myForm').serialize();
-
                         $.ajax({
-                            url: '/admin/manageSubject/edit/' + id,
+                            url: '/admin/manage-subject/edit/' + id,
                             method: 'POST',
                             dataType: 'json',
                             data: formData,

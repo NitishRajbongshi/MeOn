@@ -61,10 +61,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/getSubject/{id}', [StandardController::class, 'getSubject']);
 
     // manage subject
-    Route::get('/manageSubject', [SubjectController::class, 'index'])->name('manageSubject');
-    Route::post('/manageSubject', [SubjectController::class, 'store']);
-    Route::get('/manageSubject/{id}', [SubjectController::class, 'show']);
-    Route::post('/manageSubject/edit/{id}', [SubjectController::class, 'update']);
+    Route::get('/manage-subject', [SubjectController::class, 'index'])->name('manageSubject');
+    Route::post('/manage-subject', [SubjectController::class, 'store']);
+    Route::get('/manage-subject/{id}', [SubjectController::class, 'show']);
+    Route::post('/manage-subject/edit/{id}', [SubjectController::class, 'update']);
+    Route::delete('/manage-subject/delete', [SubjectController::class, 'destroy'])->name('subject.delete');
     Route::get('/getChapter/{id}', [SubjectController::class, 'getChapter']);
 
     // manage chapter

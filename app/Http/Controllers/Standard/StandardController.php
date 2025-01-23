@@ -109,8 +109,13 @@ class StandardController extends Controller
         $classTags = $request->input('tags');
         $classCategory = $request->input('category');
         $classPriceStatus = $request->input('price_status');
-        $classActualPrice = $request->input('actual_price') ? $request->input('actual_price') : '0.00';
-        $classOfferPrice = $request->input('offer_price') ? $request->input('offer_price') : '0.00';
+        if ($classPriceStatus == 1) {
+            $classActualPrice = '0.00';
+            $classOfferPrice = '0.00';
+        } else {
+            $classActualPrice = $request->input('actual_price') ? $request->input('actual_price') : '0.00';
+            $classOfferPrice = $request->input('offer_price') ? $request->input('offer_price') : '0.00';
+        }
         // Find the standard by its ID
         $standard = Standard::find($standardId);
         if ($standard) {

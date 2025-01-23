@@ -93,7 +93,6 @@
                 </div>
             </div>
         </x-main-content>
-        @include('layouts.modal-layout')
         @include('layouts.success-modal')
         @include('layouts.failed-modal')
     </main>

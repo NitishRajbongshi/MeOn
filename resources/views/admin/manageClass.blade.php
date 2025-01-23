@@ -206,7 +206,7 @@
                                                         $tags = $item->tags ? explode(',', $item->tags) : [];
                                                     @endphp
                                                     @foreach ($tags as $tag)
-                                                        {{ $tag }}
+                                                        <p>#{{ trim($tag) }}</p>
                                                     @endforeach
                                                 </td>
                                                 <td class="whitespace-nowrap px-6 py-1 text-center">
@@ -307,7 +307,13 @@
                                 $('#editTags').val(response.result.tags);
                                 $('#editCategory').val(response.result.master_class_category_id);
                                 $('#edit_price_status').val(response.result.master_price_status_id);
-
+                                const priceStatus = response.result.master_price_status_id;
+                                $('.edit_price_tag').hide();
+                                if (priceStatus == '2') {
+                                    $('#edit_actual_price').val(response.result.actual_price);
+                                    $('#edit_offer_price').val(response.result.offer_price);
+                                    $('.edit_price_tag').show();
+                                }
                                 // show the modal
                                 $('#modal').removeClass('hidden');
                                 $('#modal').addClass('flex');

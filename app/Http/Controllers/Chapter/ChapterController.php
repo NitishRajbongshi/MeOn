@@ -38,6 +38,7 @@ class ChapterController extends Controller
             'chapter_no' => 'required|numeric|min:0',
             'name' => 'required|max:100',
             'description' => 'nullable',
+            'tags' => 'required',
             'price_status' => 'required'
         ]);
 
@@ -45,6 +46,7 @@ class ChapterController extends Controller
             'name' => $request->name,
             'slug' => strtolower(str_replace(' ', '-', $request->name)),
             'description' => $request->description,
+            'tags' => $request->tags,
             'standard_id' => $request->class,
             'subject_id' => $request->subject,
             'master_price_status_id' => $request->price_status,

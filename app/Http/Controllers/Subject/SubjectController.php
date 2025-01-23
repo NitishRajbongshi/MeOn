@@ -40,6 +40,7 @@ class SubjectController extends Controller
             'class' => 'required',
             'name' => 'required|max:100',
             'description' => 'nullable',
+            'tags' => 'required',
             'language' => 'required',
             'price_status' => 'required'
         ]);
@@ -49,6 +50,7 @@ class SubjectController extends Controller
             'name' => $request->name,
             'slug' => strtolower(str_replace(' ', '-', $request->name)),
             'description' => $request->description,
+            'tags' => $request->tags,
             'master_language_id' => $request->language,
             'master_price_status_id' => $request->price_status,
             'actual_price' => $request->actual_price ? $request->actual_price : '0.00',
@@ -101,7 +103,9 @@ class SubjectController extends Controller
         $user = Auth::user();
         $classes = Standard::all();
         $currentClass = Standard::find($id);
-        $subjects = $currentClass->subjects()->select('id', 'name', 'slug', 'description', 'master_price_status_id', 'actual_price', 'offer_price')
+        // dd($currentClass);
+        $subjects = $currentClass->subjects()
+            ->select('id', 'name', 'slug', 'description', 'tags', 'master_price_status_id', 'actual_price', 'offer_price')
             ->where('master_language_id', '1')->get();
         $subjectCount = $currentClass->subjects()
             ->where('master_language_id', '1')->count();
@@ -125,7 +129,7 @@ class SubjectController extends Controller
         $user = Auth::user();
         $classes = Standard::all();
         $currentClass = Standard::find($id);
-        $subjects = $currentClass->subjects()->select('id', 'name', 'description', 'master_price_status_id', 'actual_price', 'offer_price')->where('master_language_id', '2')->get();
+        $subjects = $currentClass->subjects()->select('id', 'name', 'slug', 'description', 'tags', 'master_price_status_id', 'actual_price', 'offer_price')->where('master_language_id', '2')->get();
         $subjectCount = $currentClass->subjects()->where('master_language_id', '2')->count();
         $metaData = DB::table('meta_subject_details')->where('standard_id', $id)
             ->where('master_language_id', '2')

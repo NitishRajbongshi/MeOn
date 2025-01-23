@@ -24,8 +24,8 @@
                 {{-- Chpater section --}}
                 <div class="chapter_list px-4">
                     <div class="border-b my-3 font-bold">
-                        <h1 class="text-xl">
-                            <i class="fa fa-list mr-1 text-sm"></i>
+                        <h1 class="text-xl mb-1">
+                            <i class="fa-solid fa-layer-group mr-1 text-sm"></i>
                             Chapter List
                         </h1>
                     </div>
@@ -52,7 +52,7 @@
                             @foreach ($chapters as $chapter)
                                 <div class="w-full my-1 md:w-[49.5%] p-4 border border-blue-100 bg-white hover:shadow-md">
                                     <div class="flex justify-between font-bold pb-2">
-                                        <div class="text-md">
+                                        <div class="text-sm">
                                             <i class="fa fa-circle-dot mr-1 text-blue-700"></i>
                                             {{ $chapter->name }}
                                         </div>
@@ -78,6 +78,7 @@
                                         <a href="{{ url('/notes/show', [$chapter->slug, 'all-notes']) }}">
                                             <button data-id={{ $chapter->id }}
                                                 class="subject_btn bg-blue-500 text-white rounded py-1 px-2 hover:bg-blue-600">
+                                                <i class="fa-solid fa-right-from-bracket"></i>
                                                 Explore Notes
                                             </button>
                                         </a>

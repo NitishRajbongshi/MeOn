@@ -123,6 +123,23 @@
                                 </div>
                                 <div class="md:flex my-2">
                                     <div class="w-full md:w-1/3">
+                                        <label class="text-sm" for="tags">Related Tags: <span
+                                                class="text-xs text-red-500">*</span></label>
+                                    </div>
+                                    <div class="w-full md:w-2/3">
+                                        <input type="text" id="tags" name="tags" placeholder="NCERT, Assamese, Class10"
+                                            class="w-full border border-blue-300 rounded-sm outline-none p-1 text-sm">
+                                        <small class="text-red-500">Tags should be single words seperated by comma(csv).</small>
+                                        @error('tags')
+                                            <p class="text-xs text-red-500">
+                                                <i class="fa fa-warning mr-1 my-1"></i>
+                                                {{ $message }}
+                                            </p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="md:flex my-2">
+                                    <div class="w-full md:w-1/3">
                                         <label class="text-sm" for="price_status">Select Price Status:<span
                                                 class="text-xs text-red-500">*</span></label>
                                     </div>

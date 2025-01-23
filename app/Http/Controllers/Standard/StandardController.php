@@ -33,6 +33,7 @@ class StandardController extends Controller
         $validator = $request->validate([
             'name' => 'required|max:100',
             'description' => 'nullable',
+            'tags' => 'required',
             'category' => 'required',
             'price_status' => 'required'
         ]);
@@ -46,6 +47,7 @@ class StandardController extends Controller
                 'name' => $name,
                 'slug' => $slug,
                 'description' => $request->description,
+                'tags' => str_replace(' ', '', $request->tags),
                 'master_class_category_id' => $request->category,
                 'master_price_status_id' => $request->price_status,
                 'actual_price' => $request->actual_price ? $request->actual_price : '0.00',

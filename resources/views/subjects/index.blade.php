@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @section('title', $metaData->meta_title ?? 'Edorb')
-@section('meta_description', $metaData->meta_description ?? 'Discover comprehensive Assamese and English notes for classes 5 to 10 (SEBA and NCERT) and exercise solutions for class 11 and 12 science (NCERT) in physics, chemistry, maths, and biology at edorb.in. We also offer online coaching for JEE, CEE, NEET, NEST, and more.')
+@section('meta_description', $metaData->meta_description ?? 'Discover comprehensive Assamese and English notes for
+    classes 5 to 10 (SEBA and NCERT) and exercise solutions for class 11 and 12 science (NCERT) in physics, chemistry,
+    maths, and biology at edorb.in. We also offer online coaching for JEE, CEE, NEET, NEST, and more.')
 @section('content')
     @include('layouts.navbar')
     <x-show-notification />
@@ -26,8 +28,8 @@
                 {{-- Chpater section --}}
                 <div class="chapter_list px-4">
                     <div class="border-b my-3 font-bold">
-                        <h1 class="text-xl">
-                            <i class="fa fa-list mr-1 text-sm"></i>
+                        <h1 class="text-xl mb-1">
+                            <i class="fa-solid fa-layer-group mr-1 text-sm"></i>
                             Subject List
                         </h1>
                     </div>
@@ -40,6 +42,10 @@
                         <a href="#" class="text-sm font-bold">
                             {{ $currentClass->name }} - ({{ $subjectCount }} Subjects Available)
                         </a><br>
+                    </div>
+                    <div class="text-sm my-2 text-slate-500 text-justify">
+                        <p>{{ $currentClass->description }}</p>
+                        <x-class-tags :tagsCsv="$currentClass->tags" />
                     </div>
                     <div class="py-2">
                         {{-- <p class="underline text-lg text-blue-500">List of subjects:</p> --}}
@@ -55,6 +61,7 @@
                                             <p class="text-gray-500 text-sm">{{ $currentClass->name }}</p>
                                         </div>
                                     </div>
+                                    <x-ass-subject-tags :tagsCsv="$item->tags" :routeParam="['standard' => $currentClass->slug]" />
                                     <div class="min-h-[5rem]">
                                         <p class="text-gray-400 max-h-[4rem] text-xs"
                                             style="overflow: hidden; text-overflow: ellipsis;">
@@ -66,16 +73,20 @@
                                             <p class="text-sm text-blue-500 mx-1">Free</p>
                                         @else
                                             <p class="text-sm text-blue-500 mx-1">
-                                                <span class="font-bold text-md text-gray-400" style="text-decoration: line-through"><i class="fa-solid fa-indian-rupee-sign"></i>{{$item->actual_price}}</span>
-                                                <span class="font-bold text-md text-red-600"><i class="fa-solid fa-indian-rupee-sign"></i>{{$item->offer_price}}</span>
+                                                <span class="font-bold text-md text-gray-400"
+                                                    style="text-decoration: line-through"><i
+                                                        class="fa-solid fa-indian-rupee-sign"></i>{{ $item->actual_price }}</span>
+                                                <span class="font-bold text-md text-red-600"><i
+                                                        class="fa-solid fa-indian-rupee-sign"></i>{{ $item->offer_price }}</span>
                                             </p>
                                         @endif
-                                        <button data-id={{ $item->id }}
-                                            class="subject_btn bg-blue-500 text-white rounded py-1 px-2 hover:bg-blue-600">
-                                            <a href="{{ url('/notes/chapter', [$item->slug, 'all-chapters']) }}">
+                                        <a href="{{ url('/notes/chapter', [$item->slug, 'all-chapters']) }}">
+                                            <button data-id={{ $item->id }}
+                                                class="subject_btn bg-blue-500 text-white rounded py-1 px-2 hover:bg-blue-600">
+                                                <i class="fa-solid fa-right-from-bracket"></i>
                                                 Go to chapter List
-                                            </a>
-                                        </button>
+                                            </button>
+                                        </a>
                                     </div>
                                 </div>
                             @endforeach
@@ -97,7 +108,8 @@
                         <ul>
                             @foreach ($classes as $item)
                                 <li>
-                                    <a href="{{ url('content/subject', [$item->name, 'language', 'all-languages']) }}" class="text-sm text-blue-500">
+                                    <a href="{{ url('content/subject', [$item->name, 'language', 'all-languages']) }}"
+                                        class="text-sm text-blue-500">
                                         <i class="fa fa-circle-dot mr-1 text-red-600" aria-hidden="true"></i>
                                         {{ $item->name }}
                                     </a>

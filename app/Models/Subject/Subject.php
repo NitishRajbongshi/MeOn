@@ -18,6 +18,7 @@ class Subject extends Model
         'name',
         'slug',
         'description',
+        'tags',
         'master_language_id',
         'master_price_status_id',
         'actual_price',

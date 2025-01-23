@@ -19,6 +19,7 @@ class Note extends Model
         'name',
         'slug',
         'description',
+        'tags',
         'master_price_status_id',
         'created_by',
         'updated_by',

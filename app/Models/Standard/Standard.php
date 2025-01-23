@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Arr;
 
 class Standard extends Model
 {
@@ -17,6 +18,7 @@ class Standard extends Model
         'name',
         'slug',
         'description',
+        'tags',
         'master_class_category_id',
         'master_price_status_id',
         'actual_price',

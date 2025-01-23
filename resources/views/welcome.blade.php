@@ -46,21 +46,21 @@
     </div>
 
     <!-- Slideshow container -->
-    <div class="container mx-auto">
+    <div class="container mx-auto rounded-b-sm">
         <div class="slideshow-container w-full">
             <div class="mySlides fade">
                 <div class="numbertext">1 / 3</div>
-                <img src="{{ asset('images/banner1.png') }}" style="width:100%">
+                <img src="{{ asset('images/banner1.png') }}" style="width:100%" class="rounded-b-sm">
             </div>
 
             <div class="mySlides fade">
                 <div class="numbertext">2 / 3</div>
-                <img src="{{ asset('images/banner2.png') }}" style="width:100%">
+                <img src="{{ asset('images/banner2.png') }}" style="width:100%" class="rounded-b-sm">
             </div>
 
             <div class="mySlides fade">
                 <div class="numbertext">3 / 3</div>
-                <img src="{{ asset('images/banner1.png') }}" style="width:100%">
+                <img src="{{ asset('images/banner1.png') }}" style="width:100%" class="rounded-b-sm">
             </div>
         </div>
     </div>
@@ -69,15 +69,12 @@
         {{-- content --}}
         <div class="w-full md:w-3/4">
             {{-- Exam Link --}}
-            <div class="available_class px-1 md:px-4">
-                <div class="text-xl border-b my-3">
-                    <span class="font-bold">
-                        <i class="fa fa-list text-sm mr-1"></i>
-                        Exam Links
-                    </span>
-                </div>
-                <div class="p-2 shadow-sm text-sm font-bold"
-                    style="background: linear-gradient(90deg, rgb(149, 183, 222) 0%, rgb(212, 221, 238) 100%)">
+            <div class="available_class px-1 py-5 my-1 rounded-md md:my-5 md:px-4"
+                style="background: linear-gradient(90deg, rgb(234, 238, 243) 0%, rgb(250, 251, 253) 100%)">
+                <p class="text-xl md:text-2xl text-center my-3 font-bold">Online Examination</p>
+                <p class="text-center mb-2">Edorb is preparing students for multiple online assessment. Prepare yourself and
+                    participate here.</p>
+                <div class="border p-2 text-sm font-bold rounded-lg">
                     @if ($examLinks->count() == 0)
                         <p class="p-1">
                             <i class="fa fa-smile" aria-hidden="true"></i>
@@ -85,10 +82,10 @@
                         </p>
                     @else
                         <table class="table-auto w-full">
-                            <tbody>
+                            <tbody class="">
                                 @foreach ($examLinks as $examLink)
-                                    <tr class="">
-                                        <td class="p-1 ">
+                                    <tr class="mb-1">
+                                        <td class="p-1">
                                             <i class="fa fa-circle-dot text-xs text-blue-800"></i>
                                             {{ $examLink->title }}
                                             @if ($examLink->status_id === 1)
@@ -111,10 +108,18 @@
                                         <td class="p-1 text-end">
                                             @if ($examLink->status_id === 2)
                                                 <a class="text-blue-500 rounded" href="{{ $examLink->link }}">
-                                                    Click Here
+                                                    <button
+                                                        class="btn btn-sm bg-blue-500 text-white hover:bg-blue-600 px-2 py-1 rounded-full">
+                                                        Click Here
+                                                    </button>
                                                 </a>
                                             @else
-                                                <p>Not Avaiable</p>
+                                                <a class="text-blue-500 rounded" href="#">
+                                                    <button
+                                                        class="btn btn-sm bg-red-500 text-white hover:bg-red-600 px-2 py-1 rounded-full">
+                                                        Not Available
+                                                    </button>
+                                                </a>
                                             @endif
                                         </td>
                                     </tr>
@@ -130,46 +135,36 @@
             </div>
 
             {{-- Class section --}}
-            <div class="available_class px-1 md:px-4">
-                <div class="text-xl border-b my-3">
-                    <span class="font-bold">
-                        <i class="fa fa-list text-sm mr-1"></i>
-                        Our Courses
-                    </span>
-                </div>
+            <div class="available_class px-1 py-5 my-1 rounded-md md:my-4 md:px-2"
+                style="background: linear-gradient(90deg, rgb(234, 238, 243) 0%, rgb(250, 251, 253) 100%)">
+                <p class="text-center text-xl md:text-2xl my-3 font-bold">Our Courses</p>
+                <p class="text-center text-slate-500 mb-2"></p>
                 @foreach ($categories as $category)
-                    <div class="text-md bg-blue-200 text-blue-600 my-3 px-3 py-2 flex justify-between">
-                        <div class="font-bold">
-                            <i class="fa fa-circle-dot"></i>
-                            {{ $category->category }}
+                    <div class="p-2 mb-4">
+                        <div class="text-lg rounded-md my-3 flex justify-center">
+                            <div class="font-bold">
+                                {{ $category->category }}
+                            </div>
+                            <div>
+                                {{-- <i class="fa fa-list"></i> --}}
+                            </div>
                         </div>
-                        <div>
-                            <i class="fa fa-angle-down"></i>
-                        </div>
-                    </div>
-                    <div class="flex flex-wrap justify-between items-center">
-                        @foreach ($category->standards as $item)
-                            <div class="flex flex-wrap w-full my-1 md:w-[49%] rounded-md min-h-[12rem] bg-white shadow-sm hover:shadow-lg"
-                                style="background: linear-gradient(90deg, rgba(255,245,255,1) 0%, rgba(241,251,255,1) 47%, rgba(234,237,255,1) 100%);">
-                                {{-- <div class="w-2/6 flex justify-center items-start">
-                                    <img src="{{ asset('images/course.png') }}" alt="{{ $item->name }}" class="pt-5">
-                                </div> --}}
-                                <div class="w-full">
-                                    {{-- <div class="flex justify-end">
-                                        <p class="text-xs text-white px-2 py-1 bg-red-600 rounded-tr-md">New</p>
-                                    </div> --}}
-                                    <div class="min-h-[7rem] p-3 text-justify">
-                                        <div class="flex flex-wrap justify-between items-end border-b border-blue-300 pb-1">
-                                            <h1 class="font-bold text-xl">{{ $item->name }}</h1>
-                                            <p class="text-sm font-bold text-slate-500">Assamese + English</p>
-                                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 mb-2">
+                            @foreach ($category->standards as $item)
+                                @php
+                                    $randomNumber = rand(1, 7);
+                                @endphp
+                                <div class="bg-white shadow-md rounded-md overflow-hidden hover:shadow-lg">
+                                    <div class="h-48 w-full bg-gray-200">
+                                        <img src={{ asset('images\classHeader\header_' . $randomNumber . '.jpg') }}
+                                            alt="Image 1" class="h-full w-full object-cover">
+                                    </div>
+                                    <div class="p-3">
                                         <div class="py-1">
-                                            <p class="text-xs font-bold text-slate-500">NCERT</p>
-                                            <p class="font-bold text-sm"><span>Free</span> & <span>Premium</span></p>
                                             {{-- check if the user is authenticate or not --}}
                                             @auth
                                                 @if ($user->admin)
-                                                    <div class="inline-block bg-yellow-400 px-1 shadow-orange-500 rounded-sm">
+                                                    <div class="flex flex-wrap justify-between">
                                                         @if ($item->master_price_status_id == '1')
                                                             <p class="text-sm text-blue-500">Free</p>
                                                         @else
@@ -181,49 +176,58 @@
                                                                         class="fa-solid fa-indian-rupee-sign"></i>{{ $item->offer_price }}</span>
                                                             </p>
                                                         @endif
+                                                        <div>
+                                                            <form action="{{ route('class.delete') }}" method="post">
+                                                                @method('delete')
+                                                                @csrf
+                                                                <input type="hidden" name="classID"
+                                                                    value="{{ $item->id }}">
+                                                                <button type="submit" class="rounded-full bg-red-200 px-2 py-1 text-xs text-red-500 hover:text-red-800"
+                                                                    onclick="return confirm('Are you sure you want to delete this class and related resources?')">
+                                                                    <i class="fa fa-trash text-xs"></i>
+                                                                </button>
+                                                            </form>
+                                                        </div>
                                                     </div>
                                                 @endif
                                             @endauth
                                         </div>
-                                        <div class="my-2">
-                                            <p class="text-sm text-gray-700 max-h-[6rem] min-h-[6rem] w-full"
-                                                style="overflow: hidden; text-overflow: ellipsis;">
-                                                {{ $item->description }}
-                                            </p>
+                                        <div class="flex flex-wrap justify-between items-end pb-1">
+                                            <p class="font-bold text-xs">Free & Premium</p>
+                                            <p class="text-xs font-bold text-slate-500">NCERT</p>
                                         </div>
+                                        <div class="flex flex-wrap justify-between items-end pb-1">
+                                            <p class="font-bold text-sm">{{ $item->name }}</p>
+                                            {{-- <p class="text-sm font-bold text-slate-500">Assamese + English</p> --}}
+                                        </div>
+                                        <div class="">
+                                            <x-class-tags :tagsCsv="$item->tags" />
+                                        </div>
+                                        <p class="text-sm text-gray-700 mt-2 max-h-[6rem] min-h-[6rem] w-full text-justify"
+                                            style="overflow: hidden; text-overflow: ellipsis;">
+                                            {{ $item->description }}
+                                        </p>
                                     </div>
-                                    <div class="flex items-end justify-between gap-1 p-3 mb-3">
-                                        <div class="w-full md:w-1/2">
-                                            <button
-                                                class="w-full px-4 py-2 rounded-full bg-yellow-500 text-white hover:bg-yellow-600"
-                                                data-id="{{ $item->id }}">
-                                                <a class="text-sm font-bold" href="/">
-                                                    Purchase Now
-                                                </a>
+                                    <div class="p-2">
+                                        {{-- <a href="{{ route('subjectList', [$item->id]) }}">Explore Notes</a> --}}
+                                        {{-- <a href="{{ url('content/subject', [$item->name, 'all-subjects']) }}">Explore Notes</a> --}}
+                                        <a class="text-sm font-bold block"
+                                            href="{{ url('content/subject', [$item->slug, 'language', 'all-languages']) }}">
+                                            <button class="w-full py-3 rounded-lg bg-blue-500 text-white hover:bg-blue-600"
+                                                data-id="1">
+                                                View Content
                                             </button>
-                                        </div>
-                                        <div class="w-full md:w-1/2 flex justify-end">
-                                            <button
-                                                class="w-full px-4 py-2 rounded-full bg-blue-500 text-white hover:bg-blue-600"
-                                                data-id="{{ $item->id }}">
-                                                {{-- <a href="{{ route('subjectList', [$item->id]) }}">Explore Notes</a> --}}
-                                                {{-- <a href="{{ url('content/subject', [$item->name, 'all-subjects']) }}">Explore Notes</a> --}}
-                                                <a class="text-sm font-bold"
-                                                    href="{{ url('content/subject', [$item->slug, 'language', 'all-languages']) }}">
-                                                    View Content
-                                                </a>
-                                            </button>
-                                        </div>
+                                        </a>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>
                     </div>
                 @endforeach
             </div>
         </div>
         {{-- sidebar --}}
-        <div class="hidden md:block md:w-1/4 px-4">
+        <div class="hidden md:block md:w-1/4 px-4 ">
             <div class="notification_list ">
                 <div class="text-xl border-b my-3 font-bold">
                     <p>

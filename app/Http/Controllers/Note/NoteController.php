@@ -51,6 +51,7 @@ class NoteController extends Controller
             'chapter' => 'required',
             'name' => 'required',
             'description' => 'nullable',
+            'tags' => 'required',
             'price_status' => 'required',
             'img_file.*' => 'required|image|mimes:jpg, jpeg|max:5120',
         ]);
@@ -64,6 +65,7 @@ class NoteController extends Controller
                 'name' => $request->input('name'),
                 'slug' => strtolower(str_replace(' ', '-', $request->input('name'))),
                 'description' => $request->input('description'),
+                'tags' => $request->tags,
                 'master_price_status_id' => $request->input('price_status'),
                 'created_by' => $user->id,
                 'updated_by' => $user->id,

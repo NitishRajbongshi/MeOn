@@ -60,7 +60,7 @@
     @stack('styles')
 </head>
 
-<body class="font-[Nunito Sans] bg-gradient-to-t bg-gray-100 h-screen">
+<body class="font-[Nunito Sans] bg-gradient-to-t h-screen">
     @include('layouts.preloader')
     @yield('content')
     @stack('scripts')

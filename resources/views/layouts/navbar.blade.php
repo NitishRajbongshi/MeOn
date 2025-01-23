@@ -1,16 +1,16 @@
 <header class="shadow-sm bg-white">
-    <nav class="flex justify-between items-center w-[95%]  mx-auto">
+    <nav class="container flex justify-between items-center w-[95%]  mx-auto">
         <div>
             {{-- <img class="w-16 cursor-pointer" src="https://cdn-icons-png.flaticon.com/512/5968/5968204.png" alt="..."> --}}
             <a href="/" class="flex justify-center items-center py-1">
-                <img src="{{ asset('images/main_logo.png') }}" alt="logo" width="60rem;" class="hidden md:block">
+                <img src="{{ asset('images/main_logo.png') }}" alt="logo" width="50rem;" class="hidden md:block">
                 <span class="text-xl py-3 font-bold text-blue-800">EDORB</span>
             </a>
             {{-- <p class="text-xl py-3 font-bold">EDORB</p> --}}
         </div>
         <div class="nav-links duration-500 md:static bg-white absolute md:min-h-fit min-h-[40vh] left-0 top-[-100%] md:w-auto  w-full flex items-start px-5 py-4"
             style="z-index: 1;">
-            <ul class="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-2">
+            <ul class="flex text-md md:flex-row flex-col md:items-center md:gap-[4vw] gap-2">
                 <li class="md:hidden">
                     <a class="hover:text-gray-500 text-lg font-bold text-blue-800" href="{{ route('home') }}">
                         EDORB

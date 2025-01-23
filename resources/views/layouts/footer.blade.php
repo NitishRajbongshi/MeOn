@@ -1,36 +1,70 @@
-{{-- footer --}}
-{{-- <div class="p-1"> --}}
-    <div class="p-1" style="background: linear-gradient(90deg, rgb(238, 238, 238) 0%, rgb(212, 212, 212) 100%);">
-    <div class="flex flex-row flex-wrap py-2">
-        <div class="basis-full md:basis-1/3 flex flex-col justify-center items-center">
-            <div>
-                <img src="{{ asset('images/main_logo.png') }}" alt="logo" width="80rem;" height="auto">
+<footer class="border-t bg-white">
+    <div class="container px-8 mx-auto">
+
+        <div class="flex flex-col w-full py-6 md:flex-row">
+
+            <div class="flex-1 mb-6 text-black">
+                <a class="text-sm font-bold text-orange-600 no-underline hover:no-underline lg:text-xl" href="#">
+                    <img class="inline-block" src="{{ asset('images/main_logo.png') }}" alt="logo" width="50rem;" height="auto"> EDORB
+                </a>
             </div>
-            <p class="text-xl font-bold">EDORB</p>
-        </div>
-        <div class="basis-full px-1 md:basis-1/3">
-            <h1 class="underline font-bold text-lg pb-2">Important Link</h1>
-            <ul>
-                <li class="text-md"><a href="{{ route('contact.us') }}" class="hover:text-gray-500">Contact Us</a></li>
-                <li class="text-md"><a href="{{ route('about') }}" class="hover:text-gray-500">About Us</a></li>
-                <li class="text-md"><a href="#" class="hover:text-gray-500">Location</a></li>
-                <li class="text-md"><a href="{{ url('/sitemap.xml') }}" class="hover:text-gray-500">SiteMap</a></li>
-            </ul>
-        </div>
-        <div class="basis-full px-1 md:basis-1/3">
-            <div class="text-2xl py-2">
-                <a class="me-2" href="#" class="hover:text-gray-500"><i class="fa-brands fa-facebook"></i></a>
-                <a class="me-2" href="#" class="hover:text-gray-500"><i class="fa-brands fa-instagram"></i></a>
-                <a class="me-2" href="#" class="hover:text-gray-500"><i class="fa-brands fa-twitter"></i></a>
+
+
+            <div class="flex-1">
+                <p class="text-gray-500 uppercase md:mb-6">Links</p>
+                <ul class="mb-6 list-reset">
+                    <li class="inline-block mt-2 mr-2 md:block md:mr-0">
+                        <a href="{{ route('contact.us') }}" class="text-gray-800 no-underline hover:underline hover:text-orange-500">Contact Us</a>
+                    </li>
+                    <li class="inline-block mt-2 mr-2 md:block md:mr-0">
+                        <a href="{{ route('about') }}" class="text-gray-800 no-underline hover:underline hover:text-orange-500">About Us</a>
+                    </li>
+                    <li class="inline-block mt-2 mr-2 md:block md:mr-0">
+                        <a href="#" class="text-gray-800 no-underline hover:underline hover:text-orange-500">Support</a>
+                    </li>
+                </ul>
             </div>
-            <p>
-                Copyright
-                <i class="fa fa-copyright" aria-hidden="true"></i>
-                2024 Edorb.in
-            </p>
-            <div class="text-xs">
-                <a href="https://nitishrajbongshi.github.io/visit_portfolio/" target="__blank">Developer info</a>
+            <div class="flex-1">
+                <p class="text-gray-500 uppercase md:mb-6">Legal</p>
+                <ul class="mb-6 list-reset">
+                    <li class="inline-block mt-2 mr-2 md:block md:mr-0">
+                        <a href="#" class="text-gray-800 no-underline hover:underline hover:text-orange-500">Terms</a>
+                    </li>
+                    <li class="inline-block mt-2 mr-2 md:block md:mr-0">
+                        <a href="{{ url('/sitemap.xml') }}" class="text-gray-800 no-underline hover:underline hover:text-orange-500">SiteMap</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="flex-1">
+                <p class="text-gray-500 uppercase md:mb-6">Social</p>
+                <ul class="mb-6 list-reset">
+                    <li class="inline-block mt-2 mr-2 md:block md:mr-0">
+                        <a href="#" class="text-gray-800 no-underline hover:underline hover:text-orange-500">Facebook</a>
+                    </li>
+                    <li class="inline-block mt-2 mr-2 md:block md:mr-0">
+                        <a href="#" class="text-gray-800 no-underline hover:underline hover:text-orange-500">Linkedin</a>
+                    </li>
+                    <li class="inline-block mt-2 mr-2 md:block md:mr-0">
+                        <a href="#" class="text-gray-800 no-underline hover:underline hover:text-orange-500">Twitter</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="flex-1">
+                <p class="text-gray-500 uppercase md:mb-6">Company</p>
+                <ul class="mb-6 list-reset">
+                    <li class="inline-block mt-2 mr-2 md:block md:mr-0">
+                        <a href="#" class="text-gray-800 no-underline hover:underline hover:text-orange-500">Official
+                            Blog</a>
+                    </li>
+                    <li class="inline-block mt-2 mr-2 md:block md:mr-0">
+                        <a href="#" class="text-gray-800 no-underline hover:underline hover:text-orange-500">About
+                            Us</a>
+                    </li>
+                    <li class="inline-block mt-2 mr-2 md:block md:mr-0">
+                        <a href="#" class="text-gray-800 no-underline hover:underline hover:text-orange-500">Contact</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
-</div>
+</footer>

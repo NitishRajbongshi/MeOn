@@ -4,33 +4,30 @@
             {{-- <img class="w-16 cursor-pointer" src="https://cdn-icons-png.flaticon.com/512/5968/5968204.png" alt="..."> --}}
             <a href="/" class="flex justify-center items-center py-1">
                 <img src="{{ asset('images/main_logo.png') }}" alt="logo" width="50rem;" class="hidden md:block">
-                <span class="text-xl py-3 font-bold text-blue-800">EDORB</span>
+                <span style="font-family: 'Lilita One', serif;" class="text-xl py-3 text-red-800">EDORB</span>
             </a>
             {{-- <p class="text-xl py-3 font-bold">EDORB</p> --}}
         </div>
         <div class="nav-links duration-500 md:static bg-white absolute md:min-h-fit min-h-[40vh] left-0 top-[-100%] md:w-auto  w-full flex items-start px-5 py-4"
             style="z-index: 1;">
-            <ul class="flex text-md md:flex-row flex-col md:items-center md:gap-[4vw] gap-2">
+            <ul class="flex text-lg md:flex-row flex-col md:items-center md:gap-[4vw] gap-2">
                 <li class="md:hidden">
-                    <a class="hover:text-gray-500 text-lg font-bold text-blue-800" href="{{ route('home') }}">
+                    <a style="font-family: 'Lilita One', serif;" class="hover:text-gray-500 text-lg text-red-800" href="{{ route('home') }}">
                         EDORB
                     </a>
                 </li>
                 <li>
-                    <a class="hover:text-gray-500 text-blue-800 font-bold" href="{{ route('home') }}">
-                        <i class="fa fa-home"></i>
+                    <a class="text-blue-800 font-bold hover:text-gray-500 hover:underline" href="{{ route('home') }}">
                         Home
                     </a>
                 </li>
                 <li>
-                    <a class="hover:text-gray-500 text-red-500 font-bold" href="{{ route('subscription') }}">
-                        <i class="fa-solid fa-indian-rupee-sign"></i>
+                    <a class="text-red-500 font-bold hover:text-gray-500 hover:underline" href="{{ route('subscription') }}">
                         Pricing
                     </a>
                 </li>
                 <li>
-                    <a class="hover:text-gray-500 text-red-800 font-bold" href="#">
-                        <i class="fa fa-comments"></i>
+                    <a class="text-red-800 font-bold hover:text-gray-500 hover:underline" href="#">
                         Blog
                     </a>
                 </li>
@@ -91,7 +88,7 @@
             @guest
                 <a href="{{ route('login') }}">
                     <button
-                        class="text-sm border bg-blue-500 text-white px-4 py-1 hover:bg-blue-600 hover:shadow-md hover:shadow-blue-100">
+                        class="text-md rounded-full border bg-blue-500 text-white px-4 py-1 hover:bg-blue-600 hover:shadow-md hover:shadow-blue-100">
                         <i class="fa fa-sign-in"></i>
                         Login
                     </button>

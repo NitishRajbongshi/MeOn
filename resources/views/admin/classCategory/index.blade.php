@@ -33,16 +33,62 @@
                             </fieldset>
                             <div class="md:flex my-2">
                                 <div class="w-full md:w-1/3">
-                                    <label class="text-sm" for="category">category Title: <span
+                                    <label class="text-sm" for="category">Category: <span
                                             class="text-xs text-red-500">*</span></label>
                                 </div>
                                 <div class="w-full md:w-2/3">
                                     <input type="text" id="category" name="category"
-                                        placeholder="eg: High School (5 - 10)"
-                                        value="{{ old('category') }}"
+                                        placeholder="eg: High School (5 - 10)" value="{{ old('category') }}"
                                         class="w-full border border-blue-300 rounded-sm outline-none p-1 text-sm">
 
                                     @error('category')
+                                        <p class="text-xs text-red-500">
+                                            <i class="fa fa-warning mr-1 my-1"></i>
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="md:flex my-2">
+                                <div class="w-full md:w-1/3">
+                                    <label class="text-sm" for="title">Category Title: <span
+                                            class="text-xs text-red-500">*</span></label>
+                                </div>
+                                <div class="w-full md:w-2/3">
+                                    <input type="text" id="title" name="title"
+                                        placeholder="Explore the best and effordable content for this category"
+                                        value="{{ old('title') }}"
+                                        class="w-full border border-blue-300 rounded-sm outline-none p-1 text-sm">
+
+                                    @error('title')
+                                        <p class="text-xs text-red-500">
+                                            <i class="fa fa-warning mr-1 my-1"></i>
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="md:flex my-2">
+                                <div class="w-full md:w-1/3">
+                                    <label class="text-sm" for="description">Category Description:</label>
+                                </div>
+                                <div class="w-full md:w-2/3">
+                                    <textarea rows="4" id="description" name="description"
+                                        class="w-full border border-blue-300 rounded-sm outline-none p-1 text-sm"
+                                        placeholder="Write any description if needed..."></textarea>
+                                </div>
+                            </div>
+                            <div class="md:flex my-2">
+                                <div class="w-full md:w-1/3">
+                                    <label class="text-sm" for="tags">Related Tags: <span
+                                            class="text-xs text-red-500">*</span></label>
+                                </div>
+                                <div class="w-full md:w-2/3">
+                                    <input type="text" id="tags" name="tags"
+                                        placeholder="NCERT, Assamese, Class10"
+                                        class="w-full border border-blue-300 rounded-sm outline-none p-1 text-sm">
+                                    <small class="text-red-500">Tags should be single words seperated by comma(csv).</small>
+                                    @error('tags')
                                         <p class="text-xs text-red-500">
                                             <i class="fa fa-warning mr-1 my-1"></i>
                                             {{ $message }}
@@ -81,13 +127,16 @@
                 </div>
                 <div class="flex flex-col overflow-x-auto">
                     <div class="">
-                        <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                        <div class="inline-block min-w-full py-2 px-1">
                             <div class="overflow-x-auto">
                                 <table class="min-w-full text-left text-sm font-light">
                                     <thead class="border-b font-medium dark:border-neutral-500">
                                         <tr>
                                             <th scope="col" class="px-6 py-1">#</th>
+                                            <th scope="col" class="px-6 py-1">Category</th>
                                             <th scope="col" class="px-6 py-1">Title</th>
+                                            <th scope="col" class="px-6 py-1">Description</th>
+                                            <th scope="col" class="px-6 py-1">Tags</th>
                                             <th scope="col" class="px-6 py-1">Edit</th>
                                             <th scope="col" class="px-6 py-1">Delete</th>
                                         </tr>
@@ -98,9 +147,24 @@
                                         @endphp
                                         @foreach ($categories as $item)
                                             <tr class="border-b dark:border-neutral-500">
-                                                <td class="whitespace-nowrap px-6 py-1 font-medium">{{ $i }}</td>
-                                                <td class="whitespace-nowrap px-6 py-1">
+                                                <td class="whitespace-nowrap px-6 py-1 font-medium">{{ $i }}
+                                                </td>
+                                                <td class=" px-6 py-1">
                                                     {{ $item->category }}
+                                                </td>
+                                                <td class=" px-6 py-1">
+                                                    {{ $item->title }}
+                                                </td>
+                                                <td class=" px-6 py-1">
+                                                    {{ $item->description }}
+                                                </td>
+                                                <td class=" px-6 py-1">
+                                                    @php
+                                                        $tags = $item->tags ? explode(',', $item->tags) : [];
+                                                    @endphp
+                                                    @foreach ($tags as $tag)
+                                                        <p>#{{ trim($tag) }}</p>
+                                                    @endforeach
                                                 </td>
                                                 <td class="whitespace-nowrap px-6 py-1">
                                                     <button class="openModal" data-id="{{ $item->id }}">
@@ -108,11 +172,13 @@
                                                     </button>
                                                 </td>
                                                 <td class="whitespace-nowrap text-center px-6 py-1">
-                                                    <form action="{{route('deleteExamLink')}}" method="post">
+                                                    <form action="{{ route('deleteExamLink') }}" method="post">
                                                         @method('delete')
                                                         @csrf
-                                                        <input type="hidden" name="linkId" value="{{$item->id}}">
-                                                        <button type="submit" onclick="return confirm('Are you sure you want to delete this exam link?')">
+                                                        <input type="hidden" name="linkId"
+                                                            value="{{ $item->id }}">
+                                                        <button type="submit"
+                                                            onclick="return confirm('Are you sure you want to delete this exam link?')">
                                                             <i class="fa fa-trash text-xs"></i>
                                                         </button>
                                                     </form>

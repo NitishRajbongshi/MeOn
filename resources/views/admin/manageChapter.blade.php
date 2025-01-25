@@ -306,7 +306,6 @@
                 </div>
             </div>
         </x-main-content>
-        {{-- @include('layouts.modal-layout') --}}
     </main>
     @include('layouts.footer')
     <script>

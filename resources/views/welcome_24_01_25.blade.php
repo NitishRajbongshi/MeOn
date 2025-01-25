@@ -19,119 +19,148 @@
             @endforeach
         </marquee>
     </div>
+
+    {{-- info button --}}
+    {{-- <div class="container mx-auto flex gap-1 justify-end items-center text-xs">
+        <p class="border border-blue-200 p-1 hover:bg-blue-500 hover:text-white hover:font-bold hover:cursor-pointer">
+            <a href="#">
+                <i class="fa-solid fa-comment"></i>
+                Feedback
+            </a>
+        </p>
+        <p class="border border-blue-200 p-1 hover:bg-blue-500 hover:text-white hover:font-bold hover:cursor-pointer">
+            <a href="{{ route('about') }}">
+                <i class="fa-solid fa-address-card"></i>
+                About us
+            </a>
+        </p>
+        <p class="border border-blue-200 p-1 hover:bg-blue-500 hover:text-white hover:font-bold hover:cursor-pointer">
+            <a href="{{ route('contact.us') }}">
+                <i class="fa-solid fa-phone"></i>
+                contact us
+            </a>
+        </p>
+    </div> --}}
     <div class="pt-24 container mx-auto">
         <div class="container flex flex-col flex-wrap items-center px-3 mx-auto md:flex-row">
             <!--Left Col-->
             <div class="flex flex-col items-start justify-center w-full text-center md:w-2/5 md:text-left">
                 <p class="w-full uppercase tracking-loose">Are you looking for best notes for your subjects?</p>
-                <h1 class="my-4 text-3xl font-bold leading-tight">Congratulations ! EDORB is here for you.</h1>
+                <h1 class="my-4 text-3xl font-bold leading-tight">congratulations ! EDORB is here for you.</h1>
                 <p class="mb-8 text-xl leading-normal">Learn and participate online assessment to grow yourself.</p>
                 <a href="{{ route('about') }}">
-                    <button style="background: linear-gradient(90deg, #d53d67 0%, #daad52 100%)"
-                        class="px-8 py-4 mx-auto my-6 font-bold text-gray-800 bg-white rounded-full shadow-lg lg:mx-0 hover:text-white hover:underline">
+                    <button
+                        class="px-8 py-4 mx-auto my-6 font-bold text-gray-800 bg-white rounded-full shadow-lg lg:mx-0 hover:underline">
                         About Us
                     </button>
                 </a>
+
             </div>
             <!--Right Col-->
             <div class="w-full py-6 text-center md:w-3/5">
                 <img class="z-50 w-full md:w-4/5" src="{{ asset('images\hero.png') }}">
             </div>
+
         </div>
     </div>
-
     <section class="container py-6 mx-auto mb-12 text-center">
+
         <h1 class="w-full my-2 text-3xl font-bold leading-tight text-center">Online assessment</h1>
         <div class="w-full mb-4">
             <div class="w-1/6 h-1 py-0 mx-auto my-0 bg-white rounded-t opacity-25"></div>
         </div>
+
         <h3 class="my-4 text-xl leading-tight">Edorb is preparing students for multiple online assessment. Prepare yourself
             and participate here.</h3>
-        <a href="{{ route('student.assessment') }}" target="_blank">
-            <button style="background: linear-gradient(90deg, #d53d67 0%, #daad52 100%)"
-                class="px-8 py-4 mx-auto my-6 font-bold text-gray-800 bg-white rounded-full shadow-lg lg:mx-0 hover:text-white hover:underline">
-                Participate
-            </button>
-        </a>
 
+        <button
+            class="px-8 py-4 mx-auto my-6 font-bold text-gray-800 bg-white rounded-full shadow-lg lg:mx-0 hover:underline">Paticipate</button>
 
     </section>
-    <div class="container flex flex-wrap pt-4 pb-12 mx-auto">
+
+    <div class="container flex flex-wrap pt-4 pb-12 mx-auto text-center">
         <h1 class="w-full my-2 text-3xl font-bold leading-tight text-center text-gray-800">Our Courses</h1>
-        <div class="w-full mb-4">
-            <div class="w-64 h-1 py-0 mx-auto my-0 rounded-t opacity-25 gradient"></div>
-        </div>
-        @foreach ($categories as $category)
-            @php
-                $randomNumber = rand(1, 7);
-            @endphp
-            <div class="flex flex-col w-full p-6 md:w-1/3">
-                <div class="h-48 w-full">
-                    <img src={{ asset('images\classHeader\header_' . $randomNumber . '.jpg') }} alt="{{ $category->title }}"
-                        class="h-full w-full object-cover">
-                </div>
-                <div class="flex-1 p-4 overflow-hidden bg-slate-50 rounded-t rounded-b-none shadow">
-                    <a href="#" class="flex flex-wrap no-underline hover:no-underline">
-                        <div class="w-full text-xs text-gray-600 md:text-sm">
-                            <x-class-tags :tagsCsv="$category->tags" />
-                        </div>
-                        <div class="w-full text-xl font-bold text-gray-800">{{ $category->category }}</div>
-                        <p class="mb-3 text-justify text-base text-gray-800">
-                            {{ Str::limit($category->title, 200) }}
-                        </p>
-                    </a>
-                </div>
-                <div class="flex-none mt-auto overflow-hidden bg-slate-50 rounded-t-none rounded-b shadow">
-                    <div class="flex items-center justify-center">
-                        <a href="{{ url('category', [$category->slug, 'all-classes']) }}">
-                            <button
-                                class="px-8 py-4 mx-auto my-6 font-bold rounded-full shadow-lg lg:mx-0 hover:underline hover:text-white gradient"
-                                style="background: linear-gradient(90deg, #d53d67 0%, #daad52 100%)">
-                                Explore Classes
-                            </button>
-                        </a>
+        <div class="available_class rounded-md md:my-4 md:px-2">
+            @foreach ($categories as $category)
+                <div class="p-2 mb-4">
+                    <h3 class="text-center my-4 text-xl leading-tight">
+                        {{ $category->category }}
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 mb-2">
+                        @foreach ($category->standards as $item)
+                            @php
+                                $randomNumber = rand(1, 7);
+                            @endphp
+                            <div class="border bg-white shadow rounded-md overflow-hidden hover:shadow-lg">
+                                <div class="h-48 w-full bg-gray-200">
+                                    <img src={{ asset('images\classHeader\header_' . $randomNumber . '.jpg') }}
+                                        alt="Image 1" class="h-full w-full object-cover">
+                                </div>
+                                <div class="p-3">
+                                    <div class="py-1">
+                                        {{-- check if the user is authenticate or not --}}
+                                        @auth
+                                            @if ($user->admin)
+                                                <div class="flex flex-wrap justify-between">
+                                                    @if ($item->master_price_status_id == '1')
+                                                        <p class="text-sm text-blue-500">Free</p>
+                                                    @else
+                                                        <p class="text-sm text-blue-500">
+                                                            <span class="font-bold text-md text-gray-400"
+                                                                style="text-decoration: line-through"><i
+                                                                    class="fa-solid fa-indian-rupee-sign"></i>{{ $item->actual_price }}</span>
+                                                            <span class="font-bold text-md text-red-600"><i
+                                                                    class="fa-solid fa-indian-rupee-sign"></i>{{ $item->offer_price }}</span>
+                                                        </p>
+                                                    @endif
+                                                    <div>
+                                                        <form action="{{ route('class.delete') }}" method="post">
+                                                            @method('delete')
+                                                            @csrf
+                                                            <input type="hidden" name="classID" value="{{ $item->id }}">
+                                                            <button type="submit"
+                                                                class="rounded-full bg-red-200 px-2 py-1 text-xs text-red-500 hover:text-red-800"
+                                                                onclick="return confirm('Are you sure you want to delete this class and related resources?')">
+                                                                <i class="fa fa-trash text-xs"></i>
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        @endauth
+                                    </div>
+                                    <div class="flex flex-wrap justify-between items-end pb-1">
+                                        <p class="font-bold text-xs">Free & Premium</p>
+                                        <p class="text-xs font-bold text-slate-500">NCERT</p>
+                                    </div>
+                                    <div class="flex flex-wrap justify-between items-end pb-1">
+                                        <p class="font-bold text-sm">{{ $item->name }}</p>
+                                        {{-- <p class="text-sm font-bold text-slate-500">Assamese + English</p> --}}
+                                    </div>
+                                    <div class="">
+                                        <x-class-tags :tagsCsv="$item->tags" />
+                                    </div>
+                                    <p class="text-md text-gray-700 mt-2 max-h-[15rem] min-h-[15rem] w-full text-justify"
+                                        style="overflow: hidden; text-overflow: ellipsis;">
+                                        {{ $item->description }}
+                                    </p>
+                                </div>
+                                <div class="px-2">
+                                    {{-- <a href="{{ route('subjectList', [$item->id]) }}">Explore Notes</a> --}}
+                                    {{-- <a href="{{ url('content/subject', [$item->name, 'all-subjects']) }}">Explore Notes</a> --}}
+                                    <a class="text-md font-bold block"
+                                        href="{{ url('content/subject', [$item->slug, 'language', 'all-languages']) }}">
+                                        <button class="w-full py-4 mx-auto mb-4 font-bold text-white bg-blue-500 rounded-full shadow-lg lg:mx-0 hover:underline"
+                                            data-id="1">
+                                            View Content
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
-            </div>
-        @endforeach
-    </div>
-    <div class="container max-w-5xl m-8 mx-auto">
-        <h1 class="w-full my-2 text-3xl font-bold leading-tight text-center text-gray-800">Want To Know More?</h1>
-        <div class="w-full mb-4">
-            <div class="w-64 h-1 py-0 mx-auto my-0 rounded-t opacity-25 gradient"></div>
-        </div>
-
-        <div class="flex flex-wrap">
-            <div class="w-5/6 p-6 sm:w-1/2">
-                <h3 class="mb-3 text-2xl font-bold leading-none text-gray-800">It's better to know about us</h3>
-                <p class="mb-8 text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at
-                    ipsum eu nunc commodo posuere et sit amet ligula.<br><br>
-                    <a href="{{ route('about') }}">
-                        <button
-                            class="px-8 py-4 mx-auto my-6 font-bold text-gray-800 bg-white rounded-full shadow-lg lg:mx-0 hover:underline">
-                            About Us
-                        </button>
-                    </a>
-            </div>
-            <div class="w-full p-6 sm:w-1/2">
-                <img class="z-50 w-full md:w-4/5" src="{{ asset('images\hero.png') }}">
-            </div>
-        </div>
-
-        <div class="flex flex-col-reverse flex-wrap sm:flex-row">
-            <div class="w-full p-6 mt-6 sm:w-1/2">
-                <img class="z-50 w-full md:w-4/5" src="{{ asset('images\hero.png') }}">
-            </div>
-            <div class="w-full p-6 mt-6 sm:w-1/2">
-                <div class="align-middle">
-                    <h3 class="mb-3 text-2xl font-bold leading-none text-gray-800">Lorem ipsum dolor sit amet</h3>
-                    <p class="mb-8 text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-                        at ipsum eu nunc commodo posuere et sit amet ligula.<br><br>
-                        Images from: <a class="text-orange-500 underline" href="https://undraw.co/">undraw.co</a>
-                    </p>
-                </div>
-            </div>
-
+            @endforeach
         </div>
     </div>
     @include('layouts.footer')

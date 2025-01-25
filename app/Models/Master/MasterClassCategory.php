@@ -12,7 +12,11 @@ class MasterClassCategory extends Model
     use HasFactory;
 
     protected $fillable = [
-        'category'
+        'category',
+        'slug',
+        'title',
+        'description',
+        'tags'
     ];
 
     public function standards() : HasMany {

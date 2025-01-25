@@ -8,6 +8,7 @@ use App\Http\Controllers\Subject\SubjectController;
 use App\Http\Controllers\Standard\StandardController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Assessment\AssessmentController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ExamLink\ExamLinkController;
 use App\Http\Controllers\Marquee\MarqueeController;
@@ -24,6 +25,7 @@ use App\Http\Controllers\Subscription\ManageSubscription;
 use App\Http\Controllers\Subscription\SubscriptionController;
 use App\Http\Controllers\User\UserProfileController;
 use App\Http\Controllers\WelcomeController;
+use App\Models\Master\MasterClassCategory;
 
 Route::get('/', [WelcomeController::class, 'index'])->name('home');
 Route::get('/subscription/plans/all-plans', [SubscriptionController::class, 'index'])->name('subscription');
@@ -47,6 +49,9 @@ Route::post('/logout', [LogoutController::class, 'logoutUser'])->middleware('aut
 // student
 Route::get('/student/registration', [StudentRegistrationController::class, 'index'])->name('student.registration');
 Route::post('/student/registration', [StudentRegistrationController::class, 'store']);
+
+// online exam
+Route::get("/student/online-assessment", [AssessmentController::class, 'show'])->name('student.assessment');
 
 // admin
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
@@ -155,6 +160,10 @@ Route::middleware(['auth'])->prefix('user/subscription/plan')->group(function ()
 
     Route::post('/purchase/premium', [SubscriptionController::class, 'purchasePremiumPlan'])->name('plan.purchase.premium')->middleware('signed');
     Route::post('/purchase/premium/submit', [SubscriptionController::class, 'storePremiumPlan'])->name('plan.store.premium')->middleware('signed');
+});
+// class
+Route::prefix('category')->group(function () {
+    Route::get('/{category:slug}/all-classes', [CategoryController::class, 'getClassList'])->name('category.classes');
 });
 
 // subject

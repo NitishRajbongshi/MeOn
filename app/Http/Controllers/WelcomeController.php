@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Chapter\Chapter;
 use Illuminate\Http\Request;
 use App\Models\Standard\Standard;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Marquee\MarqueeDetail;
 use App\Models\Master\MasterClassCategory;
+use App\Models\Note\Note;
+use App\Models\Subject\Subject;
 
 class WelcomeController extends Controller
 {
@@ -15,8 +18,10 @@ class WelcomeController extends Controller
     {
         $user = Auth::user();
         $filters = $request->only(['tag']);
-        $classes = Standard::all(['id', 'name', 'description', 'tags', 'master_price_status_id', 'actual_price', 'offer_price']);
+        $classes = Standard::all(['id', 'name', 'slug', 'description', 'tags', 'master_price_status_id', 'actual_price', 'offer_price']);
         $categories = MasterClassCategory::all(['id', 'category', 'slug', 'title', 'description', 'tags']);
+        $subjects = Subject::all(['id', 'name', 'slug']);
+        $chapters = Chapter::all(['id', 'name', 'slug']);
         // dd($categories);
         // $categoriesBaseQuery = MasterClassCategory::with('standards');
         // // dd($categoriesBaseQuery);
@@ -33,6 +38,8 @@ class WelcomeController extends Controller
         return view('welcome', [
             'user' => $user,
             'classes' => $classes,
+            'subjects' => $subjects,
+            'chapters' => $chapters,
             'examLinks' => $examLinks,
             'marquees' => $marquees,
             'categories' => $categories

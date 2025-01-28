@@ -2,7 +2,7 @@
 
 @section('content')
     @include('layouts.navbar')
-    <div class="container mx-auto min-h-screen border bg-white p-1 md:p-4">
+    <div class="container mx-auto min-h-screen bg-white p-1 md:p-4">
         <div class="container mx-auto rounded-lg bg-[#cdc2ac] p-1 md:p-4">
             <h1 class="font-bold text-3xl text-center uppercase text-white">Basic Plan</h1>
             <div class="flex flex-wrap justify-between rounded-lg p-1 md:m-10 md:p-10 items-start bg-stone-50 shadow-lg">

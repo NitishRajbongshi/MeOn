@@ -22,7 +22,7 @@
 
         <div class="flex gap-2 my-2 ">
             {{-- content --}}
-            <div class="w-full md:w-3/4 shadow-sm bg-white">
+            <div class="w-full border md:w-3/4 shadow-sm bg-white">
                 {{-- Chpater section --}}
                 <div class="chapter_list px-4">
                     <div class="border-b my-3 font-bold">
@@ -67,7 +67,7 @@
                 </div>
             </div>
             {{-- sidebar --}}
-            <div class="hidden md:block md:w-1/4 px-4 shadow-sm bg-white">
+            <div class="hidden border md:block md:w-1/4 px-4 shadow-sm bg-white">
                 <div class="notification_list ">
                     <div class="text-xl border-b my-3 font-bold">
                         <p>

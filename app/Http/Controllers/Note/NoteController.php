@@ -13,6 +13,7 @@ use App\Models\Standard\Standard;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
+use App\Models\Master\MasterClassCategory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Storage;
@@ -178,6 +179,9 @@ class NoteController extends Controller
         $metaData = DB::table('meta_chapter_details')->where('subject_id', $subject->id)
             ->select('meta_title', 'meta_description', 'keywords')
             ->first();
+        $categories = MasterClassCategory::all();
+        $subjects = Subject::where('standard_id', $subject->standard_id)
+            ->where('id', '<>', $subject->id)->get();
         return view(
             'chapters.index',
             [
@@ -186,7 +190,9 @@ class NoteController extends Controller
                 'subject' => $subject,
                 'chapters' => $chapters,
                 'classes' => $classes,
-                'metaData' => $metaData
+                'metaData' => $metaData,
+                'subjects' => $subjects,
+                'categories' => $categories
             ]
         );
     }
@@ -271,6 +277,7 @@ class NoteController extends Controller
             }
         }
         $classes = Standard::all();
+        $categories = MasterClassCategory::all();
         $metaData = DB::table('meta_note_details')->where('chapter_id', $chapterID)
             ->select('meta_title', 'meta_description', 'keywords')
             ->first();
@@ -282,6 +289,7 @@ class NoteController extends Controller
                 'paidNotes' => $paidNotes,
                 'classes' => $classes,
                 'access' => $access,
+                'categories' => $categories,
                 'metaData' => $metaData
             ]
         );
@@ -317,7 +325,7 @@ class NoteController extends Controller
     public function showFreeNotes(Request $request, Note $note)
     {
         $user = Auth::user();
-        if($note->master_price_status_id == 1) {
+        if ($note->master_price_status_id == 1) {
             return view('notes.show', [
                 'user' => $user,
                 'note' => $note,
@@ -333,7 +341,7 @@ class NoteController extends Controller
         $user = Auth::user();
         $resources = NoteResource::where('note_id', $note->id)->skip(0)->take(2)->get();
         // dd($resources);
-        if($note->master_price_status_id == 2) {
+        if ($note->master_price_status_id == 2) {
             return view('notes.preview', [
                 'user' => $user,
                 'note' => $note,
@@ -349,7 +357,7 @@ class NoteController extends Controller
     {
         $user = Auth::user();
         $requestEmail = $request->email;
-        if($user->email == $requestEmail) {
+        if ($user->email == $requestEmail) {
             return view('notes.premium', [
                 'user' => $user,
                 'note' => $note,

@@ -7,14 +7,14 @@
             <h1 class="text-xl text-green-900">OUR PLANS</h1>
         </div>
         <div class="flex flex-wrap justify-between items-start">
-            <div class="w-full bg-white border my-2 md:w-[33%] hover:shadow-md">
-                <div class="w-full bg-blue-600 text-white text-center">
+            <div class="w-full bg-slate-100  rounded-b-md my-2 md:w-[32%] hover:shadow-md">
+                <div class="w-full bg-blue-200 text-blue-500 text-center">
                     <h1 class="font-bold text-xl p-3">BASIC</h1>
                 </div>
                 <div class="flex justify-center my-2">
                     <img src="{{ asset('icons/piggy.png') }}" alt="icon" width="160rem;">
                 </div>
-                <div class="p-4">
+                <div class="p-6">
                     <ul class="text-justify">
                         <li class="my-2 text-md font-bold"><i class="fa fa-check-circle mr-2 text-blue-500"></i>Chapter
                             Access: <span class="text-slate-600 text-md">Get all notes for a specific chapter.</span></li>
@@ -29,21 +29,21 @@
                                 paying for more.</span></li>
                     </ul>
                 </div>
-                <div class="w-full px-2 mb-4">
+                <div class="w-full px-4 mb-4">
                     <a href="{{ URL::temporarySignedRoute('plan.basic', now()->addMinutes(60)) }}">
                         <button
-                            class="bg-blue-800 w-full text-white text-lg p-3 rounded-lg font-bold hover:bg-blue-600">Explore</button>
+                            class="bg-blue-200 w-full text-blue-500 text-lg p-3 rounded-full font-bold hover:bg-blue-300 hover:text-blue-800">Explore</button>
                     </a>
                 </div>
             </div>
-            <div class="w-full bg-white border my-2 md:w-[33%] hover:shadow-md">
-                <div class="w-full bg-green-600 text-white text-center">
+            <div class="w-full bg-slate-100  rounded-b-md my-2 md:w-[32%] hover:shadow-md">
+                <div class="w-full bg-green-200 text-green-500 text-center">
                     <h1 class="font-bold text-xl p-3">STANDARD</h1>
                 </div>
                 <div class="flex justify-center my-2">
                     <img src="{{ asset('icons/money_tree.png') }}" alt="icon" width="130rem;">
                 </div>
-                <div class="p-4">
+                <div class="p-6">
                     <ul class="text-justify">
                         <li class="my-2 text-md font-bold"><i class="fa fa-check-circle mr-2 text-green-500"></i>Full
                             Subject Access:<span class="text-slate-600 text-md"> Unlock all chapters in one subject.</span>
@@ -61,27 +61,27 @@
                                 resources in one place.</span></li>
                     </ul>
                 </div>
-                <div class="px-4">
+                <div class="px-6">
                     <strong class="text-justify text-md text-red-600"><i
                             class="fa fa-info-circle mr-2 text-red-800"></i>Test your knowledge with subject-specific mock
                         exams to evaluate and improveyour preparation.
                     </strong>
                 </div>
-                <div class="w-full px-2 mt-2 mb-4">
+                <div class="w-full px-4 mt-2 mb-4">
                     <a href="{{ URL::temporarySignedRoute('plan.standard', now()->addMinutes(60)) }}">
                         <button
-                            class="bg-green-800 w-full text-white text-lg p-3 rounded-lg font-bold hover:bg-green-600">Explore</button>
+                            class="bg-green-200 w-full text-green-500 text-lg p-3 rounded-full font-bold hover:bg-green-300 hover:text-green-800">Explore</button>
                     </a>
                 </div>
             </div>
-            <div class="w-full bg-white border my-2 md:w-[33%] hover:shadow-md">
-                <div class="w-full bg-red-600 text-white text-center">
+            <div class="w-full bg-slate-100  rounded-b-md my-2 md:w-[32%] hover:shadow-md">
+                <div class="w-full bg-red-200 text-red-500 text-center">
                     <h1 class="font-bold text-xl p-3">PREMIUM</h1>
                 </div>
                 <div class="flex justify-center my-2">
                     <img src="{{ asset('icons/money_bag.png') }}" alt="icon" width="150rem;">
                 </div>
-                <div class="p-4">
+                <div class="p-6">
                     <ul class="text-justify">
                         <li class="my-2 text-md font-bold"><i class="fa fa-check-circle mr-2 text-red-500"></i>
                             All Subjects:<span class="text-slate-600 text-md"> Get access to every subject in your class.
@@ -95,24 +95,25 @@
                             Value:<span class="text-slate-600 text-md"> The most comprehensive plan at the best price.
                             </span>
                         </li>
-                        <li class="my-2 text-md font-bold"><i class="fa fa-question-circle mr-2 text-yellow-500"></i>Why Choose
+                        <li class="my-2 text-md font-bold"><i class="fa fa-question-circle mr-2 text-yellow-500"></i>Why
+                            Choose
                             This?: <br><span class="text-slate-600 text-md"> Ideal for students who want to be fully
                                 prepared across all subjects, ensuring top grades.
                             </span>
                         </li>
                     </ul>
                 </div>
-                <div class="px-4">
+                <div class="px-6">
                     <strong class="text-justify text-md text-red-600">
                         <i class="fa fa-info-circle mr-2 text-red-800"></i>Benefit from mock tests across all subjects to
                         assess your readiness and boost
                         your exam confidence.
                     </strong>
                 </div>
-                <div class="w-full px-2 mt-2 mb-4">
+                <div class="w-full px-4 mt-2 mb-4">
                     <a href="{{ URL::temporarySignedRoute('plan.premium', now()->addMinutes(60)) }}">
                         <button
-                            class="bg-red-800 w-full text-white text-lg p-3 rounded-lg font-bold hover:bg-red-600">Explore</button>
+                            class="bg-red-200 w-full text-red-500 text-lg p-3 rounded-full font-bold hover:bg-red-300 hover:text-red-800">Explore</button>
                     </a>
                 </div>
             </div>

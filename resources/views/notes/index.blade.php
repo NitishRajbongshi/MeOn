@@ -20,7 +20,7 @@
         </div>
 
         <div class="flex flex-wrap justify-between gap-1 my-2">
-            <div class="w-full md:w-[70%] shadow-sm bg-white">
+            <div class="w-full border md:w-[70%] shadow-sm bg-white">
                 {{-- Chpater section --}}
                 <div class="chapter_list px-4">
                     <div class="border-b my-3 font-bold">
@@ -147,7 +147,28 @@
             </div>
 
             {{-- sidebar --}}
-            <div class="w-full md:w-[29%] px-4 shadow-sm bg-white" id="classContainer">
+            <div class="w-full border md:w-[29%] px-4 shadow-sm bg-white" id="classContainer">
+                <div class="notification_list ">
+                    <div class="text-xl border-b my-3 font-bold">
+                        <p>
+                            <i class="fa fa-list text-sm"></i>
+                            Available Categories
+                        </p>
+                    </div>
+                    <div class="pb-2">
+                        <ul>
+                            @foreach ($categories as $item)
+                                <li>
+                                    <a href="{{ url('category', [$item->slug, 'all-classes']) }}"
+                                        class="text-sm text-blue-500">
+                                        <i class="fa fa-circle-dot mr-1 text-red-600" aria-hidden="true"></i>
+                                        {{ $item->category }}
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
                 <div class="notification_list ">
                     <div class="text-xl border-b my-3 font-bold">
                         <p>
@@ -159,7 +180,7 @@
                         <ul>
                             @foreach ($classes as $item)
                                 <li>
-                                    <a href="{{ url('content/subject', [$item->name, 'language', 'all-languages']) }}"
+                                    <a href="{{ url('content/subject', [$item->slug, 'language', 'all-languages']) }}"
                                         class="text-sm text-blue-500">
                                         <i class="fa fa-circle-dot mr-1 text-red-600" aria-hidden="true"></i>
                                         {{ $item->name }}

@@ -19,6 +19,17 @@
             @endforeach
         </marquee>
     </div>
+    <div class="container mx-auto">
+        @foreach ($classes as $item)
+            <a href="{{ url('content/subject', [$item->slug, 'language', 'all-languages']) }}"></a>
+        @endforeach
+        @foreach ($subjects as $item)
+            <a href="{{ url('/notes/chapter', [$item->slug, 'all-chapters']) }}"></a>
+        @endforeach
+        @foreach ($chapters as $item)
+            <a href="{{ url('/notes/show', [$item->slug, 'all-notes']) }}"></a>
+        @endforeach
+    </div>
     <div class="pt-24 container mx-auto">
         <div class="container flex flex-col flex-wrap items-center px-3 mx-auto md:flex-row">
             <!--Left Col-->
@@ -106,10 +117,10 @@
                 <h3 class="mb-3 text-2xl font-bold leading-none text-gray-800">It's better to know about us</h3>
                 <p class="mb-8 text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at
                     ipsum eu nunc commodo posuere et sit amet ligula.<br><br>
-                    <a href="{{ route('about') }}">
-                        <button
-                            class="px-8 py-4 mx-auto my-6 font-bold text-gray-800 bg-white rounded-full shadow-lg lg:mx-0 hover:underline">
-                            About Us
+                    <a href="{{ route('contact.us') }}">
+                        <button style="background: linear-gradient(90deg, #d53d67 0%, #daad52 100%)"
+                            class="px-8 py-4 mx-auto my-6 font-bold text-gray-800 bg-white rounded-full shadow-lg lg:mx-0 hover:text-white hover:underline">
+                            Contact Us
                         </button>
                     </a>
             </div>
@@ -127,11 +138,15 @@
                     <h3 class="mb-3 text-2xl font-bold leading-none text-gray-800">Lorem ipsum dolor sit amet</h3>
                     <p class="mb-8 text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
                         at ipsum eu nunc commodo posuere et sit amet ligula.<br><br>
-                        Images from: <a class="text-orange-500 underline" href="https://undraw.co/">undraw.co</a>
+                        <a href="#">
+                            <button style="background: linear-gradient(90deg, #d53d67 0%, #daad52 100%)"
+                                class="px-8 py-4 mx-auto my-6 font-bold text-gray-800 bg-white rounded-full shadow-lg lg:mx-0 hover:text-white hover:underline">
+                                Give your feedback
+                            </button>
+                        </a>
                     </p>
                 </div>
             </div>
-
         </div>
     </div>
     @include('layouts.footer')

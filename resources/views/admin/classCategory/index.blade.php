@@ -51,6 +51,25 @@
                             </div>
                             <div class="md:flex my-2">
                                 <div class="w-full md:w-1/3">
+                                    <label class="text-sm" for="slug">Category Slug: <span
+                                            class="text-xs text-red-500">*</span></label>
+                                </div>
+                                <div class="w-full md:w-2/3">
+                                    <input type="text" id="slug" name="slug"
+                                        placeholder="category-one"
+                                        value="{{ old('slug') }}"
+                                        class="w-full border border-blue-300 rounded-sm outline-none p-1 text-sm">
+                                    <small class="text-red-500">Slug should be lowercase words seperated by dash( - ).</small>
+                                    @error('slug')
+                                        <p class="text-xs text-red-500">
+                                            <i class="fa fa-warning mr-1 my-1"></i>
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="md:flex my-2">
+                                <div class="w-full md:w-1/3">
                                     <label class="text-sm" for="title">Category Title: <span
                                             class="text-xs text-red-500">*</span></label>
                                 </div>
@@ -202,6 +221,90 @@
                 </div>
             </div>
         </x-main-content>
+        @include('layouts.modal-layout-category')
+        @include('layouts.success-modal')
+        @include('layouts.failed-modal')
     </main>
     @include('layouts.footer')
 @endsection
+@push('scripts')
+        <script>
+            $(document).ready(function() {
+                $('.openModal').on('click', function() {
+                    const id = $(this).data('id');
+
+                    // Get CSRF token from the meta tag
+                    var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+                    $.ajax({
+                        url: '/admin/manage-category/' + id,
+                        method: 'GET',
+                        dataType: 'json',
+                        headers: {
+                            'X-CSRF-TOKEN': csrfToken
+                        },
+                        success: function(response) {
+                            console.log(response);
+                            if (response.status == 'success' && response.result != null) {
+                                $('#editCategory').val(response.result.category);
+                                $('#editSlug').val(response.result.slug);
+                                $('#editTitle').val(response.result.title);
+                                $('#editDescription').val(response.result.description);
+                                $('#editTags').val(response.result.tags);
+                               
+                                // show the modal
+                                $('#modal').removeClass('hidden');
+                                $('#modal').addClass('flex');
+                            } else {
+                                alert(response.message);
+                            }
+                        },
+                        error: function(e) {
+                            console.error('AJAX error:', e);
+                        }
+                    });
+
+                    $('#submitBtn').on('click', function() {
+                        var formData = $('#myForm').serialize();
+                        $.ajax({
+                            url: '/admin/manage-category/edit/' + id,
+                            method: 'POST',
+                            dataType: 'json',
+                            data: formData,
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success: function(response) {
+                                if (response.status === 'success') {
+                                    $('.modalContent').html(response.message);
+                                    $('#successModal').removeClass('hidden');
+                                    $('#successModal').addClass('flex');
+                                }
+                                if (response.status === 'failed') {
+                                    $('.modalContent').html(response.message);
+                                    $('#failedModal').removeClass('hidden');
+                                    $('#failedModal').addClass('flex');
+                                }
+                            },
+                            error: function(error) {
+                                console.error('AJAX error:', error);
+                            }
+                        });
+
+                        // Close the modal (optional)
+                        $('#modal').addClass('hidden');
+                    });
+
+                });
+
+                $('#closeModal').on('click', function() {
+                    $('#modal').removeClass('flex');
+                    $('#modal').addClass('hidden');
+                });
+            });
+
+            function refreshPage() {
+                location.reload();
+            }
+        </script>
+    @endpush

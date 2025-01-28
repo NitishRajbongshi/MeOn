@@ -7,6 +7,7 @@ use App\Models\Subject\Subject;
 use App\Models\Standard\Standard;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Master\MasterClassCategory;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Master\MasterLanguage;
 use App\Models\Master\MasterPriceStatus;
@@ -117,13 +118,16 @@ class SubjectController extends Controller
             ->where('master_language_id', '1')
             ->select('meta_title', 'meta_description', 'keywords')
             ->first();
+        $categories = MasterClassCategory::all();
+
         return view('subjects.index', [
             'user' => $user,
             'classes' => $classes,
             'subjects' => $subjects,
             'currentClass' => $currentClass,
             'subjectCount' => $subjectCount,
-            'metaData' => $metaData
+            'metaData' => $metaData,
+            'categories' => $categories
         ]);
     }
 
@@ -139,13 +143,16 @@ class SubjectController extends Controller
             ->where('master_language_id', '2')
             ->select('meta_title', 'meta_description', 'keywords')
             ->first();
+        $categories = MasterClassCategory::all();
+
         return view('subjects.index', [
             'user' => $user,
             'classes' => $classes,
             'subjects' => $subjects,
             'currentClass' => $currentClass,
             'subjectCount' => $subjectCount,
-            'metaData' => $metaData
+            'metaData' => $metaData,
+            'categories' => $categories
         ]);
     }
 
@@ -187,7 +194,7 @@ class SubjectController extends Controller
             $subjectTags = $request->input('tags');
             $subjectLanguage = $request->input('language');
             $subjectPriceStatus = $request->input('price_status');
-            if($subjectPriceStatus == 1) {
+            if ($subjectPriceStatus == 1) {
                 $actualPrice = '0.00';
                 $offerPrice = '0.00';
             } else {

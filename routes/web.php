@@ -97,6 +97,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     // add class category
     Route::get('/addClassCategory', [CategoryController::class, 'index'])->name('classCategory');
     Route::post('/addClassCategory', [CategoryController::class, 'store']);
+    Route::get('/manage-category/{id}', [CategoryController::class, 'show']);
+    Route::post('/manage-category/edit/{id}', [CategoryController::class, 'update']);
+    Route::delete('/manage-category/delete', [CategoryController::class, 'destroy'])->name('classCategory.delete');
 
     // manage student
     Route::get('/student/all', [StudentController::class, 'index'])->name('student.list');

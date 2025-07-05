@@ -29,9 +29,11 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $validate = $request->validate([
             'name' => 'required',
             'email' => 'required|unique:students,email',
+            'phone' => 'required|unique:students,ph_number|regex:/^[0-9]{10}$/',
             // 'username' => 'required|string|max:255|unique:users,username|regex:/^[a-zA-Z0-9_]+$/',
             'password' => 'required|string|min:8|confirmed',
         ]);
@@ -54,6 +56,8 @@ class RegisterController extends Controller
                     $data = [
                         'name' => $request->name,
                         'email' => $request->email,
+                        'ph_number' => $request->phone,
+                        // 'username' => $request->input('username') ?? Str::slug($request->name) . '-' . Str::random(5),
                     ];
                     $student = Student::create($data);
                     if ($student) {

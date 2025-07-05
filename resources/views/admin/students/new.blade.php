@@ -39,6 +39,7 @@
                                             <th scope="col" class="px-6 py-1">#</th>
                                             <th scope="col" class="px-6 py-1">Name</th>
                                             <th scope="col" class="px-6 py-1">Email</th>
+                                            <th scope="col" class="px-6 py-1">Phone</th>
                                             <th scope="col" class="px-6 py-1 text-center">Action</th>
                                             <th scope="col" class="px-6 py-1 text-center">View</th>
                                             <th scope="col" class="px-6 py-1 text-center">Delete</th>
@@ -56,6 +57,9 @@
                                                 </td>
                                                 <td class="whitespace-nowrap px-6 py-1">
                                                     {{ $item->email }}
+                                                </td>
+                                                <td class="whitespace-nowrap px-6 py-1">
+                                                    {{ $item->student->ph_number ?? 'N/A' }}
                                                 </td>
                                                 <td class="whitespace-nowrap px-6 py-1 text-center">
                                                     {{-- <a href="#"> --}}

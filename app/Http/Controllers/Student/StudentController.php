@@ -15,7 +15,7 @@ class StudentController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $students = User::where('admin', '0')->paginate(10);
+        $students = User::with('student')->where('admin', '0')->paginate(10);
         return view(
             'admin.students.all',
             [
@@ -40,7 +40,8 @@ class StudentController extends Controller
     public function newStudentList(Request $request)
     {
         $user = Auth::user();
-        $students = User::where('admin', '0')->where('active', '0')->paginate(10);
+        $students = User::with('student')->where('admin', '0')->where('active', '0')->paginate(10);
+        // dd($students);
         return view(
             'admin.students.new',
             [

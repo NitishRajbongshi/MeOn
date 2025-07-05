@@ -22,14 +22,15 @@
                             <i class="fa-solid fa-envelope me-2"></i>
                             Email
                         </label>
-                        <input class="w-full bg-gray-50 py-2 px-3 shadow-sm rounded-md mb-3 focus:outline-none" type="email" name="email" id="email" placeholder="Example@gmail.com">
+                        <input class="w-full bg-gray-50 py-2 px-3 shadow-sm rounded-md mb-3 focus:outline-none"
+                            type="email" name="email" id="email" placeholder="Example@gmail.com">
                         @error('email')
                             <p class="text-sm text-red-700 mb-3">
                                 <i class="fa fa-warning mr-1"></i>
                                 {{ $message }}
                             </p>
                         @enderror
-    
+
                         {{-- <label class="text-lg text-blue-700 font-bold mb-2" for="username">
                             <i class="fa-solid fa-user me-2"></i>
                             Username
@@ -46,10 +47,25 @@
                             <i class="fa-solid fa-user me-2"></i>
                             Name
                         </label>
-                        <input class="w-full bg-gray-50 py-2 px-3 shadow-sm rounded-md mb-3 focus:outline-none" type="name" name="name" id="name" placeholder="John Doe">
+                        <input class="w-full bg-gray-50 py-2 px-3 shadow-sm rounded-md mb-3 focus:outline-none"
+                            type="text" name="name" id="name" placeholder="John Doe">
                         @error('name')
                             <p class="text-sm text-red-700 mb-3">
                                 <i class="fa fa-warning mr-1"></i>
+                                {{ $message }}
+                            </p>
+                        @enderror
+
+                        <label class="text-lg text-blue-700 font-bold mb-2" for="phone">
+                            <i class="fa-solid fa-phone me-2"></i>
+                            Phone
+                        </label>
+                        <input class="w-full bg-gray-50 py-2 px-3 shadow-sm rounded-md mb-3 focus:outline-none"
+                            type="phone" name="phone" id="phone" placeholder="xxxxxxxxxx" maxlength="10"
+                            minlength="10" pattern="[0-9]{10}">
+                        @error('phone')
+                            <p class="text-sm text-red-700 mb-3">
+                                <i class="fa fa-contact mr-1"></i>
                                 {{ $message }}
                             </p>
                         @enderror
@@ -58,25 +74,30 @@
                             <i class="fa-solid fa-unlock me-2"></i>
                             Password
                         </label>
-                        <input class="w-full bg-gray-50 py-2 px-3 shadow-sm rounded-md mb-3 focus:outline-none" type="password" name="password" id="password" placeholder="************">
+                        <input class="w-full bg-gray-50 py-2 px-3 shadow-sm rounded-md mb-3 focus:outline-none"
+                            type="password" name="password" id="password" placeholder="************">
                         @error('password')
                             <p class="text-sm text-red-700 mb-3">
                                 <i class="fa fa-warning mr-1"></i>
                                 {{ $message }}
                             </p>
                         @enderror
-                        
+
                         <label class="text-lg text-blue-700 font-bold mb-2" for="password_confirmation">
                             <i class="fa-solid fa-lock me-2"></i>
                             Confirm Password
                         </label>
-                        <input class="w-full bg-gray-50 py-2 px-3 shadow-sm rounded-md mb-3 focus:outline-none" type="password" name="password_confirmation" id="password_confirmation" placeholder="************">
-    
-                        <button class="bg-blue-700 text-white py-2 rounded-full my-3 hover:bg-blue-800" type="submit" name="login"><i class="fa-solid fa-key me-2"></i>Register</button>
+                        <input class="w-full bg-gray-50 py-2 px-3 shadow-sm rounded-md mb-3 focus:outline-none"
+                            type="password" name="password_confirmation" id="password_confirmation"
+                            placeholder="************">
+
+                        <button class="bg-blue-700 text-white py-2 rounded-full my-3 hover:bg-blue-800" type="submit"
+                            name="login"><i class="fa-solid fa-key me-2"></i>Register</button>
                     </form>
-    
+
                     <div class="text-center">
-                        <span>Already have an account? <a class="text-blue-700" href="{{route('login')}}">Login here</a></span>  
+                        <span>Already have an account? <a class="text-blue-700" href="{{ route('login') }}">Login
+                                here</a></span>
                     </div>
                 </div>
             </div>

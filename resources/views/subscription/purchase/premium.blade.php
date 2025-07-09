@@ -95,7 +95,7 @@
                     <div class="flex justify-center">
                         <img src="{{ asset('images/payment/payment_qr.png') }}" alt="" width="220px">
                     </div>
-                    <p class="text-center"><span class="text-xl font-bold">7002390253@ptsbi</span></p>
+                    <p class="text-center"><span class="text-xl font-bold">ankurjyoti902-6@okicici</span></p>
                 </div>
             </div>
         </div>

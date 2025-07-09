@@ -53,7 +53,7 @@
                         <div class="flex justify-center my-2">
                             <img src="{{ asset('images/payment/payment_qr.png') }}" alt="QR_CODE" width="200px">
                         </div>
-                        <p class="text-center"><span class="text-xl font-bold">7002390253@ptsbi</span></p>
+                        <p class="text-center"><span class="text-xl font-bold">ankurjyoti902-6@okicici</span></p>
                     </div>
                 </div>
                 <div class="w-full p-2 shadow-md rounded-md md:w-[62%] md:p-10">

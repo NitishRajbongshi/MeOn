@@ -51,7 +51,7 @@
                     </div>
                     <div>
                         <div class="flex justify-center my-2">
-                            <img src="{{ asset('images/payment/payment_qr.jpg') }}" alt="QR_CODE" width="200px">
+                            <img src="{{ asset('images/payment/payment_qr.png') }}" alt="QR_CODE" width="200px">
                         </div>
                         <p class="text-center"><span class="text-xl font-bold">7002390253@ptsbi</span></p>
                     </div>

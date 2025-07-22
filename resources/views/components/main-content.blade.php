@@ -130,8 +130,8 @@
                     <li class="menuTitle">
                         <button
                             class="flex text-md justify-between w-full px-1 py-2 hover:bg-gray-600 hover:rounded-md">
-                            <div><i class="fa fa-info-circle mr-[0.4rem] text-md"
-                                    aria-hidden="true"></i>Manage Info</div>
+                            <div><i class="fa fa-info-circle mr-[0.4rem] text-md" aria-hidden="true"></i>Manage Info
+                            </div>
                             <div class="ms-4"><i class="fa fa-caret-left" aria-hidden="true"></i></div>
                         </button>
                         <ul class="text-md subMenuItem hidden ms-3">
@@ -143,8 +143,7 @@
                                 </a>
                             </li>
                             <li class="my-2">
-                                <a href="#"
-                                    class="flex items-center focus:outline-none hover:text-gray-400">
+                                <a href="#" class="flex items-center focus:outline-none hover:text-gray-400">
                                     <i class="fa fa-genderless mr-1" aria-hidden="true"></i>
                                     <span class="text-md">Add Main Banner</span>
                                 </a>

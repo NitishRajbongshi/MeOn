@@ -1,87 +1,120 @@
 @extends('layouts.app')
 @section('title', $metaData->meta_title ?? 'Edorb')
-@section('meta_description', $metaData->meta_description ?? 'Discover comprehensive Assamese and English notes for classes 5 to 10 (SEBA and NCERT) and exercise solutions for class 11 and 12 science (NCERT) in physics, chemistry, maths, and biology at edorb.in. We also offer online coaching for JEE, CEE, NEET, NEST, and more.')
+@section('meta_description', $metaData->meta_description ?? 'Discover comprehensive Assamese and English notes for
+    classes 5 to 10 (SEBA and NCERT) and exercise solutions for class 11 and 12 science (NCERT) in physics, chemistry,
+    maths, and biology at edorb.in. We also offer online coaching for JEE, CEE, NEET, NEST, and more.')
 @section('content')
     @include('layouts.navbar')
     <x-show-notification />
-    <main class="container mx-auto min-h-[80%]">
-        {{-- BreadCrumbs --}}
-        <div class="w-full rounded-md text-xs px-4 my-2">
-            <ol class="list-reset flex">
-                <li>
-                    <a href="/"
-                        class="text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600">Home</a>
-                </li>
-                <li>
-                    <span class="mx-2 text-neutral-500 dark:text-neutral-400">/</span>
-                </li>
-                <li class="text-neutral-500 dark:text-neutral-400">Chapter List</li>
-            </ol>
+    <main class="container mx-auto px-1 py-2 md:px-4 md:py-8 min-h-[80%]">
+        <!-- Breadcrumbs -->
+        <div class="w-full rounded-md text-sm mb-6">
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-2">
+                    <li class="inline-flex items-center">
+                        <a href="/" class="inline-flex items-center text-indigo-600 hover:text-indigo-800">
+                            <i class="fas fa-home mr-2"></i>
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <i class="fas fa-chevron-right text-gray-400 mx-2"></i>
+                            <span class="text-gray-500">Chapter List</span>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
         </div>
 
-        <div class="flex flex-wrap justify-between gap-1 my-2">
-            <div class="w-full border pb-4 md:w-[70%] shadow-sm bg-white">
-                {{-- Chpater section --}}
-                <div class="chapter_list px-4">
-                    <div class="border-b my-3 font-bold">
-                        <h1 class="text-xl mb-1">
-                            <i class="fa-solid fa-layer-group mr-1 text-sm"></i>
+        <div class="flex flex-col lg:flex-row gap-6">
+            <!-- Main Content -->
+            <div class="w-full lg:w-3/4">
+                <div class="border bg-white rounded-xl shadow-md overflow-hidden">
+                    <!-- Header -->
+                    <div class="border-b border-gray-100 px-8 py-5">
+                        <h1 class="text-2xl font-bold text-indigo-800">
+                            <i class="fas fa-layer-group mr-3 text-indigo-500"></i>
                             Chapter List
                         </h1>
                     </div>
-                    <div class="font-bold border border-blue-300 p-2 bg-blue-200 text-blue-700">
-                        Showing available chapters for
-                        <span class="text-blue-800">{{ $subject->name }}</span>
-                        <span class="text-red-500 font-bold p-1">
-                            ({{ $class->name }})
-                        </span>
+
+                    <!-- Subject Info -->
+                    <div class="gradient-bg text-white px-8 py-6">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                            <div>
+                                <h2 class="text-xl font-bold">
+                                    Showing chapters for <span class="text-indigo-100">{{ $subject->name }}</span>
+                                </h2>
+                                <p class="mt-2 text-indigo-100">
+                                    <span class="bg-indigo-700 px-2 py-1 rounded-full text-sm">
+                                        {{ $class->name }}
+                                    </span>
+                                </p>
+                            </div>
+                            <a href="{{ url('/content/subject', $class->id) }}"
+                                class="mt-4 md:mt-0 text-sm bg-white text-indigo-700 px-4 py-2 rounded-lg hover:bg-gray-100 transition duration-300">
+                                Explore other chapters
+                            </a>
+                        </div>
+                        <p class="mt-3 text-indigo-100 opacity-90">
+                            All related solutions and notes are listed here. Select a chapter to access detailed materials.
+                        </p>
                     </div>
-                    <div class="text-justify my-2">
-                        <p>All related solutions and notes are listed here related to <span
-                                class="font-bold">{{ $class->name }}</span>. You can easily get the notes by selecting a
-                            specific topic or chapter from the list provided below.</p>
-                    </div>
-                    <div>
-                        <a href="{{ url('/content/subject', $class->id) }}" class="text-sm text-blue-500 underline">
-                            Click here to explore other chapters available for {{ $class->name }}
-                        </a>
-                    </div>
-                    <div>
-                        <p class="underline text-lg text-blue-500">List of chapters:</p>
-                        <div class="flex justify-between items-center flex-wrap">
+
+                    <!-- Chapters Grid -->
+                    <div class="p-2 md:p-8">
+                        <h3 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
+                            <i class="fas fa-list-ol mr-2 text-indigo-500"></i>
+                            List of Chapters
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             @foreach ($chapters as $chapter)
-                                <div class="w-full my-1 md:w-[49.5%] p-4 border border-blue-100 bg-white hover:shadow-md">
-                                    <div class="flex justify-between font-bold pb-2">
-                                        <div class="text-sm">
-                                            <i class="fa fa-circle-dot mr-1 text-blue-700"></i>
+                                <div
+                                    class="bg-white rounded-xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                                    <!-- Card Header -->
+                                    <div class="px-6 py-5 border-b border-gray-50 flex flex-wrap gap-2 justify-between items-start">
+                                        <h4 class="text-lg font-semibold text-gray-800">
+                                            <i class="fas fa-bookmark text-indigo-400 mr-3"></i>
                                             {{ $chapter->name }}
-                                        </div>
-                                        <div>
-                                            <p class="text-gray-500 text-sm">{{ $subject->name }}</p>
-                                        </div>
+                                        </h4>
+                                        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
+                                            {{ $subject->name }}
+                                        </span>
                                     </div>
-                                    <div class="min-h-[5rem]">
-                                        <p class="text-gray-400 max-h-[4rem] text-xs"
-                                            style="overflow: hidden; text-overflow: ellipsis;">
+
+                                    <!-- Card Body -->
+                                    <div class="px-6 py-5">
+                                        <!-- Description -->
+                                        <p class="text-gray-500 text-sm mb-5 line-clamp-2 leading-relaxed">
                                             {{ $chapter->description }}
                                         </p>
-                                    </div>
-                                    <div class="flex justify-between items-end flex-wrap mt-3">
-                                        @if ($chapter->master_price_status_id == '1')
-                                            <p class="text-sm text-blue-500 mx-1">Free</p>
-                                        @else
-                                            <p class="text-sm text-blue-500 mx-1">
-                                                <span class="font-bold text-md text-gray-400" style="text-decoration: line-through"><i class="fa-solid fa-indian-rupee-sign"></i>{{$chapter->actual_price}}</span>
-                                                <span class="font-bold text-md text-red-600"><i class="fa-solid fa-indian-rupee-sign"></i>{{$chapter->offer_price}}</span>
-                                            </p>
-                                        @endif
-                                        <a href="{{ url('/notes/show', [$chapter->slug, 'all-notes']) }}">
-                                            <button data-id={{ $chapter->id }}
-                                                class="subject_btn bg-blue-500 text-white rounded p-2 hover:bg-blue-600">
-                                                <i class="fa-solid fa-right-from-bracket"></i>
-                                                Explore Notes
-                                            </button>
-                                        </a>
+
+                                        <!-- Price & CTA -->
+                                        <div class="flex justify-between items-center">
+                                            @if ($chapter->master_price_status_id == '1')
+                                                <span
+                                                    class="bg-green-50 text-green-600 text-xs font-medium px-3 py-1 rounded-full">
+                                                    <i class="fas fa-gift mr-1"></i> Free Access
+                                                </span>
+                                            @else
+                                                <div class="flex items-center space-x-2">
+                                                    <span class="text-gray-400 line-through text-sm">
+                                                        ₹{{ $chapter->actual_price }}
+                                                    </span>
+                                                    <span
+                                                        class="bg-gradient-to-r from-pink-500 to-orange-400 text-white text-sm font-semibold px-3 py-1 rounded-full">
+                                                        ₹{{ $chapter->offer_price }}
+                                                    </span>
+                                                </div>
+                                            @endif
+
+                                            <a href="{{ url('/notes/show', [$chapter->slug, 'all-notes']) }}"
+                                                class="text-sm bg-gradient-to-r from-indigo-400 to-purple-500 text-white px-5 py-2 rounded-lg hover:shadow-lg transition duration-300 flex items-center">
+                                                <i class="fas fa-book-open mr-2"></i>
+                                                View Notes
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             @endforeach
@@ -90,65 +123,81 @@
                 </div>
             </div>
 
-            {{-- sidebar --}}
-            <div class="w-full border pb-4 md:w-[29%] px-4 shadow-sm bg-white" id="classContainer">
-                <div class="notification_list ">
-                    <div class="text-xl border-b my-3 font-bold">
-                        <p>
-                            <i class="fa fa-list text-sm"></i>
+            <!-- Sidebar -->
+            <div class="w-full lg:w-1/4" id="classContainer">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden sticky top-4 border border-gray-100">
+                    <!-- Categories Section -->
+                    <div class="gradient-bg px-6 py-4">
+                        <h2 class="text-xl font-bold text-white flex items-center">
+                            <i class="fas fa-folder-open mr-3 text-indigo-200"></i>
                             Available Categories
-                        </p>
+                        </h2>
                     </div>
-                    <div class="pb-2">
-                        <ul>
+                    <div class="p-6">
+                        <ul class="space-y-3">
                             @foreach ($categories as $item)
-                                <li>
+                                <li class="group">
                                     <a href="{{ url('category', [$item->slug, 'all-classes']) }}"
-                                        class="text-sm text-blue-500">
-                                        <i class="fa fa-circle-dot mr-1 text-red-600" aria-hidden="true"></i>
-                                        {{ $item->category }}
+                                        class="flex items-center px-4 py-3 bg-gray-50 rounded-lg hover:bg-indigo-50 transition duration-300">
+                                        <span
+                                            class="w-2 h-2 bg-indigo-500 rounded-full mr-3 group-hover:bg-indigo-600 transition duration-300"></span>
+                                        <span
+                                            class="text-gray-700 font-medium group-hover:text-indigo-700 transition duration-300">{{ $item->category }}</span>
+                                        <span class="ml-auto text-xs bg-indigo-100 text-indigo-700 px-2 py-1 rounded-full">
+                                            {{ $item->classes_count ?? '0' }}
+                                        </span>
                                     </a>
                                 </li>
                             @endforeach
                         </ul>
                     </div>
-                </div>
-                <div class="notification_list ">
-                    <div class="text-xl border-b my-3 font-bold">
-                        <p>
-                            <i class="fa fa-list text-sm"></i>
+
+                    <!-- Classes Section -->
+                    <div class="gradient-bg px-6 py-4">
+                        <h2 class="text-xl font-bold text-white flex items-center">
+                            <i class="fas fa-graduation-cap mr-3 text-indigo-200"></i>
                             Available Classes
-                        </p>
+                        </h2>
                     </div>
-                    <div class="pb-2">
-                        <ul>
+                    <div class="p-6">
+                        <ul class="space-y-3">
                             @foreach ($classes as $item)
-                                <li>
+                                <li class="group">
                                     <a href="{{ url('content/subject', [$item->slug, 'language', 'all-languages']) }}"
-                                        class="text-sm text-blue-500">
-                                        <i class="fa fa-circle-dot mr-1 text-red-600" aria-hidden="true"></i>
-                                        {{ $item->name }}
+                                        class="flex items-center px-4 py-3 bg-gray-50 rounded-lg hover:bg-indigo-50 transition duration-300">
+                                        <span
+                                            class="w-2 h-2 bg-purple-500 rounded-full mr-3 group-hover:bg-purple-600 transition duration-300"></span>
+                                        <span
+                                            class="text-gray-700 font-medium group-hover:text-indigo-700 transition duration-300">{{ $item->name }}</span>
+                                        <span class="ml-auto text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full">
+                                            {{ $item->subjects_count ?? '0' }}
+                                        </span>
                                     </a>
                                 </li>
                             @endforeach
                         </ul>
                     </div>
-                </div>
-                <div class="notification_list ">
-                    <div class="text-xl border-b my-3 font-bold">
-                        <p>
-                            <i class="fa fa-list text-sm"></i>
+
+                    <!-- Subjects Section -->
+                    <div class="gradient-bg px-6 py-4">
+                        <h2 class="text-xl font-bold text-white flex items-center">
+                            <i class="fas fa-book mr-3 text-indigo-200"></i>
                             Other Subjects
-                        </p>
+                        </h2>
                     </div>
-                    <div class="pb-2">
-                        <ul>
+                    <div class="p-6">
+                        <ul class="space-y-3">
                             @foreach ($subjects as $item)
-                                <li>
+                                <li class="group">
                                     <a href="{{ url('/notes/chapter', [$item->slug, 'all-chapters']) }}"
-                                        class="text-sm text-blue-500">
-                                        <i class="fa fa-circle-dot mr-1 text-red-600" aria-hidden="true"></i>
-                                        {{ $item->name }}
+                                        class="flex items-center px-4 py-3 bg-gray-50 rounded-lg hover:bg-indigo-50 transition duration-300">
+                                        <span
+                                            class="w-2 h-2 bg-blue-500 rounded-full mr-3 group-hover:bg-blue-600 transition duration-300"></span>
+                                        <span
+                                            class="text-gray-700 font-medium group-hover:text-indigo-700 transition duration-300">{{ $item->name }}</span>
+                                        <span class="ml-auto text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
+                                            {{ $item->chapters_count ?? '0' }}
+                                        </span>
                                     </a>
                                 </li>
                             @endforeach
@@ -159,6 +208,19 @@
         </div>
     </main>
     @include('layouts.footer')
+
+    @push('styles')
+        <style>
+            .gradient-bg {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            }
+
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+        </style>
+    @endpush
 
     <script>
         // Function to generate HTML content for each object in the array

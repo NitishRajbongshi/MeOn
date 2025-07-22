@@ -25,9 +25,9 @@ use App\Http\Controllers\Subscription\ManageSubscription;
 use App\Http\Controllers\Subscription\SubscriptionController;
 use App\Http\Controllers\User\UserProfileController;
 use App\Http\Controllers\WelcomeController;
-use App\Models\Master\MasterClassCategory;
 
 Route::get('/', [WelcomeController::class, 'index'])->name('home');
+Route::get('/get-standards/{category_id}', [WelcomeController::class, 'getStandardsByCategory']);
 Route::get('/subscription/plans/all-plans', [SubscriptionController::class, 'index'])->name('subscription');
 
 // dashboard
@@ -42,8 +42,10 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/email/verify/{token}', [RegisterController::class, 'verifyEmail'])->name('verify');
 });
 
+// common routes for all users
 Route::get('/about-us', [WelcomeController::class, 'about'])->name('about');
 Route::get('/contact-us', [WelcomeController::class, 'contact'])->name('contact.us');
+Route::get('/course/all-courses', [WelcomeController::class, 'courseList'])->name('course.all');
 Route::post('/logout', [LogoutController::class, 'logoutUser'])->middleware('auth')->name('logout');
 
 // student

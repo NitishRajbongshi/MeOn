@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Edorb - About Us')
+@section('title', 'Online Assessments')
 @section('meta_description',
     'Welcome to our website Edorb.in, your one-stop destination for comprehensive study
     materials and solutions tailored for students from Class 5 to 10 following the SEBA & from 9 to 12 following the NCERT
@@ -9,117 +9,151 @@
 @section('meta_keywords', 'Edorb, Edorb.in, Edorb Assam, Edorb online study, Edorb Assamese Notes')
 @section('content')
     @include('layouts.navbar')
-    <div class="container mx-auto">
-        <div class="p-1 md:p-4 w-full rounded-md text-xs">
-            <ol class="list-reset flex">
-                <li>
-                    <a href="{{ route('home') }}"
-                        class="text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600">Home</a>
-                </li>
-                <li>
-                    <span class="mx-2 text-neutral-500 dark:text-neutral-400">/</span>
-                </li>
-                <li class="text-neutral-500 dark:text-neutral-400">Online Assessments</li>
-            </ol>
+    <div class="container mx-auto px-4 py-8">
+        <!-- Breadcrumbs -->
+        <div class="w-full rounded-md text-sm mb-6">
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-2">
+                    <li class="inline-flex items-center">
+                        <a href="{{ route('home') }}" class="inline-flex items-center text-indigo-600 hover:text-indigo-800">
+                            <i class="fas fa-home mr-2"></i>
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <i class="fas fa-chevron-right text-gray-400 mx-2"></i>
+                            <span class="text-gray-500">Online Assessments</span>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
         </div>
 
-        <div class="p-1 md:p-4">
-            <h1 class="text-center text-3xl font-bold pb-4">Online Assessments</h1>
-            <div class="w-full text-center">
-                <h3 class="text-lg font-semibold ml-3 text-slate-800">List of available examination</h3>
-                <p class="text-slate-500 mb-5 ml-3">Participate and test yourself with our free of cost online assessement and improve yourself</p>
+        <!-- Page Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-3xl md:text-4xl font-bold text-indigo-800 mb-4">Online Assessments</h1>
+            <div class="w-24 h-1.5 gradient-bg mx-auto rounded-full"></div>
+            <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+                Participate and test yourself with our free online assessments to track your progress
+            </p>
+        </div>
+
+        <!-- Assessments Table -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <!-- Table Header -->
+            <div class="gradient-bg text-white px-6 py-4">
+                <h2 class="text-xl font-bold flex items-center">
+                    <i class="fas fa-clipboard-list mr-3"></i>
+                    Available Examinations
+                </h2>
             </div>
-            <div
-                class="relative flex flex-col w-full h-full overflow-auto text-gray-700 bg-white shadow-sm rounded-lg bg-clip-border">
-                <table class="w-full text-left table-auto min-w-max">
+
+            <div class="overflow-x-auto">
+                <table class="w-full">
                     <thead>
-                        <tr class="text-center">
-                            <th class="p-4 border-b border-slate-300 bg-slate-50">
-                                <p class="block text-sm font-normal leading-none text-slate-500">
-                                    Sl. No.
-                                </p>
+                        <tr class="bg-gray-50 text-gray-700">
+                            <th class="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider">
+                                Sl. No.
                             </th>
-                            <th class="text-start p-4 border-b border-slate-300 bg-slate-50">
-                                <p class="block text-sm font-normal leading-none text-slate-500">
-                                    Exam Title
-                                </p>
+                            <th class="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider">
+                                Exam Title
                             </th>
-                            <th class="p-4 border-b border-slate-300 bg-slate-50">
-                                <p class="block text-sm font-normal leading-none text-slate-500">
-                                    Exam Status
-                                </p>
+                            <th class="px-6 py-4 text-center text-xs font-medium uppercase tracking-wider">
+                                Exam Status
                             </th>
-                            <th class="p-4 border-b border-slate-300 bg-slate-50">
-                                <p class="block text-sm font-normal leading-none text-slate-500">
-                                    Action
-                                </p>
+                            <th class="px-6 py-4 text-center text-xs font-medium uppercase tracking-wider">
+                                Action
                             </th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="divide-y divide-gray-200">
                         @foreach ($assessments as $index => $assessment)
-                            <tr class="text-center hover:bg-slate-50">
-                                <td class="p-4 border-b border-slate-200">
-                                    <p class="block text-sm text-slate-800">
-                                        {{ ++$index }}
-                                    </p>
+                            <tr class="hover:bg-gray-50 transition duration-150">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                                    {{ ++$index }}
                                 </td>
-                                <td class="text-start p-4 border-b border-slate-200">
-                                    <p class="block text-sm text-slate-800">
-                                        {{ $assessment->title }}
-                                    </p>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm font-medium text-gray-900">{{ $assessment->title }}</div>
+
                                 </td>
-                                <td class="p-4 border-b border-slate-200">
-                                    <p class="block text-sm text-slate-800">
-                                        @if ($assessment->status_id === 1)
-                                            <span class="text-xs bg-gray-800 text-white p-1 border-gray-800 rounded-sm">
-                                                Upcoming
-                                            </span>
-                                        @endif
-                                        @if ($assessment->status_id === 2)
-                                            <span class="text-xs bg-green-800 text-white p-1 border-green-800 rounded-sm">
-                                                Open
-                                            </span>
-                                        @endif
-                                        @if ($assessment->status_id === 3)
-                                            <span class="text-xs bg-red-800 text-white p-1 border-red-800 rounded-sm">
-                                                Expired
-                                            </span>
-                                        @endif
-                                    </p>
+                                <td class="px-6 py-4 whitespace-nowrap text-center">
+                                    @if ($assessment->status_id === 1)
+                                        <span
+                                            class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                            <i class="fas fa-clock mr-1"></i> Upcoming
+                                        </span>
+                                    @endif
+                                    @if ($assessment->status_id === 2)
+                                        <span
+                                            class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                            <i class="fas fa-check-circle mr-1"></i> Open
+                                        </span>
+                                    @endif
+                                    @if ($assessment->status_id === 3)
+                                        <span
+                                            class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                            <i class="fas fa-times-circle mr-1"></i> Expired
+                                        </span>
+                                    @endif
                                 </td>
-                                <td class="p-4 border-b border-slate-200">
-                                    <p class="block text-sm text-slate-800">
-                                        @if ($assessment->status_id === 2)
-                                            <a class="text-blue-500 rounded" href="{{ $assessment->link }}">
-                                                <button
-                                                    class="btn btn-sm bg-blue-500 text-white hover:bg-blue-600 px-2 py-1 rounded-full">
-                                                    Click Here
-                                                </button>
-                                            </a>
-                                        @else
-                                            <a class="text-blue-500 rounded" href="#">
-                                                <button
-                                                    class="btn btn-sm bg-red-500 text-white hover:bg-red-600 px-2 py-1 rounded-full">
-                                                    Not Available
-                                                </button>
-                                            </a>
-                                        @endif
-                                    </p>
+                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+                                    @if ($assessment->status_id === 2)
+                                        <a href="{{ $assessment->link }}" class="text-indigo-600 hover:text-indigo-900">
+                                            <button
+                                                class="gradient-bg text-white px-4 py-2 rounded-lg hover:opacity-90 transition duration-300 flex items-center mx-auto">
+                                                <i class="fas fa-external-link-alt mr-2"></i>
+                                                Start Exam
+                                            </button>
+                                        </a>
+                                    @else
+                                        <button
+                                            class="bg-gray-200 text-gray-600 px-4 py-2 rounded-lg cursor-not-allowed flex items-center mx-auto"
+                                            disabled>
+                                            <i class="fas fa-lock mr-2"></i>
+                                            Not Available
+                                        </button>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
-                <div class="m-1">
-                    {{ $assessments->links() }}
-                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="px-6 py-4 border-t border-gray-200">
+                {{ $assessments->links() }}
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="mt-12 text-center">
+            <div class="gradient-bg text-white p-8 rounded-xl">
+                <h2 class="text-2xl font-bold mb-4">Want to create custom assessments?</h2>
+                <p class="mb-6 max-w-2xl mx-auto opacity-90">
+                    Contact us to create personalized assessments tailored to your learning needs.
+                </p>
+                <button
+                    class="bg-white text-indigo-700 hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold transition duration-300">
+                    Request Custom Assessment
+                </button>
             </div>
         </div>
     </div>
     @include('layouts.footer')
 
     @push('styles')
+        <style>
+            .gradient-bg {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            }
+
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+        </style>
     @endpush
 
     @push('scripts')

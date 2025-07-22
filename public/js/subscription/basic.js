@@ -1,11 +1,11 @@
 $(document).ready(function () {
     $("#class").on("change", () => {
-        console.log("change");
         // Get CSRF token from the meta tag
         var csrfToken = $('meta[name="csrf-token"]').attr("content");
 
         $("#subject").empty();
         $("#subject").append('<option value="">Choose One</option>');
+        const subjectSelect = document.getElementById('subject');
 
         const selectedClass = $("#class").val();
         $.ajax({
@@ -26,6 +26,7 @@ $(document).ready(function () {
                                 "</option>"
                         );
                     });
+                    subjectSelect.disabled = false;
                 } else {
                     alert(`Failed! ${response.message}`);
                 }
@@ -43,6 +44,7 @@ $(document).ready(function () {
 
         $("#chapter").empty();
         $("#chapter").append('<option value="">Choose One</option>');
+        const chapterSelect = document.getElementById('chapter');
 
         $.ajax({
             url: "/user/subscription/plan/chapter/list/" + selectedSubject,
@@ -62,6 +64,8 @@ $(document).ready(function () {
                                 "</option>"
                         );
                     });
+                    chapterSelect.disabled = false;
+
                 } else {
                     alert(`Failed! ${response.message}`);
                 }
@@ -91,7 +95,7 @@ $(document).ready(function () {
             success: function (response) {
                 if (response.status == "success") {
                     $("#chapter_name").append(response.result.name);
-                    $("#chapter_price").append(response.result.actual_price);
+                    $("#chapter_price").append(response.result.offer_price);
                     $("#actual_price").append(response.result.actual_price);
                     $("#offer_price").append(response.result.offer_price);
                     $("#total_amount").append(response.result.offer_price);

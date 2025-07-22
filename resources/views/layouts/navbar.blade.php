@@ -1,10 +1,10 @@
-<header class="shadow-sm bg-white">
-    <nav class="container flex justify-between items-center w-[95%]  mx-auto">
+<header class="shadow-md bg-white">
+    <nav class="container flex justify-between items-center w-[95%] mx-auto">
         <div>
             {{-- <img class="w-16 cursor-pointer" src="https://cdn-icons-png.flaticon.com/512/5968/5968204.png" alt="..."> --}}
             <a href="/" class="flex justify-center items-center py-1">
                 <img src="{{ asset('images/main_logo.png') }}" alt="logo" width="50rem;" class="hidden md:block">
-                <span style="font-family: 'Lilita One', serif;" class="text-xl py-3 text-red-800">EDORB</span>
+                <span style="font-family: 'Lilita One', serif;" class="text-2xl py-3 text-blue-900">E D O R B</span>
             </a>
             {{-- <p class="text-xl py-3 font-bold">EDORB</p> --}}
         </div>
@@ -12,22 +12,22 @@
             style="z-index: 1;">
             <ul class="flex text-lg md:flex-row flex-col md:items-center md:gap-[4vw] gap-2">
                 <li class="md:hidden">
-                    <a style="font-family: 'Lilita One', serif;" class="hover:text-gray-500 text-lg text-red-800" href="{{ route('home') }}">
-                        EDORB
+                    <a style="font-family: 'Lilita One', serif;" class="hover:text-gray-500 text-lg text-blue-900" href="{{ route('home') }}">
+                        E D O R B
                     </a>
                 </li>
                 <li>
-                    <a class="text-blue-800 font-bold hover:text-gray-500 hover:underline" href="{{ route('home') }}">
+                    <a class="font-bold hover:text-blue-500" href="{{ route('home') }}">
                         Home
                     </a>
                 </li>
                 <li>
-                    <a class="text-red-500 font-bold hover:text-gray-500 hover:underline" href="{{ route('subscription') }}">
+                    <a class="font-bold hover:text-blue-500" href="{{ route('subscription') }}">
                         Pricing
                     </a>
                 </li>
                 <li>
-                    <a class="text-red-800 font-bold hover:text-gray-500 hover:underline" href="#">
+                    <a class="font-bold hover:text-blue-500" href="#">
                         Blog
                     </a>
                 </li>
@@ -103,7 +103,7 @@
             @guest
                 <a href="{{ route('login') }}">
                     <button
-                        class="text-md rounded-full border bg-blue-500 text-white px-4 py-1 hover:bg-blue-600 hover:shadow-md hover:shadow-blue-100">
+                        class="text-md rounded-md border bg-blue-900 text-white px-4 py-2 hover:bg-blue-700 hover:shadow-md hover:shadow-blue-100">
                         <i class="fa fa-sign-in"></i>
                         Login
                     </button>

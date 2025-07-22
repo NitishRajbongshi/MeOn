@@ -83,6 +83,7 @@ class SubscriptionController extends Controller
             $subjects = Subject::find($id)
                 ->chapters()
                 ->select('id', 'name', 'description')
+                ->where('master_price_status_id', 2)
                 ->get();
             $response = [
                 'status' => 'success',

@@ -9,160 +9,237 @@
     @include('layouts.navbar')
     <x-show-notification />
 
-    <main class="container mx-auto min-h-[80%]">
-        {{-- BreadCrumbs --}}
-        <div class="w-full rounded-md text-xs px-4 my-2">
-            <ol class="list-reset flex">
-                <li>
-                    <a href="/"
-                        class="text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600">Home</a>
-                </li>
-                <li>
-                    <span class="mx-2 text-neutral-500 dark:text-neutral-400">/</span>
-                </li>
-                <li class="text-neutral-500 dark:text-neutral-400">Subject List</li>
-            </ol>
+    <main class="container mx-auto px-1 py-2 md:px-4 md:py-8 min-h-[80%]">
+        <!-- Breadcrumbs -->
+        <div class="w-full rounded-md text-sm mb-6">
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-2">
+                    <li class="inline-flex items-center">
+                        <a href="/" class="inline-flex items-center text-indigo-600 hover:text-indigo-800">
+                            <i class="fas fa-home mr-2"></i>
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <i class="fas fa-chevron-right text-gray-400 mx-2"></i>
+                            <span class="text-gray-500">Subject List</span>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
         </div>
 
-        <div class="flex flex-wrap justify-between gap-1 my-2">
-            {{-- content --}}
-            <div class="w-full md:w-[70%] shadow-sm bg-white border">
-                {{-- Chpater section --}}
-                <div class="chapter_list px-4">
-                    <div class="border-b my-3 font-bold">
-                        <h1 class="text-xl mb-1">
-                            <i class="fa-solid fa-layer-group mr-1 text-sm"></i>
-                            Subject List
-                        </h1>
+        <div class="flex flex-col lg:flex-row gap-6">
+            <!-- Main Content -->
+            <div class="w-full lg:w-3/4">
+                <div class="border bg-white rounded-xl shadow-md overflow-hidden">
+                    <!-- Header -->
+                    <div class="border-b border-gray-100 px-8 py-5">
+                        <div class="flex flex-wrap gap-3 justify-between items-center">
+                            <h1 class="text-2xl font-bold text-indigo-800">
+                                <i class="fas fa-layer-group mr-3 text-indigo-500"></i>
+                                Subject List
+                            </h1>
+                            <div class="lg:hidden">
+                                <a href="#classContainer"
+                                    class="text-sm bg-indigo-50 text-indigo-600 px-4 py-2 rounded-full hover:bg-indigo-100 transition duration-300">
+                                    <i class="fas fa-list mr-1"></i> View Categories
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="my-2 block md:hidden">
-                        <a href="#classContainer" class="border text-sm border-red-200 p-1 text-red-500">
-                            <button>View all available classes</button>
-                        </a>
+
+                    <!-- Class Info -->
+                    <div class="gradient-bg text-white px-8 py-6">
+                        <h2 class="text-2xl font-bold">
+                            {{ $currentClass->name }} <span class="text-indigo-100 opacity-90">({{ $subjectCount }} Subjects
+                                Available)</span>
+                        </h2>
+                        <div class="mt-3">
+                            <p class="text-indigo-100">{{ $currentClass->description }}</p>
+                        </div>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <x-class-tags :tagsCsv="$currentClass->tags" />
+                        </div>
                     </div>
-                    <div class="border border-blue-300 p-2 bg-blue-200 text-blue-700">
-                        <a href="#" class="text-sm font-bold">
-                            {{ $currentClass->name }} - ({{ $subjectCount }} Subjects Available)
-                        </a><br>
-                    </div>
-                    <div class="text-sm my-2 text-slate-500 text-justify">
-                        <p>{{ $currentClass->description }}</p>
-                        <x-class-tags :tagsCsv="$currentClass->tags" />
-                    </div>
-                    <div class="py-2">
-                        {{-- <p class="underline text-lg text-blue-500">List of subjects:</p> --}}
-                        <div class="flex justify-between items-center flex-wrap">
-                            @foreach ($subjects as $item)
-                                <div class="w-full my-1 md:w-[49.5%] p-4 border border-blue-100 bg-white hover:shadow-md">
-                                    <div class="flex justify-between font-bold pb-2">
-                                        <div class="text-sm">
-                                            <i class="fa fa-circle-dot mr-1 text-blue-700"></i>
-                                            {{ $item->name }}
-                                        </div>
-                                        <div>
-                                            <p class="text-gray-500 text-sm">{{ $currentClass->name }}</p>
-                                        </div>
+
+                    <!-- Subjects Grid -->
+                    <div class="p-2 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                        @foreach ($subjects as $item)
+                            <div
+                                class="bg-white rounded-xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                                <!-- Card Header -->
+                                <div class="px-6 py-5 border-b border-gray-50 flex justify-between items-start">
+                                    <h3 class="text-lg font-semibold text-gray-800">
+                                        <i class="fas fa-circle-dot text-indigo-400 mr-3"></i>
+                                        {{ $item->name }}
+                                    </h3>
+                                    <span class="text-xs bg-indigo-50 text-indigo-600 px-2 py-1 rounded-full">
+                                        {{ $currentClass->name }}
+                                    </span>
+                                </div>
+
+                                <!-- Card Body -->
+                                <div class="px-6 py-5">
+                                    <!-- Tags -->
+                                    <div class="mb-4 flex flex-wrap gap-2">
+                                        <x-ass-subject-tags :tagsCsv="$item->tags" :routeParam="['standard' => $currentClass->slug]" />
                                     </div>
-                                    <x-ass-subject-tags :tagsCsv="$item->tags" :routeParam="['standard' => $currentClass->slug]" />
-                                    <div class="min-h-[5rem]">
-                                        <p class="text-gray-400 max-h-[4rem] text-xs"
-                                            style="overflow: hidden; text-overflow: ellipsis;">
-                                            {{ $item->description }}
-                                        </p>
-                                    </div>
-                                    <div class="flex justify-between items-end flex-wrap mt-3">
-                                        @auth
-                                            @if ($user->admin)
-                                            <div class="flex justify-center items-center pb-1">
-                                                @if ($item->master_price_status_id == '1')
-                                                    <p class="text-sm text-blue-500 mx-1">Free</p>
-                                                @else
-                                                    <p class="text-sm text-blue-500 mx-1">
-                                                        <span class="font-bold text-md text-gray-400"
-                                                            style="text-decoration: line-through"><i
-                                                                class="fa-solid fa-indian-rupee-sign"></i>{{ $item->actual_price }}</span>
-                                                        <span class="font-bold text-md text-red-600"><i
-                                                                class="fa-solid fa-indian-rupee-sign"></i>{{ $item->offer_price }}</span>
-                                                    </p>
-                                                @endif
-                                                <div>
+
+                                    <!-- Description -->
+                                    <p class="text-gray-500 text-sm mb-5 line-clamp-3 leading-relaxed">
+                                        {{ $item->description }}
+                                    </p>
+
+                                    <!-- Price & CTA -->
+                                    <div class="flex justify-between items-center">
+                                        @if ($item->master_price_status_id == '1')
+                                            <span
+                                                class="bg-green-50 text-green-600 text-xs font-medium px-3 py-1 rounded-full">
+                                                <i class="fas fa-gift mr-1"></i> Free Access
+                                            </span>
+                                        @else
+                                            <div class="flex items-center space-x-2">
+                                                <span class="text-gray-400 line-through text-sm">
+                                                    ₹{{ $item->actual_price }}
+                                                </span>
+                                                <span
+                                                    class="bg-gradient-to-r from-pink-500 to-orange-400 text-white text-sm font-semibold px-3 py-1 rounded-full">
+                                                    ₹{{ $item->offer_price }}
+                                                </span>
+                                            </div>
+                                        @endif
+
+                                        <div class="flex items-center space-x-2">
+                                            @auth
+                                                @if ($user->admin)
                                                     <form action="{{ route('subject.delete') }}" method="post">
                                                         @method('delete')
                                                         @csrf
-                                                        <input type="hidden" name="subjectID"
-                                                            value="{{ $item->id }}">
-                                                        <button type="submit" class="rounded-full bg-red-200 px-2 py-1 text-xs text-red-500 hover:text-red-800"
+                                                        <input type="hidden" name="subjectID" value="{{ $item->id }}">
+                                                        <button type="submit"
+                                                            class="text-gray-400 hover:text-red-500 transition duration-300 p-2"
                                                             onclick="return confirm('Are you sure you want to delete this class and related resources?')">
-                                                            <i class="fa fa-trash text-xs"></i>
+                                                            <i class="fas fa-trash"></i>
                                                         </button>
                                                     </form>
-                                                </div>
-                                            </div>
-                                            @endif
-                                        @endauth
-                                        <div class="w-full md:w-auto">
-                                            <a class="inline-block w-full md:w-auto" href="{{ url('/notes/chapter', [$item->slug, 'all-chapters']) }}">
-                                                <button data-id={{ $item->id }}
-                                                    class="subject_btn w-full md:w-auto bg-blue-500 text-white rounded p-2 hover:bg-blue-600">
-                                                    <i class="fa-solid fa-right-from-bracket"></i>
-                                                    Go to chapter List
-                                                </button>
+                                                @endif
+                                            @endauth
+
+                                            <a href="{{ url('/notes/chapter', [$item->slug, 'all-chapters']) }}"
+                                                class="text-sm bg-gradient-to-r from-indigo-400 to-purple-500 text-white px-5 py-2 rounded-lg hover:shadow-lg transition duration-300 flex items-center">
+                                                <i class="fas fa-arrow-right mr-2"></i>
+                                                Chapters
                                             </a>
                                         </div>
                                     </div>
-
                                 </div>
-                            @endforeach
-                        </div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
-            {{-- sidebar --}}
-            <div class="w-full md:w-[29%] px-4 border shadow-sm bg-white" id="classContainer">
-                <div class="notification_list ">
-                    <div class="text-xl border-b my-3 font-bold">
-                        <p>
-                            <i class="fa fa-list text-sm"></i>
+
+            <!-- Sidebar -->
+            <div class="w-full lg:w-1/4" id="classContainer">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden sticky top-4 border border-gray-100">
+                    <!-- Categories Section -->
+                    <div class="gradient-bg px-6 py-4">
+                        <h2 class="text-xl font-bold text-white flex items-center">
+                            <i class="fas fa-folder-open mr-3 text-indigo-200"></i>
                             Available Categories
-                        </p>
+                        </h2>
                     </div>
-                    <div class="pb-2">
-                        <ul>
+                    <div class="p-6">
+                        <ul class="space-y-3">
                             @foreach ($categories as $item)
-                                <li>
+                                <li class="group">
                                     <a href="{{ url('category', [$item->slug, 'all-classes']) }}"
-                                        class="text-sm text-blue-500">
-                                        <i class="fa fa-circle-dot mr-1 text-red-600" aria-hidden="true"></i>
-                                        {{ $item->category }}
+                                        class="flex items-center px-4 py-3 bg-gray-50 rounded-lg hover:bg-indigo-50 transition duration-300">
+                                        <span
+                                            class="w-2 h-2 bg-indigo-500 rounded-full mr-3 group-hover:bg-indigo-600 transition duration-300"></span>
+                                        <span
+                                            class="text-gray-700 font-medium group-hover:text-indigo-700 transition duration-300">{{ $item->category }}</span>
+                                        <span class="ml-auto text-xs bg-indigo-100 text-indigo-700 px-2 py-1 rounded-full">
+                                            {{ $item->classes_count ?? '0' }}
+                                        </span>
                                     </a>
                                 </li>
                             @endforeach
                         </ul>
                     </div>
-                </div>
-                <div class="notification_list ">
-                    <div class="text-xl border-b my-3 font-bold">
-                        <p>
-                            <i class="fa fa-list text-sm"></i>
+
+                    <!-- Classes Section -->
+                    <div class="gradient-bg px-6 py-4">
+                        <h2 class="text-xl font-bold text-white flex items-center">
+                            <i class="fas fa-graduation-cap mr-3 text-indigo-200"></i>
                             Available Classes
-                        </p>
+                        </h2>
                     </div>
-                    <div class="pb-2">
-                        <ul>
+                    <div class="p-6">
+                        <ul class="space-y-3">
                             @foreach ($classes as $item)
-                                <li>
+                                <li class="group">
                                     <a href="{{ url('content/subject', [$item->slug, 'language', 'all-languages']) }}"
-                                        class="text-sm text-blue-500">
-                                        <i class="fa fa-circle-dot mr-1 text-red-600" aria-hidden="true"></i>
-                                        {{ $item->name }}
+                                        class="flex items-center px-4 py-3 bg-gray-50 rounded-lg hover:bg-indigo-50 transition duration-300">
+                                        <span
+                                            class="w-2 h-2 bg-purple-500 rounded-full mr-3 group-hover:bg-purple-600 transition duration-300"></span>
+                                        <span
+                                            class="text-gray-700 font-medium group-hover:text-indigo-700 transition duration-300">{{ $item->name }}</span>
+                                        <span class="ml-auto text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full">
+                                            {{ $item->subjects_count ?? '0' }}
+                                        </span>
                                     </a>
                                 </li>
                             @endforeach
                         </ul>
+                    </div>
+
+                    <!-- Quick Links -->
+                    <div class="border-t border-gray-100 px-6 py-4">
+                        <h2 class="text-lg font-semibold text-gray-700 mb-3 flex items-center">
+                            <i class="fas fa-bolt mr-2 text-yellow-500"></i>
+                            Quick Links
+                        </h2>
+                        <div class="grid grid-cols-2 gap-3">
+                            <a href="#"
+                                class="text-sm bg-indigo-50 text-indigo-700 px-3 py-2 rounded-lg hover:bg-indigo-100 transition duration-300 flex items-center">
+                                <i class="fas fa-star mr-2 text-yellow-500"></i>
+                                Popular
+                            </a>
+                            <a href="#"
+                                class="text-sm bg-green-50 text-green-700 px-3 py-2 rounded-lg hover:bg-green-100 transition duration-300 flex items-center">
+                                <i class="fas fa-fire mr-2 text-red-500"></i>
+                                Trending
+                            </a>
+                            <a href="#"
+                                class="text-sm bg-blue-50 text-blue-700 px-3 py-2 rounded-lg hover:bg-blue-100 transition duration-300 flex items-center">
+                                <i class="fas fa-clock mr-2 text-blue-500"></i>
+                                Recent
+                            </a>
+                            <a href="#"
+                                class="text-sm bg-purple-50 text-purple-700 px-3 py-2 rounded-lg hover:bg-purple-100 transition duration-300 flex items-center">
+                                <i class="fas fa-trophy mr-2 text-purple-500"></i>
+                                Top Rated
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
     @include('layouts.footer')
+    @push('styles')
+        <style>
+            .gradient-bg {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            }
+
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+        </style>
+    @endpush
 @endsection

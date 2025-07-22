@@ -63,7 +63,7 @@
     @stack('styles')
 </head>
 
-<body class="bg-gradient-to-t h-screen" style="font-family: 'Nunito Sans', 'Noto Serif Ahom', serif;">
+<body class="h-screen" style="font-family: 'Nunito Sans', 'Noto Serif Ahom', serif;">
     @include('layouts.preloader')
     @yield('content')
     @stack('scripts')

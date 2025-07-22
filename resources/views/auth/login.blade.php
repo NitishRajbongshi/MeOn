@@ -2,111 +2,132 @@
 
 @section('content')
     <x-show-notification />
-    {{-- <div class="flex justify-center items-center h-screen"
-        style="background-color: #A9C9FF; background-image: linear-gradient(180deg, #A9C9FF 0%, #FFBBEC 100%);"> --}}
-    {{-- <div class="flex justify-center items-center h-screen backgroundImage">
-        <div class="w-[20rem] bg-white shadow-md rounded p-4">
-            <div class="logo-section flex justify-center items-center my-4">
-                <img src="{{ asset('icons/login.png') }}" alt="logo" width="50rem" height="50rem">
-            </div>
-            <div class="main-content">
-                <form action="{{ route('login') }}" method="POST" autocomplete="off">
-                    @csrf
-                    <div class="my-2">
-                        <label for="email"><i class="fa fa-envelope me-2 text-blue-800"></i><strong>Email
-                                Address</strong></label>
-                        <input class="w-full border rounded-sm p-1 outline-blue-100" type="email" name="email"
-                            id="email" placeholder="johndoe@gmail.com" value="{{ old('email') }}">
-                        @error('email')
-                            <p class="text-sm text-red-500">
-                                <i class="fa fa-warning mr-1"></i>
-                                {{ $message }}
-                            </p>
-                        @enderror
+    <div class="min-h-screen flex items-center justify-center bg-gradient-to-r from-indigo-50 to-purple-50 p-4">
+        <div class="w-full max-w-4xl bg-white rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row">
+            <!-- Left Side - Image -->
+            <div class="hidden md:block md:w-1/2 bg-indigo-600 p-8 items-center justify-center">
+                <div class="text-center text-white">
+                    <img src="{{ asset('images/auth/login_image.jpg') }}" alt="Welcome to Edorb"
+                        class="w-full h-auto rounded-lg shadow-lg mb-6">
+                    <h2 class="text-2xl font-bold mb-2">Welcome Back!</h2>
+                    <p class="opacity-90">Login to access your personalized learning dashboard and continue your educational
+                        journey.</p>
+                    <div class="mt-6 flex justify-center space-x-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-500 flex items-center justify-center">
+                            <i class="fas fa-book-open text-xl"></i>
+                        </div>
+                        <div class="w-12 h-12 rounded-full bg-indigo-500 flex items-center justify-center">
+                            <i class="fas fa-video text-xl"></i>
+                        </div>
+                        <div class="w-12 h-12 rounded-full bg-indigo-500 flex items-center justify-center">
+                            <i class="fas fa-chart-line text-xl"></i>
+                        </div>
                     </div>
-                    <div class="my-2">
-                        <label for="password"><i class="fa fa-key me-2 text-blue-800"></i><strong>Password</strong></label>
-                        <input class="w-full border rounded-sm p-1 outline-blue-100" type="password" name="password"
-                            id="password" placeholder="xxxxxxxx">
-                        @error('email')
-                            <p class="text-sm text-red-500">
-                                <i class="fa fa-warning mr-1"></i>
-                                {{ $message }}
-                            </p>
-                        @enderror
-                    </div>
-                    <div class="w-full my-3">
-                        <button class="w-full bg-blue-200 text-blue-700 rounded-sm py-1 hover:shadow-sm" type="submit">
-                            <i class="fa fa-sign-in"></i>
-                            <span class="font-bold">Login</span>
-                        </button>
-                    </div>
-                    <div class="w-full my-3">
-                        <a href="{{ route('home') }}"
-                            class="w-full text-center block bg-red-200 text-red-700 rounded-sm py-1 hover:shadow-sm">
-                            <i class="fa fa-backward"></i>
-                            <span class="font-bold">Back</span>
-                        </a>
-                    </div>
-                    <div class="text-blue-500 text-sm text-center py-3">
-                        <a href="{{ route('student.registration') }}">New User? <span>Register here</span></a>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div> --}}
-
-    <div class="flex justify-center items-center h-screen ">
-        <div class="w-[60rem] h-full md:h-auto flex flex-wrap justify-center bg-white shadow-md rounded-md">
-            <div class="hidden md:w-1/2 md:border-e md:p-10 md:flex md:justify-center md:items-center">
-                <img src="{{ asset('images/auth/login_image.jpg') }}" alt="logo" width="100%" height="100%">
-            </div>
-            <div class="w-full md:w-1/2 p-5">
-                <div class="border-b mb-3">
-                    <h3 class="text-3xl text-blue-700 font-bold py-3 text-center">
-                        <i class="fa-solid fa-right-to-bracket"></i>
-                        Login
-                    </h3>
-                    <p class="text-lg text-gray-600 font-bold pb-2 text-center">Explore EDORB</p>
                 </div>
-                <div>
-                    <form action="{{ route('login') }}" method="POST" autocomplete="off" class="flex flex-col">
-                        @csrf
-                        <label class="text-lg text-blue-700 font-bold mb-2" for="email">
-                            <i class="fa-solid fa-envelope me-2"></i>
-                            Email
-                        </label>
-                        <input class="w-full bg-gray-50 py-2 px-3 shadow-sm rounded-md mb-3 focus:outline-none" type="email"
-                            name="email" id="email" placeholder="Example@gmail.com" value="{{ old('email') }}">
-                        @error('email')
-                            <p class="text-sm text-red-700 mb-3">
-                                <i class="fa fa-warning mr-1"></i>
-                                {{ $message }}
-                            </p>
-                        @enderror
-    
-                        <label class="text-lg text-blue-700 font-bold mb-2" for="password">
-                            <i class="fa-solid fa-lock me-2"></i>
-                            Password
-                        </label>
-                        <input class="w-full bg-gray-50 py-2 px-3 shadow-sm rounded-md mb-3 focus:outline-none" type="password"
-                            name="password" id="password" placeholder="************">
-                        @error('password')
-                            <p class="text-sm text-red-700 mb-3">
-                                <i class="fa fa-warning mr-1"></i>
-                                {{ $message }}
-                            </p>
-                        @enderror
-    
-    
-                        <button class="bg-blue-700 text-white py-2 rounded-full my-3 hover:bg-blue-800" type="submit"
-                            name="login"><i class="fa-solid fa-key me-2"></i>Login</button>
-                    </form>
-    
-                    <div class="mb-5 text-center">
-                        <span>Do not have an account? <a class="text-blue-700"
-                                href="{{ route('register') }}">Register here</a></span>
+            </div>
+
+            <!-- Right Side - Login Form -->
+            <div class="w-full md:w-1/2 p-8 md:p-10">
+                <div class="text-center mb-8">
+                    <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-user-graduate text-white text-2xl"></i>
                     </div>
+                    <h1 class="text-3xl font-bold text-indigo-800 mb-2">Login to Edorb</h1>
+                    <p class="text-gray-600">Enter your credentials to access your account</p>
+                </div>
+
+                <form action="{{ route('login') }}" method="POST" class="space-y-6">
+                    @csrf
+
+                    <!-- Email Field -->
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
+                            Email Address
+                        </label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-envelope text-gray-400"></i>
+                            </div>
+                            <input type="email" id="email" name="email" value="{{ old('email') }}"
+                                class="w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-300"
+                                placeholder="your@email.com" required>
+                        </div>
+                        @error('email')
+                            <p class="mt-1 text-sm text-red-600 flex items-center">
+                                <i class="fas fa-exclamation-circle mr-2"></i> {{ $message }}
+                            </p>
+                        @enderror
+                    </div>
+
+                    <!-- Password Field -->
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <label for="password" class="block text-sm font-medium text-gray-700">
+                                Password
+                            </label>
+                            <a href="#" class="text-sm text-indigo-600 hover:text-indigo-800">
+                                Forgot password?
+                            </a>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-lock text-gray-400"></i>
+                            </div>
+                            <input type="password" id="password" name="password"
+                                class="w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-300"
+                                placeholder="••••••••" required>
+                        </div>
+                        @error('password')
+                            <p class="mt-1 text-sm text-red-600 flex items-center">
+                                <i class="fas fa-exclamation-circle mr-2"></i> {{ $message }}
+                            </p>
+                        @enderror
+                    </div>
+
+                    <!-- Remember Me -->
+                    <div class="flex items-center">
+                        <input id="remember" name="remember" type="checkbox"
+                            class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                        <label for="remember" class="ml-2 block text-sm text-gray-700">
+                            Remember me
+                        </label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit"
+                        class="w-full gradient-bg text-white py-3 px-4 rounded-lg font-semibold hover:opacity-90 transition duration-300 flex items-center justify-center">
+                        <i class="fas fa-sign-in-alt mr-2"></i> Login
+                    </button>
+                </form>
+
+                <!-- Divider -->
+                <div class="my-6 relative">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-gray-300"></div>
+                    </div>
+                    <div class="relative flex justify-center text-sm">
+                        <span class="px-2 bg-white text-gray-500">Or continue with</span>
+                    </div>
+                </div>
+
+                <!-- Social Login -->
+                <div class="grid grid-cols-2 gap-3 mb-6">
+                    <a href="#"
+                        class="w-full bg-white border border-gray-300 rounded-lg py-2 px-4 flex items-center justify-center text-gray-700 hover:bg-gray-50 transition duration-300">
+                        <i class="fab fa-google text-red-500 mr-2"></i> Google
+                    </a>
+                    <a href="#"
+                        class="w-full bg-white border border-gray-300 rounded-lg py-2 px-4 flex items-center justify-center text-gray-700 hover:bg-gray-50 transition duration-300">
+                        <i class="fab fa-facebook-f text-blue-600 mr-2"></i> Facebook
+                    </a>
+                </div>
+
+                <!-- Registration Link -->
+                <div class="text-center text-sm text-gray-600">
+                    Don't have an account?
+                    <a href="{{ route('register') }}" class="font-medium text-indigo-600 hover:text-indigo-800">
+                        Create one now
+                    </a>
                 </div>
             </div>
         </div>
@@ -114,12 +135,8 @@
 @endsection
 @push('styles')
     <style>
-        .backgroundImage {
-            position: relative;
-            background-image: url('images/background/image2.jpg');
-            background-size: cover;
-            background-position: center;
-            background-color: rgba(255, 255, 255, 0.8);
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
     </style>
 @endpush

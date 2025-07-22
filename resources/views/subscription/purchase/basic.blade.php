@@ -2,233 +2,252 @@
 
 @section('content')
     @include('layouts.navbar')
-    <div class="container mx-auto min-h-screen border bg-white p-1 md:p-4">
-        <div class="container mx-auto rounded-lg bg-[#cdc2ac] p-1 md:p-4">
-            <h1 class="font-bold text-3xl text-center uppercase text-white">Basic Plan</h1>
-            <div class="flex flex-wrap justify-between rounded-lg p-1 md:m-10 md:p-10 items-start bg-stone-50 shadow-lg">
-                <div class="w-full p-2 shadow-md rounded-md md:w-[35%] md:p-10">
-                    <div class="text-md pb-2 font-bold text-blue-900 border-slate-200">
-                        <h1 class="uppercase">
-                            Payment
-                        </h1>
-                    </div>
-                    <div>
-                        <div class="mb-5">
-                            <h1 class="text-xl font-bold"><span id="chapter_name">{{ $plan['chapter_name'] }}</span></h1>
-                            <h1 class="text-md font-bold text-slate-400">Rs. <span
-                                    id="chapter_price">{{ $plan['actual_price'] }}</span></h1>
-                        </div>
-                        <div class="border-t ">
-                            <div class="flex justify-between my-2 font-bold">
-                                <div class="w-1/2">Total Chapter</div>
-                                <div class="w-1/2 text-right"><span id="">1</span></div>
-                            </div>
-                            <div class="flex justify-between my-2 font-bold">
-                                <div class="w-1/2">Actual Price</div>
-                                <div class="w-1/2 text-right">Rs. <span id="actual_price">
-                                        {{ $plan['actual_price'] }}</span></div>
-                            </div>
-                            <div class="flex justify-between my-2 font-bold">
-                                <div class="w-1/2">Others</div>
-                                <div class="w-1/2 text-right">Rs. <span id=""> 00.00</span></div>
-                            </div>
-                            <div class="flex justify-between my-2 font-bold">
-                                <div class="w-1/2">Taxes</div>
-                                <div class="w-1/2 text-right">Rs. <span id=""> 00.00</span></div>
-                            </div>
-                            <div class="flex justify-between my-2 font-bold">
-                                <div class="w-1/2">Offer Price</div>
-                                <div class="w-1/2 text-right">Rs. <span id="offer_price"> {{ $plan['offer_price'] }}</span>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="flex justify-between my-2 font-bold">
-                                <div class="w-1/2">Total Amount</div>
-                                <div class="w-1/2 text-right">Rs. <span id="total_amount"> {{ $plan['offer_price'] }}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex justify-center my-2">
-                            <img src="{{ asset('images/payment/payment_qr.png') }}" alt="QR_CODE" width="200px">
-                        </div>
-                        <p class="text-center"><span class="text-xl font-bold">ankurjyoti902-6@okicici</span></p>
-                    </div>
+    <div class="min-h-screen bg-gradient-to-r from-indigo-50 to-purple-50 p-4 md:p-8">
+        <div class="container mx-auto rounded-xl shadow-lg overflow-hidden">
+            <!-- Header -->
+            <div class="gradient-bg text-white text-center py-8 px-4">
+                <div class="w-20 h-20 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-credit-card text-3xl"></i>
                 </div>
-                <div class="w-full p-2 shadow-md rounded-md md:w-[62%] md:p-10">
-                    <div class="text-md font-bold text-blue-900 border-slate-200">
-                        <h1 class="uppercase">
-                            Instruction
-                        </h1>
-                    </div>
-                    <div class="my-5 ps-5">
-                        <ul class="list-disc text-red-500">
-                            <li>Scan the QR to pay.</li>
-                            <li>Once payment is done, take a screenshot.</li>
-                            <li>Upload the screenshot and confirm your order.</li>
-                        </ul>
-                    </div>
+                <h1 class="text-3xl md:text-4xl font-bold uppercase mb-2">Basic Plan Payment</h1>
+                <p class="text-lg opacity-90">Complete your purchase to access premium content</p>
+            </div>
 
-                    <div class="text-md font-bold text-blue-900 border-slate-200">
-                        <h1 class="uppercase">
-                            User Details
-                        </h1>
-                    </div>
-                    <div class="my-5 bg-white p-2 rounded-sm">
-                        <div class="flex flex-wrap px-1">
-                            <div class="flex flex-wrap w-full md:w-1/2">
-                                <div class="w-full md:w-1/3 font-bold">
-                                    Name:
+            <!-- Content -->
+            <div class="bg-white p-6 md:p-10">
+                <div class="flex flex-col lg:flex-row gap-8">
+                    <!-- Payment Summary -->
+                    <div class="w-full lg:w-2/5">
+                        <div class="bg-white border border-gray-200 rounded-xl shadow-md p-6 sticky top-4">
+                            <div class="border-b border-gray-200 pb-4 mb-4">
+                                <h2 class="text-xl font-bold text-indigo-800 flex items-center">
+                                    <i class="fas fa-receipt mr-3 text-indigo-500"></i>
+                                    Order Summary
+                                </h2>
+                            </div>
+
+                            <!-- Selected Chapter -->
+                            <div class="mb-6">
+                                <h3 class="text-lg font-semibold text-gray-800">{{ $plan['chapter_name'] }}</h3>
+                                <p class="text-gray-500 text-sm">Basic Plan - Single Chapter Access</p>
+                            </div>
+
+                            <!-- Pricing Breakdown -->
+                            <div class="space-y-3 mb-6">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Chapter Price</span>
+                                    <span class="font-medium">₹{{ $plan['actual_price'] }}</span>
                                 </div>
-                                <div class="w-full md:w-2/3">
-                                    {{ $user->name }}
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Discount</span>
+                                    <span
+                                        class="text-green-600 font-medium">-₹{{ number_format($plan['actual_price'] - $plan['offer_price'], 2) }}</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Taxes & Fees</span>
+                                    <span class="font-medium">₹00.00</span>
                                 </div>
                             </div>
-                            <div class="flex flex-wrap w-full md:w-1/2">
-                                <div class="w-full md:w-1/3 font-bold">
-                                    Email:
+
+                            <!-- Total -->
+                            <div class="border-t border-gray-200 pt-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-lg font-bold text-gray-800">Total Amount</span>
+                                    <span class="text-2xl font-bold text-indigo-700">₹{{ $plan['offer_price'] }}</span>
                                 </div>
-                                <div class="w-full md:w-2/3">
-                                    {{ $user->email }}
+                            </div>
+
+                            <!-- Payment QR Code -->
+                            <div class="mt-8 text-center">
+                                <div class="bg-white p-4 rounded-lg border border-gray-200 inline-block">
+                                    <img src="{{ asset('images/payment/payment_qr.png') }}" alt="Payment QR Code"
+                                        class="w-48 h-48 mx-auto">
                                 </div>
+                                <p class="mt-4 text-lg font-semibold text-gray-800">ankurjyoti902-6@okicici</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="text-md pb-2 font-bold text-blue-900 border-slate-200">
-                        <h1 class="uppercase">
-                            Order Details
-                        </h1>
-                    </div>
-                    <form
-                        action="{{ URL::temporarySignedRoute('plan.store', now()->addMinutes(60), ['user' => Auth::user()->name, 'email' => Auth::user()->email]) }}"
-                        method="post" autocomplete="off" enctype="multipart/form-data">
-                        @csrf
-                        <fieldset class="my-3">
-                            <div class="md:flex">
-                                <div class="w-full md:w-2/5">
-                                    <label class="text-md font-bold" for="plan_code">Plan Type:<span
-                                            class="text-xs text-red-500">*</span></label>
-                                </div>
-                                <div class="w-full md:w-3/5">
-                                    <select name="plan_code" id="plan_code"
-                                        class="border w-full rounded-sm outline-none p-1 text-md">
-                                        <option value="{{ $plan['plan_code'] }}">Basic Plan</option>
-                                    </select>
-                                    @error('plan_code')
-                                        <p class="text-xs text-red-500">
-                                            <i class="fa fa-warning mr-1 my-1"></i>
-                                            {{ $message }}
-                                        </p>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="md:flex my-4">
-                                <div class="w-full md:w-2/5">
-                                    <label class="text-md font-bold" for="class">Select Class:<span
-                                            class="text-xs text-red-500">*</span></label>
-                                </div>
-                                <div class="w-full md:w-3/5">
-                                    <select name="class" id="class"
-                                        class="border w-full rounded-sm outline-none p-1 text-md">
-                                        <option value="{{ $plan['class_code'] }}">{{ $plan['class_name'] }}</option>
-                                    </select>
-                                    @error('class')
-                                        <p class="text-xs text-red-500">
-                                            <i class="fa fa-warning mr-1 my-1"></i>
-                                            {{ $message }}
-                                        </p>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="md:flex my-4">
-                                <div class="w-full md:w-2/5">
-                                    <label class="text-md font-bold" for="subject">Select Subject:<span
-                                            class="text-xs text-red-500">*</span></label>
-                                </div>
-                                <div class="w-full md:w-3/5">
-                                    <select name="subject" id="subject"
-                                        class="border w-full rounded-sm outline-none p-1 text-md">
-                                        <option value="{{ $plan['subject_code'] }}">{{ $plan['subject_name'] }}</option>
-                                    </select>
-                                    @error('subject')
-                                        <p class="text-xs text-red-500">
-                                            <i class="fa fa-warning mr-1 my-1"></i>
-                                            {{ $message }}
-                                        </p>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="md:flex my-4">
-                                <div class="w-full md:w-2/5">
-                                    <label class="text-md font-bold" for="chapter">Select Chapter:<span
-                                            class="text-xs text-red-500">*</span></label>
-                                </div>
-                                <div class="w-full md:w-3/5">
-                                    <select name="chapter" id="chapter"
-                                        class="border w-full rounded-sm outline-none p-1 text-md">
-                                        <option value="{{ $plan['chapter_code'] }}">{{ $plan['chapter_name'] }}</option>
-                                    </select>
-                                    <div>
-                                        <p class="text-slate-500 text-[.8rem]">
-                                            Description:
-                                            {{ $plan['chapter_desc'] }}
-                                        </p>
-                                    </div>
-                                    @error('chapter')
-                                        <p class="text-xs text-red-500">
-                                            <i class="fa fa-warning mr-1 my-1"></i>
-                                            {{ $message }}
-                                        </p>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="md:flex my-4">
-                                <div class="w-full md:w-2/5">
-                                    <label class="text-md font-bold text-red-600" for="img_file">Upload Payment
-                                        Receipt:<span class="text-xs text-red-500">*</span></label>
-                                </div>
-                                <div class="w-full md:w-3/5">
-                                    <input type="file" name="img_file[]" id="img_file" accept=".jpg, .jpeg"
-                                        class="w-full rounded-sm outline-none text-sm text-blue-300" multiple required>
-                                    @error('img_file')
-                                        <p class="text-xs text-red-500">
-                                            <i class="fa fa-warning mr-1 my-1"></i>
-                                            {{ $message }}
-                                        </p>
-                                    @enderror
+                    <!-- Instruction & Form -->
+                    <div class="w-full lg:w-3/5">
+                        <!-- Instruction Section -->
+                        <div class="border-b border-gray-200 pb-4 mb-6">
+                            <h2 class="text-xl font-bold text-indigo-800 flex items-center">
+                                <i class="fas fa-info-circle mr-3 text-indigo-500"></i>
+                                Payment Instructions
+                            </h2>
+                        </div>
 
-                                    <div>
-                                        <p class="text-slate-500 text-[.8rem]">
-                                            <i class="fa fa-warning mr-1 my-1"></i>
-                                            Upload single/multiple images at once of type .jpg or .jpeg and size should less
-                                            than
-                                            5MB
+                        <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg mb-6">
+                            <ul class="list-disc list-inside space-y-2 text-red-700">
+                                <li>Scan the QR code to make payment</li>
+                                <li>Take a screenshot of your payment confirmation</li>
+                                <li>Upload the screenshot to confirm your order</li>
+                            </ul>
+                        </div>
+
+                        <!-- User Details -->
+                        <div class="border-b border-gray-200 pb-4 mb-6">
+                            <h2 class="text-xl font-bold text-indigo-800 flex items-center">
+                                <i class="fas fa-user-circle mr-3 text-indigo-500"></i>
+                                User Details
+                            </h2>
+                        </div>
+
+                        <div class="bg-gray-50 p-4 rounded-lg mb-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <p class="text-sm font-medium text-gray-500">Name</p>
+                                    <p class="text-gray-800">{{ $user->name }}</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-500">Email</p>
+                                    <p class="text-gray-800">{{ $user->email }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Order Details Form -->
+                        <div class="border-b border-gray-200 pb-4 mb-6">
+                            <h2 class="text-xl font-bold text-indigo-800 flex items-center">
+                                <i class="fas fa-shopping-bag mr-3 text-indigo-500"></i>
+                                Order Details
+                            </h2>
+                        </div>
+
+                        <form
+                            action="{{ URL::temporarySignedRoute('plan.store', now()->addMinutes(60), ['user' => Auth::user()->name, 'email' => Auth::user()->email]) }}"
+                            method="post" autocomplete="off" enctype="multipart/form-data">
+                            @csrf
+
+                            <!-- Plan Type -->
+                            <div class="mb-6">
+                                <label for="plan_code" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Plan Type <span class="text-red-500">*</span>
+                                </label>
+                                <select name="plan_code" id="plan_code"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-300">
+                                    <option value="{{ $plan['plan_code'] }}">Basic Plan</option>
+                                </select>
+                                @error('plan_code')
+                                    <p class="mt-1 text-sm text-red-600 flex items-center">
+                                        <i class="fas fa-exclamation-circle mr-2"></i> {{ $message }}
+                                    </p>
+                                @enderror
+                            </div>
+
+                            <!-- Class -->
+                            <div class="mb-6">
+                                <label for="class" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Class <span class="text-red-500">*</span>
+                                </label>
+                                <select name="class" id="class"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-300">
+                                    <option value="{{ $plan['class_code'] }}">{{ $plan['class_name'] }}</option>
+                                </select>
+                                @error('class')
+                                    <p class="mt-1 text-sm text-red-600 flex items-center">
+                                        <i class="fas fa-exclamation-circle mr-2"></i> {{ $message }}
+                                    </p>
+                                @enderror
+                            </div>
+
+                            <!-- Subject -->
+                            <div class="mb-6">
+                                <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Subject <span class="text-red-500">*</span>
+                                </label>
+                                <select name="subject" id="subject"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-300">
+                                    <option value="{{ $plan['subject_code'] }}">{{ $plan['subject_name'] }}</option>
+                                </select>
+                                @error('subject')
+                                    <p class="mt-1 text-sm text-red-600 flex items-center">
+                                        <i class="fas fa-exclamation-circle mr-2"></i> {{ $message }}
+                                    </p>
+                                @enderror
+                            </div>
+
+                            <!-- Chapter -->
+                            <div class="mb-6">
+                                <label for="chapter" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Chapter <span class="text-red-500">*</span>
+                                </label>
+                                <select name="chapter" id="chapter"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-300">
+                                    <option value="{{ $plan['chapter_code'] }}">{{ $plan['chapter_name'] }}</option>
+                                </select>
+                                <p class="mt-2 text-sm text-gray-500">
+                                    Description: {{ $plan['chapter_desc'] }}
+                                </p>
+                                @error('chapter')
+                                    <p class="mt-1 text-sm text-red-600 flex items-center">
+                                        <i class="fas fa-exclamation-circle mr-2"></i> {{ $message }}
+                                    </p>
+                                @enderror
+                            </div>
+
+                            <!-- Payment Receipt -->
+                            <div class="mb-6">
+                                <label for="img_file" class="block text-sm font-medium text-red-600 mb-2">
+                                    Upload Payment Receipt <span class="text-red-500">*</span>
+                                </label>
+                                <input type="file" name="img_file[]" id="img_file" accept=".jpg, .jpeg" multiple
+                                    required
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-300">
+                                <p class="mt-2 text-sm text-gray-500">
+                                    <i class="fas fa-info-circle mr-2"></i>
+                                    Upload single/multiple images (JPG/JPEG only, max 5MB each)
+                                </p>
+                                @error('img_file')
+                                    <p class="mt-1 text-sm text-red-600 flex items-center">
+                                        <i class="fas fa-exclamation-circle mr-2"></i> {{ $message }}
+                                    </p>
+                                @enderror
+                            </div>
+
+                            <!-- Important Note -->
+                            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg mb-6">
+                                <div class="flex">
+                                    <div class="flex-shrink-0">
+                                        <i class="fas fa-exclamation-circle text-yellow-500"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-sm text-yellow-700">
+                                            <span class="font-bold">Important:</span> Verify all details before confirming
+                                            your order.
                                         </p>
                                     </div>
                                 </div>
                             </div>
-                            <p class="text-justify text-xs my-4">
-                                <span class="text-red-500 font-bold ">Important: </span>
-                                Choose the resources very carefully before purchase. The cart will show all the charges and
-                                other prices.
-                            </p>
+
+                            <!-- Submit Button -->
                             <div class="flex justify-end">
-                                <button class="uppercase my-5 text-white bg-red-600 px-2 py-1 rounded-sm text-lg font-bold"
-                                    type="submit">
-                                    <i class="fa fa-save mr-1"></i>
+                                <button type="submit"
+                                    class="gradient-bg text-white px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition duration-300 flex items-center">
+                                    <i class="fas fa-check-circle mr-2"></i>
                                     Confirm Your Order
                                 </button>
                             </div>
-                        </fieldset>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     @include('layouts.footer')
+    @push('styles')
+        <style>
+            .gradient-bg {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            }
+
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+        </style>
+    @endpush
     @push('scripts')
-        
     @endpush
 @endsection

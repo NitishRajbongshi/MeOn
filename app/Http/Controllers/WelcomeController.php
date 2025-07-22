@@ -46,6 +46,22 @@ class WelcomeController extends Controller
         ]);
     }
 
+    public function courseList()
+    {
+        $user = Auth::user();
+        $categories = MasterClassCategory::all(['id', 'category', 'slug', 'title', 'description', 'tags']);
+        return view('site.courses', [
+            'user' => $user,
+            'categories' => $categories
+        ]);
+    }
+
+    public function getStandardsByCategory($category_id)
+    {
+        $standards = Standard::where('master_class_category_id', $category_id)->get();
+        return response()->json($standards);
+    }
+
     public function about()
     {
         $user = Auth::user();
